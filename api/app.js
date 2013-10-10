@@ -27,7 +27,7 @@ app.get('/app/:slug/manifest/:format', function(req, res) {
     // TODO: Read from CouchDB.
     // TODO: Serve manifest from subdomain.
     // TODO: Add /index.html from each subdomain.
-    var format = req.params.type;
+    var format = req.params.format;
     var slug = req.params.slug;
     var app = {
         name: '{name}',
@@ -55,7 +55,7 @@ app.get('/app/:slug/manifest/:format', function(req, res) {
                 icons: {
                     '240': 'http://hexgl.bkcore.com/thumbs/hexmki.png'
                 },
-                launch_path: '/static/launcher.html?http://cvan.github.io/HexGL',
+                launch_path: '/static/launcher.html?http://cvan.github.io/HexGL/',
                 fullscreen: 'true',
                 developer: {
                     name: 'Thibaut Despoulain',
@@ -78,9 +78,10 @@ app.get('/app/:slug/manifest/:format', function(req, res) {
                         container: 'panel',
                         //height:
                         //width:
-                        web_url: 'http://cvan.github.io/HexGL'
+                        web_url: 'http://cvan.github.io/HexGL/'
                     }
-                }
+                },
+                manifest_version: 2,
             };
         }
     }

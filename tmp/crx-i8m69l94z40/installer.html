@@ -11,12 +11,11 @@
         <script>
             (function() {
                 var apps = {};
-                window.apps = apps;
 
                 var mozApps = 'mozApps' in navigator;
                 var chromeApps = 'chrome' in window;
 
-                var manifest = 'http://cvan.github.io/HexGL/';
+                var manifest = 'http://cvan.github.io/HexGL';
 
                 if (mozApps) {
                     manifest = 'http://localhost:5000/app/hexgl/manifest/firefox';
@@ -28,7 +27,7 @@
                         // Get list of installed apps and mark as such.
                         var r = navigator.mozApps.getInstalled();
                         r.onsuccess = function() {
-                            r.result.forEach(function(val) {
+                            Object.keys(r.result, function(val) {
                                 apps[val.manifestURL.split('?')[0]] = val;
                             });
                         };
@@ -36,7 +35,7 @@
                     getInstalled();
                 } else if (chromeApps) {
                     //manifest = 'http://localhost:5000/app/hexgl/manifest/chrome.crx';
-                    //manifest = 'http://localhost:5000/static/hexgl-crx.crx';
+                    manifest = 'http://localhost:5000/static/hexgl.crx';
                 }
 
                 var button = document.querySelector('button');
@@ -55,8 +54,6 @@
                                 status = request.result.installState;
                                 if (status == 'installed') {
                                     console.log('Install succeded', manifest);
-                                    button.blur();
-                                    apps[manifest] = app;
                                     app.launch();
                                     clearInterval(isInstalled);
                                 }
@@ -66,9 +63,8 @@
                             console.error('Install failed:', this.error.name);
                         };
                     } else if (chromeApps) {
-                        button.blur();
                         //window.location = manifest;
-                        window.open(manifest);
+                        chrome.webstore.install(manifest)
                     }
                 }, false);
             })();
