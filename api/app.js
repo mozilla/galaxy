@@ -16,15 +16,18 @@ var app = express(express.logger());
 app.use('/static', express.static(__dirname + '/static'));
 app.use(express.bodyParser());
 
+express.static.mime.define({'application/x-chrome-extension': ['crx']});
+
 /**
  * HTTP GET /app/:slug/manifest/
  * Body Param: the JSON app you want to create
  * Returns: 200 HTTP code
  */
-app.get('/app/:slug/manifest', function(req, res) {
+app.get('/app/:slug/manifest/:format', function(req, res) {
     // TODO: Read from CouchDB.
     // TODO: Serve manifest from subdomain.
     // TODO: Add /index.html from each subdomain.
+    var format = req.params.type;
     var slug = req.params.slug;
     var app = {
         name: '{name}',
@@ -42,7 +45,52 @@ app.get('/app/:slug/manifest', function(req, res) {
         appcache_path: '{appcache_path}'
 
     };
-    res.contentType('application/x-web-app-manifest+json');
+
+    // Demo.
+    if (slug == 'hexgl') {
+        if (format == 'firefox') {
+            app = {
+                name: 'HexGL',
+                description: 'HexGL is a futuristic, fast-paced racing game built by Thibaut Despoulain using HTML5, Javascript and WebGL and a tribute to the original Wipeout and F-Zero series.',
+                icons: {
+                    '240': 'http://hexgl.bkcore.com/thumbs/hexmki.png'
+                },
+                launch_path: '/static/launcher.html?http://cvan.github.io/HexGL',
+                fullscreen: 'true',
+                developer: {
+                    name: 'Thibaut Despoulain',
+                    url: 'http://bkcore.com/'
+                }
+            };
+        } else {
+            app = {
+                name: 'HexGL',
+                description: 'HexGL is a futuristic, fast-paced racing game built by Thibaut Despoulain using HTML5, Javascript and WebGL and a tribute to the original Wipeout and F-Zero series.',
+                version: '1',
+                icons: {
+                    '240': 'http://hexgl.bkcore.com/thumbs/hexmki.png'
+                },
+                app: {
+                    urls: [
+                        '*://cvan.github.io/'
+                    ],
+                    launch: {
+                        container: 'panel',
+                        //height:
+                        //width:
+                        web_url: 'http://cvan.github.io/HexGL'
+                    }
+                }
+            };
+        }
+    }
+
+    if (format == 'firefox') {
+        res.contentType('application/x-web-app-manifest+json');
+    } else if (format == 'chrome') {
+        res.contentType('application/application/x-chrome-extension');
+    }
+
     api.ok(req, res, app);
 });
 
