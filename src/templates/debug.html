@@ -1,0 +1,75 @@
+<section class="main infobox prose">
+  <div>
+    <style>
+      dt {
+        clear: left;
+        float: left;
+      }
+      dd {
+        float: left;
+      }
+    </style>
+    <h2>Debug</h2>
+    <p>
+      <button class="button" id="submit-debug">Submit logs</button>
+    </p>
+
+    <p>
+      <button class="button" id="clear-localstorage">Clear <code>localStorage</code></button>
+    </p>
+
+    <h3>Site Settings</h3>
+
+    <dl class="site-settings c">
+      {% for setting in settings.items() %}
+        <dt>{{ setting[0] }}</dt>
+        <dd>{{ setting[1] or '––' }}</dd>
+      {% endfor %}
+    </dl>
+
+    <h3>User Settings</h3>
+
+    <dl class="user-settings c">
+      {% for setting in user.get_settings().items() %}
+        <dt>{{ setting[0] }}</dt>
+        <dd>{{ setting[1] or '––' }}</dd>
+      {% endfor %}
+    </dl>
+
+    <h3>Capabilities</h3>
+
+    <dl class="capabilities c">
+      {% for cap in capabilities.items() %}
+        <dt>{{ cap[0] }}</dt>
+        <dd>{{ cap[1] }}</dd>
+      {% endfor %}
+    </dl>
+
+    <h3>Cache</h3>
+
+    <pre id="cache-inspector"></pre>
+
+    <ul class="cache-menu">
+      {% for k in cache.keys() %}
+        <li><a href="#" data-url="{{ k }}">{{ filter(k) }}</a></li>
+      {% endfor %}
+    </ul>
+
+    <h3>Recent Logs</h3>
+    <ol class="debug-log">
+      {% for entry in recent_logs %}
+        <li>{% for piece in entry %}{{ piece }} {% endfor %}</li>
+      {% endfor %}
+    </ol>
+
+    <h3>Persistent Logs</h3>
+    {% for log_type, logs in persistent_logs.items() %}
+      <h4>{{ log_type }}</h4>
+      <ol class="debug-log">
+        {% for entry in logs %}
+          <li>{% for piece in entry %}{{ piece }} {% endfor %}</li>
+        {% endfor %}
+      </ol>
+    {% endfor %}
+  </div>
+</section>

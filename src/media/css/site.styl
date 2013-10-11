@@ -1,0 +1,222 @@
+@import 'lib';
+
+// Site-wide or structural styles only in this file.
+// Can't find a better file for your style? Create one!
+// This is not your diaper.
+
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    //text-rendering: optimizeLegibility;
+    word-wrap: break-word;
+}
+
+.js-hidden, .hidden {
+    display: none;
+}
+
+noscript {
+    background: $salt-flat-white;
+    display: table;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    p {
+        background: url(../img/pretty/marketplace_logo.png) 50% 48% no-repeat;
+        background-size: auto 60px;
+        display: table-cell;
+        font-weight: bold;
+        height: 100%;
+        padding-top: 60px;
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: $sailor-blue;
+
+    &:hover {
+        text-decoration: underline;
+    }
+    &:not([href]) {
+        cursor: pointer;
+    }
+}
+
+body {
+    background: #11203D;
+    color: #eff;
+    // min-height needed so ff b2g/android can scroll to 0 (bug 872622).
+    min-height: 300px;
+    overflow-x: hidden;
+    transform-origin: 50% 400px;
+    transition: transform 1s;
+    -webkit-transition: -webkit-transform 1s;
+}
+
+main {
+    margin: 0 auto;
+    max-width: 1024px;
+}
+
+#site-header, #page {
+    min-width: 320px;
+    section.main {
+        margin-left: auto;
+        margin-right: auto;
+        &:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        &.full {
+            width: 100%;
+            > div {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+}
+
+#page {
+    position: relative;
+}
+
+.row {
+    clear: both;
+}
+
+.detailed-error, .fragment-error {
+    background: #fff;
+}
+
+.detailed-error {
+    padding: 15px;
+}
+
+.main {
+    margin: 0 auto;
+    .fragment-error {
+        padding: 0;
+    }
+}
+#page > .overlay {
+    max-width: 100%;
+}
+
+.two-up {
+    width: 50%;
+    float: left;
+
+    &:nth-child(2n+1) {
+        padding: 0 5px 0 0;
+    }
+    &:nth-child(2n) {
+        padding: 0 0 0 5px;
+    }
+    .button {
+        display: block;
+    }
+}
+
+.only-logged-in {
+    display: none !important;
+}
+
+.only-logged-out {
+    display: block !important;
+}
+
+.logged-in .only-logged-in {
+    display: block !important;
+}
+
+.logged-in .only-logged-out {
+    display: none !important;
+}
+
+.spinner {
+    spinner();
+    &.alt {
+        spinner-alt-image();
+    }
+    &.btn-replace {
+        spinner-abs();
+        top: 24px;
+    }
+    &.spaced {
+        margin: 70px auto;
+    }
+    &.padded {
+        padding: 70px 0;
+    }
+}
+
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0turn); }
+    to { -webkit-transform: rotate(1turn); }
+}
+@keyframes spin {
+    from { transform: rotate(0turn); }
+    to { transform: rotate(1turn); }
+}
+
+
+@media $at-least-desktop {
+    html, #footer {
+        background: #222;
+    }
+} // End of Desktop.
+
+@media $retina {
+    .spinner {
+        spinner-base-image('retina');
+        &.alt {
+            spinner-alt-image('retina');
+        }
+    }
+}
+
+.badge {
+    color: #fff;
+    display: inline-block;
+    font-family: FontAwesome;
+    height: 2em;
+    line-height: 2em;
+    margin: 0.75em 0.5em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 0 5px #0ff;
+    width: 2em;
+
+    &:before, &:after {
+        border: 1px solid #fff;
+        bottom: 0;
+        box-shadow: 0 0 5px #0ff, inset 0 0 10px #0aa;
+        content: "";
+        display: block;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: unquote('transform 0.5s');
+        -webkit-transition: unquote('-webkit-transform 0.5s');
+    }
+    &:before {
+        transform: rotate(10deg);
+    }
+    &:after {
+        transform: rotate(-10deg);
+    }
+    &:hover {
+        text-decoration: none;
+
+        &:before { transform: rotate(25deg); }
+        &:after { transform: rotate(-25deg); }
+    }
+}
