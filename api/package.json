@@ -2,6 +2,7 @@
   "name": "galaxy",
   "version": "0.0.1",
   "dependencies": {
+    "rethinkdb": "*",
     "nano": "4.1.4",
     "node-restify-swagger": "*",
     "node-restify-validation": "*",
