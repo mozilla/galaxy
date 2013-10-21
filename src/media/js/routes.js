@@ -3,6 +3,7 @@
 // Please leave quotes around keys! They're needed for Space Heater.
 var routes = [
     {'pattern': '^/$', 'view_name': 'homepage'},
+    {'pattern': '^/submit$', 'view_name': 'submit'},
 
     {'pattern': '^/tests$', 'view_name': 'tests'},
     {'pattern': '^/debug$', 'view_name': 'debug'}

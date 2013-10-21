@@ -1,33 +1,37 @@
 var settings = require('./settings_local.js');
 
-// TODO: Use express-validator.
-var api = require('express-api-helper');
-var express = require('express');
-var redis = require('redis');
 var stripe = require('stripe')(settings.stripe.private);
 
-var redisClient = redis.createClient(settings.redis.port || '', settings.redis.host || '');
-if (settings.redis.auth) {
-    redisClient.auth(settings.redis.auth);
-}
+var restify = require('restify');
+var restifySwagger = require('node-restify-swagger');
+var restifyValidation = require('node-restify-validation');
 
-var app = express(express.logger());
+var server = restify.createServer({
+    name: 'galaxy',
+    version: '0.0.1'
+});
+server.use(restify.acceptParser(server.acceptable));
+server.use(restify.bodyParser());
+server.use(restify.gzipResponse());
+server.use(restify.queryParser());
+server.use(restifyValidation.validationPlugin({errorsAsArray: false}));
+restifySwagger.configure(server);
 
-app.use('/static', express.static(__dirname + '/static'));
-app.use(express.bodyParser());
 
-express.static.mime.define({'application/x-chrome-extension': ['crx']});
-
-/**
- * HTTP GET /app/:slug/manifest/
- * Body Param: the JSON app you want to create
- * Returns: 200 HTTP code
- */
-app.get('/app/:slug/manifest/:format', function(req, res) {
+server.get({
+    url: '/app/:slug/manifest/',
+    swagger: {
+        summary: '',
+        notes: '',
+        nickname: ''
+    },
+    validation: {
+    }
+}, function(req, res) {
     // TODO: Read from CouchDB.
     // TODO: Serve manifest from subdomain.
     // TODO: Add /index.html from each subdomain.
-    var format = req.params.format;
+    var format = 'firefox';
     var slug = req.params.slug;
     var app = {
         name: '{name}',
@@ -76,8 +80,6 @@ app.get('/app/:slug/manifest/:format', function(req, res) {
                     ],
                     launch: {
                         container: 'panel',
-                        //height:
-                        //width:
                         web_url: 'http://cvan.github.io/HexGL/'
                     }
                 },
@@ -85,49 +87,60 @@ app.get('/app/:slug/manifest/:format', function(req, res) {
             };
         }
     }
-
-    if (format == 'firefox') {
-        res.contentType('application/x-web-app-manifest+json');
-    } else if (format == 'chrome') {
-        res.contentType('application/application/x-chrome-extension');
-    }
-
-    api.ok(req, res, app);
+    res.contentType = 'application/x-web-app-manifest+json';
+    res.send(app);
 });
 
-/**
- * HTTP POST /submit/
- * Body Param: the JSON app you want to create
- * Returns: 200 HTTP code
- */
-app.post('/submit', function(req, res) {
-    api.requireParams(req, res, ['url', 'name', 'icons', 'screenshots'], function(err) {
-        if (err) {
-            return api.serverError(req, res, err);
+
+server.post({
+    url: '/submit',
+    swagger: {
+        summary: 'Submission',
+        nickname: 'submit'
+    },
+    validation: {
+        url: {
+            isRequired: true,
+        },
+        name: {
+            isRequired: true,
+            description: 'Name of app'
+        },
+        icons: {
+            isRequired: true,
+            description: 'Icons'
+        },
+        screenshots: {
+            isRequired: true,
+            description: 'Screenshots'
         }
+    }
+}, function(req, res) {
+    var form = req.body;
+    var app = {
+        slug: form.slug,
+        url: form.url,
+        name: form.name,  // maxlength: 128
+        description: form.description,
+        icons: form.icons,
+        default_locale: form.default_locale,
+        locales: form.locales,
+        orientation: form.orientation,
+        fullscreen: form.fullscreen,
 
-        var form = req.body;
-        var app = {
-            url: form.url,
-            name: form.name,  // maxlength: 128
-            description: form.description,
-            icons: form.icons,
-            default_locale: form.default_locale,
-            locales: form.locales,
-            orientation: form.orientation,
-            fullscreen: form.fullscreen,
-
-            // Galaxy-specific metadata.
-            screenshots: form.screenshots,
-            privacy: form.privacy_policy,
-            license: form.license
-        };
-
-        // TODO: Pull web page. If using appcache, then set `appcache_path`.
-    });
+        // Galaxy-specific metadata.
+        screenshots: form.screenshots,
+        privacy: form.privacy_policy,
+        license: form.license
+    };
+    res.json({success: true});
+    // TODO: Pull web page. If using appcache, then set `appcache_path`.
 });
 
-var port = process.env.PORT || 5000;
-app.listen(port, function() {
-    console.log('Listening on', port);
+
+restifySwagger.loadRestifyRoutes();
+
+
+server.listen(process.env.PORT || 5000, function() {
+    console.log('%s listening at %s', server.name, server.url);
 });
