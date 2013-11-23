@@ -127,6 +127,7 @@ server.post({
         locales: form.locales,
         orientation: form.orientation,
         fullscreen: form.fullscreen,
+        appcache_path: form.appcache_path,
 
         // Galaxy-specific metadata.
         screenshots: form.screenshots,
