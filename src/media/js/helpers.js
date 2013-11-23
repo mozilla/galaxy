@@ -84,11 +84,29 @@ define('helpers',
         return output;
     };
 
+    // Credit to ngoke and potch.
+    filters.hex2rgba = function(hex, o) {
+        hex = parseInt(hex.substring(hex[0] == '#' ? 1 : 0), 16);
+        return 'rgba(' +
+            (hex >> 16) + ',' +
+            ((hex & 0x00FF00) >> 8) + ',' +
+            (hex & 0x0000FF) + ',' + o + ')';
+    }
+
     safe_filter('stringify', JSON.stringify);
 
     filters.format = require('format').format;
     filters.sum = function(obj) {
         return obj.reduce(function(mem, num) {return mem + num;}, 0);
+    };
+
+    // The exposed user object should know nothing of tokens.
+    var user = require('user');
+    var userobj = {
+        get_setting: user.get_setting,
+        // We don't expose `get_settings` because it's a direct reference.
+        get_permission: user.get_permission,
+        logged_in: user.logged_in
     };
 
     // Functions provided in the default context.
@@ -102,7 +120,7 @@ define('helpers',
         _plural: make_safe(l10n.ngettext),
         format: require('format').format,
         settings: require('settings'),
-        user: require('user'),
+        user: userobj,
 
         escape: utils.escape_,
         len: function(x) {return x.length;},
@@ -114,9 +132,9 @@ define('helpers',
             return obj;
         },
 
-        REGIONS: require('settings').REGION_CHOICES_SLUG,
-
         navigator: window.navigator,
+        screen: window.screen,
+        // TODO: Pull the default value from settings.
         language: window.navigator.l10n ? window.navigator.l10n.language : 'en-US'
     };
 

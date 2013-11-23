@@ -1,4 +1,7 @@
-define('utils', ['jquery', 'underscore'], function($, _) {
+define('utils', ['jquery', 'l10n', 'underscore'], function($, l10n, _) {
+
+    var ngettext = l10n.ngettext;
+
     _.extend(String.prototype, {
         strip: function(str) {
             // Strip all whitespace.
@@ -43,8 +46,22 @@ define('utils', ['jquery', 'underscore'], function($, _) {
                 .replace(/'/g, '&#39;').replace(/"/g, '&#34;');
     }
 
+    function slugify(s, limit) {
+        if (typeof s !== 'string') {
+            return s;
+        }
+        var value = s.toLowerCase().trim()
+                     .replace(/[ _]/g, '-')
+                     .replace(/[^-\w]/g, '')
+                     .replace(/-+/g, '-');
+        if (limit) {
+            value = value.substr(0, limit);  // Cap the slug length.
+        }
+        return value;
+    }
+
+    var tags = /input|keygen|meter|option|output|progress|select|textarea/i;
     function fieldFocused(e) {
-        var tags = /input|keygen|meter|option|output|progress|select|textarea/i;
         return tags.test(e.target.nodeName);
     }
 
@@ -70,6 +87,9 @@ define('utils', ['jquery', 'underscore'], function($, _) {
     }
 
     function urlencode(kwargs) {
+        if (typeof kwargs === 'string') {
+            return encodeURIComponent(kwargs);
+        }
         var params = [];
         if ('__keywords' in kwargs) {
             delete kwargs.__keywords;
@@ -168,11 +188,14 @@ define('utils', ['jquery', 'underscore'], function($, _) {
         '_pd': _pd,
         'baseurl': baseurl,
         'browser': browser,
+        'encodeURIComponent': encodeURIComponent,
+        'decodeURIComponent': decodeURIComponent,
         'escape_': escape_,
         'fieldFocused': fieldFocused,
         'getVars': getVars,
         'initCharCount': initCharCount,
         'querystring': querystring,
+        'slugify': slugify,
         'urlencode': urlencode,
         'urlparams': urlparams,
         'urlunparam': urlunparam,
