@@ -1,10 +1,80 @@
-<section class="hero">
+<h1>{{ _('Submit an App') }}</h1>
+<form class="submit-form" method="post">
   <div>
-    <button class="play hidden">{{ _('Play') }}</button>
-    <h1>{{ _('Dungeon Defenders II') }}</h1>
-    <p>{{ _('Dungeon Defenders II is the sequel to our popular tower-defense role-playing game, Dungeon Defenders. Unlike its predecessor, Dungeon Defenders II features a cooperative and competitive mode. Heroes, cosmetic items, pets, and more will transfer across both modes.') }}</p>
-    <form class="purchase-form" method="post">
-      <a href="#" class="purchase" id="purchase">$19.95</a>
-    </form>
+    <label>
+      {{ _('Name') }}
+      <input type="text" name="name">
+    </label>
   </div>
-</section>
+  <div>
+    <label>
+      {{ _('Slug') }}
+      <input type="text" name="slug">
+    </label>
+  </div>
+  <div>
+    <label>
+      {{ _('URL') }}
+      <input type="url" name="url">
+    </label>
+  </div>
+  <div>
+    <label>
+      {{ _('Description') }}
+      <textarea name="description"></textarea>
+    </label>
+  </div>
+  <div>
+    <label>
+      {{ _('Icon') }}
+      <input type="file" name="icon">
+    </label>
+  </div>
+
+  <div>
+    <h2>{{ _('Orientation') }}</h2>
+    <label>
+      <input type="radio" name="orientation" value="portrait"> {{ _('Portrait') }}
+    </label>
+    <label>
+      <input type="radio" name="orientation" value="landscape"> {{ _('Landscape') }}
+    </label>
+    <label>
+      <input type="radio" name="orientation" value="both"> {{ _('Both') }}
+    </label>
+  </div>
+
+  <div>
+    <h2>{{ _('Fullscreen') }}</h2>
+    <label>
+      <input type="radio" name="fullscreen" value="1"> {{ _('Yes') }}
+    </label>
+    <label>
+      <input type="radio" name="fullscreen" value="0"> {{ _('No') }}
+    </label>
+  </div>
+
+  <div>
+    <h2>{{ _('Screenshots') }}</h2>
+    <label>
+      <input type="file" name="screenshot">
+    </label>
+  </div>
+
+  <div>
+    <label>
+      {{ _('Privacy Policy') }}
+      <textarea name="privacy-policy"></textarea>
+    </label>
+  </div>
+
+  <div>
+    <h2>License</h2>
+    <label>
+      <input type="radio" name="license" value=""> {{ _('Public Domain') }}
+      <input type="radio" name="license" value="cc"> {{ _('Creative Commons') }}
+    </label>
+  </div>
+
+  <button type="submit">{{ _('Submit') }}</button>
+</form>
