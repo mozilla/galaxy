@@ -6,6 +6,7 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         init_module: 'main',
         default_locale: 'en-US',
         api_url: 'http://' + window.location.hostname,  // No trailing slash, please.
+        media_url: 'http://' + window.location.hostname,
 
         storage_version: '0',
 

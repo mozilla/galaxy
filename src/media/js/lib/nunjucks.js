@@ -84,24 +84,24 @@ var lookupEscape = function(ch) {
 var exports = modules.lib = {};
 
 exports.withPrettyErrors = function(path, withInternals, func) {
-    try {
+    // try {
         return func();
-    } catch (e) {
-        if (!e.Update) {
-            // not one of ours, cast it
-            e = new exports.TemplateError(e);
-        }
-        e.Update(path);
+    // } catch (e) {
+    //     if (!e.Update) {
+    //         // not one of ours, cast it
+    //         e = new exports.TemplateError(e);
+    //     }
+    //     e.Update(path);
 
-        // Unless they marked the dev flag, show them a trace from here
-        if (!withInternals) {
-            var old = e;
-            e = new Error(old.message);
-            e.name = old.name;
-        }
+    //     // Unless they marked the dev flag, show them a trace from here
+    //     if (!withInternals) {
+    //         var old = e;
+    //         e = new Error(old.message);
+    //         e.name = old.name;
+    //     }
 
-        throw e;
-    }
+    //     throw e;
+    // }
 };
 
 exports.TemplateError = function(message, lineno, colno) {
@@ -1245,12 +1245,16 @@ var Environment = Obj.extend({
         }
 
         var tmpl = this.cache[name];
-        if (!tmpl.render) {
-            tmpl.env = this;
-            tmpl.render = function(ctx, cb) {
-                return this.env.render(name, ctx, cb);
-            };
-        }
+        var env = this;
+        tmpl.render = function(ctx, frame, cb) {
+            return this.root(env, new Context(ctx), frame, runtime, cb);
+        };
+        tmpl.getExported = function(cb) {
+            var ctx = new Context({});
+            this.root(env, ctx, new Frame(), runtime, function() {
+                cb(null, ctx.getExported());
+            });
+        };
 
         if(tmpl) {
             if(cb) {
@@ -1284,7 +1288,7 @@ var Environment = Obj.extend({
                 throw err;
             }
             else {
-                tmpl.root(this, new Context(ctx), new Frame(), runtime, cb || function(err, res) {
+                tmpl.root(this, new Context(ctx || {}), new Frame(), runtime, cb || function(err, res) {
                     if(err) { throw err; }
                     syncResult = res;
                 });
@@ -1402,12 +1406,6 @@ nunjucks.render = function(name, ctx, cb) {
 };
 
 nunjucks.require = function(name) { return modules[name]; };
-
-if(typeof define === 'function' && define.amd) {
-    define(function() { return nunjucks; });
-}
-else {
-    window.nunjucks = nunjucks;
-}
+define('nunjucks', [], function() { return nunjucks; });
 
 })();

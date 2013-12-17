@@ -59,11 +59,11 @@ require.config({
             console.log('Reloading chrome');
             var context = {z: z};
             $('#site-header').html(
-                nunjucks.env.getTemplate('header.html').render(context));
+                nunjucks.env.render('header.html', context));
             $('body > menu').html(
-                nunjucks.env.getTemplate('menu.html').render(context));
+                nunjucks.env.render('menu.html', context));
             $('#site-footer').html(
-                nunjucks.env.getTemplate('footer.html').render(context));
+                nunjucks.env.render('footer.html', context));
 
             z.body.toggleClass('logged-in', require('user').logged_in());
             z.page.trigger('reloaded_chrome');

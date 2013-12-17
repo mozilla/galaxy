@@ -67,11 +67,12 @@ test('api url', function(done, fail) {
         {
             capabilities: {firefoxOS: true, widescreen: function() { return false; }, touch: 'foo'},
             routes_api: {'homepage': '/foo/homepage'},
+            routes_api_args: function() {return function() {return function() {return {foo: 'bar'};};};},  // Functions get pre-evaluated.
             settings: {api_url: 'api:'}
         }, function(urls) {
             var homepage_url = urls.api.url('homepage');
             eq_(homepage_url.substr(0, 17), 'api:/foo/homepage');
-            contains(homepage_url, 'dev=firefoxos');
+            contains(homepage_url, 'foo=bar');
             done();
         },
         fail
@@ -84,11 +85,14 @@ test('api url signage', function(done, fail) {
         {
             capabilities: {firefoxOS: true, widescreen: function() { return false; }, touch: 'foo'},
             routes_api: {'homepage': '/foo/homepage'},
+            routes_api_args: function() {return function() {return function() {return {foo: 'bar'};};};},  // Functions get pre-evaluated.
             settings: {api_url: 'api:'}
         }, function(urls) {
             var homepage_url = urls.api.unsigned.url('homepage');
             eq_(homepage_url, 'api:/foo/homepage');
             eq_(urls.api.sign(homepage_url), urls.api.url('homepage'));
+            disincludes(homepage_url, 'foo=bar');
+            contains(urls.api.sign(homepage_url), 'foo=bar');
             done();
         },
         fail
