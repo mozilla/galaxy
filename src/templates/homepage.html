@@ -1,48 +1,120 @@
-<masthead>
-  <h1>{{ _('Activity Board') }}</h1>
-  <h2>{{ _("Games you're playing") }}</h2>
+<masthead class="activity-board">
+  <div>
+    <h1>{{ _('Activity Board') }}</h1>
+    <section class="games-youre-playing">
+      <h2>{{ _("Games you're playing") }}</h2>
+      <ul class="games-list">
+        <li>
+          <a href="#"><div class="game-icon" style="background-image: url(/media/img/uploads/game/unreal-tournament.png)"></div>{{ _('Unreal Tournament') }}</a>
+        </li>
+        <li>
+          <a href="#"><div class="game-icon" style="background-image: url(/media/img/uploads/game/gta-5.png)"></div>{{ _('GTA 5') }}</a>
+        </li>
+        <li>
+          <a href="#"><div class="game-icon" style="background-image: url(/media/img/uploads/game/mortal-kombat.png)"></div>{{ _('Mortal Kombat') }}</a>
+        </li>
+        <li>
+          <a href="#"><div class="game-icon" style="background-image: url(/media/img/uploads/game/halo-4.png)"></div>{{ _('Halo 4') }}</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="games-your-friends-are-playing">
+      <h2>{{ _('Games your friends are playing') }}</h2>
+      <ul class="games-list games-friends-list">
+        <li>
+          <a href="#"><div class="game-icon" style="background-image: url(/media/img/uploads/game/halo-4.png)"></div>{{ _('Halo 4') }}</a>
+
+          <ul class="avatars">
+            {% for email in ['danieljb2@gmail.com', 'me@potch.me', 'clouserw@gmail.com', 'me@mattbasta.com', 'adrian@gaudebert.fr', 'mkelly@mozilla.com', 'rdalal@mozilla.com'] %}
+              <li><div class="avatar" style="background-image: url({{ gravatar(email) }})"></div></li>
+            {% endfor %}
+          </ul>
+        </li>
+        <li>
+          <a href="#"><div class="game-icon" style="background-image: url(/media/img/uploads/game/fifa-soccer-14.png)"></div>{{ _('FIFA Soccer 14') }}</a>
+
+          <ul class="avatars">
+            {% for email in ['chris@atlee.ca', 'danieljb2@gmail.com', 'ccook@mozilla.com', 'me@dale.io', 'dwalsh@mozilla.com', 'oremj@mozilla.com'] %}
+              <li><div class="avatar" style="background-image: url({{ gravatar(email) }})"></div></li>
+            {% endfor %}
+          </ul>
+        </li>
+        <li>
+          <a href="#"><div class="game-icon" style="background-image: url(/media/img/uploads/game/legend-of-zelda-open-edition.png)"></div>{{ _('Legend of Zelda: Open Edition') }}</a>
+
+          <ul class="avatars">
+            {% for email in ['jen@meatspac.es', 'fwenzel@mozilla.com', 'danieljb2@gmail.com', 'spenades@mozilla.com', 'rrosario@mozilla.com'] %}
+              <li><div class="avatar" style="background-image: url({{ gravatar(email) }})"></div></li>
+            {% endfor %}
+          </ul>
+        </li>
+        <li>
+          <a href="#"><div class="game-icon" style="background-image: url(/media/img/uploads/game/batman-arkham-origins.png)"></div>{{ _('Batman: Arkham Origins') }}</a>
+
+          <ul class="avatars">
+          {% for email in ['clonnen@mozilla.com', 'mcooper@mozilla.com', 'danieljb2@gmail.com'] %}
+            <li><div class="avatar" style="background-image: url({{ gravatar(email) }})"></div></li>
+          {% endfor %}
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="achievements-in-progress">
+      <h2>{{ _('Achievements in progress') }}</h2>
+      <ul>
+        <li><a href="#"><div class="badge" title="{{ _('Alchemist badge') }}">&#61635;</div>Alchemist</a></li>
+        <li><a href="#"><div class="badge" title="{{ _('Rocket Scientist badge') }}">&#61749;</div>Rocket Scientist</a></li>
+      </ul>
+    </section>
+  </div>
 </masthead>
-<menu class="games">
-  <a href="#" class="prev game tile">
-    <img src="{{ media('img/games/angrybirds_sq.png') }}" alt="Angry Birds">
-    <div>
-      <strong>Angry Birds</strong>
-      <span>Rovio</span>
-    </div>
-  </a>
-  <a href="#" class="prev game tile">
-    <img src="{{ media('img/games/cookieclicker_sq.png') }}" alt="Angry Birds">
-    <div>
-      <strong>Cookie Clicker</strong>
-      <span>Orteil</span>
-    </div>
-  </a>
-  <a href="#" class="game tile">
-    <img src="{{ media('img/games/cookieclicker_sq.png') }}" alt="Angry Birds">
-    <div>
-      <strong>Cookie Clicker</strong>
-      <span>Orteil</span>
-    </div>
-  </a>
-  <a href="#" class="game tile">
-    <img src="{{ media('img/games/cookieclicker_sq.png') }}" alt="Angry Birds">
-    <div>
-      <strong>Cookie Clicker</strong>
-      <span>Orteil</span>
-    </div>
-  </a>
-  <a href="#" class="next game tile">
-    <img src="{{ media('img/games/cookieclicker_sq.png') }}" alt="Angry Birds">
-    <div>
-      <strong>Cookie Clicker</strong>
-      <span>Orteil</span>
-    </div>
-  </a>
-  <a href="#" class="next game tile">
-    <img src="{{ media('img/games/cookieclicker_sq.png') }}" alt="Angry Birds">
-    <div>
-      <strong>Cookie Clicker</strong>
-      <span>Orteil</span>
-    </div>
-  </a>
-</menu>
+
+<section class="featured">
+  <h1>{{ _('Featured Titles') }}</h1>
+  <menu class="games">
+    <a href="#" class="prev game tile">
+      <img src="{{ media('img/games/angrybirds_sq.png') }}" alt="Angry Birds">
+      <div>
+        <strong>Angry Birds</strong>
+        <span>Rovio</span>
+      </div>
+    </a>
+    <a href="#" class="prev game tile">
+      <img src="{{ media('img/games/cookieclicker_sq.png') }}" alt="Angry Birds">
+      <div>
+        <strong>Cookie Clicker</strong>
+        <span>Orteil</span>
+      </div>
+    </a>
+    <a href="#" class="game tile">
+      <img src="{{ media('img/games/cookieclicker_sq.png') }}" alt="Angry Birds">
+      <div>
+        <strong>Cookie Clicker</strong>
+        <span>Orteil</span>
+      </div>
+    </a>
+    <a href="#" class="game tile">
+      <img src="{{ media('img/games/cookieclicker_sq.png') }}" alt="Angry Birds">
+      <div>
+        <strong>Cookie Clicker</strong>
+        <span>Orteil</span>
+      </div>
+    </a>
+    <a href="#" class="next game tile">
+      <img src="{{ media('img/games/cookieclicker_sq.png') }}" alt="Angry Birds">
+      <div>
+        <strong>Cookie Clicker</strong>
+        <span>Orteil</span>
+      </div>
+    </a>
+    <a href="#" class="next game tile">
+      <img src="{{ media('img/games/cookieclicker_sq.png') }}" alt="Angry Birds">
+      <div>
+        <strong>Cookie Clicker</strong>
+        <span>Orteil</span>
+      </div>
+    </a>
+  </menu>
+</section>

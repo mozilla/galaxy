@@ -1,12 +1,15 @@
 define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, settings_local, _) {
     var gettext = l10n.gettext;
 
+    var origin = window.location.origin || (
+        window.location.protocol + '//' + window.location.host);
+
     return _.defaults(settings_local, {
         app_name: 'galaxy',
         init_module: 'main',
         default_locale: 'en-US',
-        api_url: 'http://' + window.location.hostname,  // No trailing slash, please.
-        media_url: 'http://' + window.location.hostname,
+        api_url: origin,  // No trailing slash, please.
+        media_url: origin + '/media',
 
         storage_version: '0',
 

@@ -47,11 +47,11 @@ a {
 }
 
 html, body {
+    background: #11203D;
     height: 100%;
 }
 
 body {
-    background: #11203D;
     color: #eff;
     // min-height needed so ff b2g/android can scroll to 0 (bug 872622).
     min-height: 300px;
@@ -169,13 +169,6 @@ main {
     to { transform: rotate(1turn); }
 }
 
-
-@media $at-least-desktop {
-    html, #footer {
-        background: #222;
-    }
-} // End of Desktop.
-
 @media $retina {
     .spinner {
         spinner-base-image('retina');
@@ -217,10 +210,21 @@ main {
     &:after {
         transform: rotate(-10deg);
     }
-    &:hover {
-        text-decoration: none;
+}
 
-        &:before { transform: rotate(25deg); }
-        &:after { transform: rotate(-25deg); }
-    }
+.badge:hover,
+a:hover .badge {
+    text-decoration: none;
+
+    &:before { transform: rotate(25deg); }
+    &:after { transform: rotate(-25deg); }
+}
+
+.avatar {
+    background: #fff no-repeat;
+    background-size: contain;
+    border-radius: 32px;
+    box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+    height: 32px;
+    width: 32px;
 }

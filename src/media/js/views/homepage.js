@@ -37,73 +37,9 @@ define('views/homepage', ['l10n', 'storage', 'z'], function(l10n, storage, z) {
 
     return function(builder) {
         builder.start('homepage.html').done(function() {
-            togglePlay();
-
-            var apps = {};
-            window.apps = apps;
-
-            var mozApps = 'mozApps' in navigator;
-            var chromeApps = 'chrome' in window;
-
-            var manifest = 'http://cvan.github.io/HexGL/';
-
-            if (mozApps) {
-                manifest = 'http://localhost:5000/app/hexgl/manifest/firefox';
-                function getInstalled() {
-                    // Don't getInstalled if the page isn't visible.
-                    if (document.hidden) {
-                        return;
-                    }
-                    // Get list of installed apps and mark as such.
-                    var r = navigator.mozApps.getInstalled();
-                    r.onsuccess = function() {
-                        r.result.forEach(function(val) {
-                            apps[val.manifestURL.split('?')[0]] = val;
-                        });
-                    };
-                }
-                getInstalled();
-            } else if (chromeApps) {
-                //manifest = 'http://localhost:5000/app/hexgl/manifest/chrome.crx';
-                //manifest = 'http://localhost:5000/static/hexgl-crx.crx';
-            }
-
-            var button = document.querySelector('.play');
-            button.addEventListener('click', function() {
-                if (mozApps) {
-                    if (manifest in apps) {
-                        apps[manifest].launch();
-                        return;
-                    }
-                    var request = navigator.mozApps.install(manifest);
-                    request.onsuccess = function() {
-                        console.error('Install onsuccess', manifest);
-                        var app = this.result;
-                        var status;
-                        var isInstalled = setInterval(function() {
-                            status = request.result.installState;
-                            if (status == 'installed') {
-                                console.log('Install succeded', manifest);
-                                button.blur();
-                                apps[manifest] = app;
-                                app.launch();
-                                clearInterval(isInstalled);
-                            }
-                        }, 250);
-                    };
-                    request.onerror = function() {
-                        console.error('Install failed:', this.error.name);
-                    };
-                } else if (chromeApps) {
-                    button.blur();
-                    //window.location = manifest;
-                    window.open(manifest);
-                }
-            }, false);
-
         });
 
         builder.z('type', 'root');
-        builder.z('title', gettext('Home'));
+        // builder.z('title', gettext('Home'));
     };
 });
