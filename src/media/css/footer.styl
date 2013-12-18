@@ -1,0 +1,65 @@
+@import 'lib';
+
+.site-footer {
+    background: rgba(51,62,72,.9);
+    bottom: 0;
+    max-height: 40px;
+    position: fixed;
+    width: 100%;
+
+    a {
+        color: #d7d7d7;
+        display: block;
+
+        &:hover {
+            background-color: rgba(0,0,0,.1);
+        }
+    }
+    nav {
+        font-size: 0;
+        float: right;
+    }
+    li {
+        display: inline-block;
+        font-size: 12px;
+
+        a {
+            display: table-cell;
+            font-weight: 600;
+            height: 40px;
+            padding: 0 15px;
+            text-decoration: none;
+            vertical-align: middle;
+
+            &:hover {
+                background-color: rgba(0,0,0,.1);
+                color: #f1f1f1;
+            }
+        }
+        &:last-child a {
+            padding-right: 30px;
+        }
+    }
+    .mozilla {
+        background: url(../img/mozilla.png) 30px 10px no-repeat;
+        background-size: auto 17px;
+        min-height: 17px;
+        padding: 10px 0;
+        text-indent: -9999px;
+        width: 120px;
+    }
+    .develop {
+        background: url(../img/rocket.png) 10px 6px no-repeat;
+        background-size: auto 15px;
+        border-radius: 4px;
+        border: 1px solid rgba(255,255,255,.4);
+        height: 30px;
+        padding: 0 10px 0 25px;  // 10px for padding + 15px for icon
+        position: relative;
+        right: 15px;
+        top: -5px;
+        &:hover {
+            border-color: rgba(255,255,255,.6);
+        }
+    }
+}

@@ -9,7 +9,9 @@ require.config({
         'nunjucks.compat': 'lib/nunjucks.compat',
         'templates': '../../templates',
         'settings': ['settings_local', 'settings'],
-        'format': 'lib/format'
+        'format': 'lib/format',
+        'md5': 'lib/md5',
+        'gravatar': 'lib/gravatar'
     }
 });
 
@@ -60,8 +62,6 @@ require.config({
             var context = {z: z};
             $('#site-header').html(
                 nunjucks.env.render('header.html', context));
-            $('body > menu').html(
-                nunjucks.env.render('menu.html', context));
             $('#site-footer').html(
                 nunjucks.env.render('footer.html', context));
 

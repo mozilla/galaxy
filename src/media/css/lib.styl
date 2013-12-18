@@ -9,40 +9,6 @@ $narrower-than-desktop = unquote('(max-width: 709px)');
 $retina-tablet = $retina unquote('and (max-width: 540px)');
 $retina-wide = $retina unquote('and (min-width: 1024px)');
 
-// Colors
-// TODO: Have Michael take a peek at these!
-$link = #2d87ca;
-$link-dark = darken($link, 10%);
-$faded-link = rgba($link, .5);
-$shadow-blue = #98B2C9;
-$border-blue = #C9DDF2;
-$border-black = rgba(#000, .2);
-$faded-blue = rgba($border-blue, .1);
-$orange = darken(#d60, 5%);
-$red = #c00000;
-$maroon = #800;
-$green = #090;
-$black = #000;
-$dark-gray = #333;
-$navy-gray = #394C58;
-$overlay-gray = #2a353c;
-$text = #424f5a;
-$subtext = #74828d;
-$darker-text = darken($text, 25%);
-$medium-gray = #666;
-$gray = #888;
-$note-gray = #999;
-$bg-gray = #bbb;
-$light-gray = #ccc;
-$faint-gray = #eee;
-$barely-gray = #fcfcfc;
-$white = #fff;
-$bg = #eff1f3;
-$black-border = #14171a;
-$bg-lite = lighten($bg, 2%);
-$faint-blue = #ECF5FE;
-$grain = #394C58;
-
 // New design.
 $flamin-hot-cheetos-orange = #ff9500;
 $sailor-blue = #0096dc;
@@ -57,19 +23,6 @@ $seavan-salt-white = #e7e7e7;
 $salt-flat-white = #f1f1f1;
 $steam-white = #fffefe;
 
-// Used for content ratings for games in Brazil.
-// You can use them elsewhere when you want colourful boxes.
-// Don't be a square.
-$box-green = #00b963;
-$box-blue = #00d5ff;
-$box-yellow = #ffd300;
-$box-orange = #ff7c00;
-$box-red = #ff2600;
-
-
-$btn-b = #44A5E1;
-$btn-b-dark = #267CC2;
-$btn-b-lite = saturate(spin($btn-b, 4), 4%);
 
 // Font Stacks
 $open-stack = "Open Sans", "Helvetica Neue", Arial, sans-serif;
@@ -78,17 +31,6 @@ $open-stack = "Open Sans", "Helvetica Neue", Arial, sans-serif;
 $retina = unquote('screen and (-webkit-min-device-pixel-ratio: 2), screen and (min--moz-device-pixel-ratio: 2), screen and (min-device-pixel-ratio: 2)');
 
 // Mixins
-$grain-src = url(../img/grain.png);
-grain() {
-    background-image: $grain-src;
-}
-
-$arrow-src = url(../img/arrows/plain.png);
-
-light-text-shadow() {
-    text-shadow: 0 1px 0 rgba(255,255,255,.5);
-}
-
 transform($tform) {
     -webkit-transform: $tform;
     -moz-transform: $tform;
@@ -328,53 +270,4 @@ flex($flex) {
     -ms-flex: $flex;
     -moz-flex: $flex;
     -webkit-flex: $flex;
-}
-
-diagonal-lines($bgcolor='#fff') {
-    // Not using gradient due to scroll perf (bug 867535)
-    background: $bgcolor url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+Cjxzdmcgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHZpZXdCb3g9IjAgMCAxMjAgMTIwIgogICAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIgogICAgIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KCTxkZWZzPgogICAgCTxwYXR0ZXJuIGlkPSJkaWFnb25hbEhhdGNoIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB3aWR0aD0iNCIgaGVpZ2h0PSI0Ij4KICAgIAkJPGcgc3R5bGU9ImZpbGw6I2ZmZjsgc3Ryb2tlOiNmN2Y3Zjc7IHN0cm9rZS13aWR0aDoxIj4KICAJCQkJPHBhdGggZD0iTS0xLDEgbDIsLTIiIC8+CiAgCQkJCTxwYXRoIGQ9Ik0wLDQgbDQsLTQiIC8+CiAgICAgICAgICAgCQk8cGF0aCBkPSJNMyw1IGwyLC0yIiAvPgogICAgICAgICAgICA8L2c+CgkJPC9wYXR0ZXJuPgogICAgPC9kZWZzPgoJPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNkaWFnb25hbEhhdGNoKSAiLz4KPC9zdmc+');
-}
-
-btn-shadow() {
-    box-shadow: 0, 0 -2px 0 0 rgba(255,255,255,.1) inset;
-}
-
-alt-btn-shadow() {
-    box-shadow: 0 1px 0 #fff, 0 1px 1px $salt-flat-white inset;
-}
-
-btn-shadow-active() {
-    box-shadow: 0 2px 0 0 rgba(0,0,0,.2) inset, 0 12px 24px 6px rgba(0,0,0,.2) inset, 0 0 2px 2px rgba(0,0,0,.2) inset;
-}
-
-fatten() {
-    height: 48px;
-    padding: 0 32px;
-}
-
-alt-btn-hover-focus() {
-    gradient-two-color(darken(#fff, 10%), darken($seavan-salt-white, 10%));
-}
-
-alt-btn-hover-focus-active() {
-    color: darken($london-fog-gray, 10%);
-}
-
-alt-btn-active() {
-    btn-shadow-active();
-    border: 1px solid darken($primer-gray, 10%);
-}
-
-dropdown() {
-    background: url(../img/pretty/dropdown.svg) 0 50% no-repeat;
-    background-size: 24px auto;
-    content: "";
-    display: inline-block;
-    height: 15px;
-    margin-left: 10px;
-    pointer-events: none;
-    position: absolute;
-    right: 10px;
-    top: 15px;
-    width: 25px;
 }

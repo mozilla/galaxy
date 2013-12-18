@@ -1,11 +1,23 @@
 <nav role="navigation">
   <a href="#" id="nav-back" class="header-button icon back" title="{{ _('Back') }}"><b>{{ _('Back') }}</b></a>
-  <h1 class="site"><a href="/" class="wordmark">Mozilla Galaxy</a></h1>
+  <h1 class="site"><a href="/" class="wordmark">Galaxy</a></h1>
+<!--
   <span class="flex-shift"></span>
   <span class="flex-span"></span>
-  <input type="search">
-  <a href="/settings" class="only-logged-in email">
-    <b>{{ user.get_setting('email') }}</b></a>
-  <a class="logout only-logged-in" href="#">{{ _('Sign Out') }}</a>
-  <a class="header-button persona only-logged-out" href="#">{{ _('Sign In') }}</a>
+-->
+  <menu>{% include 'menu.html' %}</menu>
+  <span class="flex-shift"></span>
+  <span class="flex-span"></span>
+  <div class="auth">
+    <a href="/settings" class="only-logged-in email">
+      <div class="avatar" style="background-image: url({{ gravatar(user.get_setting('email')) }})"></div>
+      {{ user.get_setting('username') }}</a>
+    <a class="logout only-logged-in" href="#">{{ _('Sign Out') }}</a>
+    <a class="header-button persona only-logged-out" href="#">{{ _('Sign In') }}</a>
+  </div>
 </nav>
+<div class="badges">
+  <span>{{ _('Badges In Progress:') }}</span>
+  <a href="#" class="badge" title="Badge!">&#61635;</a>
+  <a href="#" class="badge" title="Another badge!">&#61749;</a>
+</div>
