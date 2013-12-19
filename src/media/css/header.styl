@@ -140,15 +140,16 @@
             }
         }
     }
-}
 
-.home .site-header menu .home,
-.home .site-header menu .home:hover {
-    background: rgba(0,0,0,.4);
-    color: #f1f1f1;
-    position: relative;
-    &:before {
-        background: $flamin-hot-cheetos-orange;
+    [data-page-type~="root"] & {
+        .home, .home:hover {
+            background: rgba(0,0,0,.4);
+            color: #f1f1f1;
+            position: relative;
+            &:before {
+                background: $flamin-hot-cheetos-orange;
+            }
+        }
     }
 }
 
