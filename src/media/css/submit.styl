@@ -1,0 +1,130 @@
+@import 'lib';
+
+[data-page-type~="leaf"] .page {
+    background: $colorWhite;
+    margin-bottom: 6px;
+    padding: 40px 35px;
+    h1 {
+        color: $colorGray;
+    }
+    h2 {
+        color: $colorGrayLight;
+        font-size: 24px;
+        line-height: 26px;
+        margin-top: 15px;
+    }
+}
+
+form.grid {
+    .req {
+        position: absolute;
+        right: 0;
+        &:after {
+            content: attr(data-required);
+            display: block;
+            border-radius: 2px;
+            border: 2px solid lighten(#da3e5a, 80%);
+            color: lighten(#da3e5a, 20%);
+            font-size: 10px;
+            padding: 1px 3px;
+            position: absolute;
+            bottom: 5px;
+            transition(unquote('.1s opacity, .1s visibility'));
+            right: 12px;
+            z-index: 2;
+        }
+    }
+    .opt:after {
+        border: 2px solid #eee;
+        color: #999;
+    }
+    textarea ~ .req:after {
+        bottom: 11px;
+    }
+    .large ~ .req:after {
+        bottom: 10px;
+    }
+    .form-field > .req:after {
+        bottom: -10px;
+        right: 0;
+    }
+    :focus ~ .req:after,
+    :valid ~ .req:after {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .content {
+        padding-top: 30px;
+    }
+    .form-field {
+        position: relative;
+    }
+    .form-help {
+        font-size: 12px;
+    }
+    input[type=text],
+    input[type=url],
+    textarea {
+        font-size: 18px;
+        line-height: 22px;
+        height: 30px;
+        padding: 2px 4px;
+        width: 100%;
+        z-index: 2;
+    }
+    input[type=text].large {
+        font-size: 24px;
+        line-height: 34px;
+        height: 40px;
+        padding: 4px;
+    }
+    textarea {
+        height: auto;
+        min-height: 50px;
+    }
+
+    .l {
+        font-size: 10px;
+    }
+    [placeholder] {
+        ~ .l {
+            line-height: 1;
+            opacity: 1;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            transition(unquote('.1s opacity, .1s visibility, .4s top'));
+            visibility: hidden;
+            z-index: 1;
+        }
+        &:focus ~ .l,
+        &.focused:valid ~ .l {
+            opacity: 1;
+            pointer-events: default;
+            top: -15px;
+            visibility: visible;
+        }
+    }
+
+    .input-prepend {
+        border-radius: 2px 0 0 2px;
+        float: left;
+        line-height: 18px;
+        height: 30px;
+        padding: 5px;
+    }
+    input[name=slug] {
+        max-width: 397px;
+    }
+
+    input[type=radio] {
+        margin-right: 5px;
+    }
+
+    .choice {
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 20px;
+    }
+}

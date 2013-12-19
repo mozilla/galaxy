@@ -1,80 +1,140 @@
-<h1>{{ _('Submit an App') }}</h1>
-<form class="submit-form" method="post">
-  <div>
-    <label>
-      {{ _('Name') }}
-      <input type="text" name="name">
-    </label>
+<h1>{{ _('Submit a Game') }}</h1>
+<form class="submit-form grid" method="post" data-required="{{ _('Required') }}">
+  <div class="unit two-of-three">
+    <div class="content form-field">
+      <label>
+        <input type="text" class="large" name="name" placeholder="{{ _('Enter game title here') }}" required>
+        <span class="l">{{ _('Name') }}</span>
+        <span class="req" data-required="{{ _('Required') }}"></span>
+      </label>
+    </div>
   </div>
-  <div>
-    <label>
-      {{ _('Slug') }}
-      <input type="text" name="slug">
-    </label>
+  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _("Your game's name, which is shown on all listings in Galaxy.") }}
+    </div>
   </div>
-  <div>
-    <label>
-      {{ _('URL') }}
-      <input type="url" name="url">
-    </label>
+
+  <div class="unit two-of-three">
+    <div class="content form-field">
+      <label>
+        <span class="input-prepend">https://galaxy.firefox.com/game/</span>
+        <input type="text" name="slug" placeholder="{{ _('Enter game listing slug here') }}" required>
+        <span class="l">{{ _('Game slug') }}</span>
+        <span class="req" data-required="{{ _('Required') }}"></span>
+      </label>
+    </div>
   </div>
-  <div>
-    <label>
-      {{ _('Description') }}
-      <textarea name="description"></textarea>
-    </label>
+  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _('Select a unique URL for your game detail page. By default we generate this from your game title.') }}
+    </div>
   </div>
-  <div>
-    <label>
-      {{ _('Icon') }}
+
+  <div class="unit two-of-three">
+    <div class="content form-field">
+      <label>
+        <input type="url" name="url" pattern="https?://.*" placeholder="{{ _('Enter game URL here') }}" required>
+        <span class="l">{{ _('Game URL') }}</span>
+        <span class="req" data-required="{{ _('Required') }}"></span>
+      </label>
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _('The URL to your game hosted on your servers.') }}
+    </div>
+  </div>
+
+  <div class="unit two-of-three">
+    <div class="content form-field">
+      <label>
+        <textarea name="description" rows="4" placeholder="{{ _('Enter game description here') }}" required></textarea>
+        <span class="l">{{ _('Description') }}</span>
+        <span class="req" data-required="{{ _('Required') }}"></span>
+      </label>
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _("Your game's description should be consise and capture the essence of what it does. It will be shown on all listings, and on your Galaxy game detail page.") }}
+    </div>
+  </div>
+
+  <div class="unit two-of-three">
+    <div class="content form-field">
+      <label>
+        <input type="url" name="url" pattern="https?://.*" placeholder="{{ _('Enter privacy policy URL here') }}">
+        <span class="l">{{ _('Privacy Policy URL') }}</span>
+        <span class="req opt" data-required="{{ _('Optional') }}"></span>
+      </label>
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _('Provide a URL to your privacy policy explaining what data is transmitted from a user\'s computer and how it is used is required. Generate one at <a href="{iubenda_url}" target="_blank">iubenda.com</a>.', iubenda_url='https://www.iubenda.com/') }}
+    </div>
+  </div>
+
+  <div class="unit two-of-three">
+    <div class="content form-field">
+      <div class="l">{{ _('Genre') }}</div>
+      {% for genre in ['Action', 'Adventure', 'RPG', 'Simulation', 'Sports', 'Strategy'] %}
+        <label class="choice"><input type="radio" name="genre" required value="{{ genre|lower }}"> {{ genre }}</label>
+      {% endfor %}
+      <span class="req opt" data-required="{{ _('Required') }}"></span>
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _("Genres are used to classify games in Galaxy. Choose the genre that best fits your game.") }}
+    </div>
+  </div>
+
+  <div class="unit span-grid">
+    <div class="content">
+      <h2>{{ _('Media') }}</h2>
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-field">
+      <div class="l">{{ _('Icon') }}</div>
       <input type="file" name="icon">
-    </label>
+      <span class="req opt" data-required="{{ _('Required') }}"></span>
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-field">
+      <div class="l">{{ _('Screenshots') }}</div>
+      <input type="file" name="screenshots">
+      <span class="req opt" data-required="{{ _('Required') }}"></span>
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-field">
+      <div class="l">{{ _('Videos') }}</div>
+      <input type="file" name="videos">
+      <span class="req opt" data-required="{{ _('Required') }}"></span>
+    </div>
+  </div>  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _("The icon will be displayed on all listings in Galaxy.") }}
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _("Screenshots will be displayed on your game detail page.") }}
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _("Videos will be displayed on your game detail page.") }}
+    </div>
   </div>
 
-  <div>
-    <h2>{{ _('Orientation') }}</h2>
-    <label>
-      <input type="radio" name="orientation" value="portrait"> {{ _('Portrait') }}
-    </label>
-    <label>
-      <input type="radio" name="orientation" value="landscape"> {{ _('Landscape') }}
-    </label>
-    <label>
-      <input type="radio" name="orientation" value="both"> {{ _('Both') }}
-    </label>
+  <div class="unit span-grid">
+    <div class="content">
+      <button class="btn btn-green btn-big" type="submit">{{ _('Submit') }}</button>
+    </div>
   </div>
-
-  <div>
-    <h2>{{ _('Fullscreen') }}</h2>
-    <label>
-      <input type="radio" name="fullscreen" value="1"> {{ _('Yes') }}
-    </label>
-    <label>
-      <input type="radio" name="fullscreen" value="0"> {{ _('No') }}
-    </label>
-  </div>
-
-  <div>
-    <h2>{{ _('Screenshots') }}</h2>
-    <label>
-      <input type="file" name="screenshot">
-    </label>
-  </div>
-
-  <div>
-    <label>
-      {{ _('Privacy Policy') }}
-      <textarea name="privacy-policy"></textarea>
-    </label>
-  </div>
-
-  <div>
-    <h2>License</h2>
-    <label>
-      <input type="radio" name="license" value=""> {{ _('Public Domain') }}
-      <input type="radio" name="license" value="cc"> {{ _('Creative Commons') }}
-    </label>
-  </div>
-
-  <button type="submit">{{ _('Submit') }}</button>
 </form>
