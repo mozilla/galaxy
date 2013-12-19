@@ -9,9 +9,11 @@
   <span class="flex-shift"></span>
   <span class="flex-span"></span>
   <div class="auth">
-    <a href="/settings" class="only-logged-in email">
-      <div class="avatar" style="background-image: url({{ gravatar(user.get_setting('email')) }})"></div>
-      {{ user.get_setting('username') }}</a>
+    {% if user.logged_in() %}
+      <a href="/settings" class="only-logged-in email">
+        <div class="avatar" style="background-image: url({{ gravatar(user.get_setting('email')) }})"></div>
+        {{ user.get_setting('username') }}</a>
+    {% endif %}
     <a class="logout only-logged-in" href="#">{{ _('Sign Out') }}</a>
     <a class="header-button persona only-logged-out" href="#">{{ _('Sign In') }}</a>
   </div>
