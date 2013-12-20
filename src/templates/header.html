@@ -14,7 +14,7 @@
         <div class="avatar" style="background-image: url({{ user.get_settings('public').avatar or gravatar(user.get_setting('email')) }})"></div>
         {{ user.get_setting('username') }}</a>
     {% endif %}
-    <a class="logout only-logged-in" href="#">{{ _('Sign Out') }}</a>
-    <a class="header-button persona only-logged-out" href="#">{{ _('Sign In') }}</a>
+    <a class="logout only-logged-in" href="#">{{ _('Sign out') }}</a>
+    <a class="header-button persona only-logged-out" href="#">{{ _('Sign in') }}</a>
   </div>
 </nav>

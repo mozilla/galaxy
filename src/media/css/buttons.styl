@@ -7,14 +7,14 @@
     display: inline-block;
     text-align: center;
     text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: $inputFontFamily;
     line-height: 1;
     font-size: 13px;
     font-weight: normal;
     padding: 6px 16px;
     border-radius: 4px;
 
-    gradientLeft(#fff, #e1e1e1);
+    gradientTop(unquote('#fff, #e1e1e1'));
     border: 1px solid #dadada;
     border-left: 1px solid #d2d2d2;
     border-right: 1px solid #d2d2d2;
@@ -34,6 +34,99 @@
     box-shadow: 0 1px 0 rgba(0, 0, 0, .15);
 }
 
+.btn-black {
+  border-color: #000;
+  background-color: #2e2e2e;
+  gradientTop(unquote('#4d4d4d, #000000'));
+}
+.btn-red {
+  border-color: #c01415;
+  border-bottom-color: #910f10;
+  background-color: #e54546;
+  gradientTop(unquote('#ef6465, #d71618'));
+}
+.btn-orange {
+  border-color: #cd640b;
+  border-bottom-color: #9c4c08;
+  background-color: #ee7f22;
+  gradientTop(unquote('#f48a30, #e5700c'));
+}
+.btn-green {
+  border-color: #5a6d2b;
+  border-bottom-color: #3c491d;
+  background-color: #7e993c;
+  gradientTop(unquote('#90af45, #63782f'));
+
+}
+.btn-blue {
+  border-color: #104769;
+  border-bottom-color: #09293d;
+  background-color: #196ea2;
+  gradientTop(unquote('#1c7ab4, #155c88'));
+
+}
+.btn-yellow {
+  border-color: #b7900b;
+  border-bottom-color: #876a08;
+  background-color: #e5b925;
+  gradientTop(unquote('#f3c835, #cfa30c'));
+}
+.btn-black {
+  text-shadow: 0 -1px 0 #000;
+}
+.btn-red,
+.btn-orange,
+.btn-green,
+.btn-blue,
+.btn-yellow {
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.24);
+}
+.btn-black,
+.btn-red,
+.btn-orange,
+.btn-green,
+.btn-blue,
+.btn-yellow {
+  color: #fff;
+}
+.btn-black:hover,
+.btn-red:hover,
+.btn-orange:hover,
+.btn-green:hover,
+.btn-blue:hover,
+.btn-yellow:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+.btn-black:hover {
+  background: #000;
+}
+.btn-red:hover {
+  background: #d71618;
+}
+.btn-orange:hover {
+  background: #e5700c;
+}
+.btn-green:hover {
+  background: #63782f;
+}
+.btn-blue:hover {
+  background: #155c88;
+}
+.btn-yellow:hover {
+  background: #cfa30c;
+}
+.btn-small {
+  font-size: .7em;
+}
+.btn-big {
+  font-size: 1.2em;
+  line-height: 1.65em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
+.btn.btn-round {
+  border-radius: 20px;
+}
 
 /* Active  */
 .btn-big.btn-active, .btn-big.btn-active:hover {
@@ -85,6 +178,9 @@
     width: 100%;
 }
 
+.btn-inline {
+    display: inline-block;
+}
 
 /* Group  */
 .btn-group {

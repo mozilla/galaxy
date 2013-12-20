@@ -1,3 +1,8 @@
+{% if not user.logged_in() %}
+  <h1>{{ _('Friends') }}</h1>
+  <p>{{ _('You must sign in/sign up to see your friends.') }}</p>
+  <p><a class="btn btn-blue btn-round btn-big btn-inline persona only-logged-out" href="#">{{ _('Sign in') }}</a></p>
+{% else %}
 <h1>{{ _('Friends') }}</h1>
 
 <div class="unit span-grid">
@@ -48,3 +53,4 @@
 {% end %}
 </div>
 </div>
+{% endif %}
