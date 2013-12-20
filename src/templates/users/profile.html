@@ -1,0 +1,25 @@
+{% include '_macros/friends.html' %}
+
+<div class="profile unit span-grid">
+    <div class="content">
+    {% defer (url=api('user.search')|urlparams(id=user_id), key=user_id, id='user-id') %}
+      <h1>{{ avatar(this) }}</h1>
+      <section>
+        <h2>{{ _('Games playing') }}</h2>
+        <p class="no-results">{{ _('No games played yet') }}</p>
+      </section>
+      <section>
+        <h2>{{ _('Leaderboard activity') }}</h2>
+        <p class="no-results">{{ _('No activity yet') }}</p>
+      </section>
+      <section>
+        <h2>{{ _('Achievements') }}</h2>
+        <p class="no-results">{{ _('No achievements yet') }}</p>
+      </section>
+      {# TODO: Allow some way to contact user. #}
+      {# TODO: Add Leaderboard Activity. #}
+      {# TODO: Add Achievements. #}
+    {% empty %}
+    {% end %}
+  </div>
+</div>
