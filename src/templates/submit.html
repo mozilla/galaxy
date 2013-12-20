@@ -98,37 +98,50 @@
   </div>
   <div class="unit one-of-three">
     <div class="content form-field">
-      <div class="l">{{ _('Icon') }}</div>
-      <input type="file" name="icon">
-      <span class="req opt" data-required="{{ _('Required') }}"></span>
+      <label>
+        <div class="l">{{ _('Icon') }}</div>
+        <div class="fallback">
+          <input type="file" name="icon">
+        </div>
+        <span class="req" data-required="{{ _('Required') }}"></span>
+      </label>
     </div>
   </div>
   <div class="unit one-of-three">
     <div class="content form-field">
-      <div class="l">{{ _('Screenshots') }}</div>
-      <input type="file" name="screenshots">
-      <span class="req opt" data-required="{{ _('Required') }}"></span>
+      <label>
+        <div class="l">{{ _('Screenshots') }}</div>
+        <div class="fallback">
+          <input type="file" name="screenshots" multiple>
+        </div>
+        <span class="req" data-required="{{ _('Required') }}"></span>
+      </label>
     </div>
   </div>
   <div class="unit one-of-three">
     <div class="content form-field">
-      <div class="l">{{ _('Videos') }}</div>
-      <input type="file" name="videos">
-      <span class="req opt" data-required="{{ _('Required') }}"></span>
-    </div>
-  </div>  <div class="unit one-of-three">
-    <div class="content form-help">
-      {{ _("The icon will be displayed on all listings in Galaxy.") }}
-    </div>
-  </div>
-  <div class="unit one-of-three">
-    <div class="content form-help">
-      {{ _("Screenshots will be displayed on your game detail page.") }}
+      <label>
+        <div class="l">{{ _('Videos') }}</div>
+        <div class="fallback">
+          <input type="file" name="videos" multiple>
+        </div>
+        <span class="req opt" data-required="{{ _('Optional') }}"></span>
+      </label>
     </div>
   </div>
   <div class="unit one-of-three">
     <div class="content form-help">
-      {{ _("Videos will be displayed on your game detail page.") }}
+      {{ _("The icon will be shown on all listings in Galaxy. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _("Screenshots will be shown on your game detail page. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
+    </div>
+  </div>
+  <div class="unit one-of-three">
+    <div class="content form-help">
+      {{ _("Videos will be shown on your game detail page. Allowed video formats: <code>MP4</code>, <code>OGG</code>, <code>WebM</code>") }}
     </div>
   </div>
 
