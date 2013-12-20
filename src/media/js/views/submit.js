@@ -1,4 +1,6 @@
-define('views/submit', ['l10n', 'storage', 'utils', 'z'], function(l10n, storage, utils, z) {
+define('views/submit',
+       ['dropzone', 'l10n', 'routes_api', 'storage', 'utils', 'z'],
+       function(dropzone, l10n, routes_api, storage, utils, z) {
 
     z.body.on('focus', '[pattern], [required], [maxlength]', function() {
         // Add a class so we don't prematurely stylise `:invalid` fields.
@@ -21,6 +23,9 @@ define('views/submit', ['l10n', 'storage', 'utils', 'z'], function(l10n, storage
 
     return function(builder) {
         builder.start('submit.html').done(function() {
+            // new dropzone('.submit-form', {
+            //     uploadMultiple: true
+            // });
         });
 
         builder.z('type', 'leaf submit');

@@ -1,5 +1,5 @@
 <h1>{{ _('Submit a Game') }}</h1>
-<form class="dropzone submit-form grid" method="post" data-required="{{ _('Required') }}">
+<form class="submit-form grid" method="post" data-required="{{ _('Required') }}">
   <div class="unit two-of-three">
     <div class="content form-field">
       <label>
@@ -112,7 +112,7 @@
       <label>
         <div class="l">{{ _('Screenshots') }}</div>
         <div class="fallback">
-          <input type="file" name="screenshots" multiple>
+          <input type="file" name="screenshots">
         </div>
         <span class="req" data-required="{{ _('Required') }}"></span>
       </label>
