@@ -30,16 +30,11 @@ define('views/friends',
         requests.post(urls.api.url('user.friends.request'), {
             recipient: user_id
         }).done(function(data) {
-            if (!data || data.error) {
-                var msg = gettext('Failed to submit friend request');
-                notification.notification({message: msg});
-                return console.error(data.error);
-            }
-            z.page.trigger('reload_chrome');
+            notification.notification({message: gettext('Friend request sent')});
+            require('views').reload();
             return console.log(data);
         }).fail(function(data) {
-            var msg = gettext('Failed to submit friend request');
-            notification.notification({message: msg});
+            notification.notification({message: gettext('Failed to submit friend request')});
             return console.error(data);
         });
     }
@@ -48,16 +43,27 @@ define('views/friends',
         requests.post(urls.api.url('user.friends.accept'), {
             acceptee: user_id
         }).done(function(data) {
-            if (!data || data.error) {
-                var msg = gettext('Failed to accept friend request');
-                notification.notification({message: msg});
-                return console.error(data.error);
+            var friend;
+            var requestsUrl = urls.api.url('user.friends.requests');
+            cache.attemptRewrite(function(url) {
+                return url === requestsUrl;
+            }, function(item) {
+                for (var i = 0; i < item.length; i++) {
+                    if (item[i].id != user_id) continue;
+                    friend = item[i];
+                    delete item[i];
+                    return;
+                }
+            });
+            if (friend) {
+                var friendsUrl = urls.api.url('user.friends');
+                cache.attemptRewrite(function(url) {
+                    return url === friendsUrl;
+                }, function(item) {
+                    item.push(friend);
+                });
             }
-            // TODO: Rewrite cache to just add single friend.
-            cache.bust(urls.api.url('user.friends'));
-            // TODO: Rewrite cache to just remove single friend.
-            cache.bust(urls.api.url('user.friends.requests'));
-            z.body.trigger('reload');
+            require('views').reload();
             return console.log(data);
         }).fail(function(data) {
             var msg = gettext('Failed to accept friend request');
@@ -70,18 +76,20 @@ define('views/friends',
         requests.post(urls.api.url('user.friends.ignore'), {
             acceptee: user_id
         }).done(function(data) {
-            if (!data || data.error) {
-                var msg = gettext('Failed to ignore friend request');
-                notification.notification({message: msg});
-                return console.error(data.error);
-            }
-            // TODO: Rewrite cache to just remove single friend.
-            cache.bust(urls.api.url('user.friends.requests'));
-            z.body.trigger('reload');
+            var requestsUrl = urls.api.url('user.friends.requests');
+            cache.attemptRewrite(function(url) {
+                return url === requestsUrl;
+            }, function(item) {
+                for (var i = 0; i < item.length; i++) {
+                    if (item[i].id != user_id) continue;
+                    delete item[i];
+                    return;
+                }
+            });
+            require('views').reload();
             return console.log(data);
         }).fail(function(data) {
-            var msg = gettext('Failed to ignore friend request');
-            notification.notification({message: msg});
+            notification.notification({message: gettext('Failed to ignore friend request')});
             return console.error(data);
         });
     }
@@ -90,18 +98,20 @@ define('views/friends',
         requests.post(urls.api.url('user.friends.unfriend'), {
             exfriend: user_id
         }).done(function(data) {
-            if (!data || data.error) {
-                var msg = gettext('Failed to remove friend');
-                notification.notification({message: msg});
-                return console.error(data.error);
-            }
-            // TODO: Rewrite cache to just remove single friend.
-            cache.bust(urls.api.url('user.friends'));
-            z.body.trigger('reload');
+            var requestsUrl = urls.api.url('user.friends');
+            cache.attemptRewrite(function(url) {
+                return url === requestsUrl;
+            }, function(item) {
+                for (var i = 0; i < item.length; i++) {
+                    if (item[i].id != user_id) continue;
+                    delete item[i];
+                    return;
+                }
+            });
+            require('views').reload();
             return console.log(data);
         }).fail(function(data) {
-            var msg = gettext('Failed to remove friend');
-            notification.notification({message: msg});
+            notification.notification({message: gettext('Failed to remove friend')});
             return console.error(data);
         });
     }
@@ -141,7 +151,6 @@ define('views/friends',
     }).on('click', '.ignore-friend', function() {
         var $friend = $(this).closest('[data-user-id]');
         var username = $friend.find('.profile-link').text();
-        var msg = gettext('Friend request ignored: {username}', {username: username});
         notification.notification({message: msg});
         ignoreFriend($friend.data('userId'));
         $friend.remove();
