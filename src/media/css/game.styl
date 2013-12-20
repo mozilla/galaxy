@@ -1,0 +1,78 @@
+@import 'lib';
+
+[data-page-type~="game"] {
+    .page {
+        &:before {
+            background: #fdfe98 url(../img/homepage/hero.jpg) 50% 0 repeat-y;
+            background-size: auto 785px;
+            content: "";
+            display: block;
+            height: 215px;
+            left: 0;
+            opacity: .1;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+        h1 {
+            color: #eff;
+            line-height: 1;
+        }
+        .game-release-info {
+            margin: -46px 0 0 80px;
+
+            h2, h3 {
+                font-size: 12px;
+                margin: 0;
+            }
+        }
+        h2 {
+            color: #ddd;
+            font-style: italic;
+        }
+        h3 {
+            color: #c7c7c7;
+        }
+        time {
+            color: #f7f7f7;
+        }
+    }
+    .game-masthead {
+        min-height: 100px;
+        padding: 40px 35px;
+        position: relative;
+        z-index: 2;
+    }
+    .game-icon {
+        background: no-repeat;
+        background-size: contain;
+        display: inline-block;
+        height: 64px;
+        margin-right: 15px;
+        width: 64px;
+        vertical-align: middle;
+    }
+    .game-details {
+        background: $colorWhite;
+        padding: 40px 35px;
+        h1 {
+            color: $colorGray;
+        }
+        h2 {
+            color: $colorGrayDark;
+            font-size: 24px;
+            line-height: 26px;
+        }
+    }
+    .game-install {
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        .btn {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+    }
+}
