@@ -18,7 +18,8 @@ define('views/submit',
         }
     }).on('blur keyup change paste', '[name=name]', function() {
         var $this = $(this);
-        $this.closest('form').find('[name=slug]').val(utils.slugify($this.val()));
+        var $slug = $this.closest('form').find('[name=slug]');
+        $slug.val(utils.slugify($this.val())).addClass('focused');
     });
 
     return function(builder) {
