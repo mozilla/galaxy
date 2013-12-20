@@ -182,15 +182,17 @@ textarea {
     font-weight: normal;
     font-size: $smallFontSize;
 }
-input.input-error, textarea.input-error, select.input-error, .input-error,
-input.focused:invalid, textarea.focused:invalid, select.focused:invalid {
-    border-color: #da3e5a;
-    box-shadow: 0 0 0 2px rgba(218, 62, 90, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
-}
-input.input-success, textarea.input-success, select.input-success, .input-success,
-input.focused:valid, textarea.focused:valid, select.focused:valid {
-    border-color: #18a011 ;
-    box-shadow: 0 0 0 2px rgba(24, 160, 17, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+form:not([novalidate]) {
+    input.input-error, textarea.input-error, select.input-error, .input-error,
+    input.focused:invalid, textarea.focused:invalid, select.focused:invalid {
+        border-color: #da3e5a;
+        box-shadow: 0 0 0 2px rgba(218, 62, 90, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+    }
+    input.input-success, textarea.input-success, select.input-success, .input-success,
+    input.focused:valid, textarea.focused:valid, select.focused:valid {
+        border-color: #18a011 ;
+        box-shadow: 0 0 0 2px rgba(24, 160, 17, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+    }
 }
 input.input-gray, textarea.input-gray, select.input-gray, .input-gray  {
     border-color: #ccc;
@@ -227,8 +229,12 @@ input.input-search, input[type="search"] {
 
 .input-append {
     position: relative;
-    z-index: 1;
     margin-left: -1px;
+}
+
+.input-append,
+.input-prepend {
+    z-index: 2;
 }
 
 button, input, select, textarea {
@@ -279,7 +285,7 @@ label {
     }
 }
 
-input[type=email], input[type=text], input[type=url], input[type=search], textarea, .input-prepend {
+input[type=email], input[type=search], input[type=text], input[type=url], textarea, .input-prepend {
     border-radius: 2px;
     border: 1px solid $light-gray;
     padding: 5px;
@@ -288,6 +294,29 @@ input[type=email], input[type=text], input[type=url], input[type=search], textar
         color: $earl-gray;
         cursor: not-allowed;
     }
+    &.large {
+        font-size: 24px;
+        height: 40px;
+        line-height: 34px;
+        padding: 4px;
+    }
+}
+
+input[type=email],
+input[type=search],
+input[type=text],
+input[type=url],
+textarea {
+    font-size: 18px;
+    line-height: 22px;
+    height: 30px;
+    padding: 2px 4px;
+    width: 100%;
+    z-index: 2;
+}
+textarea {
+    height: auto;
+    min-height: 50px;
 }
 
 form.grid {
@@ -349,38 +378,19 @@ form.grid {
         color: $colorGray;
         font-size: 12px;
     }
-    input[type=text],
-    input[type=url],
-    textarea {
-        font-size: 18px;
-        line-height: 22px;
-        height: 30px;
-        padding: 2px 4px;
-        width: 100%;
-        z-index: 2;
-    }
-    input[type=text].large {
-        font-size: 24px;
-        line-height: 34px;
-        height: 40px;
-        padding: 4px;
-    }
-    textarea {
-        height: auto;
-        min-height: 50px;
-    }
 
     .l {
         font-size: 10px;
     }
     [placeholder] {
         ~ .l {
+            left: 0;
             line-height: 1;
-            opacity: 1;
+            opacity: 0;
             pointer-events: none;
             position: absolute;
             top: 0;
-            transition(unquote('.1s opacity, .1s visibility, .4s top'));
+            transition(unquote('.1s opacity ease-in, .2s visibility ease-in-out, .4s top ease-in-out'));
             visibility: hidden;
             z-index: 1;
         }
