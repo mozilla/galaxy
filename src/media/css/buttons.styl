@@ -1,43 +1,37 @@
 @import 'lib';
 
 .btn {
-    position: relative;
+    border: 1px solid #dadada;
+    border-bottom-color: #a9a9a9;
+    border-left: 1px solid #d2d2d2;
+    border-radius: 4px;
+    border-right: 1px solid #d2d2d2;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .15), inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
     cursor: pointer;
-    outline: none;
     display: inline-block;
+    font-family: 400 13px/1 $inputFontFamily;
+    gradientTop(unquote('#fff, #e1e1e1'));
+    outline: none;
+    padding: 6px 16px;
+    position: relative;
     text-align: center;
     text-decoration: none;
-    font-family: $inputFontFamily;
-    line-height: 1;
-    font-size: 13px;
-    font-weight: normal;
-    padding: 6px 16px;
-    border-radius: 4px;
-
-    gradientTop(unquote('#fff, #e1e1e1'));
-    border: 1px solid #dadada;
-    border-left: 1px solid #d2d2d2;
-    border-right: 1px solid #d2d2d2;
-    border-bottom-color: #a9a9a9;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, .15), inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
-    text-shadow: 0 1px 0px rgba(255, 255, 255, 1);
+    text-shadow: 0 1px 0 #fff;
 }
 .btn, .btn:hover {
     color: #000;
 }
 .btn:hover {
-    filter: none;
-    background: none;
     background: #eee;
-    text-shadow: 0 1px 0px rgba(255, 255, 255, .8);
-    text-decoration: none;
     box-shadow: 0 1px 0 rgba(0, 0, 0, .15);
+    text-shadow: 0 1px -1px #fff;
+    text-decoration: none;
 }
 
 .btn-black {
   border-color: #000;
   background-color: #2e2e2e;
-  gradientTop(unquote('#4d4d4d, #000000'));
+  gradientTop(unquote('#4d4d4d, #000'));
 }
 .btn-red {
   border-color: #c01415;

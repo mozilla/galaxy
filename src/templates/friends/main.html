@@ -1,56 +1,52 @@
+{% include '_macros/friends.html' %}
+
 {% if not user.logged_in() %}
   <h1>{{ _('Friends') }}</h1>
   <p>{{ _('You must sign in/sign up to see your friends.') }}</p>
   <p><a class="btn btn-blue btn-round btn-big btn-inline persona only-logged-out" href="#">{{ _('Sign in') }}</a></p>
 {% else %}
-<h1>{{ _('Friends') }}</h1>
+  <h1>{{ _('Friends') }}</h1>
 
-<div class="unit span-grid">
-    <div class="content">
+  {% defer (url=api('user.friends.requests')) %}
+    <section>
+      <h2>{{ _('Friend requests') }}</h2>
+      <ul class="friend-requests c">
+        {% for user in this %}
+          <li data-user-id="{{ user.id }}">
+            <a href="{{ url('user', [user.id]) }}" class="profile-link">{{ avatar(user) }}</a>
+            {# TODO: Mark as grayed out if friend is already requested. #}
+            <a href="#" class="btn btn-red ignore-friend">{{ _('Ignore') }}</a>
+            <a href="#" class="btn btn-green accept-friend">{{ _('Accept') }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% empty %}
+  {% end %}
 
-<h2>{{ _('Your friends') }}</h2>
-{% defer (url=api('user.friends')) %}
-  <ul class="two text-columns">
-    {% for friend in this %}
-      <li>
-        <a href="/friend/{{ friend(friend.id) }}">{{ friend_icon(friend) }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-{% empty %}
-  <p class="no-results">{{ _('No friends') }}</p>
-{% end %}
-</div>
-</div>
+  {% defer (url=api('user.friends')) %}
+    <section>
+      <h2>{{ _('Your friends') }}</h2>
+      <ul class="two text-columns">
+        {% for user in this %}
+          <li data-user-id="{{ user.id }}">
+            <a href="{{ url('user', [user.id]) }}" class="profile-link">{{ avatar(user) }}</a>
+            <a href="#" class="btn btn-red unfriend-friend">{{ _('Remove') }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+  {% empty %}
+  {% end %}
 
-<div class="unit span-grid">
-  <div class="content">
-    <h2>{{ _('Find a friend') }}</h2>
-    <form class="user-search">
-      <input type="search" name="q" placeholder="{{ _('Search by email') }}"
-             title="" x-inputmode="verbatim"
-             autocapitalize="off" autocomplete="off" autocorrect="off">
+  <section>
+    <h2>{{ _('Add a friend') }}</h2>
+    <form class="user-search" novalidate>
+      <p><input type="search" name="q" placeholder="{{ _('Search by email') }}"
+             autocapitalize="off" autocomplete="off" autocorrect="off"
+             class="large" novalidate title="" x-inputmode="verbatim"></p>
     </form>
     <ul class="user-results"></ul>
-  </div>
-</div>
-
-<div class="unit span-grid">
-    <div class="content">
-{% defer (url=api('user.friends.requests')) %}
-  <h2>{{ _('Friend requests') }}</h2>
-  <ul data-accept-url="{{ api('user.friends.accept') }}"
-      data-ignore-url="{{ api('user.friends.ignore') }}">
-    {% for friend in this %}
-      <li>
-        <a href="">{{ friend }}</a>
-        <a href="#" class="accept">Accept</a>
-        <a href="#" class="ignore">Ignore</a>
-      </li>
-    {% endfor %}
-  </ul>
-{% empty %}
-{% end %}
-</div>
-</div>
+  </section>
 {% endif %}

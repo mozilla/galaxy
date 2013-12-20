@@ -1,14 +1,51 @@
 @import 'lib';
 
-[data-page-type~="profile"] .page h1 {
-    color: $flamin-hot-cheetos-orange;
-    line-height: 1;
-    .avatar {
-        display: inline-block;
+[data-page-type~="leaf"] .page {
+    h1 {
+        color: $flamin-hot-cheetos-orange;
+        line-height: 1;
+    }
+}
+
+[data-page-type~="profile"] .page {
+    h1 .avatar {
         margin-right: 10px;
     }
 }
 
-.profile section {
-    padding-top: 30px;
+[data-page-type~="friends"] .page {
+    section {
+        margin-top: 30px;
+    }
+    .user-search {
+        margin-top: 15px;
+    }
+    ul {
+        list-style: none;
+        padding: 15px 0 45px;
+    }
+    .user-search,
+    ul {
+        width: 50%;
+    }
+    .profile-link {
+        display: block;
+        float: left;
+        ellipsis();
+        line-height: 32px;
+    }
+    .user-results .profile-link {
+        width: 300px;
+    }
+    .avatar {
+        float: left;
+        margin-right: 7px;
+    }
+    li .btn {
+        float: right;
+        margin-left: 15px;
+    }
+    .no-results:last-child {
+        margin-bottom: 0;
+    }
 }
