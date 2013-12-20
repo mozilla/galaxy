@@ -5,6 +5,7 @@ var routes = [
     {'pattern': '^/$', 'view_name': 'homepage'},
     {'pattern': '^/submit$', 'view_name': 'submit'},
     {'pattern': '^/friends$', 'view_name': 'friends'},
+    {'pattern': '^/user/([^/<>"\']+)/?$', 'view_name': 'user'},
 
     {'pattern': '^/tests$', 'view_name': 'tests'},
     {'pattern': '^/debug$', 'view_name': 'debug'}
