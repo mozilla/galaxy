@@ -6,24 +6,29 @@ define('forms', ['z'], function(z) {
         }
     }
 
-    z.body.on('change keyup paste', 'input, select, textarea', function(e) {
+    z.body.on('blur change keypress paste', 'input, select, textarea', function(e) {
+        var $this = $(this);
         checkValid(e.target.form);
+        // If it's required, show :valid/:invalid styles -OR-
+        // if it's optional, show styles when there's some text in the value.
+        $this.toggleClass('focused', this.hasAttribute('required') || !!$this.val());
+    }).on('blur', 'input, select, textarea', function(e) {
+        var $this = $(this);
+        $this.toggleClass('focused', this.hasAttribute('required') || !!$this.val());
     }).on('loaded decloak', function() {
         $('form:not([novalidate])').each(function() {
             checkValid(this);
         });
         $('form[novalidate] button[type=submit]').removeAttr('disabled');
-    }).on('blur', 'input, select, textarea', function() {
-        // Add a class so we don't prematurely stylise `:invalid` fields.
-        var $this = $(this);
-        // If it's required, show :valid/:invalid styles -OR-
-        // if it's optional, show styles when there's some text in the value.
-        $this.toggleClass('focused', this.hasAttribute('required') || !!$this.val());
-        // if (!this.hasAttribute('required') && this.val())
-    }).on('focus', 'input[type=url]', function() {
+    }).on('focus', 'input[type=url]', function(e) {
+        console.log(e.type);
         var $this = $(this);
         if (!$this.val()) {
-            $this.val('http://');
+            // This `setTimeout` is so we set the value *after* the field has
+            // been focussed; otherwise, the text will be highlighted upon focus.
+            setTimeout(function() {
+                $this.val('http://');
+            }, 0);
         }
     }).on('blur', 'input[type=url]', function() {
         var $this = $(this);

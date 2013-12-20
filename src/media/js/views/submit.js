@@ -2,7 +2,9 @@ define('views/submit',
        ['dropzone', 'l10n', 'routes_api', 'storage', 'utils', 'z'],
        function(dropzone, l10n, routes_api, storage, utils, z) {
 
-    z.body.on('blur change keyup paste', '[name=name]', function(e) {
+    z.body.on('blur change keyup paste', 'input[name=name]', function(e) {
+        // NOTE: We're using `keyup` instead of `keypress` to detect when
+        // the user tabs within this field.
         var $this = $(this);
         var $slug = $this.closest('form').find('[name=slug]');
 
@@ -14,7 +16,7 @@ define('views/submit',
         // Upon blur of name, add the `focused` class so :valid/:invalid
         // styles get set on slug.
         if (e.type === 'blur' || e.type === 'focusout') {
-            $slug.addClass('focused');
+            $slug.toggleClass('focused', !!$this.val());
         }
     });
 
