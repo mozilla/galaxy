@@ -9,9 +9,7 @@ require.config({
         'nunjucks.compat': 'lib/nunjucks.compat',
         'templates': '../../templates',
         'settings': ['settings_local', 'settings'],
-        'format': 'lib/format',
-        'md5': 'lib/md5',
-        'gravatar': 'lib/gravatar'
+        'format': 'lib/format'
     }
 });
 
