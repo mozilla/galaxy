@@ -298,17 +298,17 @@ form.grid {
         position: absolute;
         right: 0;
         &:after {
-            content: attr(data-required);
-            display: block;
             border-radius: 2px;
             border: 2px solid lighten(#da3e5a, 80%);
+            bottom: 5px;
             color: lighten(#da3e5a, 20%);
+            content: attr(data-required);
+            display: block;
             font-size: 10px;
             padding: 1px 3px;
             position: absolute;
-            bottom: 5px;
-            transition(unquote('.1s opacity, .1s visibility'));
             right: 12px;
+            transition(unquote('.1s opacity, .1s visibility'));
             z-index: 2;
         }
     }
@@ -316,20 +316,27 @@ form.grid {
         border: 2px solid #eee;
         color: #999;
     }
+    input.large ~ .req:after {
+        bottom: 10px;
+    }
     textarea ~ .req:after {
         bottom: 11px;
     }
-    .large ~ .req:after {
-        bottom: 10px;
+    textarea.large {
+        height: 100px;
+        ~ .req:after {
+            bottom: 73px;
+        }
     }
     .form-field > .req:after {
         bottom: -10px;
         right: 0;
     }
     :focus ~ .req:after,
-    :valid ~ .req:after {
-        visibility: hidden;
+    :not(.optional):valid ~ .req:after,
+    .optional:not(.empty) ~ .req:after {
         opacity: 0;
+        visibility: hidden;
     }
 
     .content {

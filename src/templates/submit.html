@@ -49,7 +49,7 @@
   <div class="unit two-of-three">
     <div class="content form-field">
       <label>
-        <textarea name="description" rows="4" placeholder="{{ _('Enter game description here') }}" required></textarea>
+        <textarea name="description" class="large" placeholder="{{ _('Enter game description here') }}" required></textarea>
         <span class="l">{{ _('Description') }}</span>
         <span class="req" data-required="{{ _('Required') }}"></span>
       </label>
@@ -64,7 +64,7 @@
   <div class="unit two-of-three">
     <div class="content form-field">
       <label>
-        <input type="url" name="url" pattern="https?://.*" placeholder="{{ _('Enter privacy policy URL here') }}">
+        <input type="url" name="url" pattern="https?://.*" placeholder="{{ _('Enter privacy policy URL here') }}" class="optional">
         <span class="l">{{ _('Privacy Policy URL') }}</span>
         <span class="req opt" data-required="{{ _('Optional') }}"></span>
       </label>

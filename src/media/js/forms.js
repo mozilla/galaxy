@@ -15,11 +15,18 @@ define('forms', ['z'], function(z) {
     }).on('blur', 'input, select, textarea', function(e) {
         var $this = $(this);
         $this.toggleClass('focused', this.hasAttribute('required') || !!$this.val());
+        // So we can target .empty (because :empty doesn't apply to attributes).
+        $this.toggleClass('empty', !!!$this.val());
     }).on('loaded decloak', function() {
         $('form:not([novalidate])').each(function() {
             checkValid(this);
         });
         $('form[novalidate] button[type=submit]').removeAttr('disabled');
+        $('input, select, textarea').each(function() {
+            var $this = $(this);
+            // So we can target .empty (because :empty doesn't apply to attributes).
+            $this.toggleClass('empty', !!!$this.val());
+        });
     }).on('focus', 'input[type=url]', function(e) {
         console.log(e.type);
         var $this = $(this);
@@ -33,7 +40,7 @@ define('forms', ['z'], function(z) {
     }).on('blur', 'input[type=url]', function() {
         var $this = $(this);
         if ($this.val() === 'http://') {
-            $this.val('');
+            $this.val('').addClass('empty');
             if (!this.hasAttribute('required')) {
                 $this.removeClass('focused');
             }
