@@ -13,11 +13,9 @@ define('views/submit',
         // If the name is valid, the slug is valid so let the user tab over it.
         $slug.attr('tabIndex', this.checkValidity() ? '-1' : '');
 
-        // Upon blur of name, add the `focused` class so :valid/:invalid
-        // styles get set on slug.
-        if (e.type === 'blur' || e.type === 'focusout') {
-            $slug.toggleClass('focused', !!$this.val());
-        }
+        // Upon presence/absence of name, toggle the `focused` class so
+        // :valid/:invalid styles get set on slug.
+        $slug.toggleClass('focused', !!$this.val());
     });
 
     return function(builder) {
