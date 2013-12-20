@@ -203,7 +203,7 @@ input:focus, textarea:focus {
     border-color: #5ca9e4;
     box-shadow: 0 0 0 2px rgba(70, 161, 231, .3), 0 1px 2px rgba(0, 0, 0, .2) inset;
 }
-input[type=checkbox], input[type=radio] {
+input[type=checkbox], input[type=file], input[type=radio] {
     box-shadow: none !important;
 }
 input.input-search, input[type="search"] {
@@ -427,5 +427,30 @@ form.grid {
     input[type=file] {
         color: #666;
         font-size: 11px;
+    }
+
+    .file-preview {
+        background: 0 50% no-repeat;
+        background-size: contain;
+        display: none;
+        height: 150px;
+        margin-top: 5px;
+        width: 200px;
+    }
+
+    .icon .file-preview {
+        height: 128px;
+        width: 128px;
+    }
+
+    .videos .file-preview {
+        height: 150px;
+        width: 200px;
+    }
+
+    .file-size {
+        color: $colorGrayLight;
+        font-size: 10px;
+        margin-top: 15px;
     }
 }

@@ -16,6 +16,29 @@ define('views/submit',
         // Upon presence/absence of name, toggle the `focused` class so
         // :valid/:invalid styles get set on slug.
         $slug.toggleClass('focused', !!$this.val());
+    }).on('blur change', 'input[type=file]', function(e) {
+        // TODO: Replace with drag-and-drop library.
+        var input = this;
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var $filePreview = $(input).closest('.form-field').find('.file-preview');
+                    $filePreview.show().css('background-image', 'url(' + e.target.result + ')');
+                    var img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        $filePreview.siblings('.file-size').html(this.width + 'px &times; ' + this.height + 'px').show();
+                    };
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        input.blur();
+        readURL(this);
+        // TODO: Allow user to delete/replace (and possibly resize/crop) images.
+        // TODO: Allow previewing of videos.
+        // TODO: Allow multiple icons/screenshots/videos.
     });
 
     return function(builder) {
