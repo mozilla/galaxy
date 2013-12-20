@@ -107,6 +107,15 @@
     }
 }
 
+selectedNav() {
+    background: rgba(0,0,0,.4);
+    color: #f1f1f1;
+    position: relative;
+    &:before {
+        background: $flamin-hot-cheetos-orange;
+    }
+}
+
 // Main navigation
 .site-header menu {
     font-size: 0;
@@ -143,12 +152,22 @@
 
     [data-page-type~="root"] & {
         .home, .home:hover {
-            background: rgba(0,0,0,.4);
-            color: #f1f1f1;
-            position: relative;
-            &:before {
-                background: $flamin-hot-cheetos-orange;
-            }
+            selectedNav();
+        }
+    }
+    [data-page-type~="library"] & {
+        .library, .library:hover {
+            selectedNav();
+        }
+    }
+    [data-page-type~="friends"] & {
+        .friends, .friends:hover {
+            selectedNav();
+        }
+    }
+    [data-page-type~="achievements"] & {
+        .achievements, .achievements:hover {
+            selectedNav();
         }
     }
 }

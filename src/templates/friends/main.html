@@ -1,0 +1,50 @@
+<h1>{{ _('Friends') }}</h1>
+
+<div class="unit span-grid">
+    <div class="content">
+
+<h2>{{ _('Your friends') }}</h2>
+{% defer (url=api('user.friends')) %}
+  <ul class="two text-columns">
+    {% for friend in this %}
+      <li>
+        <a href="/friend/{{ friend(friend.id) }}">{{ friend_icon(friend) }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% empty %}
+  <p class="no-results">{{ _('No friends') }}</p>
+{% end %}
+</div>
+</div>
+
+<div class="unit span-grid">
+  <div class="content">
+    <h2>{{ _('Find a friend') }}</h2>
+    <form class="user-search">
+      <input type="search" name="q" placeholder="{{ _('Search by email') }}"
+             title="" x-inputmode="verbatim"
+             autocapitalize="off" autocomplete="off" autocorrect="off">
+    </form>
+    <ul class="user-results"></ul>
+  </div>
+</div>
+
+<div class="unit span-grid">
+    <div class="content">
+{% defer (url=api('user.friends.requests')) %}
+  <h2>{{ _('Friend requests') }}</h2>
+  <ul data-accept-url="{{ api('user.friends.accept') }}"
+      data-ignore-url="{{ api('user.friends.ignore') }}">
+    {% for friend in this %}
+      <li>
+        <a href="">{{ friend }}</a>
+        <a href="#" class="accept">Accept</a>
+        <a href="#" class="ignore">Ignore</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% empty %}
+{% end %}
+</div>
+</div>
