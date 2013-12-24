@@ -60,7 +60,7 @@ function() {
     // Debug page
     (function() {
         var to = false;
-        z.doc.on('touchstart mousedown', '.wordmark', function(e) {
+        z.body.on('touchstart mousedown', '.wordmark', function(e) {
             console.log('hold for debug...', e.type);
             clearTimeout(to);
             to = setTimeout(function() {

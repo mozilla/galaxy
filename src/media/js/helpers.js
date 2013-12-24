@@ -151,7 +151,7 @@ define('helpers',
         user: userobj,
 
         escape: utils.escape_,
-        len: function(x) {return x.length;},
+        len: function(x) {return x ? x.length || 0 : 0;},
         max: Math.max,
         min: Math.min,
         range: _.range,

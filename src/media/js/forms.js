@@ -1,4 +1,4 @@
-define('forms', ['z'], function(z) {
+define('forms', ['jquery', 'z'], function($, z) {
 
     function checkValid(form) {
         if (form) {

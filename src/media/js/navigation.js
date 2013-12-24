@@ -189,7 +189,7 @@ define('navigation',
                 el.getAttribute('rel') === 'external';
     }
 
-    z.body.on('click', 'a', function(e) {
+    z.doc.on('click', 'a', function(e) {
         var href = this.getAttribute('href');
         var $elm = $(this);
         var preserveScrollData = $elm.data('preserveScroll');
