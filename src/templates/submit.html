@@ -82,7 +82,7 @@
       {% for genre in ['Action', 'Adventure', 'RPG', 'Simulation', 'Sports', 'Strategy'] %}
         <label class="choice"><input type="radio" name="genre" required value="{{ genre|lower }}"> {{ genre }}</label>
       {% endfor %}
-      <span class="req opt" data-required="{{ _('Required') }}"></span>
+      <span class="req" data-required="{{ _('Required') }}"></span>
     </div>
   </div>
   <div class="unit one-of-three">
