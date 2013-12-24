@@ -155,7 +155,7 @@ define('views/friends',
         ignoreFriend($friend.data('userId'));
         $friend.remove();
     }).on('click', '.unfriend-friend', function() {
-        // TODO: Add logic when the API endpoint lands
+        // TODO: Add logic when the API endpoint lands.
         var $friend = $(this).closest('[data-user-id]');
         var username = $friend.find('.profile-link').text();
         var msg = gettext('Friend removed: {username}', {username: username});

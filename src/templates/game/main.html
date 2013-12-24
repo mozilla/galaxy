@@ -1,21 +1,65 @@
-<masthead class="game-masthead">
-  <div>
-    <h1><div class="game-icon" style="background-image: url(/media/img/uploads/game/fifa-soccer-14.png)"></div>Bastaball: Boop Edition</h1>
-    <div class="game-release-info">
-      <h2>BastaCorp Gaming, Ltd.</h2>
-      <h3>Genre: <a href="#">Action</a></h3>
-      <h3>Release Date: <time>Dec. 20, 2013</time></h3>
+{% set endpoint = api('game', [slug]) %}
+
+{% defer (url=endpoint, as='game', key=slug, id='game-data') %}
+  {% set game = this %}
+  <masthead class="game-masthead">
+    <div>
+      <h1><div class="game-icon" style="background-image: url({{ game.icons.64 }})"></div>{{ game.title }}</h1>
+      <div class="game-release-info">
+        <h2>
+          {% if game.developer_url %}<a href="{{ game.developer_url }}">{% endif %}
+          {{ game.developer_name }}
+          {% if game.developer_url %}</a>{% endif %}
+        </h2>
+        <h3>{{ _('Genre:') }} <a href="#">{{ game.genre }}</a></h3>
+        {% if game.created %}
+          <h3>Release Date: <time>{{ game.created }}</time></h3>
+        {% endif %}
+      </div>
+      <div class="game-install">
+        <button data-app-url="{{ game.app_url }}" class="btn btn-big btn-green play">{{ _('Play') }}</button>
+        <!-- <button class="btn btn-small install">{{ _('Install') }}</button> -->
+      </div>
     </div>
-    <div class="game-install">
-      <button class="btn btn-big btn-green play">{{ _('Play') }}</button>
-      <button class="btn btn-small install">{{ _('Install') }}</button>
+  </masthead>
+
+  <section class="game-media">
+    {# TODO: Screenshots and videos go here. #}
+  </section>
+
+  <section class="game-details">
+    <h3>{{ _('Description') }}</h3>
+    <p class="description" itemprop="description">
+      {{ this.description|translate(this)|nl2br }}
+    </p>
+    {% if game.homepage_url %}
+      <a href="{{ game.homepage_url }}" rel="external">{{ _('Homepage') }}</a>
+    {% endif %}
+    {% if game.license %}
+      {{ _('License:') }} {{ game.license }}
+    {% endif %}
+    {% if game.privacy_policy_url %}
+      <a href="{{ game.privacy_policy_url }}" rel="external">{{ _('Privacy Policy') }}</a>
+    {% endif %}
+  </section>
+{% placeholder %}
+  <masthead class="game-masthead">
+    <div>
+      <h1>{{ _('Loading&hellip;') }}</h1>
     </div>
   </div>
-</masthead>
-
-<section class="game-details">
-  <p>For the first time, football legends are coming to Bastaball 14 Ultimate Team. You will be able to combine legends of the past with the superstars of today. A number of legendary players will be available, allowing players to create some of the most incredible lineups imaginable, like Pelé with Messi or Patrick Vieira with Basta Schweinsteiger. Discover all of the football legends that will be in Bastaball 14 Ultimate Team here.</p>
-  <p>Bastaball 14 will feature the iconic Brazilian National Team in addition to new licenses for the Argentinean Primera División, Chilean Primera División and other licenses still to be announced. EA SPORTS Bastaball is the most authentic sports videogame franchise on the planet and Bastaball 14 will be no exception, featuring 33 officially licensed leagues, over 600 clubs and more than 16,000 players. Full details on the Leagues and Teams here.</p>
-  <p>For the first time, football legends are coming to Bastaball 14 Ultimate Team. You will be able to combine legends of the past with the superstars of today. A number of legendary players will be available, allowing players to create some of the most incredible lineups imaginable, like Pelé with Messi or Patrick Vieira with Basta Schweinsteiger. Discover all of the football legends that will be in Bastaball 14 Ultimate Team here.</p>
-  <p>Bastaball 14 will feature the iconic Brazilian National Team in addition to new licenses for the Argentinean Primera División, Chilean Primera División and other licenses still to be announced. EA SPORTS Bastaball is the most authentic sports videogame franchise on the planet and Bastaball 14 will be no exception, featuring 33 officially licensed leagues, over 600 clubs and more than 16,000 players. Full details on the Leagues and Teams here.</p>
-</section>
+{% except %}
+  <div class="detailed-error">
+    <h2>{{ _('Oh no!') }}</h2>
+    {% if error == 403 %}
+      <p>{{ _('The game requested is not public.') }}</p>
+    {% elif error == 404 %}
+      <p>{{ _('The game requested was not found.') }}</p>
+    {% elif error == 451 %}
+      <p>{{ _('The game requested is not available for your region.') }}</p>
+      <p>{{ _('You may wish to contact the developer if you would like to see a version of this game for your region.') }}</p>
+    {% else %}
+      <p>{{ _('A server error occurred. Please try again later.') }}</p>
+    {% endif %}
+  </div>
+{% end %}

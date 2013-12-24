@@ -1,6 +1,7 @@
 define('routes_api', [], function() {
     return {
         'login': '/user/login',
+        'game': '/data/game/{0}.json',
         'game.submit.media': '/game/submit/media',
         'user.search': '/user/search',
         'user.friends': '/user/friends',

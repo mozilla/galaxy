@@ -15,7 +15,11 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
 
         param_whitelist: ['q', 'sort'],
 
-        model_prototypes: {},
+        // The list of models and their primary key mapping. Used by caching.
+        model_prototypes: {
+            'game': 'slug',
+            'genre': 'slug'
+        },
 
         fragment_error_template: 'errors/fragment.html',
         pagination_error_template: 'errors/pagination.html',
