@@ -21,6 +21,15 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'genre': 'slug'
         },
 
+        genres: {
+            'action': gettext('Action'),
+            'adventure': gettext('Adventure'),
+            'rpg': gettext('RPG'),
+            'simulation': gettext('Simulation'),
+            'sports': gettext('Sports'),
+            'strategy': gettext('Strategy')
+        },
+
         fragment_error_template: 'errors/fragment.html',
         pagination_error_template: 'errors/pagination.html',
 

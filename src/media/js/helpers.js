@@ -2,6 +2,8 @@ define('helpers',
        ['l10n', 'nunjucks', 'underscore', 'utils', 'format', 'settings', 'urls', 'user'],
        function(l10n, nunjucks, _, utils) {
 
+    var gettext = l10n.gettext;
+
     var SafeString = nunjucks.require('runtime').SafeString;
     var filters = nunjucks.require('filters');
 
@@ -49,13 +51,16 @@ define('helpers',
         return num;
     };
 
-    filters.datetime = function(date) {
+    filters.date = function(date, format, time) {
         if (!date) {
             return '';
         }
         var orig_date = date;
         if (!(date instanceof Date)) {
             date = new Date(date);
+        }
+        if (format) {
+            return formatDateTime(date, format, time);
         }
         var dateStr = date.toLocaleString();
         if (dateStr === 'Invalid Date') {
@@ -65,6 +70,63 @@ define('helpers',
             return dateStr;
         }
     };
+
+    filters.datetime = function(date, format, time) {
+        return filters.date(date, format, true);
+    }
+
+    var monthNames = [
+        gettext('January'),
+        gettext('February'),
+        gettext('March'),
+        gettext('April'),
+        gettext('May'),
+        gettext('June'),
+        gettext('July'),
+        gettext('August'),
+        gettext('September'),
+        gettext('October'),
+        gettext('November'),
+        gettext('December')
+    ];
+
+    function formatDateTime(date, format, time) {
+        var day = date.getDate(),
+            month = date.getMonth() + 1,
+            year = date.getFullYear(),
+            hours = date.getHours(),
+            minutes = date.getMinutes(),
+            seconds = date.getSeconds();
+
+        var d = {
+            'B': function() { return monthNames[date.getMonth()]; },
+            'MM': function() { return month.toString().replace(/^(\d)$/, '0$1'); },
+            'yyyy': function() { return year.toString(); },
+            'yy': function() { return year.toString().substr(2, 2); },
+            'dd': function() { return day.toString().replace(/^(\d)$/, '0$1'); },
+            't': function() { return hours > 11 ? gettext('pm') : gettext('am'); },
+            'T': function() { return hours > 11 ? gettext('PM') : gettext('AM'); },
+            'HH': function() { return hours.toString().replace(/^(\d)$/, '0$1'); },
+            'hh': function() { if (hours > 12) { hours -= 12; } if (hours === 0) { hours = 12; } return hours.toString().replace(/^(\d)$/, '0$1'); },
+            'mm': function() { return minutes.toString().replace(/^(\d)$/, '0$1'); },
+            'ss': function() { return seconds.toString().replace(/^(\d)$/, '0$1'); }
+        };
+
+        format = (time ? 'datetime-' : 'date-') + format;
+
+        switch (format) {
+            case 'datetime-short':
+                return d.MM() + '/' + fmt.dd() + '/' + d.yyyy() + ' ' +
+                       d.HH() + ':' + fmt.MM() + ':' + d.SS();
+            case 'datetime-long':
+                return d.B() + ' ' + d.dd() + ', ' + d.yyyy() + ' ' +
+                       d.HH() + ':' + d.MM() + ':' + d.SS();
+            case 'date-short':
+                return d.MM() + '/' + d.dd() + '/' + d.yyyy();
+            case 'date-long':
+                return d.B() + ' ' + d.dd() + ', ' + d.yyyy();
+        }
+    }
 
     filters.filter = function(list, kwargs) {
         var output = [];
@@ -144,7 +206,7 @@ define('helpers',
         url: require('urls').reverse,
         media: require('urls').media,
 
-        _: make_safe(l10n.gettext),
+        _: make_safe(gettext),
         _plural: make_safe(l10n.ngettext),
         format: require('format').format,
         settings: require('settings'),

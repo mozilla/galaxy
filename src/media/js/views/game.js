@@ -12,10 +12,6 @@ define('views/game', ['l10n', 'utils', 'z'], function(l10n, utils, z) {
         var slug = args[0];
         builder.start('game/main.html', {slug: slug});
 
-        builder.z('type', 'leaf detail');
-        builder.z('title', gettext('Loading...'));
-        builder.z('pagetitle', gettext('App Details'));
-
         builder.onload('game-data', function(game) {
             builder.z('title', utils.translate(game.name));
         });

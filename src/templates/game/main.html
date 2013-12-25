@@ -4,16 +4,16 @@
   {% set game = this %}
   <masthead class="game-masthead">
     <div>
-      <h1><div class="game-icon" style="background-image: url({{ game.icons.64 }})"></div>{{ game.title }}</h1>
+      <h1 itemprop="name"><div class="game-icon" style="background-image: url({{ game.icons[64] }})"></div>{{ game.name|translate(game) }}</h1>
       <div class="game-release-info">
         <h2>
           {% if game.developer_url %}<a href="{{ game.developer_url }}">{% endif %}
           {{ game.developer_name }}
           {% if game.developer_url %}</a>{% endif %}
         </h2>
-        <h3>{{ _('Genre:') }} <a href="#">{{ game.genre }}</a></h3>
+        <h3>{{ _('Genre:') }}&nbsp;<a href="{{ url('genre', [game.genre]) }}">{{ settings.genres[game.genre] }}</a></h3>
         {% if game.created %}
-          <h3>Release Date: <time>{{ game.created }}</time></h3>
+          <h3>{{ _('Release Date:') }}&nbsp;<time>{{ game.created|date('long') }}</time></h3>
         {% endif %}
       </div>
       <div class="game-install">
@@ -26,6 +26,8 @@
   <section class="game-media">
     {# TODO: Screenshots and videos go here. #}
   </section>
+
+  {# TODO: Links for admins/reviewers go here. #}
 
   <section class="game-details">
     <h3>{{ _('Description') }}</h3>
