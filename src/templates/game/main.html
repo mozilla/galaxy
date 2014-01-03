@@ -3,23 +3,25 @@
 {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
   {% set game = this %}
   <masthead class="game-masthead">
-    <div>
-      <h1 itemprop="name"><div class="game-icon" style="background-image: url({{ game.icons[64] }})"></div>{{ game.name|translate(game) }}</h1>
-      <div class="game-release-info">
-        <h2>
-          {% if game.developer_url %}<a href="{{ game.developer_url }}">{% endif %}
-          {{ game.developer_name }}
-          {% if game.developer_url %}</a>{% endif %}
-        </h2>
-        <h3>{{ _('Genre:') }}&nbsp;<a href="{{ url('genre', [game.genre]) }}">{{ settings.genres[game.genre] }}</a></h3>
+    <div class="game-icon" style="background-image: url({{ game.icons[64] }})"></div>
+    <div class="game-release-info">
+      <h1 itemprop="name">{{ game.name|translate(game) }}</h1>
+      {% if game.developer and game.developer.name %}
+        <div class="author">
+          {% if game.developer.url %}<a href="{{ game.developer_url }}">{% endif %}
+          {{ game.developer.name }}
+          {% if game.developer.url %}</a>{% endif %}
+        </div>
+      {% endif %}
+      <dl>
+        <dt>{{ _('Genre:') }}</dt><dd><a href="{{ url('genre', [game.genre]) }}">{{ settings.genres[game.genre] }}</a></dd>
         {% if game.created %}
-          <h3>{{ _('Release Date:') }}&nbsp;<time>{{ game.created|date('long') }}</time></h3>
+          <dt>{{ _('Release Date:') }}</dt><dd><time>{{ game.created|date('long') }}</time></dd>
         {% endif %}
-      </div>
-      <div class="game-install">
-        <button data-app-url="{{ game.app_url }}" class="btn btn-big btn-green play">{{ _('Play') }}</button>
-        <!-- <button class="btn btn-small install">{{ _('Install') }}</button> -->
-      </div>
+      </dl>
+    </div>
+    <div class="game-install">
+      <button data-app-url="{{ game.app_url }}" class="btn btn-big btn-green play">{{ _('Play') }}</button>
     </div>
   </masthead>
 
