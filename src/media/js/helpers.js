@@ -117,10 +117,10 @@ define('helpers',
         switch (format) {
             case 'datetime-short':
                 return d.MM() + '/' + fmt.dd() + '/' + d.yyyy() + ' ' +
-                       d.HH() + ':' + fmt.MM() + ':' + d.SS();
+                       d.HH() + ':' + fmt.mm() + ':' + d.ss();
             case 'datetime-long':
                 return d.B() + ' ' + d.dd() + ', ' + d.yyyy() + ' ' +
-                       d.HH() + ':' + d.MM() + ':' + d.SS();
+                       d.HH() + ':' + d.mm() + ':' + d.ss();
             case 'date-short':
                 return d.MM() + '/' + d.dd() + '/' + d.yyyy();
             case 'date-long':
