@@ -100,14 +100,14 @@ define('helpers',
 
         var d = {
             'B': function() { return monthNames[date.getMonth()]; },
-            'MM': function() { return month.toString().replace(/^(\d)$/, '0$1'); },
+            'MM': function() { return month.toString(); },
             'yyyy': function() { return year.toString(); },
             'yy': function() { return year.toString().substr(2, 2); },
-            'dd': function() { return day.toString().replace(/^(\d)$/, '0$1'); },
+            'dd': function() { return day.toString(); },
             't': function() { return hours > 11 ? gettext('pm') : gettext('am'); },
             'T': function() { return hours > 11 ? gettext('PM') : gettext('AM'); },
-            'HH': function() { return hours.toString().replace(/^(\d)$/, '0$1'); },
-            'hh': function() { if (hours > 12) { hours -= 12; } if (hours === 0) { hours = 12; } return hours.toString().replace(/^(\d)$/, '0$1'); },
+            'HH': function() { return hours.toString(); },
+            'hh': function() { if (hours > 12) { hours -= 12; } if (hours === 0) { hours = 12; } return hours.toString(); },
             'mm': function() { return minutes.toString().replace(/^(\d)$/, '0$1'); },
             'ss': function() { return seconds.toString().replace(/^(\d)$/, '0$1'); }
         };
