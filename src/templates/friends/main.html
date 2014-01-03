@@ -10,9 +10,9 @@
   {% defer (url=api('user.friends.requests')) %}
     <section>
       <h2>{{ _('Friend requests') }}</h2>
-      <ul class="friend-requests c">
+      <ul class="friends-list friend-requests c">
         {% for user in this %}
-          <li data-user-id="{{ user.id }}">
+          <li class="c" data-user-id="{{ user.id }}">
             <a href="{{ url('user', [user.id]) }}" class="profile-link">{{ avatar(user) }}</a>
             {# TODO: Mark as grayed out if friend is already requested. #}
             <a href="#" class="btn btn-red ignore-friend">{{ _('Ignore') }}</a>
@@ -27,9 +27,9 @@
   {% defer (url=api('user.friends')) %}
     <section>
       <h2>{{ _('Your friends') }}</h2>
-      <ul class="two text-columns">
+      <ul class="friends-list two text-columns">
         {% for user in this %}
-          <li data-user-id="{{ user.id }}">
+          <li class="c" data-user-id="{{ user.id }}">
             <a href="{{ url('user', [user.id]) }}" class="profile-link">{{ avatar(user) }}</a>
             <a href="#" class="btn btn-red unfriend-friend">{{ _('Remove') }}</a>
           </li>

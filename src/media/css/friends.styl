@@ -17,17 +17,27 @@
     section {
         margin-top: 30px;
     }
+
+    .user-search,
+    .friends-list {
+        width: 50%;
+    }
     .user-search {
         margin-top: 15px;
     }
-    ul {
+    .friends-list {
         list-style: none;
         padding: 15px 0 45px;
+
+        li + li {
+            margin-top: 10px;
+        }
+        .btn {
+            float: right;
+            margin-left: 15px;
+        }
     }
-    .user-search,
-    ul {
-        width: 50%;
-    }
+
     .profile-link {
         display: block;
         float: left;
@@ -40,10 +50,6 @@
     .avatar {
         float: left;
         margin-right: 7px;
-    }
-    li .btn {
-        float: right;
-        margin-left: 15px;
     }
     .no-results:last-child {
         margin-bottom: 0;
