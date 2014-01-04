@@ -150,25 +150,15 @@ selectedNav() {
         }
     }
 
-    [data-page-type~="root"] & {
-        .home, .home:hover {
-            selectedNav();
-        }
-    }
-    [data-page-type~="library"] & {
-        .library, .library:hover {
-            selectedNav();
-        }
-    }
-    [data-page-type~="friends"] & {
-        .friends, .friends:hover {
-            selectedNav();
-        }
-    }
-    [data-page-type~="achievements"] & {
-        .achievements, .achievements:hover {
-            selectedNav();
-        }
+    [data-page-type~="root"] & .home,
+    [data-page-type~="root"] & .home:hover,
+    [data-page-type~="library"] & .library,
+    [data-page-type~="library"] & .library:hover,
+    [data-page-type~="friends"] & .friends,
+    [data-page-type~="friends"] & .friends:hover,
+    [data-page-type~="achievements"] & .achievements,
+    [data-page-type~="achievements"] & .achievements:hover {
+        selectedNav();
     }
 }
 
