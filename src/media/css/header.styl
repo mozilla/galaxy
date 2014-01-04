@@ -119,16 +119,20 @@ selectedNav() {
 // Main navigation
 .site-header nav {
     font-size: 0;
-    height: 59px;
-    position: relative;
+    height: 58px;
     max-width: 1024px;
-    top: -2px;
+    position: absolute;
+
+    li {
+        display: inline-block;
+        font-size: 0;
+    }
 
     a {
         color: #d7d7d7;
         display: inline-block;
         font-size: 13px;
-        height: 100%;
+        height: 58px;
         padding: 20px 15px;
         text-decoration: none;
 
@@ -138,7 +142,7 @@ selectedNav() {
             display: block;
             height: 3px;
             position: relative;
-            top: 37px;
+            top: 35px;
             transition: unquote('background .4s');
         }
         &:hover {
