@@ -1,11 +1,6 @@
-<nav role="navigation">
-  <a href="#" id="nav-back" class="header-button icon back" title="{{ _('Back') }}"><b>{{ _('Back') }}</b></a>
+<div class="inner">
   <h1 class="site"><a href="/" class="wordmark">Galaxy</a></h1>
-<!--
-  <span class="flex-shift"></span>
-  <span class="flex-span"></span>
--->
-  <menu>{% include 'menu.html' %}</menu>
+  <nav role="navigation">{% include 'nav.html' %}</nav>
   <span class="flex-shift"></span>
   <span class="flex-span"></span>
   <div class="auth">
@@ -17,4 +12,4 @@
     <a class="logout only-logged-in" href="#">{{ _('Sign out') }}</a>
     <a class="header-button persona only-logged-out" href="#">{{ _('Sign in') }}</a>
   </div>
-</nav>
+</div>
