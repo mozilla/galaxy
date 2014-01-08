@@ -14,6 +14,7 @@
             top: 0;
             width: 100%;
         }
+
         h1 {
             color: #eff;
             line-height: 1;
@@ -74,6 +75,7 @@
         dd {
             color: #c7c7c7;
             font-weight: 600;
+
             &:after {
                 clear: both;
                 content: "";
@@ -105,6 +107,49 @@
             display: block;
             margin-bottom: 10px;
             width: 100%;
+        }
+    }
+}
+
+.toggly-section {
+    display: none;
+
+    &.current {
+        display: block;
+    }
+}
+
+.toggly {
+    margin: 35px;
+
+    ul {
+        font-size: 0;
+    }
+
+    li {
+        display: inline-block;
+        font-size: 14px;
+
+        + li {
+            margin-left: 25px;
+        }
+    }
+
+    a {
+        border-radius: 2px;
+        border: 1px solid transparent;
+        color: #aaa;
+        padding: 5px 10px;
+
+        &:hover {
+            background: rgba(60,60,60,.2);
+            border-color: rgba(255,255,255,.1);
+            text-decoration: none;
+        }
+        &.current {
+            background: rgba(60,60,60,.8);
+            border-color: rgba(255,255,255,.4);
+            color: $flamin-hot-cheetos-orange;
         }
     }
 }

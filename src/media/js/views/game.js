@@ -5,6 +5,22 @@ define('views/game', ['l10n', 'utils', 'z'], function(l10n, utils, z) {
         e.preventDefault();
         window.open($this.data('appUrl'));
     });
+    z.win.on('hashchange', function() {
+        // TODO: allow builder to accept hash.
+        var hash = window.location.hash.substr(1);
+        if (!hash) {
+            return true;
+        }
+        var $el = $('.toggly-section#' + hash);
+        if (!$el.length) {
+            return true;
+        }
+        $('.toggly a.current:not(#' + hash + ')').removeClass('current');
+        $('.toggly a[href="#' + hash + '"]').addClass('current');
+        window.scrollTo($el[0]);
+        $('.toggly-section:not(#' + hash + ')').removeClass('current');
+        $el.addClass('current');
+    });
 
     var gettext = l10n.gettext;
 

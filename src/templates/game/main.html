@@ -25,8 +25,51 @@
     </div>
   </masthead>
 
-  <section class="game-media">
-    {# TODO: Screenshots and videos go here. #}
+  <section class="game-visuals">
+    <nav class="toggly">
+      <ul>
+        <li><a class="current" href="#game-media">{{ _('Media') }}</a></li>
+        <li><a href="#game-stats">{{ _('Game Stats') }}</a></li>
+        <li><a href="#game-achievements">{{ _('Achievements') }}</a></li>
+        <li><a href="#game-leaderboards">{{ _('Leaderboards') }}</a></li>
+        <li><a href="#game-friends">{{ _('Friend Activity') }}</a></li>
+      </ul>
+    </nav>
+    {% set hasVideos = game.videos|length %}
+    {% set hasScreenshots = game.screenshots|length %}
+    {% if hasVideos or hasScreenshots %}
+      <section id="game-media" class="toggly-section current">
+        {% if hasVideos %}
+          {% for video in game.videos %}
+            <figure>
+              <video src="{{ video.src }}">
+            </figure>
+          {% endfor %}
+        {% endif %}
+        {% if hasScreenshots %}
+          {% for screenshot in game.screenshots %}
+            <figure>
+              <img{% if screenshot.width %} width="{{ screenshot.width }}"{% endif %}
+                  {% if screenshot.height %} height="{{ screenshot.height }}"{% endif %}
+                src="{{ screenshot.src }}">
+            </figure>
+          {% endfor %}
+        {% endif %}
+      </section>
+    {% endif %}
+    <section id="game-stats" class="toggly-section">
+      <h1>{{ _('Game Stats') }}</h1>
+    </section>
+    <section id="game-achievements" class="toggly-section">
+      <h1>{{ _('Achievements') }}</h1>
+    </section>
+    <section id="game-leaderboards" class="toggly-section">
+      <h1>{{ _('Leaderboards') }}</h1>
+      <table>
+      </table>
+    </section>
+    <section id="game-friends" class="toggly-section">
+      <h1>{{ _('Friends Activity') }}</h1>
   </section>
 
   {# TODO: Links for admins/reviewers go here. #}
