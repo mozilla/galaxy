@@ -5,5 +5,9 @@ To infinity and beyond.
 
 ## Installation
 
-* `npm install commonplace -g`
-* `damper`
+    # Install commonplace
+    npm install commonplace -g
+    # Copy local configuration into place
+    cp src/media/js/settings_local.js.dist src/media/js/settings_local.js
+    # Start the server
+    damper
