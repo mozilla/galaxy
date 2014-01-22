@@ -13,6 +13,26 @@
     }
 }
 
+[data-page-type~="settings"] .page {
+    h1 {
+        vertical-align: top;
+    }
+    .avatar-container {
+        float: left;
+        margin-right: 20px;
+        .avatar {
+            $avatar_size = 80px;
+            width: $avatar_size;
+            height: $avatar_size;
+            border-radius: $avatar_size;
+        }
+        .edit-avatar {
+            bottom: -5px;
+            text-align: center;
+        }
+    }
+}
+
 [data-page-type~="friends"] .page {
     section {
         margin-top: 30px;

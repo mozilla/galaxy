@@ -185,6 +185,11 @@ selectedNav() {
     }
 }
 
+.user-container {
+    position: relative;
+    float: left;
+}
+
 .close {
     background: url(../img/pretty/close.svg) 50% no-repeat;
     background-size: 18px auto;
@@ -204,6 +209,17 @@ selectedNav() {
     height: 48px;
     line-height: 48px;
     text-align: center;
+
+    &.settings {
+        background: url(../img/pretty/settings_gear.svg) 50% 50% no-repeat;
+        background-size: 24px auto;
+        position: relative;
+        float: left;
+        height: 30px;
+        width: 30px;
+        top: 4px;
+        margin-left: 10px;
+    }
 }
 
 // On hover the settings gear icon should turn blue.
