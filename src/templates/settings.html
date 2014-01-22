@@ -4,7 +4,7 @@
       {% set user_settings = user.get_settings('public') %}
       <div class="avatar-container">
         <div class="avatar" style="background-image: url({{ user_settings.avatar }})"></div>
-        <div class="edit-avatar"><a href="http://en.gravatar.com/emails/">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a></div>
+        <div class="edit-avatar"><a href="http://en.gravatar.com/emails/" target="_blank">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a></div>
       </div>
       <h1>{{ user_settings.username }}</h1>
       <div>Email: {{ user_settings.email }}</div>
