@@ -9,7 +9,7 @@
       <h1>{{ user_settings.username }}</h1>
       <div>{{ _('Email:') }} {{ user_settings.email }}</div>
     {% else %}
-      You must be <a class="persona">signed in</a> to access this page.
+      {{ _('You must be <a class="persona">signed in</a> to access this page.') }}
     {% endif %}
   </div>
 </div>
