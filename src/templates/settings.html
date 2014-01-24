@@ -7,7 +7,7 @@
         <div class="edit-avatar"><a href="http://en.gravatar.com/emails/" target="_blank">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a></div>
       </div>
       <h1>{{ user_settings.username }}</h1>
-      <div>{{ _(Email:) }} {{ user_settings.email }}</div>
+      <div>{{ _('Email:') }} {{ user_settings.email }}</div>
     {% else %}
       You must be <a class="persona">signed in</a> to access this page.
     {% endif %}
