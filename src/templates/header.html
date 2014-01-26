@@ -5,12 +5,14 @@
   <span class="flex-span"></span>
   <div class="auth">
     <div class="user-container">
+      {% set user_url = url('user', [user.get_settings('public').id]) %}
       {% if user.logged_in() %}
-        <a href="{{ url('user', [user.get_settings('public').id]) }}" class="only-logged-in email">
-          <div class="avatar" style="background-image: url({{ user.get_settings('public').avatar or gravatar(user.get_setting('email')) }})"></div>
-          {{ user.get_setting('username') }}</a>
+        <a href="{{ user_url }}" class="avatar" style="background-image: url({{ user.get_settings('public').avatar or gravatar(user.get_setting('email')) }})"></a>
       {% endif %}
-      <a class="logout only-logged-in" href="#">{{ _('Sign out') }}</a>
+      <div class="user-links">
+        <a href="{{ user_url }}" class="only-logged-in email">{{ user.get_setting('username') }}</a>
+        <a class="logout only-logged-in" href="#">{{ _('Sign out') }}</a>
+      </div>
       <a class="header-button persona only-logged-out" href="#">{{ _('Sign in') }}</a>
     </div>
     {% if user.logged_in() %}
