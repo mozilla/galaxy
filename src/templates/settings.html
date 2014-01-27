@@ -1,15 +1,26 @@
 <div class="unit span-grid">
   <div class="content">
     {% if user.logged_in() %}
-      {% set user_settings = user.get_settings('public') %}
-      <div class="avatar-container">
-        <div class="avatar" style="background-image: url({{ user_settings.avatar }})"></div>
-        <div class="edit-avatar"><a href="http://en.gravatar.com/emails/" target="_blank">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a></div>
-      </div>
-      <h1>{{ user_settings.username }}</h1>
-      <div>{{ _('Email:') }} {{ user_settings.email }}</div>
-    {% else %}
-      {{ _('You must be <a class="persona">signed in</a> to access this page.') }}
-    {% endif %}
-  </div>
-</div>
+    {% set user_settings = user.get_settings('public') %}
+    <div class="avatar-container">
+      <div class="avatar" style="background-image: url({{ user_settings.avatar }})"></div>
+      <div class="edit-avatar"><a href="http://en.gravatar.com/emails/" target="_blank">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a></div>
+    </div>
+    <h1>{{ _('Profile') }}</h1>
+    <section>
+      <form novalidate>
+      <fieldset>
+          <label for="username">{{ _('Username: ') }}</label>
+          <input type="email" name="username" id="username" placeholder="{{ _('Username') }}" value="{{ user_settings.username }}" autocapitalize="off" autocomplete="off" autocorrect="off" novalidate title="" x-inputmode="verbatim">
+       </fieldset>
+        <fieldset>
+          <label for="email">{{ _('Email: ') }}</label>
+          <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" autocapitalize="off" autocomplete="off" autocorrect="off" novalidate title="" x-inputmode="verbatim">
+       </fieldset>
+       </form>
+     </section>
+     {% else %}
+     {{ _('You must be <a class="persona">signed in</a> to access this page.') }}
+     {% endif %}
+   </div>
+ </div>

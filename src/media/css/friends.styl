@@ -31,6 +31,32 @@ $settings_avatar_size = 80px;
             text-align: center;
         }
     }
+    form fieldset {
+        border: 0;
+        // display: inline-block;
+        display: table-row;
+        padding-top: 10px;
+        vertical-align: middle;
+        // position: relative;
+        // min-width: 100px;
+        label {
+            display: inline-block;
+            font-size: 18px;
+            margin-right: 10px;
+            text-align: right;
+            // position: relative;
+            // width: 20%;
+            // min-width: 20%;
+        }
+        label, input {
+            // display: table-cell;
+            vertical-align: baseline;
+        }
+        input {
+            // float: right;
+            max-width: 300px;
+        }
+    }
 }
 
 [data-page-type~="friends"] .page {
