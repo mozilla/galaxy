@@ -29,7 +29,7 @@ define('views/settings',
             handleProfileUpdate(newData, finished);
         }).fail(function(data) {
             // TODO: Show specific error messages for common error cases (ie. email already in use)
-            console.log('failed to update settings! error:', data.response);
+            console.error('Failed to update settings! Error:', data.response);
             notification.notification({message: gettext('Failed to update settings')});
             finished();
         });
