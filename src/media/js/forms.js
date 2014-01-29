@@ -6,7 +6,7 @@ define('forms', ['jquery', 'z'], function($, z) {
         }
     }
 
-    z.body.on('blur change keypress paste', 'input, select, textarea', function(e) {
+    z.body.on('input', 'input, select, textarea', function(e) {
         var $this = $(this);
         checkValid(e.target.form);
         // If it's required, show :valid/:invalid styles -OR-
