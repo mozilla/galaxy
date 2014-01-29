@@ -9,6 +9,7 @@ define('routes_api', [], function() {
         'user.friends.requests': '/user/friends/requests',
         'user.friends.accept': '/user/friends/accept',
         'user.friends.ignore': '/user/friends/ignore',
-        'user.friends.unfriend': '/user/friends/unfriend'
+        'user.friends.unfriend': '/user/friends/unfriend',
+        'user.profile': '/user/profile'
     };
 });
