@@ -15,9 +15,6 @@
 
 $settings_avatar_size = 80px;
 [data-page-type~="settings"] .page {
-    h1 {
-        vertical-align: top;
-    }
     .avatar-container {
         float: left;
         margin-right: 20px;
@@ -31,19 +28,21 @@ $settings_avatar_size = 80px;
             text-align: center;
         }
     }
-    form tr {
-        label {
-            font-size: 18px;
-            margin-right: 10px;
-            padding: 10px 0;
-            text-align: right;
-        }
-        label, input {
-            vertical-align: baseline;
-        }
-        input {
-            max-width: 300px;
-            padding: 10px 5px;
+    .edit-profile {
+        display: inline-block;
+        table {
+            border-collapse:separate; 
+            border-spacing:10px;
+            margin-bottom: 20px;
+            label {
+                font-size: 18px;
+                margin-right: 10px;
+                text-align: right;
+            }
+            input {
+                line-height: normal; // needed to align placeholder correctly
+                max-width: 300px;
+            }
         }
     }
 }

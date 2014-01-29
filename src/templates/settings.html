@@ -8,21 +8,22 @@
     </div>
     <h1>{{ _('Profile') }}</h1>
     <section>
-      <form novalidate>
+      <form class="edit-profile">
         <table>
           <tr>
             <td><label for="username">{{ _('Username: ') }}</label></td>
             <td>
-              <input type="email" name="username" id="username" placeholder="{{ _('Username') }}" value="{{ user_settings.username }}" autocapitalize="off" autocomplete="off" autocorrect="off" novalidate title="" x-inputmode="verbatim">
+              <input type="text" name="username" id="username" placeholder="{{ _('Username') }}" value="{{ user_settings.username }}" autocapitalize="off" autocomplete="off" autocorrect="off" required title="" x-inputmode="verbatim">
             </td>
           </tr>
           <tr>
             <td><label for="email">{{ _('Email: ') }}</label></td>
             <td>
-              <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" autocapitalize="off" autocomplete="off" autocorrect="off" novalidate title="" x-inputmode="verbatim">
+              <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" autocapitalize="off" autocomplete="off" autocorrect="off" required title="" x-inputmode="verbatim">
             </td>
           </tr>
         </table>
+        <button type="submit" class="btn btn-blue">{{ _('Save') }}</button>
       </form>
     </section>
     {% else %}
