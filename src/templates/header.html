@@ -11,9 +11,9 @@
       {% endif %}
       <div class="user-links">
         <a href="{{ user_url }}" class="only-logged-in email">{{ user.get_setting('username') }}</a>
-        <a class="logout only-logged-in" href="#">{{ _('Sign out') }}</a>
+        <a class="logout only-logged-in">{{ _('Sign out') }}</a>
       </div>
-      <a class="header-button persona only-logged-out" href="#">{{ _('Sign in') }}</a>
+      <a class="header-button persona only-logged-out">{{ _('Sign in') }}</a>
     </div>
     {% if user.logged_in() %}
       <a href="{{ url('settings') }}" class="only-logged-in header-button icon settings"></a>
