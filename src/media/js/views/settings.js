@@ -4,19 +4,15 @@ define('views/settings',
     
     var console = log('settings');
 
-    function handleProfileUpdate(changes, callback) {
+    function handleProfileUpdate(changes) {
         user.update_settings(changes);
         z.page.trigger('reload_chrome');
         require('views').reload().done(function() {
             notification.notification({message: gettext('Your settings have been saved')});
-            callback();
         });
     };
     function updateProfile($this) {
         forms.toggleSubmitFormState($this, false);
-        function finished() {
-            forms.toggleSubmitFormState($this, true);
-        };
 
         var newEmail = $this.find('[name=email]').val();
         var newUsername = $this.find('[name=username]').val();
@@ -26,12 +22,12 @@ define('views/settings',
         };
 
         requests.put(urls.api.url('user.profile'), newData).done(function(data) {
-            handleProfileUpdate(newData, finished);
+            handleProfileUpdate(newData);
         }).fail(function(data) {
             // TODO: Show specific error messages for common error cases (ie. email already in use)
             console.error('Failed to update settings! Error:', data.response);
             notification.notification({message: gettext('Failed to update settings')});
-            finished();
+            forms.toggleSubmitFormState($this, true);
         });
     };
 
