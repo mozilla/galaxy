@@ -40,7 +40,7 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         potatolytics_enabled: false,
 
         // The GA tracking ID for this app.
-        ga_tracking_id: 'UA-47777384-1',
+        ga_tracking_id: null,
         ua_tracking_id: null,
         tracking_section: 'Consumer',
         tracking_section_index: 3,
