@@ -93,7 +93,7 @@ define('tracking', ['log', 'settings', 'storage', 'underscore', 'z'], function(l
     }
 
     function get_url() {
-        return window.location.pathname + window.location.search;
+        return window.location.pathname + window.location.search + window.location.hash;
     }
 
     if (settings.ga_tracking_id) {
