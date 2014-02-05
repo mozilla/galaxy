@@ -30,13 +30,25 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'strategy': gettext('Strategy')
         },
 
+        // Error template paths. Used by builder.js.
         fragment_error_template: 'errors/fragment.html',
         pagination_error_template: 'errors/pagination.html',
 
-        tracking_id: null,
+        // Switches for features.
+        tracking_enabled: false,
+        action_tracking_enabled: true,
+        potatolytics_enabled: false,
 
+        // The GA tracking ID for this app.
+        ga_tracking_id: 'UA-47777384-1',
+        ua_tracking_id: null,
+        tracking_section: 'Consumer',
+        tracking_section_index: 3,
+
+        // The Persona unverified issuer origin. Used by login.js.
         persona_unverified_issuer: 'login.persona.org',
 
+        // The string to suffix page titles with. Used by builder.js.
         title_suffix: 'Mozilla Galaxy'
     });
 });
