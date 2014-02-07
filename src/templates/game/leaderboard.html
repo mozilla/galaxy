@@ -3,11 +3,12 @@
 {% defer (url=endpoint, key=slug, id='boards-data') %}
 	<h2>{{ _('Leaderboard') }} </h2>
 	<ul>
-		{{ for board in this }}
-		<li class="c">
-			<a href="#">{{ this.name }}</a>
+		{% for board in this %}
+		<li class="c" data-board-slug="{{ board.slug }}">
+			<a href="#" class="board-link">{{ board.name }}</a>
+			<a href="#" class="board-del" >{{ _('Remove')}}</a>
 		</li>
-		{{ endfor }}
+		{% endfor %}
 	</ul>
 
 {% end %}

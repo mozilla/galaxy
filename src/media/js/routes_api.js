@@ -10,6 +10,7 @@ define('routes_api', [], function() {
         'user.friends.accept': '/user/friends/accept',
         'user.friends.ignore': '/user/friends/ignore',
         'user.friends.unfriend': '/user/friends/unfriend',
-        'leaderboard': '/game/{0}/boards'
+        'leaderboard': '/game/{0}/boards',
+        'leaderboard.dev': '/game/{0}/board'
     };
 });
