@@ -4,11 +4,11 @@ define('views/leaderboard',
 
 	var console = log("leaderboard");
 
-	function delboard(slug) {
+	function delboard(game, slug) {
 		console.log(slug);
-		console.log(urls.api.url('leaderboard.dev'));
+		console.log(urls.api.url('leaderboard.dev', game));
 
-		requests.del(urls.api.url('leaderboard.dev'), {
+		requests.del(urls.api.url('leaderboard.dev', game), {
 			slug: slug
 		}).done(function(data) {
 			notification.notification({message: gettext('Leaderboard deleted')});
@@ -23,10 +23,11 @@ define('views/leaderboard',
 		var $board = $(this).closest('[data-board-slug]');
 		var boardName = $board.find(".board-link").text();
 		var boardSlug = $board.data("boardSlug");
-		console.log(boardSlug);
+		var gameSlug = $board.data("gameSlug");
+		console.log(gameSlug);
 		var alert = gettext('Do you want to remove {boardName}', {boardName: boardName});
 		if (window.confirm(alert)) {
-			delboard(boardSlug);
+			delboard(gameSlug, boardSlug);
 		}
 	});
 
@@ -34,6 +35,7 @@ define('views/leaderboard',
     	var slug = args[0];
 
         builder.start('game/leaderboard.html', {slug: slug});
+        builder.z('type', 'leaf friends');
         builder.z('title', gettext('Leaderboard'));
     }
 });
