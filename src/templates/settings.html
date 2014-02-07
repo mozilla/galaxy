@@ -11,13 +11,13 @@
       <form class="edit-profile">
         <table>
           <tr>
-            <td><label for="username">{{ _('Username: ') }}</label></td>
+            <td class="label-col"><label for="username">{{ _('Username: ') }}</label></td>
             <td>
               <input type="text" name="username" id="username" placeholder="{{ _('Username') }}" value="{{ user_settings.username }}" required x-inputmode="verbatim">
             </td>
           </tr>
           <tr>
-            <td><label for="email">{{ _('Email: ') }}</label></td>
+            <td class="label-col"><label for="email">{{ _('Email: ') }}</label></td>
             <td>
               <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required x-inputmode="verbatim">
             </td>
