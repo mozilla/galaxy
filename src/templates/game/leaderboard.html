@@ -1,5 +1,13 @@
 {% set endpoint = api('leaderboard', [slug]) %}
 
-{% defer (url=endpoint, as='leaderboards', key=slug, id='boards-data') %}
+{% defer (url=endpoint, key=slug, id='boards-data') %}
+	<h2>{{ _('Leaderboard') }} </h2>
+	<ul>
+		{{ for board in this }}
+		<li class="c">
+			<a href="#">{{ this.name }}</a>
+		</li>
+		{{ endfor }}
+	</ul>
 
 {% end %}
