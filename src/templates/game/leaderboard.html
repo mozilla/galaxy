@@ -1,0 +1,5 @@
+{% set endpoint = api('leaderboard', [slug]) %}
+
+{% defer (url=endpoint, as='leaderboards', key=slug, id='boards-data') %}
+
+{% end %}

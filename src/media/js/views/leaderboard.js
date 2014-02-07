@@ -1,7 +1,9 @@
-define('views/leaderboard', ['l10n', 'utils', 'z'], function(l10n, utils, z) {
+define('views/leaderboard', ['l10n', 'log', 'utils', 'z'], function(l10n, log, utils, z) {
 
     return function(builder, args) {
-        builder.start('game/leaderboard.html');
+    	var slug = args[0];
+
+        builder.start('game/leaderboard.html', {slug: slug});
         builder.z('title', gettext('Leaderboard'));
     }
 });
