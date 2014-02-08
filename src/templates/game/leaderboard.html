@@ -7,16 +7,22 @@
 		<ul>
 			{% for board in this %}
 			<li class="c" data-board-slug="{{ board.slug }}" data-game-slug="{{ slug }}">
-				<a href="#" class="board-link">{{ board.name }}</a>
-				<a href="#" class="board-del" >{{ _('Remove')}}</a>
+				<a href="#" class="board-name">{{ board.name }}</a>
+				<a href="#" class="board-slug">{{ board.slug }}</a>
+				<a href="#" class="btn btn-red board-del" >{{ _('Remove')}}</a>
 			</li>
 			{% endfor %}
 		</ul>
 	</section>
 	<section>
 		<h2>{{ _('Add a leaderboard') }}</h2>
-		
+		<form class="board-create" data-game-slug="{{ slug }}" novalidate>
+      <p><input type="search" class="name" placeholder="{{ _('Board Name') }}"
+            autocapitalize="off" autocomplete="off" autocorrect="off" novalidate title="" x-inputmode="verbatim"></p>
+      <p><input type="search" class="slug" placeholder="{{ _('Slug') }}" 
+      			autocapitalize="off" autocomplete="off" autocorrect="off" novalidate title="" x-inputmode="verbatim"></p>
+			<input class="btn btn-green" type="submit">
+		</form>
 	</section>
-
 
 {% end %}
