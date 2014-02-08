@@ -1,5 +1,7 @@
 define('routes_api', [], function() {
     return {
+        'leaderboard': '/game/{0}/boards',
+        'leaderboard.manage': '/game/{0}/board',
         'login': '/user/login',
         'game': '/data/game/{0}.json',
         'game.submit.media': '/game/submit/media',
@@ -9,8 +11,6 @@ define('routes_api', [], function() {
         'user.friends.requests': '/user/friends/requests',
         'user.friends.accept': '/user/friends/accept',
         'user.friends.ignore': '/user/friends/ignore',
-        'user.friends.unfriend': '/user/friends/unfriend',
-        'leaderboard': '/game/{0}/boards',
-        'leaderboard.manage': '/game/{0}/board'
+        'user.friends.unfriend': '/user/friends/unfriend'
     };
 });

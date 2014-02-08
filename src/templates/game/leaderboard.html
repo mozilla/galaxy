@@ -1,11 +1,9 @@
-{% set endpoint = api('leaderboard', [slug]) %}
-
-{% defer (url=endpoint, key=slug, id='boards-data') %}
+{% defer (url=api('leaderboard', [slug]), key=slug, id='boards-data') %}
   {% set boards = this %}
   <h1>Leaderboard for {{ slug }}</h1>
-  <ul>
-    {% for board in this %}
-    <li class="c" data-board-slug="{{ board.slug }}" data-game-slug="{{ slug }}">
+  <ul data-game-slug="{{ slug }}">
+    {% for board in boards %}
+    <li class="c" data-board-slug="{{ board.slug }}">
       <a class="board-name">{{ board.name }}</a>
       <a class="board-slug">{{ board.slug }}</a>
       <a class="btn btn-red board-del">{{ _('Remove') }}</a>
@@ -14,8 +12,8 @@
   </ul>
   <h2>{{ _('Add a leaderboard') }}</h2>
   <form data-game-slug="{{ slug }}">
-    <p><input type="search" name="name" placeholder="{{ _('Board name') }}"></p>
-    <p><input type="search" name="slug" placeholder="{{ _('Slug') }}"></p>
+    <p><input type="text" name="name" placeholder="{{ _('Board name') }}"></p>
+    <p><input type="text" name="slug" placeholder="{{ _('Slug') }}"></p>
     <button class="btn btn-green board-create" type="submit">Create</button>
   </form>
 {% end %}
