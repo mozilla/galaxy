@@ -12,7 +12,7 @@
       <h1 class="trunc" itemprop="name">{{ game.name|translate(game) }}</h1>
       {% if game.developer and game.developer.name %}
         <div class="author trunc">
-          {% if game.developer.url %}<a href="{{ game.developer_url }}">{% endif %}
+          {% if game.developer.url %}<a href="{{ game.developer.url }}" target="_blank">{% endif %}
           {{ game.developer.name }}
           {% if game.developer.url %}</a>{% endif %}
         </div>
