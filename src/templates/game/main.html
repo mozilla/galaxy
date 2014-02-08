@@ -2,12 +2,16 @@
 
 {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
   {% set game = this %}
+  {% if game.artwork and game.artwork.background %}
+    <div class="game-bg" style="background-image: {{ game.artwork.background.src|bgurl }}"></div>
+  {% endif %}
+
   <masthead class="game-masthead">
     <div class="game-icon" style="background-image: url({{ game.icons[64] }})"></div>
     <div class="game-release-info">
-      <h1 itemprop="name">{{ game.name|translate(game) }}</h1>
+      <h1 class="trunc" itemprop="name">{{ game.name|translate(game) }}</h1>
       {% if game.developer and game.developer.name %}
-        <div class="author">
+        <div class="author trunc">
           {% if game.developer.url %}<a href="{{ game.developer_url }}">{% endif %}
           {{ game.developer.name }}
           {% if game.developer.url %}</a>{% endif %}
@@ -42,7 +46,13 @@
         {% if hasVideos %}
           {% for video in game.videos %}
             <figure>
-              <video src="{{ video.src }}">
+              {% if video.type == 'webm' %}
+                <video controls
+                  {% if video.width %} width="{{ video.width }}"{% endif %}
+                  {% if video.height %} height="{{ video.height }}"{% endif %}>
+                  <source src="{{ video.src }}" type="video/webm">
+                </video>
+              {% endif %}
             </figure>
           {% endfor %}
         {% endif %}
