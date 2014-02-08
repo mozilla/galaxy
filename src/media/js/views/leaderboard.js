@@ -1,6 +1,6 @@
 define('views/leaderboard', 
-    ['l10n', 'log', 'utils', 'z', 'urls', 'requests', 'notification'], 
-    function(l10n, log, utils, z, urls, requests, notification) {
+    ['cache', 'l10n', 'log', 'utils', 'z', 'urls', 'requests', 'notification'], 
+    function(cache, l10n, log, utils, z, urls, requests, notification) {
 
     function delBoard(game, slug) {
         return requests.del(urls.api.url('leaderboard.manage', game, {
@@ -19,6 +19,12 @@ define('views/leaderboard',
             slug: slug
         }).then(function(data) {
             notification.notification({message: gettext('Leaderboard created')});
+            var boardUrl =  urls.api.url('leaderboards', [game]);
+            cache.attemptRewrite(function(url) {
+                return url === boardUrl;
+            }, function(item) {
+                item.push(data);
+            });
             require('views').reload();
         }, function(data) {
             notification.notification({message: gettext('Failed to create leaderboard')});
