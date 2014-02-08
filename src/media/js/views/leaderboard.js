@@ -3,14 +3,14 @@ define('views/leaderboard',
     function(l10n, log, utils, z, urls, requests, notification) {
 
     function delBoard(game, slug) {
-        requests.del(urls.api.url('leaderboard.manage', game, {
+        return requests.del(urls.api.url('leaderboard.manage', game, {
             slug: slug
         })).then(function(data) {
             notification.notification({message: gettext('Leaderboard deleted')});
         }, function(data) {
             notification.notification({message: gettext('Failed to delete leaderboard')});
-            return console.error(data);
-        });
+            console.error(data);
+        }).promise();
     }
 
     function createBoard(game, boardName, slug) {
@@ -19,14 +19,14 @@ define('views/leaderboard',
             slug: slug
         }).then(function(data) {
             notification.notification({message: gettext('Leaderboard created')});
-            window.location.reload(true);
+            require('views').reload();
         }, function(data) {
             notification.notification({message: gettext('Failed to create leaderboard')});
-            return console.error(data);
+            console.error(data);
         }); 
     }
 
-    z.page.on('click', '.board-del', function(e) {
+    z.body.on('click', '.board-del', function(e) {
         e.preventDefault();
         var $this = $(this);
         var $board = $this.closest('[data-board-slug]');
@@ -38,7 +38,13 @@ define('views/leaderboard',
             $board.remove();
             delBoard(gameSlug, boardSlug);
         }
-    }).on('blur change keyup paste', 'input[name=name]', function(e) {
+        $board.hide();
+        delBoard(gameSlug, boardSlug).then(function() {
+            $board.remove();
+        }, function() {
+            $board.show();
+        });
+    }).on('blur change keyup paste', '#leaderboard-create input[name=name]', function(e) {
         // NOTE: We're using `keyup` instead of `keypress` to detect when
         // the user tabs within this field.
         var $this = $(this);
@@ -58,7 +64,7 @@ define('views/leaderboard',
     return function(builder, args) {
         var slug = args[0];
         builder.start('game/leaderboard.html', {slug: slug});
-        
+
         builder.z('type', 'leaf');
         builder.z('title', gettext('Leaderboards'));
     }
