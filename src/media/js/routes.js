@@ -9,10 +9,10 @@ var routes = [
     {'pattern': '^/genre/([^/<>"\']+)/?$', 'view_name': 'genre'},
     {'pattern': '^/user/([^/<>"\']+)/?$', 'view_name': 'user'},
     {'pattern': '^/settings$', 'view_name': 'settings'},
+    {'pattern': '^/leaderboard/([^/<>"\']+)/?$', 'view_name': 'leaderboard'},
 
     {'pattern': '^/tests$', 'view_name': 'tests'},
-    {'pattern': '^/debug$', 'view_name': 'debug'},
-    {'pattern': '^/leaderboard/([^/<>"\']+)/?$', 'view_name': 'leaderboard'}
+    {'pattern': '^/debug$', 'view_name': 'debug'}
 ];
 window.routes = routes;
 
