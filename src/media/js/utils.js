@@ -2,13 +2,6 @@ define('utils', ['jquery', 'l10n', 'underscore'], function($, l10n, _) {
 
     var ngettext = l10n.ngettext;
 
-    _.extend(String.prototype, {
-        strip: function(str) {
-            // Strip all whitespace.
-            return this.replace(/\s/g, '');
-        }
-    });
-
     function _pd(func) {
         return function(e) {
             e.preventDefault();
@@ -68,6 +61,10 @@ define('utils', ['jquery', 'l10n', 'underscore'], function($, l10n, _) {
 
     function baseurl(url) {
         return url.split('?')[0];
+    }
+
+    function bgurl(url) {
+        return 'url(' + JSON.stringify(url) + ')';
     }
 
     function encodeURIComponent(uri) {
@@ -182,6 +179,7 @@ define('utils', ['jquery', 'l10n', 'underscore'], function($, l10n, _) {
     return {
         '_pd': _pd,
         'baseurl': baseurl,
+        'bgurl': bgurl,
         'browser': browser,
         'encodeURIComponent': encodeURIComponent,
         'decodeURIComponent': decodeURIComponent,

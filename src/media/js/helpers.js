@@ -22,6 +22,7 @@ define('helpers',
         return _.extend(base, kwargs);
     };
 
+    filters.bgurl = utils.bgurl;
     filters.urlparams = utils.urlparams;
     filters.urlunparam = utils.urlunparam;
 
