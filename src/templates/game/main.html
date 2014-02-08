@@ -8,7 +8,7 @@
       <h1 itemprop="name">{{ game.name|translate(game) }}</h1>
       {% if game.developer and game.developer.name %}
         <div class="author">
-          {% if game.developer.url %}<a href="{{ game.developer_url }}">{% endif %}
+          {% if game.developer.url %}<a href="{{ game.developer.url }}">{% endif %}
           {{ game.developer.name }}
           {% if game.developer.url %}</a>{% endif %}
         </div>
