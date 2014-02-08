@@ -97,37 +97,56 @@
     </div>
   </div>
   <div class="unit one-of-three">
-    <div class="icon content form-field">
+    <div class="icon media content form-field">
       <label>
-        <div class="l">{{ _('Icon') }}</div>
+        <div class="l">{{ _('Icon') }}
+          <span class="req" data-required="{{ _('Required') }}"></span>
+          <p class="form-help">
+            {{ _("The icon will be shown on all listings in Galaxy. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
+          </p>
+        </div>
         <div class="fallback">
           <input type="file" name="icon">
         </div>
-        <span class="req" data-required="{{ _('Required') }}"></span>
       </label>
       <div class="file-size"></div><div class="file-preview"></div>
     </div>
   </div>
   <div class="unit one-of-three">
-    <div class="screenshots content form-field">
+    <div class="screenshots media content form-field">
       <label>
-        <div class="l">{{ _('Screenshots') }}</div>
-        <div class="fallback">
-          <input type="file" name="screenshots">
+        <div class="l">{{ _('Screenshots') }}
+          <span class="req" data-required="{{ _('Required') }}"></span>
+          <p class="form-help">
+            {{ _("Screenshots will be shown on your game detail page. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
+          </p>
         </div>
-        <span class="req" data-required="{{ _('Required') }}"></span>
+        <div class="fallback">
+          <!-- <input type="file" name="screenshots"> -->
+          <input type="text" placeholder="Image URL">
+          <input type="text" placeholder="Image URL">
+          <input type="text" placeholder="Image URL">
+        </div>
       </label>
       <div class="file-size"></div><div class="file-preview"></div>
     </div>
   </div>
   <div class="unit one-of-three">
-    <div class="videos content form-field">
+    <div class="videos media content form-field">
       <label>
-        <div class="l">{{ _('Videos') }}</div>
-        <div class="fallback">
-          <input type="file" name="videos" multiple>
+        <div class="l">{{ _('Videos') }}
+          <span class="req opt" data-required="{{ _('Optional') }}"></span>
+          <p class="form-help">
+            {{ _("Videos will be shown on your game detail page. Please use Youtube and/or Vimeo hosted videos only.") }}
+          </p>
         </div>
-        <span class="req opt" data-required="{{ _('Optional') }}"></span>
+        <div class="fallback">
+          <!-- <input type="file" name="videos" multiple> -->
+          <input type="text" placeholder="Youtube or Vimeo link">
+          <input type="text" placeholder="Youtube or Vimeo link">
+          <input type="text" placeholder="Youtube or Vimeo link">
+        </div>
+        
       </label>
       <div class="file-size"></div><div class="file-preview"></div>
     </div>
@@ -144,7 +163,7 @@
   </div>
   <div class="unit one-of-three">
     <div class="content form-help">
-      {{ _("Videos will be shown on your game detail page. Allowed video formats: <code>MP4</code>, <code>OGG</code>, <code>WebM</code>") }}
+      {{ _("Videos will be shown on your game detail page. Please use Youtube and/or Vimeo hosted videos only.") }}
     </div>
   </div>
 
