@@ -138,9 +138,9 @@ define('requests',
         }
     }
 
-    function del(url, data) {
+    function del(url) {
         console.log('DELETing', url);
-        return ajax('DELETE', url, data).done(function() {
+        return ajax('DELETE', url).done(function() {
             console.log('DELETEd', url);
         });
     }
