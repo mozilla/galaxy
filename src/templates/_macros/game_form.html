@@ -11,7 +11,7 @@
     </div>
     <div class="unit one-of-three">
       <div class="content form-help">
-        {{ _("Your game&rsquo;s name, which is shown on all listings in Galaxy.") }}
+        {{ _('Your game&rsquo;s name, which is shown on all listings in Galaxy.') }}
       </div>
     </div>
 
@@ -57,7 +57,7 @@
     </div>
     <div class="unit one-of-three">
       <div class="content form-help">
-        {{ _("Your game&rsquo;s description should be concise and capture the essence of what it does. It will be shown on all listings, and on your Galaxy game detail page.") }}
+        {{ _('Your game&rsquo;s description should be concise and capture the essence of what it does. It will be shown on all listings, and on your Galaxy game detail page.') }}
       </div>
     </div>
 
@@ -80,22 +80,18 @@
       <div class="content form-field">
         <div class="l">{{ _('Genre') }}</div>
         {% for slug, name in settings.genres.items() %}
-          {% if slug == game.genre %}
-            <label class="choice"><input type="radio" name="genre" required checked value="{{ slug }}"> {{ name }}</label>
-          {% else %}
-            <label class="choice"><input type="radio" name="genre" required value="{{ slug }}"> {{ name }}</label>
-          {% endif %}
+            <label class="choice"><input type="radio" name="genre"{{ ' checked' if slug == game.genre }} required value="{{ slug }}"> {{ name }}</label>
         {% endfor %}
         <span class="req" data-required="{{ _('Required') }}"></span>
       </div>
     </div>
     <div class="unit one-of-three">
       <div class="content form-help">
-        {{ _("Genres are used to classify games in Galaxy. Choose the genre that best fits your game.") }}
+        {{ _('Genres are used to classify games in Galaxy. Choose the genre that best fits your game.') }}
       </div>
     </div>
 
-    <!-- TODO: Add Media (Icon, Screenshots and Videos). -->
+    {# TODO: Add Media (Icon, Screenshots and Videos). #}
     
     <div class="unit span-grid">
       <div class="content">
