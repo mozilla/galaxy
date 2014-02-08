@@ -2,7 +2,7 @@
 
 {% defer (url=endpoint, key=slug, id='boards-data') %}
   {% set boards = this %}
-  <h1>{{ _('Leaderboard') }} </h1>
+  <h1>Leaderboard for {{ slug }}</h1>
   <ul>
     {% for board in this %}
     <li class="c" data-board-slug="{{ board.slug }}" data-game-slug="{{ slug }}">
@@ -14,8 +14,8 @@
   </ul>
   <h2>{{ _('Add a leaderboard') }}</h2>
   <form data-game-slug="{{ slug }}">
-    <p><input type="search" class="name" placeholder="{{ _('Board name') }}"></p>
-    <p><input type="search" class="slug" placeholder="{{ _('Slug') }}"></p>
+    <p><input type="search" name="name" placeholder="{{ _('Board name') }}"></p>
+    <p><input type="search" name="slug" placeholder="{{ _('Slug') }}"></p>
     <button class="btn btn-green board-create" type="submit">Create</button>
   </form>
 {% end %}
