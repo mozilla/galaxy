@@ -1,0 +1,8 @@
+{% set endpoint = api('game', [slug]) %}
+
+{% defer (url=endpoint, as='game', key=slug, id='game-data') %}
+  {% set game = this %}
+  <h1>{{ _('Edit Game') }}</h1>
+  {% include '_macros/game_form.html' %}
+  {{ gameForm(game) }}
+{% end %}
