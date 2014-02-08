@@ -1,4 +1,6 @@
-define('views/game', ['l10n', 'utils', 'z'], function(l10n, utils, z) {
+define('views/game',
+       ['jquery', 'l10n', 'utils', 'z'],
+       function($, l10n, utils, z) {
 
     z.body.on('click', '.play', function(e) {
         var $this = $(this);

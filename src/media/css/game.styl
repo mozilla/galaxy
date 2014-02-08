@@ -1,11 +1,18 @@
 @import 'lib';
 
 [data-page-type~="game"] {
+    .trunc {
+        ellipsis();
+        margin-bottom: -6px;
+        padding-bottom: 6px;
+    }
+
     .page {
         &:before {
             background: #fdfe98 url(../img/homepage/hero.jpg) 50% 0 repeat-y;
             background-size: auto 785px;
-            content: "";
+            content: inherit;
+            color:white;
             display: block;
             height: 215px;
             left: 0;
@@ -25,11 +32,6 @@
         min-height: 100px;
         position: relative;
         z-index: 2;
-
-        h1 {
-            ellipsis();
-            margin-bottom: 0;
-        }
     }
 
     .game-icon {

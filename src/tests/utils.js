@@ -7,11 +7,6 @@ var feq_ = a.feq_;
 var filters = require('nunjucks').require('filters');
 var utils = require('utils');
 
-test('String strip', function(done) {
-    eq_(('  a s d  f   ').strip(), 'asdf');
-    done();
-});
-
 test('_pd', function(done) {
     var ev = {preventDefault: done};
     utils._pd(function() {})(ev);
@@ -63,6 +58,16 @@ test('baseurl', function(done) {
     eq_(utils.baseurl('http://foo/bar'), 'http://foo/bar');
     eq_(utils.baseurl('http://foo/bar?asdf/asdf'), 'http://foo/bar');
     eq_(utils.baseurl('http://foo/bar/?asdf/asdf'), 'http://foo/bar/');
+    done();
+});
+
+test('bgurl', function(done) {
+    eq_(utils.bgurl('http://foo/bar/seavan.png'),
+        'url("http://foo/bar/seavan.png")');
+    eq_(utils.bgurl('http://foo/bar/Sea "Seavan" Van.png'),
+        'url("http://foo/bar/Sea "Seavan" Van.png")');
+    eq_(utils.bgurl("http://foo/bar/Sea 'Seavan' Van.png"),
+        'url("http://foo/bar/Sea \'Seavan\' Van.png")');
     done();
 });
 
