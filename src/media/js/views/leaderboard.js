@@ -1,6 +1,6 @@
 define('views/leaderboard', 
-    ['cache', 'l10n', 'log', 'utils', 'z', 'urls', 'requests', 'notification'], 
-    function(cache, l10n, log, utils, z, urls, requests, notification) {
+    ['cache', 'l10n', 'log', 'notification', 'requests', 'utils', 'urls', 'z'], 
+    function(cache, l10n, log, notification, requests, utils, urls, z) {
 
     function delBoard(game, slug) {
         return requests.del(urls.api.url('leaderboard.manage', game, {
@@ -41,15 +41,13 @@ define('views/leaderboard',
         var gameSlug = $this.closest('[data-game-slug]').data('gameSlug');
         var msg = gettext('Do you want to remove {boardName}?', {boardName: boardName});
         if (window.confirm(msg)) {
-            $board.remove();
-            delBoard(gameSlug, boardSlug);
+            $board.hide();
+            delBoard(gameSlug, boardSlug).then(function() {
+                $board.remove();
+            }, function() {
+                $board.show();
+            });
         }
-        $board.hide();
-        delBoard(gameSlug, boardSlug).then(function() {
-            $board.remove();
-        }, function() {
-            $board.show();
-        });
     }).on('blur change keyup paste', '#leaderboard-create input[name=name]', function(e) {
         // NOTE: We're using `keyup` instead of `keypress` to detect when
         // the user tabs within this field.
