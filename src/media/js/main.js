@@ -32,6 +32,7 @@ require.config({
             'templates',
             //'tracking',
             'user',
+            'resize-textarea',
             'views',
             'z'
         ],
