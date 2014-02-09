@@ -34,7 +34,7 @@
     <div class="unit two-of-three">
       <div class="content form-field">
         <label>
-          <input type="url" name="url" pattern="https?://.*" placeholder="{{ _('Enter game URL here') }}" value="{{ game.app_url }}" required>
+          <input type="url" name="app_url" pattern="https?://.*" placeholder="{{ _('Enter game URL here') }}" value="{{ game.app_url }}" required>
           <span class="l">{{ _('Game URL') }}</span>
           <span class="req" data-required="{{ _('Required') }}"></span>
         </label>
@@ -64,7 +64,7 @@
     <div class="unit two-of-three">
       <div class="content form-field">
         <label>
-          <input type="url" name="url" pattern="https?://.*" placeholder="{{ _('Enter privacy policy URL here') }}" value="{{ game.privacy }}" class="optional">
+          <input type="url" name="privacy" pattern="https?://.*" placeholder="{{ _('Enter privacy policy URL here') }}" value="{{ game.privacy }}" class="optional">
           <span class="l">{{ _('Privacy Policy URL') }}</span>
           <span class="req opt" data-required="{{ _('Optional') }}"></span>
         </label>
