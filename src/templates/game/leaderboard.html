@@ -1,0 +1,19 @@
+{% defer (url=api('leaderboards', [slug]), key=slug) %}
+  {% set boards = this %}
+  <h1>{{_('Leaderboard for {game}', {game: slug})}}</h1>
+  <ul data-game-slug="{{ slug }}">
+    {% for board in boards %}
+    <li class="c" data-board-slug="{{ board.slug }}">
+      <a class="board-name">{{ board.name }}</a>
+      <a class="board-slug">{{ board.slug }}</a>
+      <a class="btn btn-red board-del">{{ _('Remove') }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  <h2>{{ _('Add a leaderboard') }}</h2>
+  <form data-game-slug="{{ slug }}" id="leaderboard-create">
+    <p><input type="text" name="name" placeholder="{{ _('Board name') }}"></p>
+    <p><input type="text" name="slug" placeholder="{{ _('Slug') }}"></p>
+    <button class="btn btn-green board-create" type="submit">Create</button>
+  </form>
+{% end %}
