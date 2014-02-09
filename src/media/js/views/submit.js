@@ -4,8 +4,20 @@ define('views/submit',
 
     var gettext = l10n.gettext;
 
-    function editGame(data) {
+    function submitGame(data) {
         requests.post(urls.api.url('game.submit'), data).done(function(data) {
+            notification.notification({message: gettext('Game successfully submitted')});
+            z.page.trigger('navigate', urls.reverse('game', [data.slug]));
+            return console.log(data);
+        }).fail(function(data) {
+            notification.notification({message: gettext('Failed to submit game')});
+            return console.error(data);
+        });
+    }
+
+    function editGame(data) {
+        // TODO: change the post to a put when the backend is ready
+        requests.post(urls.api.url('game.edit'), data).done(function(data) {
             notification.notification({message: gettext('Game details updated')});
             require('views').reload();
             return console.log(data);
@@ -52,7 +64,7 @@ define('views/submit',
         // TODO: Allow user to delete/replace (and possibly resize/crop) images.
         // TODO: Allow previewing of videos.
         // TODO: Allow multiple icons/screenshots/videos.
-    }).on('submit', '.submit-form', function(e) {
+    }).on('submit', '.game-form', function(e) {
         e.preventDefault();
         var data = {
             name: $(this).find('[name=name]').val(),
@@ -62,7 +74,11 @@ define('views/submit',
             privacy: $(this).find('[name=privacy]').val(),
             genre: $(this).find('[name=genre]:checked').val()
         };
-        editGame(data);
+        if ($(this).data('formtype') === 'submit') {
+            submitGame(data);
+        } else if ($(this).data('formtype') === 'edit') {
+            editGame(data);
+        }
     });
 
     return function(builder) {

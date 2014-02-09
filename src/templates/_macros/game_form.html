@@ -1,5 +1,5 @@
 {% macro gameForm(game) %}
-	<form class="submit-form grid" method="post" data-required="{{ _('Required') }}">
+	<form class="game-form grid" method="post" data-required="{{ _('Required') }}" data-formtype="{{'edit' if game else 'submit'}}">
     <div class="unit two-of-three">
       <div class="content form-field">
         <label>
