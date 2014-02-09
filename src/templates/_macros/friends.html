@@ -1,3 +1,7 @@
 {% macro avatar(user) %}
   <div class="avatar" style="background-image: url({{ user.avatar }})" title="{{ user.username }}"></div> {{ user.username }}
 {% endmacro %}
+
+{% macro devAvatar(user) %}
+  <div class="avatar" style="background-image: url({{ user.avatar }})" title="{{ user.companyName }}"></div> {{ user.companyName }}
+{% endmacro %}
