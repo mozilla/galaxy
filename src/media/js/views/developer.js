@@ -5,6 +5,6 @@ define('views/developer', [], function() {
         });
 
         builder.z('type', 'leaf profile');
-        builder.z('title', gettext('User Profile'));
+        builder.z('title', gettext('Developer Profile'));
     };
 });
