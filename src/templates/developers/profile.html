@@ -1,0 +1,22 @@
+{% include '_macros/friends.html' %}
+
+<div class="profile unit span-grid">
+    <div class="content">
+    {% defer (url=api('user.search')|urlparams(devSlug=dev_slug), key=dev_slug, id='dev-search') %}
+      <h1>{{ devAvatar(this) }}</h1>
+      <section>
+        <h2>{{ _('Homepage') }}</h2>
+        <p>{{ this.homepage }}</p>
+      </section>
+      <section>
+        <h2>{{ _('Support') }}</h2>
+        <p>{{ this.support }}</p>
+      </section>
+      <section>
+        <h2>{{ _('Games made by ' + this.companyName) }}</h2>
+        <p class="no-results">{{ _('No games yet') }}</p>
+      </section>
+    {% empty %}
+    {% end %}
+  </div>
+</div>
