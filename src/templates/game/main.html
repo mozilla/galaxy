@@ -45,8 +45,8 @@
         <li><a href="#game-friends">{{ _('Friend Activity') }}</a></li>
       </ul>
     </nav>
-    {% set hasVideos = game.videos|length %}
-    {% set hasScreenshots = game.screenshots|length %}
+    {% set hasVideos = game.videos and game.videos|length %}
+    {% set hasScreenshots = game.screenshots and game.screenshots|length %}
     {% if hasVideos or hasScreenshots %}
       <section id="game-media" class="toggly-section current">
         {% if hasVideos %}
