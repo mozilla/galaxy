@@ -28,7 +28,8 @@ define('views/game',
 
     return function(builder, args) {
         var slug = args[0];
-        builder.start('game/main.html', {slug: slug});
+    
+        builder.start('game/main.html', {slug: slug, page_url: utils.urlencode(window.location.href)});
 
         builder.z('type', 'game');
         builder.z('title', gettext('Loading...'));
@@ -36,6 +37,7 @@ define('views/game',
 
         builder.onload('game-data', function(game) {
             builder.z('title', utils.translate(game.name));
+            twttr.widgets.load(); // Needed for loaded twitter widget scripts
         });
     };
 });
