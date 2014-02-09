@@ -1,6 +1,6 @@
 define('views/submit',
        ['dropzone', 'l10n', 'resize-textarea', 'routes_api', 'storage', 'utils', 'z'],
-       function(dropzone, l10n, ra, routes_api, storage, utils, z) {
+       function(dropzone, l10n, rt, routes_api, storage, utils, z) {
 
     z.body.on('blur change keyup paste', 'input[name=name]', function(e) {
         // NOTE: We're using `keyup` instead of `keypress` to detect when
@@ -41,13 +41,12 @@ define('views/submit',
         // TODO: Allow multiple icons/screenshots/videos.
     });
 
-    
     return function(builder) {
         builder.start('submit.html').done(function() {
             // new dropzone('.submit-form', {
             //     uploadMultiple: true
             // });
-            ra.attach();
+            rt.attach();
         });
 
         builder.z('type', 'leaf submit');
