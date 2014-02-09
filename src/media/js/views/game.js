@@ -28,11 +28,8 @@ define('views/game',
 
     return function(builder, args) {
         var slug = args[0];
-        
-        var page_url = window.location.host + window.location.pathname + window.location.search;
-        // For some reason I have to remove the protocol before sharing. 
-        // Facebook doesn't like http urls. It has to be either https or no protocol.
-        builder.start('game/main.html', {slug: slug, page_url: utils.urlencode(page_url)});
+    
+        builder.start('game/main.html', {slug: slug, page_url: utils.urlencode(window.location.href)});
 
         builder.z('type', 'game');
         builder.z('title', gettext('Loading...'));
