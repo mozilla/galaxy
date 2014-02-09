@@ -5,6 +5,6 @@ define('views/homepage', [], function() {
         });
 
         builder.z('type', 'root');
-        // builder.z('title', gettext('Home'));
+        builder.z('title', null);
     };
 });

@@ -31,7 +31,6 @@ define('views/friends',
             recipient: user_id
         }).done(function(data) {
             notification.notification({message: gettext('Friend request sent')});
-            require('views').reload();
             return console.log(data);
         }).fail(function(data) {
             notification.notification({message: gettext('Failed to submit friend request')});
