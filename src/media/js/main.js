@@ -28,10 +28,10 @@ require.config({
             'log',
             'login',
             'navigation',
+            'resize-textarea',
             'templates',
             //'tracking',
             'user',
-            'resize-textarea',
             'views',
             'z'
         ],
