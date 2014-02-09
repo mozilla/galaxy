@@ -1,5 +1,5 @@
 <h1>{{ _('Submit a Game') }}</h1>
-<form class="submit-form grid" method="post" data-required="{{ _('Required') }}">
+<!-- <form class="submit-form grid" method="post" data-required="{{ _('Required') }}">
   <div class="unit two-of-three">
     <div class="content form-field">
       <label>
@@ -154,4 +154,6 @@
       <button class="btn btn-green btn-big" type="submit">{{ _('Submit') }}</button>
     </div>
   </div>
-</form>
+</form> -->
+{% include '_macros/game_form.html' %}
+{{ gameForm() }}
