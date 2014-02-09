@@ -6,6 +6,7 @@ var routes = [
     {'pattern': '^/submit$', 'view_name': 'submit'},
     {'pattern': '^/friends$', 'view_name': 'friends'},
     {'pattern': '^/game/([^/<>"\']+)/?$', 'view_name': 'game'},
+    {'pattern': '^/game/([^/<>"\']+)/edit/?$', 'view_name': 'edit_game'},
     {'pattern': '^/genre/([^/<>"\']+)/?$', 'view_name': 'genre'},
     {'pattern': '^/user/([^/<>"\']+)/?$', 'view_name': 'user'},
     {'pattern': '^/settings$', 'view_name': 'settings'},
