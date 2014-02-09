@@ -6,11 +6,15 @@
       <h1>{{ devAvatar(this) }}</h1>
       <section>
         <h2>{{ _('Homepage') }}</h2>
-        <p>{{ this.homepage }}</p>
+        <p class="dev-info">
+          <a href="{{ this.homepage }}">{{ this.homepage }}</a>
+        </p>
       </section>
       <section>
-        <h2>{{ _('Support') }}</h2>
-        <p>{{ this.support }}</p>
+        <h2>{{ _('Support Page') }}</h2>
+        <p class="dev-info">
+          <a href="{{ this.support }}">{{ this.support }}</a>
+        </p>
       </section>
       <section>
         <h2>{{ _('Games made by ' + this.companyName) }}</h2>
