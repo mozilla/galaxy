@@ -8,10 +8,8 @@ define('views/submit',
         requests.post(urls.api.url('game.submit'), data).done(function(data) {
             notification.notification({message: gettext('Game successfully submitted')});
             z.page.trigger('navigate', urls.reverse('game', [data.slug]));
-            return console.log(data);
         }).fail(function(data) {
             notification.notification({message: gettext('Failed to submit game')});
-            return console.error(data);
         });
     }
 
@@ -20,10 +18,8 @@ define('views/submit',
         requests.post(urls.api.url('game.edit'), data).done(function(data) {
             notification.notification({message: gettext('Game details updated')});
             require('views').reload();
-            return console.log(data);
         }).fail(function(data) {
             notification.notification({message: gettext('Failed to update game details')});
-            return console.error(data);
         });
     }
 
@@ -66,13 +62,14 @@ define('views/submit',
         // TODO: Allow multiple icons/screenshots/videos.
     }).on('submit', '.game-form', function(e) {
         e.preventDefault();
+        var $this = $(this);
         var data = {
-            name: $(this).find('[name=name]').val(),
-            slug: $(this).find('[name=slug]').val(),
-            app_url: $(this).find('[name=app_url]').val(),
-            description: $(this).find('[name=description]').val(),
-            privacy: $(this).find('[name=privacy]').val(),
-            genre: $(this).find('[name=genre]:checked').val()
+            name: $this.find('[name=name]').val(),
+            slug: $this.find('[name=slug]').val(),
+            app_url: $this.find('[name=app_url]').val(),
+            description: $this.find('[name=description]').val(),
+            privacy_url: $this.find('[name=privacy]').val(),
+            genre: $this.find('[name=genre]:checked').val()
         };
         if ($(this).data('formtype') === 'submit') {
             submitGame(data);
