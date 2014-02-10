@@ -100,6 +100,11 @@ require.config({
             });
         })();
 
+        z.page.on('loaded', function(e) {
+            console.log('Page loaded');
+            require('resize-textarea').attach();
+        })
+
         console.log('Initialization complete');
     });
 

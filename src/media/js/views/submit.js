@@ -1,6 +1,6 @@
 define('views/submit',
-       ['dropzone', 'l10n', 'resize-textarea', 'routes_api', 'storage', 'utils', 'z'],
-       function(dropzone, l10n, rt, routes_api, storage, utils, z) {
+       ['dropzone', 'l10n', 'routes_api', 'storage', 'utils', 'z'],
+       function(dropzone, l10n, routes_api, storage, utils, z) {
 
     z.body.on('blur change keyup paste', 'input[name=name]', function(e) {
         // NOTE: We're using `keyup` instead of `keypress` to detect when
@@ -46,7 +46,6 @@ define('views/submit',
             // new dropzone('.submit-form', {
             //     uploadMultiple: true
             // });
-            rt.attach();
         });
 
         builder.z('type', 'leaf submit');

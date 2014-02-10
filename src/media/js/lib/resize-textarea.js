@@ -2,7 +2,6 @@ define('resize-textarea', ['underscore'], function(_) {
     // Attachs auto-resizing functionality to all textareas on the page
 
     function init() {
-
         function attachToTextArea(textarea) {
             function resize() {
                 textarea.style.height = 'auto';
@@ -20,6 +19,7 @@ define('resize-textarea', ['underscore'], function(_) {
 
             resize();
         }
+        
         _.each(document.querySelectorAll('textarea'), function(obj) {
             attachToTextArea(obj);
         })
