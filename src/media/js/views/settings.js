@@ -14,14 +14,11 @@ define('views/settings',
     function updateProfile($this) {
         forms.toggleSubmitFormState($this, false);
 
-        var newEmail = $this.find('[name=email]').val();
         var newUsername = $this.find('[name=username]').val();
-        var newData = {
-            email: newEmail,
+        
+        requests.put(urls.api.url('user.profile'), {
             username: newUsername
-        };
-
-        requests.put(urls.api.url('user.profile'), newData).done(function(data) {
+        }).done(function(data) {
             handleProfileUpdate(newData);
         }).fail(function(data) {
             // TODO: Show specific error messages for common error cases (ie. email already in use)
