@@ -1,32 +1,21 @@
-define('resize-textarea', ['underscore'], function(_) {
-    // Attachs auto-resizing functionality to all textareas on the page
+define('resize-textarea', ['underscore', 'z'], function(_, z) {
+    // Auto-resizing functionality to all textareas on the page
+    function resize(textarea) {
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
 
-    function init() {
-        function attachToTextArea(textarea) {
-            function resize() {
-                textarea.style.height = 'auto';
-                textarea.style.height = textarea.scrollHeight + 'px';
-            }
-            /* 0-timeout to get the already changed text */
-            function delayedResize () {
-                window.setTimeout(resize, 0);
-            }
-            textarea.addEventListener('change', resize);
-            textarea.addEventListener('cut', delayedResize);
-            textarea.addEventListener('paste', delayedResize);
-            textarea.addEventListener('drop', delayedResize);
-            textarea.addEventListener('keydown', delayedResize);
+    /* 0-timeout to get the already changed text */
+    function delayedResize(e) {
+        window.setTimeout(function() {
+            resize(e.currentTarget);
+        }, 0);
+    }
 
-            resize();
-        }
-        
+    function resizeTextareasOnPage() {
         _.each(document.querySelectorAll('textarea'), function(obj) {
-            attachToTextArea(obj);
-        })
+            resize(obj);
+        });
     }
 
-    return {
-        attach: init
-    }
-    // Call .attach() after all textarea elements have loaded
+    z.doc.on('loaded', resizeTextareasOnPage).on('input', 'textarea', delayedResize);
 });
