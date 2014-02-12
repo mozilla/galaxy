@@ -1,8 +1,6 @@
 define('views/developer', ['l10n', 'utils'], function(l10n, utils) {
     return function(builder, args) {
-        var dev_slug = args[0];
-        builder.start('developers/profile.html', {dev_slug: dev_slug}).done(function() {
-        });
+        builder.start('developers/profile.html', {devSlug: args[0]});
 
         var gettext = l10n.gettext;
 

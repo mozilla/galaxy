@@ -1,8 +1,8 @@
 {% macro avatar(user) %}
-  <div class="avatar" style="background-image: url({{ user.avatar }})" title="{{ user.username }}"></div> {{ user.username }}
+  <div class="avatar" style="background-image: url({{ user.avatar }})" title="{{ user.username|translate }}"></div> {{ user.username }}
 {% endmacro %}
 
 {% macro devAvatar(user) %}
   {# TODO: Make "avatar" the company image (see galaxy-api issue 73) #}
-  <div class="avatar" style="background-image: url({{ user.avatar }})" title="{{ user.companyName }}"></div> {{ user.companyName }}
+  <div class="avatar" style="background-image: url({{ user.avatar }})" title="{{ user.companyName|translate }}"></div> {{ user.companyName }}
 {% endmacro %}

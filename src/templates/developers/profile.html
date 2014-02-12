@@ -2,7 +2,7 @@
 
 <div class="profile unit span-grid">
   <div class="content">
-    {% defer (url=api('user.search')|urlparams(devSlug=dev_slug), key=dev_slug, id='dev-search') %}
+    {% defer (url=apiParams('user.search', {devSlug: devSlug}), id='dev-search') %}
       <h1>{{ devAvatar(this) }}</h1>
       <section>
         <h2>{{ _('Homepage') }}</h2>
@@ -20,7 +20,6 @@
         <h2>{{ _('Games made by {company}', company=this.companyName) }}</h2>
         <p class="no-results">{{ _('No games yet') }}</p>
       </section>
-    {% empty %}
     {% end %}
   </div>
 </div>
