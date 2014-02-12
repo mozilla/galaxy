@@ -4,22 +4,22 @@
   <div class="content">
     {% defer (url=apiParams('user.search', {devSlug: devSlug}), id='dev-search') %}
       <h1>{{ devAvatar(this) }}</h1>
-      <section>
-        <h2>{{ _('Homepage') }}</h2>
-        <p class="dev-info">
-          {% if this.homepage %}
-            <a href="{{ this.homepage }}" target="_blank">{{ this.homepage }}</a>
-          {% endif %}
-        </p>
-      </section>
-      <section>
-        <h2>{{ _('Support Page') }}</h2>
-        <p class="dev-info">
-          {% if this.support %}
-            <a href="{{ this.support }}" target="_blank">{{ this.support }}</a>
-          {% endif %}
-        </p>
-      </section>
+      {% if this.homepage %}
+        <section>
+          <h2>{{ _('Homepage') }}</h2>
+          <p class="dev-info">
+              <a href="{{ this.homepage }}" target="_blank">{{ this.homepage }}</a>
+          </p>
+        </section>
+      {% endif %}
+      {% if this.support %}
+        <section>
+          <h2>{{ _('Support Page') }}</h2>
+          <p class="dev-info">
+              <a href="{{ this.support }}" target="_blank">{{ this.support }}</a>
+          </p>
+        </section>
+      {% endif %}
       <section>
         <h2>{{ _('Games made by {company}', company=this.companyName) }}</h2>
         <p class="no-results">{{ _('No games yet') }}</p>
