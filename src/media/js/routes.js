@@ -11,9 +11,11 @@ var routes = [
     {'pattern': '^/user/([^/<>"\']+)/?$', 'view_name': 'user'},
     {'pattern': '^/settings$', 'view_name': 'settings'},
     {'pattern': '^/leaderboard/([^/<>"\']+)/?$', 'view_name': 'leaderboard'},
+    {'pattern': '^/developer/([^/<>"\']+)/?$', 'view_name': 'developer'},
 
     {'pattern': '^/tests$', 'view_name': 'tests'},
     {'pattern': '^/debug$', 'view_name': 'debug'}
+    
 ];
 window.routes = routes;
 
