@@ -7,13 +7,17 @@
       <section>
         <h2>{{ _('Homepage') }}</h2>
         <p class="dev-info">
-          <a href="{{ this.homepage }}" target="_blank">{{ this.homepage }}</a>
+          {% if this.homepage %}
+            <a href="{{ this.homepage }}" target="_blank">{{ this.homepage }}</a>
+          {% endif %}
         </p>
       </section>
       <section>
         <h2>{{ _('Support Page') }}</h2>
         <p class="dev-info">
-          <a href="{{ this.support }}" target="_blank">{{ this.support }}</a>
+          {% if this.support %}
+            <a href="{{ this.support }}" target="_blank">{{ this.support }}</a>
+          {% endif %}
         </p>
       </section>
       <section>
