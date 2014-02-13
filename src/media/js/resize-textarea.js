@@ -19,3 +19,4 @@ define('resize-textarea', ['underscore', 'z'], function(_, z) {
     }
 
     z.doc.on('loaded', resizeTextareasOnPage).on('input', 'textarea', delayedResize);
+});
