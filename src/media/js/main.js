@@ -11,7 +11,6 @@ require.config({
         'settings': ['settings_local', 'settings'],
         'format': 'lib/format',
         'dropzone': 'lib/dropzone',
-        'filters': 'shared/filters'
     }
 });
 
@@ -23,7 +22,6 @@ require.config({
             'underscore',
             'helpers',  // Must come before mostly everything else.
             'capabilities',
-            'filters',
             'forms',
             'l10n',
             'log',
