@@ -10,7 +10,8 @@ require.config({
         'templates': '../../templates',
         'settings': ['settings_local', 'settings'],
         'format': 'lib/format',
-        'dropzone': 'lib/dropzone'
+        'dropzone': 'lib/dropzone',
+        'resize-textarea': 'lib/resize-textarea'
     }
 });
 
@@ -27,9 +28,11 @@ require.config({
             'log',
             'login',
             'navigation',
+            'resize-textarea',
             'templates',
             //'tracking',
             'user',
+            'resize-textarea',
             'views',
             'z'
         ],
