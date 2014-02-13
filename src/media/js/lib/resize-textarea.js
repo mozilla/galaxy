@@ -1,6 +1,7 @@
 define('resize-textarea', ['underscore', 'z'], function(_, z) {
     // Auto-resizing functionality to all textareas on the page
     function resize(textarea) {
+        textarea.style.height = 'auto';
         textarea.style.height = textarea.scrollHeight + 'px';
     }
 
