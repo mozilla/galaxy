@@ -183,18 +183,6 @@ define('helpers',
 
     safe_filter('stringify', JSON.stringify);
 
-    // add slashes where needed, ie. "What's up" -> "What\'s up"
-    function addSlashes(str) {
-        return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
-    }
-
-    safe_filter('safeurl', function(obj) {
-        if (typeof obj !== 'string') {
-            return obj;
-        }
-        return addSlashes(obj);
-    });
-
     filters.format = require('format').format;
     filters.sum = function(obj) {
         return obj.reduce(function(mem, num) {return mem + num;}, 0);
