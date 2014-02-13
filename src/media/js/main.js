@@ -10,7 +10,7 @@ require.config({
         'templates': '../../templates',
         'settings': ['settings_local', 'settings'],
         'format': 'lib/format',
-        'dropzone': 'lib/dropzone',
+        'dropzone': 'lib/dropzone'
     }
 });
 

@@ -28,7 +28,7 @@ define('views/settings',
         });
     };
 
-    z.body.on('submit', 'form.edit-profile', function(e){
+    z.body.on('submit', 'form.edit-profile', function(e) {
         e.preventDefault();
         updateProfile($(this));
     });

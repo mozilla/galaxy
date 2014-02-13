@@ -6,18 +6,18 @@
       <div class="avatar" style="background-image: url({{ user_settings.avatar|safeurl }})"></div>
       <div class="edit-avatar"><a href="http://en.gravatar.com/emails/" target="_blank">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a></div>
     </div>
-    <h1>{{ _('Profile') }}</h1>
     <section>
+      <h1>{{ _('Profile') }}</h1>
       <form class="edit-profile">
         <table>
           <tr>
-            <td class="label-col"><label for="username">{{ _('Username: ') }}</label></td>
+            <td class="label-col"><label for="username">{{ _('Username:') }}</label></td>
             <td>
               <input type="text" name="username" id="username" placeholder="{{ _('Username') }}" value="{{ user_settings.username }}" required x-inputmode="verbatim">
             </td>
           </tr>
           <tr>
-            <td class="label-col"><label for="email">{{ _('Email: ') }}</label></td>
+            <td class="label-col"><label for="email">{{ _('Email:') }}</label></td>
             <td>
               <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required readonly x-inputmode="verbatim">
             </td>
