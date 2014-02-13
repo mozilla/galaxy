@@ -15,9 +15,6 @@
 
 $settings_avatar_size = 80px;
 [data-page-type~="settings"] .page {
-    h1 {
-        vertical-align: top;
-    }
     .avatar-container {
         float: left;
         margin-right: 20px;
@@ -29,6 +26,31 @@ $settings_avatar_size = 80px;
         .edit-avatar {
             bottom: -5px;
             text-align: center;
+        }
+    }
+    .edit-profile {
+        display: inline-block;
+        width: 80%;  // can't use 100% width or it'll be displayed below avatar-container
+        table {
+            border-collapse: separate; 
+            border-spacing: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            td.label-col {
+                white-space: nowrap;
+                width: 1px;
+            }
+            label {
+                font-size: 18px;
+                line-height: 22px;
+                margin-right: 10px;
+                text-align: right;
+            }
+            input {
+                line-height: normal;  // needed to align placeholder correctly
+                max-width: 350px;
+                width: 100%;
+            }
         }
     }
 }

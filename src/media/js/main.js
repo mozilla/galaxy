@@ -42,6 +42,19 @@ require.config({
         var nunjucks = require('templates');
         var z = require('z');
 
+        // Add one-off filters
+        var filters = require('nunjucks').require('filters');
+        filters.safeurl = function(obj) {
+            if (typeof obj !== 'string') {
+                return obj;
+            }
+             // add slashes where needed, ie. "What's up" -> "What\'s up"
+            function addSlashes(str) {
+                return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+            }
+            return addSlashes(obj);
+        };
+
         nunjucks.env.dev = true;
 
         z.body.addClass('html-' + require('l10n').getDirection());
