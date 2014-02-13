@@ -4,6 +4,8 @@ define('routes_api', [], function() {
         'leaderboard.manage': '/game/{0}/board',
         'login': '/user/login',
         'game': '/data/game/{0}.json',
+        'game.submit': '/game/submit',
+        'game.edit': '/game/edit',
         'game.submit.media': '/game/submit/media',
         'user.search': '/user/search',
         'user.friends': '/user/friends',

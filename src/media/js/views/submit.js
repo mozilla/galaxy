@@ -1,6 +1,27 @@
 define('views/submit',
-       ['dropzone', 'l10n', 'routes_api', 'storage', 'utils', 'z'],
-       function(dropzone, l10n, routes_api, storage, utils, z) {
+       ['dropzone', 'l10n', 'notification', 'requests', 'routes_api', 'storage', 'urls', 'utils', 'z'],
+       function(dropzone, l10n, notification, requests, routes_api, storage, urls, utils, z) {
+
+    var gettext = l10n.gettext;
+
+    function submitGame(data) {
+        requests.post(urls.api.url('game.submit'), data).done(function(data) {
+            notification.notification({message: gettext('Game successfully submitted')});
+            z.page.trigger('navigate', urls.reverse('game', [data.slug]));
+        }).fail(function(data) {
+            notification.notification({message: gettext('Failed to submit game')});
+        });
+    }
+
+    function editGame(data) {
+        // TODO: change the post to a put when the backend is ready
+        requests.post(urls.api.url('game.edit'), data).done(function(data) {
+            notification.notification({message: gettext('Game details updated')});
+            require('views').reload();
+        }).fail(function(data) {
+            notification.notification({message: gettext('Failed to update game details')});
+        });
+    }
 
     z.body.on('blur change keyup paste', 'input[name=name]', function(e) {
         // NOTE: We're using `keyup` instead of `keypress` to detect when
@@ -39,6 +60,22 @@ define('views/submit',
         // TODO: Allow user to delete/replace (and possibly resize/crop) images.
         // TODO: Allow previewing of videos.
         // TODO: Allow multiple icons/screenshots/videos.
+    }).on('submit', '.game-form', function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        var data = {
+            name: $this.find('[name=name]').val(),
+            slug: $this.find('[name=slug]').val(),
+            app_url: $this.find('[name=app_url]').val(),
+            description: $this.find('[name=description]').val(),
+            privacy_url: $this.find('[name=privacy]').val(),
+            genre: $this.find('[name=genre]:checked').val()
+        };
+        if ($(this).data('formtype') === 'submit') {
+            submitGame(data);
+        } else if ($(this).data('formtype') === 'edit') {
+            editGame(data);
+        }
     });
 
     return function(builder) {

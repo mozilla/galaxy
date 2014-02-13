@@ -1,4 +1,4 @@
-{% defer (url=api('game', [slug]), as='game', key=slug) %}
+{% defer (url=api('game', [slug]), as='game', key=slug, id='game-data') %}
   <h1>{{ _('Edit Game') }}</h1>
   {% include '_macros/game_form.html' %}
   {{ gameForm(this) }}
