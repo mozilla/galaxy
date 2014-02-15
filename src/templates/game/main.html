@@ -82,28 +82,30 @@
     <section id="game-leaderboards" class="toggly-section">
       <h1>{{ _('Leaderboards') }}</h1>
       <table>
+        <p>ttest</p>
       </table>
     </section>
     <section id="game-friends" class="toggly-section">
       <h1>{{ _('Friends Activity') }}</h1>
-  </section>
+    </section>
 
-  {# TODO: Links for admins/reviewers go here. #}
+    {# TODO: Links for admins/reviewers go here. #}
 
-  <section class="game-details">
-    <h3>{{ _('Description') }}</h3>
-    <p class="description" itemprop="description">
-      {{ this.description|translate(this)|nl2br }}
-    </p>
-    {% if game.homepage_url %}
-      <a href="{{ game.homepage_url }}" rel="external">{{ _('Homepage') }}</a>
-    {% endif %}
-    {% if game.license %}
-      {{ _('License:') }} {{ game.license }}
-    {% endif %}
-    {% if game.privacy_policy_url %}
-      <a href="{{ game.privacy_policy_url }}" rel="external">{{ _('Privacy Policy') }}</a>
-    {% endif %}
+    <section class="game-details">
+      <h3>{{ _('Description') }}</h3>
+      <p class="description" itemprop="description">
+        {{ this.description|translate(this)|nl2br }}
+      </p>
+      {% if game.homepage_url %}
+        <a href="{{ game.homepage_url }}" rel="external">{{ _('Homepage') }}</a>
+      {% endif %}
+      {% if game.license %}
+        {{ _('License:') }} {{ game.license }}
+      {% endif %}
+      {% if game.privacy_policy_url %}
+        <a href="{{ game.privacy_policy_url }}" rel="external">{{ _('Privacy Policy') }}</a>
+      {% endif %}
+    </section>
   </section>
 {% placeholder %}
   <masthead class="game-masthead">
