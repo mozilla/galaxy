@@ -1,7 +1,6 @@
 define('routes_api', [], function() {
     return {
-        'leaderboards': '/game/{0}/boards',
-        'leaderboard.manage': '/game/{0}/board',
+        'leaderboard': '/game/{0}/board',
         'login': '/user/login',
         'game': '/game/{0}/detail',
         'game.submit': '/game/submit',

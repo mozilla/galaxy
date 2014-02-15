@@ -3,7 +3,7 @@ define('views/leaderboard',
     function(cache, l10n, log, notification, requests, utils, urls, z) {
 
     function delBoard(game, slug) {
-        return requests.del(urls.api.url('leaderboard.manage', game, {
+        return requests.del(urls.api.url('leaderboard', game, {
             slug: slug
         })).then(function(data) {
             notification.notification({message: gettext('Leaderboard deleted')});
@@ -14,12 +14,12 @@ define('views/leaderboard',
     }
 
     function createBoard(game, boardName, slug) {
-        requests.post(urls.api.url('leaderboard.manage', game), {
+        requests.post(urls.api.url('leaderboard', game), {
             name: boardName,
             slug: slug
         }).then(function(data) {
             notification.notification({message: gettext('Leaderboard created')});
-            var boardUrl =  urls.api.url('leaderboards', [game]);
+            var boardUrl =  urls.api.url('leaderboard', [game]);
             cache.attemptRewrite(function(url) {
                 return url === boardUrl;
             }, function(item) {
