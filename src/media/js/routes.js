@@ -12,6 +12,7 @@ var routes = [
     {'pattern': '^/settings$', 'view_name': 'settings'},
     {'pattern': '^/leaderboard/([^/<>"\']+)/?$', 'view_name': 'leaderboard'},
     {'pattern': '^/developer/([^/<>"\']+)/?$', 'view_name': 'developer'},
+    {'pattern': '^/review$', 'view_name': 'review'},
 
     {'pattern': '^/tests$', 'view_name': 'tests'},
     {'pattern': '^/debug$', 'view_name': 'debug'}

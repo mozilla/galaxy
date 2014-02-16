@@ -1,0 +1,32 @@
+@import 'lib';
+
+$side-margin = 5%;
+[data-page-type~="review"] .page {
+    table {
+        border-collapse: separate; 
+        margin-left: $side-margin;
+        width: (100% - 2 * $side-margin)%;
+        
+        thead tr {
+            margin-bottom: 50px;
+            text-align: left;
+        }
+
+        // Acts as padding between the header and body
+        tbody:before {
+            content: '\200C';
+            display: block;
+            line-height: 5px;
+        }
+
+        tbody td {
+            padding: 5px 0;
+            &:last-child {
+                text-align: right;
+            }
+            .btn {
+                margin-left: 10px;
+            }
+        }
+    }
+}
