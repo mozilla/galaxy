@@ -19,7 +19,6 @@ define('views/game',
         }
         $('.toggly a.current:not(#' + hash + ')').removeClass('current');
         $('.toggly a[href="#' + hash + '"]').addClass('current');
-        console.log($el[0])
         window.scrollTo($el[0], 0);
         $('.toggly-section.current:not(#' + hash + ')').removeClass('current');
         $el.addClass('current');
