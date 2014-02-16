@@ -1,7 +1,10 @@
 {% set endpoint = api('game', [slug]) %}
+{% set leaderboard = api('leaderboard', [slug]) %}
 
 {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
   {% set game = this %}
+{% defer (url=leaderboard, key=slug) %}
+  {% set boards = this %}
   {% if game.artwork and game.artwork.background %}
     <div class="game-bg" style="background-image: {{ game.artwork.background.src|bgurl }}"></div>
   {% endif %}
@@ -79,10 +82,26 @@
     <section id="game-achievements" class="toggly-section">
       <h1>{{ _('Achievements') }}</h1>
     </section>
-    <section id="game-leaderboards" class="toggly-section">
-      <h1>{{ _('Leaderboards') }}</h1>
-      <table>
-      </table>
+    <section id="game-leaderboards" class="toggly-section board-section">
+      <h1>{{ _('Leaderboards') }}</h1> 
+        {% if boards%}
+          {% for board in boards %}
+            <div class="leaderboard">
+              <h3><a>{{ board.name }}</a></h3>
+              <ul>
+                {% for entry in board.data %}
+                  <li>
+                    <a>
+                      <div class="avatar" style="background-image: url({{ entry.user.avatar }})"></div>
+                      {{ entry.user.username}}
+                    </a>
+                    <span>{{ entry.score}}</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+        {% endif%}
     </section>
     <section id="game-friends" class="toggly-section">
       <h1>{{ _('Friends Activity') }}</h1>
@@ -126,4 +145,5 @@
       <p>{{ _('A server error occurred. Please try again later.') }}</p>
     {% endif %}
   </div>
+{% end %}
 {% end %}
