@@ -88,7 +88,7 @@ define('views/submit',
                 var $input = document.createElement('input');
                 $input.setAttribute('type', 'text');
                 $input.setAttribute('placeholder', $section.attr('data-placeholder'));
-                $section.append($input);
+                $section.append('<input type="text" placeholder="' + $section.attr('data-placeholder') + '">');
             }
             $.each($fallback, function() {
                 createInput($(this));
@@ -97,21 +97,14 @@ define('views/submit',
                 var $input = $(e.target);
                 var $allInputs = $input.parent().children('input[type=text]');
                 var $emptyInputs = $allInputs.filter(function() {
-                    return $(this).val() === '';
+                    return !$(this).val();
                 });
 
-                if ($input.val() === '') {
-                    console.log($emptyInputs.length);
-                    for (var i = $emptyInputs.length - 1; i > 0; i--) {
-                        $emptyInputs[i].remove();
-                    }
+                if ($input.val() && $emptyInputs.length === 0) {
+                    createInput($input.parent());
                 } else {                    
-                    if ($emptyInputs.length === 0) {
-                        createInput($input.parent());
-                    }
+                    $emptyInputs.slice(1).remove();
                 }
-
-
             });
         });
 
