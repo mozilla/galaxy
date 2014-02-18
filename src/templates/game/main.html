@@ -3,8 +3,6 @@
 
 {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
   {% set game = this %}
-{% defer (url=leaderboard, key=slug) %}
-  {% set boards = this %}
   {% if game.artwork and game.artwork.background %}
     <div class="game-bg" style="background-image: {{ game.artwork.background.src|bgurl }}"></div>
   {% endif %}
@@ -84,24 +82,26 @@
     </section>
     <section id="game-leaderboards" class="toggly-section board-section">
       <h1>{{ _('Leaderboards') }}</h1> 
-        {% if boards%}
-          {% for board in boards %}
-            <div class="leaderboard">
-              <h3><a>{{ board.name }}</a></h3>
-              <ul>
-                {% for entry in board.data %}
-                  <li>
-                    <a>
-                      <div class="avatar" style="background-image: url({{ entry.user.avatar }})"></div>
-                      {{ entry.user.username}}
-                    </a>
-                    <span>{{ entry.score}}</span>
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endfor %}
-        {% endif%}
+      {% defer (url=leaderboard, key=slug) %}
+      {% set boards = this %}
+        {% for board in boards %}
+          <div class="leaderboard">
+            {# TODO: Update href with link to leaderboard detail page and user profile page #}
+            <h3><a href="#">{{ board.name }}</a></h3>
+            <ul>
+              {% for entry in board.data %}
+                <li>
+                  <a href="#">
+                    <div class="avatar" style="background-image: url({{ entry.user.avatar }})"></div>
+                    {{ entry.user.username }}
+                  </a>
+                  <span>{{ entry.score }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      {% end %}
     </section>
     <section id="game-friends" class="toggly-section">
       <h1>{{ _('Friends Activity') }}</h1>
@@ -118,7 +118,7 @@
         <a href="{{ game.homepage_url }}" rel="external">{{ _('Homepage') }}</a>
       {% endif %}
       {% if game.license %}
-        {{ _('License:') }} {{ game.license }}
+        {{ _('License: {license}', license=game.license) }}
       {% endif %}
       {% if game.privacy_policy_url %}
         <a href="{{ game.privacy_policy_url }}" rel="external">{{ _('Privacy Policy') }}</a>
@@ -145,5 +145,4 @@
       <p>{{ _('A server error occurred. Please try again later.') }}</p>
     {% endif %}
   </div>
-{% end %}
 {% end %}
