@@ -86,8 +86,6 @@ define('views/submit',
             var $fallback = $('.fallback');
             function createInput($section) {
                 var $input = document.createElement('input');
-                $input.setAttribute('type', 'text');
-                $input.setAttribute('placeholder', $section.attr('data-placeholder'));
                 $section.append('<input type="text" placeholder="' + $section.attr('data-placeholder') + '">');
             }
             $.each($fallback, function() {
@@ -102,7 +100,9 @@ define('views/submit',
 
                 if ($input.val() && $emptyInputs.length === 0) {
                     createInput($input.parent());
-                } else {                    
+                } else {
+                    // So that at any point in time, there will be exactly 
+                    // ONE empty input field for user to enter more URLs
                     $emptyInputs.slice(1).remove();
                 }
             });
