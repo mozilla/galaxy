@@ -105,7 +105,7 @@
               {{ _("The icon will be shown on all listings in Galaxy. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
             </p>
           </div>
-          <div class="fallback">
+          <div class="fallback" data-placeholder="Icon URL">
             <input type="file" name="icon">
           </div>
         </label>
@@ -121,11 +121,11 @@
               {{ _("Screenshots will be shown on your game detail page. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
             </p>
           </div>
-          <div class="fallback">
-            <input type="file" name="screenshots">
+          <div class="fallback" data-placeholder="Image URL">
+            <!-- <input type="file" name="screenshots"> -->
+      <!--       <input type="text" placeholder="Image URL">
             <input type="text" placeholder="Image URL">
-            <input type="text" placeholder="Image URL">
-            <input type="text" placeholder="Image URL">
+            <input type="text" placeholder="Image URL"> -->
           </div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
@@ -140,17 +140,17 @@
               {{ _("Videos will be shown on your game detail page. Please use Youtube and/or Vimeo hosted videos only.") }}
             </p>
           </div>
-          <div class="fallback">        
-            <input type="text" placeholder="Youtube or Vimeo link">
-            <input type="text" placeholder="Youtube or Vimeo link">
-            <input type="text" placeholder="Youtube or Vimeo link">
+          <div class="fallback" data-placeholder="Youtube or Vimeo URL">        
+        <!--     <input type="text" placeholder="Youtube or Vimeo URL">
+            <input type="text" placeholder="Youtube or Vimeo URL">
+            <input type="text" placeholder="Youtube or Vimeo URL"> -->
           </div>
           
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
       </div>
     </div>
-        
+
     <div class="unit span-grid">
       <div class="content">
         {# TODO: Still allow this page to be accessed anonymously, but save in localStorage and prompt user to log in/register. #}
