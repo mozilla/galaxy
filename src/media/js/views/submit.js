@@ -71,9 +71,9 @@ define('views/submit',
             privacy_url: $this.find('[name=privacy]').val(),
             genre: $this.find('[name=genre]:checked').val()
         };
-        if ($(this).data('formtype') === 'submit') {
+        if ($this.data('formtype') === 'submit') {
             submitGame(data);
-        } else if ($(this).data('formtype') === 'edit') {
+        } else if ($this.data('formtype') === 'edit') {
             editGame(data);
         }
     });
