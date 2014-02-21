@@ -88,17 +88,26 @@
           <div class="leaderboard">
             {# TODO: Update href with link to leaderboard detail page and user profile page #}
             <h3><a href="#">{{ board.name }}</a></h3>
-            <ul>
-              {% for entry in board.data %}
-                <li>
-                  <a href="#">
-                    <div class="avatar" style="background-image: url({{ entry.user.avatar }})"></div>
-                    {{ entry.user.username }}
-                  </a>
-                  <span>{{ entry.score }}</span>
-                </li>
-              {% endfor %}
-            </ul>
+
+            <table>
+              <tbody>
+                {% for entry in board.data %}
+                <tr>
+                  <td>
+                    <a href="#">
+                      <div class="avatar" style="background-image: url({{ entry.user.avatar }})"></div>
+                    </a>
+                  </td>
+                  <td class="middle">
+                    <a href="#">{{ entry.user.username }}</a>
+                  </td>
+                  <td>
+                    {{ entry.score }}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         {% endfor %}
       {% end %}

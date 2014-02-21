@@ -120,6 +120,10 @@
         overflow: hidden;
     }
 
+    .avatar {
+        vertical-align: middle;
+    }
+
     .leaderboard {
         background: #fff;
         float: left;
@@ -130,11 +134,8 @@
         width: 23%;
 
         h3 {
+            margin-bottom: 10px;
             text-align: center;
-        }
-
-        ul {
-            list-style: none;
         }
 
         li {
@@ -142,6 +143,26 @@
 
             span {
                 float: right;
+            }
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        table {
+            width: 100%;
+
+            td {
+                padding-bottom: 5px;
+                
+                + td {
+                    padding-left: 5px;
+                }
+            }
+
+            td.middle {
+                width: 100%;
             }
         }
     }
