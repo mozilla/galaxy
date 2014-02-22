@@ -3,7 +3,7 @@ define('routes_api', [], function() {
         'leaderboards': '/game/{0}/boards',
         'leaderboard.manage': '/game/{0}/board',
         'login': '/user/login',
-        'game': '/data/game/{0}.json',
+        'game': '/game/{0}/detail',
         'game.submit': '/game/submit',
         'game.edit': '/game/edit',
         'game.submit.media': '/game/submit/media',
