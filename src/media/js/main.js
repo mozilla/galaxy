@@ -26,6 +26,7 @@ require.config({
             'l10n',
             'log',
             'login',
+            'media-input',
             'navigation',
             'templates',
             //'tracking',

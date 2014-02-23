@@ -83,29 +83,6 @@ define('views/submit',
             // new dropzone('.submit-form', {
             //     uploadMultiple: true
             // });
-            var $fallback = $('.fallback');
-            function createInput($section) {
-                var $input = document.createElement('input');
-                $section.append('<input type="text" placeholder="' + $section.attr('data-placeholder') + '">');
-            }
-            $.each($fallback, function() {
-                createInput($(this));
-            });
-            $('.screenshots, .videos').on('input', 'input[type=text]', function(e) {
-                var $input = $(e.target);
-                var $allInputs = $input.parent().children('input[type=text]');
-                var $emptyInputs = $allInputs.filter(function() {
-                    return !$(this).val();
-                });
-
-                if ($input.val() && $emptyInputs.length === 0) {
-                    createInput($input.parent());
-                } else {
-                    // So that at any point in time, there will be exactly 
-                    // ONE empty input field for user to enter more URLs
-                    $emptyInputs.slice(1).remove();
-                }
-            });
         });
 
         builder.z('type', 'leaf submit');
