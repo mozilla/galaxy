@@ -107,6 +107,9 @@
           </div>
           <div class="fallback" data-placeholder="{{ _('Icon URL') }}">
             <!-- <input type="file" name="icon"> -->
+            {% if game.icons %}
+              <input type="text" value="{{ game.icons }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
+            {% endif %}
           </div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
@@ -121,7 +124,13 @@
               {{ _("Screenshots will be shown on your game detail page. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
             </p>
           </div>
-          <div class="fallback" data-placeholder="{{ _('Image URL') }}"></div>
+          <div class="fallback" data-placeholder="{{ _('Image URL') }}">
+            {% if game.screenshots and game.screenshots|length %}
+              {% for screenshot in game.screenshots %}
+                <input type="text" value="{{ screenshot }}" placeholder="{{ _('Image URL') }}" pattern="https?://.*">
+              {% endfor %}
+            {% endif %}
+          </div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
       </div>
@@ -132,10 +141,16 @@
           <div class="l">{{ _('Videos') }}
             <span class="req opt" data-required="{{ _('Optional') }}"></span>
             <p class="form-help">
-              {{ _("Videos will be shown on your game detail page. Please use Youtube and/or Vimeo hosted videos only.") }}
+              {{ _("Videos will be shown on your game detail page. Please use YouTube and/or Vimeo hosted videos only.") }}
             </p>
           </div>
-          <div class="fallback" data-placeholder="{{ _('YouTube or Vimeo URL') }}"></div>
+          <div class="fallback" data-placeholder="{{ _('YouTube or Vimeo URL') }}">
+            {% if game.videos and game.videos|length %}
+              {% for video in game.videos %}
+                <input type="text" value="{{ video }}" placeholder="{{ _('YouTube or Vimeo URL') }}" pattern="https?://.*">
+              {% endfor %}
+            {% endif %}
+          </div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
       </div>

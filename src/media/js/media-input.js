@@ -1,12 +1,20 @@
 define('media-input', ['jquery', 'z'], function($, z) {
     
     function createInput($section) {
-        $section.append($('<input>', { type: 'text', placeholder: $section.data('placeholder')}));
+        $section.append($('<input>', { 
+            type: 'text', 
+            placeholder: $section.data('placeholder'),
+            pattern: 'https?://.*'
+        }));
     }
 
     z.page.on('loaded', function() {
         $('.fallback').each(function() {
-            createInput($(this));
+            $this = $(this);
+            if (!$this.parent().parent().hasClass('icon') || !$this.children().length != 0) {
+                // Do not create input field if icon section already has icon value (in edit page).
+                createInput($this);
+            }
         });
     }).on('input', '.screenshots input[type=text], .videos input[type=text]', function(e) {
         var $input = $(e.target);
