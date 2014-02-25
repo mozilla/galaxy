@@ -1,7 +1,7 @@
 define('media-input', ['jquery', 'z'], function($, z) {
     
     function createInput($section) {
-        $section.append('<input type="text" placeholder="' + $section.attr('data-placeholder') + '">');
+        $section.append($('<input>', {type: 'text', placeholder: $section.attr('data-placeholder')}));
     }
 
     z.page.on('loaded', function() {
