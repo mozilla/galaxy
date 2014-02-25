@@ -1,16 +1,14 @@
 define('media-input', ['jquery', 'z'], function($, z) {
     
     function createInput($section) {
-        $section.append($('<input>', {type: 'text', placeholder: $section.attr('data-placeholder')}));
+        $section.append($('<input>', { type: 'text', placeholder: $section.data('placeholder')}));
     }
 
     z.page.on('loaded', function() {
         $('.fallback').each(function() {
             createInput($(this));
         });
-    })
-
-    z.page.on('input', '.screenshots input[type=text], .videos input[type=text]', function(e) {
+    }).on('input', '.screenshots input[type=text], .videos input[type=text]', function(e) {
         var $input = $(e.target);
         var $allInputs = $input.parent().children('input[type=text]');
         var $emptyInputs = $allInputs.filter(function() {
