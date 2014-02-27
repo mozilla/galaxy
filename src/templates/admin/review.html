@@ -1,28 +1,36 @@
 <form class="grid" method="post" data-required="{{ _('Required') }}" data-formtype="submit">
   <div class="unit span-grid">
-    <table>
-      <thead>
-        <tr>
-          <th>{{ _('Game') }}</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="#">Mario Bros</a></td>
-          <td>
-            <a href="#" class="btn btn-red">{{ _('Reject') }}</a>
-            <a href="#" class="btn btn-green">{{ _('Accept') }}</a>
-          </td>
-        </tr>
-        <tr>
-          <td><a href="#">Halo 4</a></td>
-          <td>
-            <a href="#" class="btn btn-red">{{ _('Reject') }}</a>
-            <a href="#" class="btn btn-green">{{ _('Accept') }}</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <h1>{{ _('Review Queue') }}</h1>
+    {% defer (url=api('game.list')|urlparams(status='pending')) %}
+      <table>
+        <thead>
+          <tr>
+            <th>{{ _('Game') }}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for game in this %}
+            <tr>
+              <td><a href="{{ game.app_url }}">{{ game.name }}</a></td>
+              <td>
+                <a href="#" class="btn btn-red">{{ _('Reject') }}</a>
+                <a href="#" class="btn btn-green">{{ _('Accept') }}</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% placeholder %}
+      {{ _('Loading games...') }}
+    {% empty %}
+      {{ _('No games pending review.') }}
+    {% except %}
+      {% if error == 401 %}
+        {{ _('You are not authorized to access this page.') }}
+      {% else %}
+        {{ _('Oh no! An error occurred.') }}
+      {% endif %}
+    {% end %}
   </div>
 </form>
