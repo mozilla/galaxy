@@ -24,9 +24,7 @@ define('forms', ['jquery', 'z'], function($, z) {
         $('form[novalidate] button[type=submit]').removeAttr('disabled');
         $('input, select, textarea').each(function() {
             var $this = $(this);
-            if (!!$this.val()) {
-                $this.toggleClass('focused');
-            }
+            $this.toggleClass('focused', !!$this.val());
             // So we can target .empty (because :empty doesn't apply to attributes).
             $this.toggleClass('empty', !!!$this.val());
         });
