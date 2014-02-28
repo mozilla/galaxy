@@ -3,7 +3,30 @@
 
 {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
   {% set game = this %}
-  {% if game.artwork and game.artwork.background %}
+  <div class="one-of-three"/>
+    <nav class="featured-games">
+      <ul>
+        {% for game in featured_games %}
+        <li>
+          <a href="#">
+            <div class="media">
+              <img class="media-figure game-icon" src="/media/img/new-details/{{ game.icon }}" />
+              <div class="media-body">
+                <h3 class="game-title">{{ game.title }}</h3>
+                <p class="game-developer">by {{ game.developer }}</p>
+              </div>
+            </div>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+  <div class="two-of-three"/>
+
+  </div>
+
+  <!-- {% if game.artwork and game.artwork.background %}
     <div class="game-bg" style="background-image: {{ game.artwork.background.src|bgurl }}"></div>
   {% endif %}
 
@@ -118,22 +141,22 @@
 
     {# TODO: Links for admins/reviewers go here. #}
 
-    <section class="game-details">
-      <h3>{{ _('Description') }}</h3>
-      <p class="description" itemprop="description">
-        {{ this.description|translate(this)|nl2br }}
-      </p>
-      {% if game.homepage_url %}
-        <a href="{{ game.homepage_url }}" rel="external">{{ _('Homepage') }}</a>
-      {% endif %}
-      {% if game.license %}
-        {{ _('License: {license}', license=game.license) }}
-      {% endif %}
-      {% if game.privacy_policy_url %}
-        <a href="{{ game.privacy_policy_url }}" rel="external">{{ _('Privacy Policy') }}</a>
-      {% endif %}
-    </section>
-  </section>
+  <section class="game-details">
+    <h3>{{ _('Description') }}</h3>
+    <p class="description" itemprop="description">
+      {{ this.description|translate(this)|nl2br }}
+    </p>
+    {% if game.homepage_url %}
+      <a href="{{ game.homepage_url }}" rel="external">{{ _('Homepage') }}</a>
+    {% endif %}
+    {% if game.license %}
+      {{ _('License:') }} {{ game.license }}
+    {% endif %}
+    {% if game.privacy_policy_url %}
+      <a href="{{ game.privacy_policy_url }}" rel="external">{{ _('Privacy Policy') }}</a>
+    {% endif %}
+  </section> -->
+
 {% placeholder %}
   <masthead class="game-masthead">
     <div>

@@ -1,0 +1,46 @@
+@import 'lib';
+
+.featured-games {
+    ul {
+        list-style: none;
+    
+        > li {
+            display: block;
+            margin-bottom: 2em;
+        }
+        a {
+            display: block;
+            ellipsis();
+            vertical-align: top;
+            text-decoration: none;
+        }
+        .media {
+            align-items: flex-start;
+            display: flex;
+        }
+        .media-figure {
+            margin-right: 1em;
+        }
+        .media-body {
+            flex: 1 0 0;
+            &, & :last-child {
+                margin-bottom: 0;
+            }
+        }
+        .game-icon {
+            border: 1px solid #ccc;
+            float: left;
+            height: 64px;
+            width: 64px;
+        }
+        .game-title {
+            color: #fff;
+            font-weight: 600; 
+            padding-bottom: 5px;
+            padding-top: 12px;
+        }
+        .game-developer {
+            color: #909090;
+        }
+    }
+}
