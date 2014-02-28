@@ -1,37 +1,23 @@
 @import 'lib';
 
-.td-fit-content {
-    width: 1%;
-    white-space: nowrap;
-}
-
 [data-page-type~="review"] .page {
     .review-table {
         border-collapse: separate; 
         width: 100%;
         
-        thead tr {
+        thead tr th {
             text-align: left;
-        }
-
-        // Acts as padding between the header and body
-        tbody:before {
-            content: '\200C';
-            display: block;
-            line-height: 5px;
+            padding-bottom: 10px;
         }
 
         tbody td {
             padding: 5px 0;
             &:not(:last-child) {
-                padding-right: 8%;
+                padding-right: 10px;
             }
-
-            &.review-title {
-                @extend .td-fit-content;
-            }
+            
             &.review-buttons {
-                @extend .td-fit-content;
+                text-align: right;
                 .btn {
                     margin-left: 10px;
                 }
