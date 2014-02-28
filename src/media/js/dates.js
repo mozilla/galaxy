@@ -30,7 +30,6 @@ define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
         M: 60 * 60 * 24 * 30,
         y: 60 * 60 * 24 * 365
     };
-    var largestUnitSize = unitSizes['y'];
 
     var unitOrdinality = ['y', 'M', 'w', 'd', 'h', 'm', 's'];
 
