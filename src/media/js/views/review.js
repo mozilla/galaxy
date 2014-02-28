@@ -7,7 +7,7 @@ define('views/review',
     function submitReview($game, accepted) {
         var gameSlug = $game.data('gameSlug');
         var statusVerb = accepted ? 'approve' : 'reject';
-        requests.post(urls.api.url('game.moderate', [gameSlug, statusVerb]), {})
+        requests.post(urls.api.url('game.moderate', [gameSlug, statusVerb]))
                 .done(function(data) {
                     reviewSubmitted(true);
                 }).fail(function(err) {
@@ -18,16 +18,19 @@ define('views/review',
         function reviewSubmitted(success) {
             var gameTitle = $game.data('gameTitle');
             var message;
+            var fmt = format.format;
             if (success) {
                 var status = gettext(accepted ? 'approved' : 'rejected');
-                message = format.format(gettext('{game} was successfully {status}'), {game: gameTitle, status: status});
+                var locMessage = gettext('{game} was successfully {status}');
+                message = fmt(locMessage, {game: gameTitle, status: status});
             } else {
-                message = format.format(gettext('Failed to {statusVerb} {game}'), {game: gameTitle, statusVerb: statusVerb});
+                var locMessage = gettext('Failed to {statusVerb} {game}');
+                message = fmt(locMessage, {game: gameTitle, statusVerb: statusVerb});
             }
             notification.notification({message: message});
 
             if (success) {
-                // TODO: Animate this ($.slideUp()?)
+                // TODO: Animate this
                 $game.remove();
 
                 var $table = $('.review-table');

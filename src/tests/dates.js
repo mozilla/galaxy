@@ -6,7 +6,7 @@ var contains = a.contains;
 
 var dateslib = require('dates');
 
-var refDate = new Date(2014,1,1);
+var refDate = new Date(2014, 1, 1);
 var opts = {
     referenceDate: refDate
 };
