@@ -1,11 +1,14 @@
 @import 'lib';
 
-$side-margin = 5%;
+.td-fit-content {
+    width: 1%;
+    white-space: nowrap;
+}
+
 [data-page-type~="review"] .page {
     table {
         border-collapse: separate; 
-        margin-left: $side-margin;
-        width: (100% - 2 * $side-margin)%;
+        width: 100%;
         
         thead tr {
             margin-bottom: 50px;
@@ -21,11 +24,18 @@ $side-margin = 5%;
 
         tbody td {
             padding: 5px 0;
-            &:last-child {
-                text-align: right;
+            &:not(:last-child) {
+                padding-right: 20px;
             }
-            .btn {
-                margin-left: 10px;
+
+            &.review-title {
+                @extend .td-fit-content;
+            }
+            &.review-buttons {
+                @extend .td-fit-content;
+                .btn {
+                    margin-left: 10px;
+                }
             }
         }
     }
