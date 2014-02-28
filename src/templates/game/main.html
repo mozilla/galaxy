@@ -3,8 +3,8 @@
 
 {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
   {% set game = this %}
-  <div class="one-of-three"/>
-    <nav class="featured-games">
+  <div class="grid">
+    <div class="unit one-of-three featured-games-section"/>
       <ul>
         {% for game in featured_games %}
         <li>
@@ -20,10 +20,16 @@
         </li>
         {% endfor %}
       </ul>
-    </nav>
-  </div>
-  <div class="two-of-three"/>
-
+    </div>
+    <div class="unit two-of-three game-detail-section"/>
+      <div class="grid">
+        <div class="unit two-of-three"/>
+          <iframe width="475" height="300" src="//www.youtube.com/embed/mX48y24t9iU" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="unit one-of-three"/>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- {% if game.artwork and game.artwork.background %}
