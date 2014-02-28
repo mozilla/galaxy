@@ -14,8 +14,9 @@ define('views/submit',
     }
 
     function editGame(data) {
-        // TODO: change the post to a put when the backend is ready
-        requests.post(urls.api.url('game.edit'), data).done(function(data) {
+        requests.put(urls.api.url('game.edit'), data, {
+            slug: data.slug
+        }).done(function(data) {
             notification.notification({message: gettext('Game details updated')});
             require('views').reload();
         }).fail(function(data) {
