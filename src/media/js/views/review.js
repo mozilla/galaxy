@@ -9,17 +9,13 @@ define('views/review',
         var statusVerb = accepted ? 'approve' : 'reject';
         requests.post(urls.api.url('game.moderate', [gameSlug, statusVerb]), {})
                 .done(function(data) {
-                    reviewSubmitted($game, true);
+                    reviewSubmitted(true);
                 }).fail(function(err) {
                     console.error('Failed to submit review; error:', err);
-                    reviewSubmitted($game, false);
+                    reviewSubmitted(false);
                 });
 
-        function reviewSubmitted($game, success) {
-            console.log('$game:', $game);
-            $game = $('[data-game-slug="' + gameSlug + '"]');
-            console.log('new $game:', $game);
-
+        function reviewSubmitted(success) {
             var gameTitle = $game.data('gameTitle');
             var message;
             if (success) {
