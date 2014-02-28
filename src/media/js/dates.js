@@ -21,34 +21,32 @@ define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
         unitFormatStrings[unit] = gettext(unitFormatStrings[unit]);
     }
 
-    var unitRanges = {
-        s: 60,
+    var unitSizes = {
+        s: 1,
         m: 60,
-        h: 24,
-        d: 7,
-        w: 4
+        h: 60 * 60,
+        d: 60 * 60 * 24,
+        w: 60 * 60 * 24 * 7,
+        M: 60 * 60 * 24 * 30,
+        y: 60 * 60 * 24 * 365
     };
-    var largestUnitSize = Object.keys(unitRanges).reduce(function(acc, unit) {
-        return acc * unitRanges[unit];
-    }, 1);
-    var unitOrdinality = ['M', 'w', 'd', 'h', 'm', 's'];
+    var largestUnitSize = unitSizes['y'];
+
+    var unitOrdinality = ['y', 'M', 'w', 'd', 'h', 'm', 's'];
 
     function getDateUnitQuantities(date, referenceDate) {
         // TODO: Mark negative diffs so they can be handled differently
         // in the future (ie. adding an 'ago' vs 'from now' suffix)
-        var diffInSeconds = Math.round((date - referenceDate) / 1000);
+        var diffInSeconds = Math.max((referenceDate - date) / 1000, 0);
 
         var unitQuantities = {};
-        var currentUnitSize = largestUnitSize;
-
         var remaining = Math.abs(diffInSeconds);
         unitOrdinality.forEach(function(unit) {
-            var unitRange = unitRanges[unit] || 1;
-            currentUnitSize /= unitRange;
-            if (remaining >= currentUnitSize) {
-                var unitQuantity = Math.floor(remaining / currentUnitSize);
+            var unitSize = unitSizes[unit];
+            if (remaining >= unitSize) {
+                var unitQuantity = Math.floor(remaining / unitSize);
                 unitQuantities[unit] = unitQuantity;
-                remaining -= unitQuantity * currentUnitSize;
+                remaining -= unitQuantity * unitSize;
             }
         });
 
@@ -132,6 +130,7 @@ define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
     }
 
     return {
-        relativeDateString: relativeDateString
+        relativeDateString: relativeDateString,
+        unitSizes: unitSizes
     };
 });
