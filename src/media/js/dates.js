@@ -85,9 +85,9 @@ define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
         var unitQuantities = getDateUnitQuantities(date, opts.referenceDate);
         var dateString = '';
 
-        var minUnitIndex = unitOrdinality.indexOf(opts.minUnit);
-        if (minUnitIndex == -1) {
-            minUnitIndex = unitOrdinality.length - 1;
+        var maxOrdinalityIndex = unitOrdinality.indexOf(opts.minUnit);
+        if (maxOrdinalityIndex == -1) {
+            maxOrdinalityIndex = unitOrdinality.length - 1;
         }
 
         var unitCount = 0;
@@ -97,14 +97,14 @@ define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
             if (!quantity) {
                 // If we've reached the last displayable unit and haven't outputted
                 // any units, just output zero for the min unit
-                if (idx == minUnitIndex && unitCount == 0) {
+                if (idx == maxOrdinalityIndex && unitCount == 0) {
                     quantity = 0;
                 } else {
                     return;
                 }
             }
 
-            if (idx > minUnitIndex || 
+            if (idx > maxOrdinalityIndex || 
                 unitCount >= opts.maxDisplayUnits ||
                 (firstUnitIdx != -1 && idx - firstUnitIdx >= opts.maxUnitSpread)) 
             {
