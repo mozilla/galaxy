@@ -69,7 +69,7 @@ define('views/submit',
             slug: $this.find('[name=slug]').val(),
             app_url: $this.find('[name=app_url]').val(),
             description: $this.find('[name=description]').val(),
-            privacy_url: $this.find('[name=privacy]').val(),
+            privacy_url: $this.find('[name=privacy_policy_url]').val(),
             genre: $this.find('[name=genre]:checked').val()
         };
         if ($this.data('formtype') === 'submit') {

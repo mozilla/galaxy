@@ -64,7 +64,7 @@
     <div class="unit two-of-three">
       <div class="content form-field">
         <label>
-          <input type="url" name="privacy_url" pattern="https?://.*" placeholder="{{ _('Enter privacy policy URL here') }}" value="{{ game.privacy }}" class="optional">
+          <input type="url" name="privacy_policy_url" pattern="https?://.*" placeholder="{{ _('Enter privacy policy URL here') }}" value="{{ game.privacy_policy_url }}" class="optional">
           <span class="l">{{ _('Privacy Policy URL') }}</span>
           <span class="req opt" data-required="{{ _('Optional') }}"></span>
         </label>
@@ -105,8 +105,8 @@
               {{ _("The icon will be shown on all listings in Galaxy. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
             </p>
           </div>
-          <div class="fallback">
-            <input type="file" name="icon">
+          <div class="fallback" data-placeholder="{{ _('Icon URL') }}">
+            <!-- <input type="file" name="icon"> -->
           </div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
@@ -121,12 +121,7 @@
               {{ _("Screenshots will be shown on your game detail page. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
             </p>
           </div>
-          <div class="fallback">
-            <input type="file" name="screenshots">
-            <input type="text" placeholder="Image URL">
-            <input type="text" placeholder="Image URL">
-            <input type="text" placeholder="Image URL">
-          </div>
+          <div class="fallback" data-placeholder="{{ _('Image URL') }}"></div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
       </div>
@@ -140,17 +135,12 @@
               {{ _("Videos will be shown on your game detail page. Please use Youtube and/or Vimeo hosted videos only.") }}
             </p>
           </div>
-          <div class="fallback">        
-            <input type="text" placeholder="Youtube or Vimeo link">
-            <input type="text" placeholder="Youtube or Vimeo link">
-            <input type="text" placeholder="Youtube or Vimeo link">
-          </div>
-          
+          <div class="fallback" data-placeholder="{{ _('YouTube or Vimeo URL') }}"></div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
       </div>
     </div>
-        
+
     <div class="unit span-grid">
       <div class="content">
         {# TODO: Still allow this page to be accessed anonymously, but save in localStorage and prompt user to log in/register. #}
