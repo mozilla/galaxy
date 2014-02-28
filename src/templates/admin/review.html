@@ -1,8 +1,12 @@
+{% macro emptyReview() %}
+  {{ _('No games pending review.') }}
+{% endmacro %}
+
 <form class="grid" method="post" data-required="{{ _('Required') }}" data-formtype="submit">
   <div class="unit span-grid">
     <h1>{{ _('Review Queue') }}</h1>
     {% defer (url=api('game.list')|urlparams(status='pending')) %}
-      <table>
+      <table class="review-table">
         <thead>
           <tr>
             <th>{{ _('Game') }}</th>
@@ -12,21 +16,24 @@
         </thead>
         <tbody>
           {% for game in this|sort(attribute='created') %}
-            <tr>
+            <tr class="review-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
               <td class="review-title"><a href="{{ game.app_url }}">{{ game.name }}</a></td>
               <td class="review-wait">{{ game.created|relativeDate }}</td>
               <td class="review-buttons">
-                <a href="#" class="btn btn-red">{{ _('Reject') }}</a>
-                <a href="#" class="btn btn-green">{{ _('Accept') }}</a>
+                <a href="#" class="btn btn-red review-reject">{{ _('Reject') }}</a>
+                <a href="#" class="btn btn-green review-accept">{{ _('Accept') }}</a>
               </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
+      <div id="empty-message" style="display: none;">
+        {{ emptyReview() }}
+      </div>
     {% placeholder %}
       {{ _('Loading games...') }}
     {% empty %}
-      {{ _('No games pending review.') }}
+      {{ emptyReview() }}
     {% except %}
       {% if error == 401 %}
         {{ _('You are not authorized to access this page.') }}
