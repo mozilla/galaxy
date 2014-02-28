@@ -1,24 +1,19 @@
 define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
-    var gettext = l10n.gettext;
+    var ngettext = l10n.ngettext;
 
-    var unitFormatStrings = {
-        s: '1 second',
-        ss: '{0} seconds',
-        m: '1 minute',
-        mm: '{0} minutes',
-        h: '1 hour',
-        hh: '{0} hours',
-        d: '1 day',
-        dd: '{0} days',
-        w: '1 week',
-        ww: '{0} weeks',
-        M: '1 month',
-        MM: '{0} months',
-        y: '1 year',
-        yy: '{0} years'
+    // Format: [singular, plural]
+    var unitFormatters = {
+        s: ['1 second', '{n} seconds'],
+        m: ['1 minute', '{n} minutes'],
+        h: ['1 hour', '{n} hours'],
+        d: ['1 day', '{n} days'],
+        w: ['1 week', '{n} weeks'],
+        M: ['1 month', '{n} months'],
+        y: ['1 year', '{n} years']
     };
-    for (var unit in unitFormatStrings) {
-        unitFormatStrings[unit] = gettext(unitFormatStrings[unit]);
+    function formattedString(unit, quantity) {
+        var strings = unitFormatters[unit];
+        return ngettext(strings[0], strings[1], {n: quantity});
     }
 
     var unitSizes = {
@@ -116,11 +111,7 @@ define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
                 firstUnitIdx = idx;
             }
 
-            // For pluralized units, use a double unit key (ie. 'ss' instead of 's' for seconds)
-            var formatKey = quantity === 1 ? unit : unit + unit;
-            var formatString = unitFormatStrings[formatKey];
-            dateString += format.format(formatString, [quantity]) || '';
-
+            dateString += formattedString(unit, quantity);
             unitCount++;
         });
 
