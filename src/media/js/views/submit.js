@@ -69,7 +69,8 @@ define('views/submit',
             app_url: $this.find('[name=app_url]').val(),
             description: $this.find('[name=description]').val(),
             privacy_url: $this.find('[name=privacy_policy_url]').val(),
-            genre: $this.find('[name=genre]:checked').val()
+            genre: $this.find('[name=genre]:checked').val(),
+            icon: $this.find('.icon.media input').val()
         };
         if ($this.data('formtype') === 'submit') {
             submitGame(data);
