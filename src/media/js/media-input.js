@@ -10,7 +10,7 @@ define('media-input', ['jquery', 'z'], function($, z) {
 
     z.page.on('loaded', function() {
         $('.fallback').each(function() {
-            $this = $(this);
+            var $this = $(this);
             if (!$this.parent().parent().hasClass('icon') || !$this.children().length != 0) {
                 // Do not create input field if icon section already has icon value (in edit page).
                 createInput($this);
