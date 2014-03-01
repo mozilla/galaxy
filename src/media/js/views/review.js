@@ -4,7 +4,20 @@ define('views/review',
     
     var console = log('review');
 
-    function submitReview($game, accepted) {
+    function submitReview($game, $button, accepted) {
+        function setSpinning(spinning) {
+            // $button[spinning ? 'addClass' : 'removeClass']('spinner');
+            $button.children('.btn-text').css({
+                visibility: spinning ? 'hidden' : 'visible'
+            });
+            if (spinning) {
+                $button.append('<div class="spinner"></div>');
+            } else {
+                $button.children('.spinner').remove();
+            }
+        }
+        setSpinning(true);
+
         var gameSlug = $game.data('gameSlug');
         var statusVerb = accepted ? 'approve' : 'reject';
         requests.post(urls.api.url('game.moderate', [gameSlug, statusVerb]))
@@ -28,6 +41,7 @@ define('views/review',
             }
             notification.notification({message: message});
 
+            setSpinning(false);
             if (success) {
                 // TODO: Animate this
                 $game.remove();
@@ -43,10 +57,10 @@ define('views/review',
 
     z.body.on('click', '.review-accept', function() {
         var $game = $(this).closest('[data-game-slug]');
-        submitReview($game, true);
+        submitReview($game, $(this), true);
     }).on('click', '.review-reject', function() {
         var $game = $(this).closest('[data-game-slug]');
-        submitReview($game, false);
+        submitReview($game, $(this), false);
     });
 
     return function(builder, args) {
