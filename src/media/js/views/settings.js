@@ -35,8 +35,7 @@ define('views/settings',
     });
 
     return function(builder, args) {
-        builder.start('settings.html').done(function() {
-        });
+        builder.start('settings.html');
 
         builder.z('type', 'leaf settings');
         builder.z('title', gettext('Settings'));

@@ -164,8 +164,7 @@ define('views/friends',
     });
 
     return function(builder) {
-        builder.start('friends/main.html').done(function() {
-        });
+        builder.start('friends/main.html');
 
         builder.z('type', 'leaf friends');
         builder.z('title', gettext('Friends'));
