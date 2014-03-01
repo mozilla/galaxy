@@ -1,24 +1,26 @@
-define('views/user', ['z'], function(z) {
+define('views/user', 
+    ['notification', 'requests', 'urls', 'z'], 
+    function(notification, requests, urls, z) {
 
     function requestFriend(user_id) {
-        requests.post(urls.api.url('user.friends.request'), {
+        return requests.post(urls.api.url('user.friends.request', {
             recipient: user_id
-        }).done(function(data) {
+        })).then(function(data) {
             notification.notification({message: gettext('Friend request sent')});
-            return console.log(data);
-        }).fail(function(data) {
+        }, function(data) {
             notification.notification({message: gettext('Failed to submit friend request')});
-            return console.error(data);
-        });
+            console.error(data);
+        }).promise();
     }
 
-    z.body.on('click', '.add-friend', function() {
-        var $friend = $(this).closest('[data-user-id]');
-        var username = $friend.find('.profile-link').text();
-        var msg = gettext('Friend requested: {username}', {username: username});
-        notification.notification({message: msg});
-        requestFriend($friend.data('userId'));
-        $friend.remove();
+    z.body.on('click', '.request-friend', function() {
+        var $this = $(this);
+        $this.hide();
+        requestFriend($this.data('userId')).then(function() {
+            $this.remove();
+        }, function() {
+            $this.show();
+        });
     });
 
     return function(builder, args) {
