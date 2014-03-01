@@ -63,14 +63,30 @@ define('views/submit',
     }).on('submit', '.game-form', function(e) {
         e.preventDefault();
         var $this = $(this);
+
+        function stringifyURLs(type) {
+            var inputs = $this.find('.' + type + '.media input');
+            inputs = $.map(inputs, function(e) { 
+                return $(e).val(); 
+            });
+            return $(inputs).filter(function(e) { 
+                return e !== ''; 
+            });
+        }
+
+        var screenshots = stringifyURLs('screenshots');
+        var videos = stringifyURLs('videos');
+        
         var data = {
             name: $this.find('[name=name]').val(),
             slug: $this.find('[name=slug]').val(),
             app_url: $this.find('[name=app_url]').val(),
             description: $this.find('[name=description]').val(),
-            privacy_url: $this.find('[name=privacy_policy_url]').val(),
+            privacy_policy_url: $this.find('[name=privacy_policy_url]').val(),
             genre: $this.find('[name=genre]:checked').val(),
-            icon: $this.find('.icon.media input').val()
+            icons: $this.find('.icon.media input').val(),
+            screenshots: utils.urlencode(JSON.stringify(screenshots)),
+            videos: utils.urlencode(JSON.stringify(videos))
         };
         if ($this.data('formtype') === 'submit') {
             submitGame(data);
