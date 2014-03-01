@@ -61,7 +61,6 @@ require.config({
         filters.relativeDate = function(date) {
             return dateslib.relativeDateString(new Date(date), {
                 minUnit: 'm',
-                maxUnitSpread: 2
             });
         };
 
