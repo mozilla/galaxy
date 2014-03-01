@@ -53,6 +53,6 @@ define('views/review',
         builder.start('admin/review.html');
 
         builder.z('type', 'leaf review');
-        builder.z('title', gettext('Review'));
+        builder.z('title', gettext('Review Queue'));
     };
 });
