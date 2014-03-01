@@ -17,15 +17,14 @@ define('views/review',
 
         function reviewSubmitted(success) {
             var gameTitle = $game.data('gameTitle');
-            var message;
-            var fmt = format.format;
+            var message, params;
             if (success) {
-                var status = gettext(accepted ? 'approved' : 'rejected');
-                var locMessage = gettext('{game} was successfully {status}');
-                message = fmt(locMessage, {game: gameTitle, status: status});
+                var status = accepted ? gettext('approved') : gettext('rejected');
+                params = {game: gameTitle, status: status};
+                message = gettext('{game} was successfully {status}', params);
             } else {
-                var locMessage = gettext('Failed to {statusVerb} {game}');
-                message = fmt(locMessage, {game: gameTitle, statusVerb: statusVerb});
+                params = {game: gameTitle, statusVerb: statusVerb};
+                message = gettext('Failed to {statusVerb} {game}', params);
             }
             notification.notification({message: message});
 

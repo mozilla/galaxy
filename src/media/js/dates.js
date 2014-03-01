@@ -1,20 +1,15 @@
 define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
     var ngettext = l10n.ngettext;
 
-    // Format: [singular, plural]
     var unitFormatters = {
-        s: ['1 second', '{n} seconds'],
-        m: ['1 minute', '{n} minutes'],
-        h: ['1 hour', '{n} hours'],
-        d: ['1 day', '{n} days'],
-        w: ['1 week', '{n} weeks'],
-        M: ['1 month', '{n} months'],
-        y: ['1 year', '{n} years']
+        s: function(n) { return ngettext('1 second', '{n} seconds', {n: n}); },
+        m: function(n) { return ngettext('1 minute', '{n} minutes', {n: n}); },
+        h: function(n) { return ngettext('1 hour', '{n} hours', {n: n}); },
+        d: function(n) { return ngettext('1 day', '{n} days', {n: n}); },
+        w: function(n) { return ngettext('1 week', '{n} weeks', {n: n}); },
+        M: function(n) { return ngettext('1 month', '{n} months', {n: n}); },
+        y: function(n) { return ngettext('1 year', '{n} years', {n: n}); }
     };
-    function formattedString(unit, quantity) {
-        var strings = unitFormatters[unit];
-        return ngettext(strings[0], strings[1], {n: quantity});
-    }
 
     var unitSizes = {
         s: 1,
@@ -111,7 +106,7 @@ define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
                 firstUnitIdx = idx;
             }
 
-            dateString += formattedString(unit, quantity);
+            dateString += unitFormatters[unit](quantity);
             unitCount++;
         });
 
