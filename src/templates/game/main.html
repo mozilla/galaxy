@@ -3,14 +3,15 @@
 
 {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
   {% set game = this %}
-  <div class="grid">
-    <div class="unit one-of-three featured-games-section">
+  
+  <div class="Grid">
+    <div class="Grid-cell featured-games-section">
       <ul>
         {% for game in featured_games %}
         <li>
           <a href="#">
             <div class="media">
-              <img class="media-figure game-icon" src="/media/img/new-details/{{ game.icon }}">
+              <img class="media-figure game-icon" src="/media/img/new-game-details/{{ game.icon }}">
               <div class="media-body">
                 <h3 class="game-title">{{ game.title }}</h3>
                 <p class="game-developer">{{ _('by {author}', author=game.developer) }}</p>
@@ -21,12 +22,57 @@
         {% endfor %}
       </ul>
     </div>
-    <div class="unit two-of-three game-detail-section"/>
-      <div class="grid">
-        <div class="unit two-of-three"/>
-          <iframe width="475" height="300" src="//www.youtube.com/embed/mX48y24t9iU" frameborder="0" allowfullscreen></iframe>
+    <div class="Grid-cell Grid--flex-grow-2 game-details-container">
+      <div class="Grid">
+        <div class="Grid-cell Grid--flex-grow-2 game-details-container-left">
+          <div class="game-current-media">
+            <iframe width="480" height="300" src="//www.youtube.com/embed/mX48y24t9iU" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="game-details-section">
+            <button data-app-url="{{ game.app_url }}" class="btn play-button">{{ _('Play') }}</button>
+            <h1 class="game-title">Bastion</h1>
+            <p class="game-developer">By Supergiant Games</p>
+          </div>
+          <div class="game-details-section">
+            <p class="game-description">Bastion is an original action role-pplaying game featuring a reactive narrator who marks your every move, lush hand-painted 2D artwork, and tight responsive gameplay that rewards playing with finesse. The game is designed to be simple to pick up and start playing, while offering a lot of rich choices around character customization as well as a deep story and game world you can lose yourself in.</p>
+          </div>
+          <div class="game-details-section">
+            <div class="Grid">
+              <div class="Grid-cell game-detail-attribute">
+                <h6>Genre:</h6>
+                Action
+              </div>
+              <div class="Grid-cell game-detail-attribute">
+                <h6>Release date:</h6>
+                Jan 15, 2014
+              </div>
+              <div class="Grid-cell game-detail-attribute">
+                <h6>Browser support:</h6>
+                <ul>
+                  <li class="game-detail-value"><i class="icon-firefox"></i> Firefox 6+</li>
+                  <li class="game-detail-value"><i class="icon-chrome"></i> Chrome 6+</li>
+                </ul>
+              </div>
+              <div class="Grid-cell game-detail-attribute">
+                <h6>Players:</h6>
+                1 &nbsp; <i class="icon-controller"></i>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="unit one-of-three"/>
+        <div class="Grid-cell game-details-container-right">
+          <img class="game-media selected" src="/media/img/new-game-details/screenshots/1.png">
+          <img class="game-media" src="/media/img/new-game-details/screenshots/2.png">
+          <img class="game-media" src="/media/img/new-game-details/screenshots/3.png">
+          <img class="game-media" src="/media/img/new-game-details/screenshots/4.png">
+          <!-- {% if game.screenshots %}
+            {% for screenshot in game.screenshots %}
+              <img class="game-media"
+                {% if screenshot.width %} width="{{ screenshot.width }}"{% endif %}
+                {% if screenshot.height %} height="{{ screenshot.height }}"{% endif %}
+                src="{{ screenshot }}">
+            {% endfor %}
+          {% endif %} -->
         </div>
       </div>
     </div>

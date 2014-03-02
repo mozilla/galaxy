@@ -21,27 +21,12 @@
             top: 0;
             width: 100%;
         }
-
-        h1 {
-            color: #eff;
-            line-height: 1;
-        }
     }
 
     .game-masthead {
         min-height: 100px;
         position: relative;
         z-index: 2;
-    }
-
-    .game-icon {
-        background: no-repeat;
-        background-size: contain;
-        height: 64px;
-        left: 35px;
-        position: absolute;
-        top: 35px;
-        width: 64px;
     }
 
     .game-release-info {
@@ -166,6 +151,71 @@
             }
         }
     }
+    .game-details-container {
+        background-color: rgba(255, 255, 255, 0.4);
+        padding-top: 20px;
+
+        .game-details-container-left,
+        .game-details-container-right  {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .game-media {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .game-media.selected {
+            outline: 5px solid rgba(255, 255, 255, 0.5);
+        }
+        .game-current-media {
+            margin-bottom: 20px;
+        }
+        .game-details-section {
+            margin-bottom: 20px;
+        }
+        .game-title {
+            color: #fff;
+            font-size: 48px;
+        }
+        .game-developer {
+            color: #cfcfcf;
+            font-size: 18px;
+            font-weight: 300;
+        }
+        .play-button {
+            border: 1px solid #467285;
+            background: #33e0c2;
+            color: #fff;
+            float: right;
+            font-size: 16px;
+            padding: 10px 40px;
+            text-shadow: none;
+        }
+        .game-description {
+            color: #cfcfcf;
+            font-size: 12px;
+        }
+        
+        .game-detail-attribute {
+            color: #fff;
+            font-size: 0.8em;
+            font-weight: 500;
+            margin-bottom: 0;
+            
+            h6 {
+                color: #b1b1b1;
+                font-size: 0.8em;
+                font-weight: 300;
+                margin-bottom: 5px;
+            }
+
+            ul {
+                list-style: none;
+            }
+        }
+
+    }
+
 }
 
 .toggly-section {
