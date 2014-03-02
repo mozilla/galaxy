@@ -26,7 +26,7 @@ define('forms', ['jquery', 'z'], function($, z) {
             var $this = $(this);
             $this.toggleClass('focused', !!$this.val());
             // So we can target .empty (because :empty doesn't apply to attributes).
-            $this.toggleClass('empty', !!!$this.val());
+            $this.toggleClass('empty', !$this.val());
         });
     }).on('focus', 'input[type=url]', function(e) {
         console.log(e.type);

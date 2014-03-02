@@ -1,6 +1,6 @@
 define('views/submit',
-       ['dropzone', 'l10n', 'notification', 'requests', 'routes_api', 'storage', 'urls', 'utils', 'z'],
-       function(dropzone, l10n, notification, requests, routes_api, storage, urls, utils, z) {
+       ['dropzone', 'l10n', 'notification', 'requests', 'routes_api', 'storage', 'urls', 'underscore', 'utils', 'z'],
+       function(dropzone, l10n, notification, requests, routes_api, storage, urls, _, utils, z) {
 
     var gettext = l10n.gettext;
 
@@ -65,13 +65,10 @@ define('views/submit',
         var $this = $(this);
 
         function stringifyURLs(type) {
-            var inputs = $this.find('.' + type + '.media input');
-            inputs = $.map(inputs, function(e) { 
-                return $(e).val(); 
-            });
-            return $(inputs).filter(function(e) { 
-                return e !== ''; 
-            });
+            var inputs = $this.find('.' + type + '.media input').get();
+            return inputs.map(function(e) {
+                return $(e).val();
+            }).filter(_.identity);
         }
 
         var screenshots = stringifyURLs('screenshots');
@@ -84,9 +81,9 @@ define('views/submit',
             description: $this.find('[name=description]').val(),
             privacy_policy_url: $this.find('[name=privacy_policy_url]').val(),
             genre: $this.find('[name=genre]:checked').val(),
-            icons: $this.find('.icon.media input').val(),
-            screenshots: utils.urlencode(JSON.stringify(screenshots)),
-            videos: utils.urlencode(JSON.stringify(videos))
+            icon: $this.find('.icon.media input').val(),
+            screenshots: JSON.stringify(screenshots),
+            videos: JSON.stringify(videos)
         };
         if ($this.data('formtype') === 'submit') {
             submitGame(data);
