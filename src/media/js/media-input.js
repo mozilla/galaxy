@@ -2,7 +2,7 @@ define('media-input', ['jquery', 'z'], function($, z) {
     
     function createInput($section) {
         $section.append($('<input>', { 
-            type: 'text', 
+            type: 'url', 
             placeholder: $section.data('placeholder'),
             pattern: 'https?://.*'
         }));

@@ -106,10 +106,7 @@
             </p>
           </div>
           <div class="fallback" data-placeholder="{{ _('Icon URL') }}">
-            <!-- <input type="file" name="icon"> -->
-            {% if game.icon %}
-              <input type="url" value="{{ game.icon }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
-            {% endif %}
+            <input type="url" value="{{ game.icon }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
           </div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
@@ -125,11 +122,9 @@
             </p>
           </div>
           <div class="fallback" data-placeholder="{{ _('Image URL') }}">
-            {% if game.screenshots %}
-              {% for screenshot in game.screenshots %}
-                <input type="url" value="{{ screenshot }}" placeholder="{{ _('Image URL') }}" pattern="https?://.*">
-              {% endfor %}
-            {% endif %}
+            {% for screenshot in game.screenshots %}
+              <input type="url" value="{{ screenshot }}" placeholder="{{ _('Image URL') }}" pattern="https?://.*">
+            {% endfor %}
           </div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
