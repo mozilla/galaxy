@@ -1,7 +1,5 @@
 @import 'lib';
 
-$btn-height = 20px;
-$spinner-height = 18px;
 [data-page-type~="review"] .page {
     .review-table {
         border-collapse: separate; 
@@ -23,17 +21,6 @@ $spinner-height = 18px;
             text-align: right;
             .btn {
                 margin-left: 10px;
-                position: relative;
-                .spinner {
-                    background-size: $btn-height;
-                    height: $btn-height;
-                    left: 50%;
-                    margin-left: -($spinner-height / 2);
-                    margin-top: -($spinner-height / 2);
-                    position: absolute;
-                    top: 50%;
-                    width: $btn-height;
-                }
             }
         }
     }

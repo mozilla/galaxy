@@ -6,10 +6,8 @@ define('views/review',
 
     function submitReview($game, $button, accepted) {
         function setSpinning(spinning) {
-            // $button[spinning ? 'addClass' : 'removeClass']('spinner');
-            $button.children('.btn-text').css({
-                visibility: spinning ? 'hidden' : 'visible'
-            });
+            var newVisibility = spinning ? 'hidden' : 'visible';
+            $button.children('.btn-text').css('visibility', newVisibility);
             if (spinning) {
                 $button.append('<div class="spinner"></div>');
             } else {
@@ -56,11 +54,13 @@ define('views/review',
     }
 
     z.body.on('click', '.review-accept', function() {
-        var $game = $(this).closest('[data-game-slug]');
-        submitReview($game, $(this), true);
+        var $this = $(this);
+        var $game = $this.closest('[data-game-slug]');
+        submitReview($game, $this, true);
     }).on('click', '.review-reject', function() {
-        var $game = $(this).closest('[data-game-slug]');
-        submitReview($game, $(this), false);
+        var $this = $(this);
+        var $game = $this.closest('[data-game-slug]');
+        submitReview($game, $this, false);
     });
 
     return function(builder, args) {
