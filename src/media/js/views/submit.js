@@ -14,9 +14,9 @@ define('views/submit',
     }
 
     function editGame(data) {
-        requests.put(urls.api.url('game.edit'), data, {
-            slug: data.slug
-        }).done(function(data) {
+        var slug = data.slug;
+        data = {data: JSON.stringify(data)};
+        requests.put(urls.api.url('game.edit', [slug]), data).done(function(data) {
             notification.notification({message: gettext('Game details updated')});
             require('views').reload();
         }).fail(function(data) {

@@ -4,7 +4,7 @@ define('routes_api', [], function() {
         'login': '/user/login',
         'game': '/game/{0}/detail',
         'game.submit': '/game/submit',
-        'game.edit': '/game/edit',
+        'game.edit': '/game/{0}/edit',
         'game.submit.media': '/game/submit/media',
         'user.search': '/user/search',
         'user.friends': '/user/friends',
