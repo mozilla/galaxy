@@ -1,5 +1,7 @@
 # galaxy
 
+[![Stories in Ready](https://badge.waffle.io/cvan/galaxy.png?label=ready&title=Ready)](https://waffle.io/cvan/galaxy)
+
 To infinity and beyond.
 
 
