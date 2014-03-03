@@ -106,7 +106,7 @@
             </p>
           </div>
           <div class="fallback" data-placeholder="{{ _('Icon URL') }}">
-            <!-- <input type="file" name="icon"> -->
+            <input type="url" value="{{ game.icon }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
           </div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
@@ -121,7 +121,11 @@
               {{ _("Screenshots will be shown on your game detail page. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
             </p>
           </div>
-          <div class="fallback" data-placeholder="{{ _('Image URL') }}"></div>
+          <div class="fallback" data-placeholder="{{ _('Image URL') }}">
+            {% for screenshot in game.screenshots %}
+              <input type="url" value="{{ screenshot }}" placeholder="{{ _('Image URL') }}" pattern="https?://.*">
+            {% endfor %}
+          </div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
       </div>
@@ -132,10 +136,16 @@
           <div class="l">{{ _('Videos') }}
             <span class="req opt" data-required="{{ _('Optional') }}"></span>
             <p class="form-help">
-              {{ _("Videos will be shown on your game detail page. Please use Youtube and/or Vimeo hosted videos only.") }}
+              {{ _("Videos will be shown on your game detail page. Please use YouTube and/or Vimeo hosted videos only.") }}
             </p>
           </div>
-          <div class="fallback" data-placeholder="{{ _('YouTube or Vimeo URL') }}"></div>
+          <div class="fallback" data-placeholder="{{ _('YouTube or Vimeo URL') }}">
+            {% if game.videos %}
+              {% for video in game.videos %}
+                <input type="url" value="{{ video }}" placeholder="{{ _('YouTube or Vimeo URL') }}" pattern="https?://.*">
+              {% endfor %}
+            {% endif %}
+          </div>
         </label>
         <div class="file-size"></div><div class="file-preview"></div>
       </div>

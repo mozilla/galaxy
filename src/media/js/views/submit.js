@@ -1,6 +1,6 @@
 define('views/submit',
-       ['dropzone', 'l10n', 'notification', 'requests', 'routes_api', 'storage', 'urls', 'utils', 'z'],
-       function(dropzone, l10n, notification, requests, routes_api, storage, urls, utils, z) {
+       ['dropzone', 'l10n', 'notification', 'requests', 'routes_api', 'storage', 'urls', 'underscore', 'utils', 'z'],
+       function(dropzone, l10n, notification, requests, routes_api, storage, urls, _, utils, z) {
 
     var gettext = l10n.gettext;
 
@@ -63,13 +63,27 @@ define('views/submit',
     }).on('submit', '.game-form', function(e) {
         e.preventDefault();
         var $this = $(this);
+
+        function stringifyURLs(type) {
+            var inputs = $this.find('.' + type + '.media input').get();
+            return inputs.map(function(e) {
+                return $(e).val();
+            }).filter(_.identity);
+        }
+
+        var screenshots = stringifyURLs('screenshots');
+        var videos = stringifyURLs('videos');
+        
         var data = {
             name: $this.find('[name=name]').val(),
             slug: $this.find('[name=slug]').val(),
             app_url: $this.find('[name=app_url]').val(),
             description: $this.find('[name=description]').val(),
-            privacy_url: $this.find('[name=privacy_policy_url]').val(),
-            genre: $this.find('[name=genre]:checked').val()
+            privacy_policy_url: $this.find('[name=privacy_policy_url]').val(),
+            genre: $this.find('[name=genre]:checked').val(),
+            icon: $this.find('.icon.media input').val(),
+            screenshots: JSON.stringify(screenshots),
+            videos: JSON.stringify(videos)
         };
         if ($this.data('formtype') === 'submit') {
             submitGame(data);
