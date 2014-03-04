@@ -1,4 +1,4 @@
-define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
+define('dates', ['underscore', 'l10n'], function(_, l10n) {
     var ngettext = l10n.ngettext;
 
     var unitFormatters = {
@@ -37,10 +37,9 @@ define('dates', ['underscore', 'format', 'l10n'], function(_, format, l10n) {
                 'y': years
     */
     function relativeDateString(date, opts) {
-        opts = _.defaults(opts || {}, {
-            minUnit: 's',
-            referenceDate: Date.now()
-        });
+        opts = opts || {};
+        opts.minUnit = opts.minUnit || 's';
+        opts.referenceDate = opts.referenceDate || Date.now();
 
         // TODO: Mark negative diffs so they can be handled differently
         // in the future (ie. adding an 'ago' vs 'from now' suffix)

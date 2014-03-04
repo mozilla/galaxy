@@ -28,14 +28,20 @@ define('views/review',
 
         function reviewSubmitted(success) {
             var gameTitle = $game.data('gameTitle');
-            var message, params;
+            var message;
+            var params = {game: gameTitle};
             if (success) {
-                var status = accepted ? gettext('approved') : gettext('rejected');
-                params = {game: gameTitle, status: status};
-                message = gettext('{game} was successfully {status}', params);
+                if (accepted) {
+                    message = gettext('Approved game: {game}', params);
+                } else {
+                    message = gettext('Rejected game: {game}', params);
+                }
             } else {
-                params = {game: gameTitle, statusVerb: statusVerb};
-                message = gettext('Failed to {statusVerb} {game}', params);
+                if (accepted) {
+                    message = gettext('Failed to accept game: {game}', params);
+                } else {
+                    message = gettext('Failed to reject game: {game}', params);
+                }
             }
             notification.notification({message: message});
 
