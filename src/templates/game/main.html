@@ -32,10 +32,13 @@
             <div class="game-buttons-section">
               <button data-app-url="{{ game.app_url }}" class="btn play-button">{{ _('Play') }}</button>
               <div>
-                <a class="btn btn-blue" href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}" target="_blank">
-                  {{ _('Share on Facebook') }}
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}" target="_blank">
+                  <i class="icon-facebook icon-medium"></i> 
                 </a>
-                <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-size="large" data-text="Check this game out: {{ game.name }}!">Tweet</a>
+                <a href="https://twitter.com/intent/tweet?source=webclient&text=Check+this+game+out:+{{ game.name }}+{{ page_url }}" target="_blank">
+                  <i class="icon-twitter icon-medium"></i> 
+                </a>
+                <!-- <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-size="large" data-text="Check this game out: {{ game.name }}!">Tweet</a> -->
               </div>
             </div>
             <h1 class="game-title">Bastion</h1>

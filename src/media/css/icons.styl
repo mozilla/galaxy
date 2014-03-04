@@ -1,14 +1,22 @@
+@import 'lib';
+
 [class^="icon-"],
 [class*=" icon-"] {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: $small;
+    height: $small;
     margin-top: 1px;
     *margin-right: .3em;
-    line-height: 18px;
+    line-height: $small;
     vertical-align: text-top;
     background-repeat: no-repeat;
-    background-size: 18px 18px;
+    background-size: $small $small;
+}
+
+.icon-medium {
+    background-size: $medium $medium;
+    height: $medium;
+    width: $medium;
 }
 
 .icon-chrome {
@@ -19,6 +27,14 @@
     background-image: url('../img/new-game-details/icon-controller.png');
 }
 
+.icon-facebook {
+    background-image: url('../img/new-game-details/icon-facebook.png');
+}
+
 .icon-firefox {
     background-image: url('../img/new-game-details/icon-firefox.png');
+}
+
+.icon-twitter {
+    background-image: url('../img/new-game-details/icon-twitter.png');
 }
