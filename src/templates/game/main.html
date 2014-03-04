@@ -29,7 +29,15 @@
             <iframe width="480" height="300" src="//www.youtube.com/embed/mX48y24t9iU" frameborder="0" allowfullscreen></iframe>
           </div>
           <div class="game-details-section">
-            <button data-app-url="{{ game.app_url }}" class="btn play-button">{{ _('Play') }}</button>
+            <div class="game-buttons-section">
+              <button data-app-url="{{ game.app_url }}" class="btn play-button">{{ _('Play') }}</button>
+              <div>
+                <a class="btn btn-blue" href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}" target="_blank">
+                  {{ _('Share on Facebook') }}
+                </a>
+                <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-size="large" data-text="Check this game out: {{ game.name }}!">Tweet</a>
+              </div>
+            </div>
             <h1 class="game-title">Bastion</h1>
             <p class="game-developer">By Supergiant Games</p>
           </div>
