@@ -35,7 +35,7 @@
     {% empty %}
       {{ emptyReview() }}
     {% except %}
-      {% if error == 401 %}
+      {% if error == 403 %}
         {{ _('You are not authorized to access this page.') }}
       {% else %}
         {{ _('Oh no! An error occurred.') }}
