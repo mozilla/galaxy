@@ -69,7 +69,7 @@ define('views/leaderboard',
         var slug = args[0];
         builder.start('game/leaderboard.html', {slug: slug});
 
-        builder.z('type', 'leaf');
+        builder.z('type', 'leaf board');
         builder.z('title', gettext('Leaderboards'));
     }
 });
