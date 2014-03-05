@@ -16,9 +16,9 @@ define('media-input', ['jquery', 'z'], function($, z) {
                 createInput($this);
             }
         });
-    }).on('input', '.screenshots input[type=text], .videos input[type=text]', function(e) {
+    }).on('input', '.screenshots input[type=url], .videos input[type=url]', function(e) {
         var $input = $(e.target);
-        var $allInputs = $input.parent().children('input[type=text]');
+        var $allInputs = $input.parent().children('input[type=url]');
         var $emptyInputs = $allInputs.filter(function() {
             return !$(this).val();
         });
