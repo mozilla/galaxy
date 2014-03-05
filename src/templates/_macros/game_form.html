@@ -113,10 +113,12 @@
       </div>
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
-          <div class="icon media form-field">
+          <div class="icons media form-field">
             <label>
               <div class="fallback" data-placeholder="{{ _('Icon URL') }}">
-                <input type="url" value="{{ game.icon }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
+                {% for icon in game.icons %}
+                  <input type="url" value="{{ icon }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
+                {% endfor %}
               </div>
             </label>
             <div class="file-size"></div><div class="file-preview"></div>
