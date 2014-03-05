@@ -190,6 +190,22 @@ main {
     }
 }
 
+.btn {
+    position: relative;
+    .spinner {
+        btn-spinner-size(20px);
+        left: 50%;
+        position: absolute;
+        top: 50%;
+    }
+    &.btn-big .spinner {
+        btn-spinner-size(35px);
+    }
+    &.btn-small .spinner {
+        btn-spinner-size(15px);
+    }
+}
+
 .badge {
     color: #fff;
     display: inline-block;

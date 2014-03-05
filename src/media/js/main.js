@@ -3,14 +3,14 @@ console.log('Sample Commonplace App');
 require.config({
     enforceDefine: true,
     paths: {
+        'dropzone': 'lib/dropzone',
+        'format': 'lib/format',
         'jquery': 'lib/jquery-2.0.2',
-        'underscore': 'lib/underscore',
         'nunjucks': 'lib/nunjucks',
         'nunjucks.compat': 'lib/nunjucks.compat',
-        'templates': '../../templates',
         'settings': ['settings_local', 'settings'],
-        'format': 'lib/format',
-        'dropzone': 'lib/dropzone'
+        'templates': '../../templates',
+        'underscore': 'lib/underscore'
     }
 });
 
@@ -22,6 +22,7 @@ require.config({
             'underscore',
             'helpers',  // Must come before mostly everything else.
             'capabilities',
+            'dates',
             'forms',
             'l10n',
             'log',
@@ -55,6 +56,12 @@ require.config({
                 return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
             }
             return addSlashes(obj);
+        };
+        var dateslib = require('dates');
+        filters.relativeDate = function(date) {
+            return dateslib.relativeDateString(new Date(date), {
+                minUnit: 'm',
+            });
         };
 
         nunjucks.env.dev = true;
