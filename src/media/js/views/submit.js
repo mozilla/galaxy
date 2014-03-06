@@ -72,6 +72,7 @@ define('views/submit',
             }).filter(_.identity);
         }
 
+        var icons = stringifyURLs('icons');
         var screenshots = stringifyURLs('screenshots');
         var videos = stringifyURLs('videos');
         
@@ -82,7 +83,7 @@ define('views/submit',
             description: $this.find('[name=description]').val(),
             privacy_policy_url: $this.find('[name=privacy_policy_url]').val(),
             genre: $this.find('[name=genre]:checked').val(),
-            icon: $this.find('.icon.media input').val(),
+            icons: JSON.stringify(icons),
             screenshots: JSON.stringify(screenshots),
             videos: JSON.stringify(videos)
         };

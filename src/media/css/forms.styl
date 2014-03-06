@@ -238,7 +238,7 @@ input.input-search, input[type="search"] {
 }
 
 button, input, select, textarea {
-    font: 100% $open-stack;
+    font: 100% $sourceFontFamily;
     margin: 0;
     max-width: 100%;
     vertical-align: middle;
@@ -319,7 +319,7 @@ textarea {
     min-height: 50px;
 }
 
-form.grid {
+form {
     .span-grid {
         margin-top: 15px;
     }
@@ -344,6 +344,9 @@ form.grid {
     .opt:after {
         border: 2px solid #eee;
         color: #999;
+    }
+    .grid > .grid-flex-grow-two {
+        padding-right: 50px;
     }
     input.large ~ .req:after {
         bottom: 10px;
@@ -411,7 +414,7 @@ form.grid {
         padding: 5px;
     }
     input[name=slug] {
-        max-width: 397px;
+        max-width: 514px;
     }
 
     input[type=radio] {
@@ -438,7 +441,7 @@ form.grid {
         width: 200px;
     }
 
-    .icon .file-preview {
+    .icons .file-preview {
         height: 128px;
         width: 128px;
     }

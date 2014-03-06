@@ -11,14 +11,11 @@ define('media-input', ['jquery', 'z'], function($, z) {
     z.page.on('loaded', function() {
         $('.fallback').each(function() {
             var $this = $(this);
-            if (!$this.closest('.icon').length || !$this.children().length) {
-                // Do not create input field if icon section already has icon value (in edit page).
-                createInput($this);
-            }
+            createInput($this);            
         });
-    }).on('input', '.screenshots input[type=text], .videos input[type=text]', function(e) {
+    }).on('input', '.media input', function(e) {
         var $input = $(e.target);
-        var $allInputs = $input.parent().children('input[type=text]');
+        var $allInputs = $input.parent().children('input[type=url]');
         var $emptyInputs = $allInputs.filter(function() {
             return !$(this).val();
         });

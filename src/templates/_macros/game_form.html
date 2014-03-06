@@ -1,153 +1,194 @@
 {% macro gameForm(game) %}
-	<form class="game-form grid" method="post" data-required="{{ _('Required') }}" data-formtype="{{'edit' if game else 'submit'}}">
-    <div class="unit two-of-three">
-      <div class="content form-field">
-        <label>
-          <input type="text" class="large" name="name" placeholder="{{ _('Enter game title here') }}" value="{{ game.name|translate(game) }}" required>
-          <span class="l">{{ _('Name') }}</span>
-          <span class="req" data-required="{{ _('Required') }}"></span>
-        </label>
-      </div>
-    </div>
-    <div class="unit one-of-three">
-      <div class="content form-help">
-        {{ _('Your game&rsquo;s name, which is shown on all listings in Galaxy.') }}
-      </div>
-    </div>
-
-    <div class="unit two-of-three">
-      <div class="content form-field">
-        <label>
-          <span class="input-prepend">https://galaxy.firefox.com/game/</span>
-          <input type="text" name="slug" placeholder="{{ _('Enter game listing slug here') }}" value="{{ game.slug }}" required>
-          <span class="l">{{ _('Game slug') }}</span>
-          <span class="req" data-required="{{ _('Required') }}"></span>
-        </label>
-      </div>
-    </div>
-    <div class="unit one-of-three">
-      <div class="content form-help">
-        {{ _('Select a unique URL for your game detail page. By default we generate this from your game title.') }}
-      </div>
-    </div>
-
-    <div class="unit two-of-three">
-      <div class="content form-field">
-        <label>
-          <input type="url" name="app_url" pattern="https?://.*" placeholder="{{ _('Enter game URL here') }}" value="{{ game.app_url }}" required>
-          <span class="l">{{ _('Game URL') }}</span>
-          <span class="req" data-required="{{ _('Required') }}"></span>
-        </label>
-      </div>
-    </div>
-    <div class="unit one-of-three">
-      <div class="content form-help">
-        {{ _('The URL to your game hosted on your servers.') }}
-      </div>
-    </div>
-
-    <div class="unit two-of-three">
-      <div class="content form-field">
-        <label>
-          <textarea name="description" placeholder="{{ _('Enter game description here') }}" required>{{ game.description }}</textarea>
-          <span class="l">{{ _('Description') }}</span>
-          <span class="req" data-required="{{ _('Required') }}"></span>
-        </label>
-      </div>
-    </div>
-    <div class="unit one-of-three">
-      <div class="content form-help">
-        {{ _('Your game&rsquo;s description should be concise and capture the essence of what it does. It will be shown on all listings, and on your Galaxy game detail page.') }}
-      </div>
-    </div>
-
-    <div class="unit two-of-three">
-      <div class="content form-field">
-        <label>
-          <input type="url" name="privacy_policy_url" pattern="https?://.*" placeholder="{{ _('Enter privacy policy URL here') }}" value="{{ game.privacy_policy_url }}" class="optional">
-          <span class="l">{{ _('Privacy Policy URL') }}</span>
-          <span class="req opt" data-required="{{ _('Optional') }}"></span>
-        </label>
-      </div>
-    </div>
-    <div class="unit one-of-three">
-      <div class="content form-help">
-        {{ _('Provide a URL to your privacy policy explaining what data is transmitted from a user&rsquo;s computer and how it is used. You can generate one at <a href="{iubenda_url}" target="_blank">iubenda.com</a>.', iubenda_url='https://www.iubenda.com/') }}
-      </div>
-    </div>
-
-    <div class="unit two-of-three">
-      <div class="content form-field">
-        <div class="l">{{ _('Genre') }}</div>
-        {% for slug, name in settings.genres.items() %}
-            <label class="choice"><input type="radio" name="genre"{{ ' checked' if slug == game.genre }} required value="{{ slug }}"> {{ name }}</label>
-        {% endfor %}
-        <span class="req" data-required="{{ _('Required') }}"></span>
-      </div>
-    </div>
-    <div class="unit one-of-three">
-      <div class="content form-help">
-        {{ _('Genres are used to classify games in Galaxy. Choose the genre that best fits your game.') }}
-      </div>
-    </div>
-
-    <div class="unit span-grid">
-      <div class="content">
-        <h2>{{ _('Media') }}</h2>
-      </div>
-    </div>
-    <div class="unit one-of-three">
-      <div class="icon media content form-field">
-        <label>
-          <div class="l">{{ _('Icon') }}
+	<form class="game-form" method="post" data-required="{{ _('Required') }}" data-formtype="{{'edit' if game else 'submit'}}">
+    <div class="grid content">
+      <div class="grid-cell grid-flex-grow-two">
+        <div class="form-field">
+          <label>
+            <input type="text" class="large" name="name" placeholder="{{ _('Enter game title here') }}" value="{{ game.name|translate(game) }}" required>
+            <span class="l">{{ _('Name') }}</span>
             <span class="req" data-required="{{ _('Required') }}"></span>
-            <p class="form-help">
-              {{ _("The icon will be shown on all listings in Galaxy. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
-            </p>
-          </div>
-          <div class="fallback" data-placeholder="{{ _('Icon URL') }}">
-            <input type="url" value="{{ game.icon }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
-          </div>
-        </label>
-        <div class="file-size"></div><div class="file-preview"></div>
+          </label>
+        </div>
+      </div>
+      <div class="grid-cell">
+        <div class="form-help">
+          {{ _('Your game&rsquo;s name, which is shown on all listings in Galaxy.') }}
+        </div>
       </div>
     </div>
-    <div class="unit one-of-three">
-      <div class="screenshots media content form-field">
-        <label>
-          <div class="l">{{ _('Screenshots') }}
+
+    <div class="grid content">
+      <div class="grid-cell grid-flex-grow-two">
+        <div class="form-field">
+          <label>
+            <span class="input-prepend">https://galaxy.firefox.com/game/</span>
+            <input type="text" name="slug" placeholder="{{ _('Enter game listing slug here') }}" value="{{ game.slug }}" required>
+            <span class="l">{{ _('Game slug') }}</span>
             <span class="req" data-required="{{ _('Required') }}"></span>
-            <p class="form-help">
-              {{ _("Screenshots will be shown on your game detail page. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
-            </p>
-          </div>
-          <div class="fallback" data-placeholder="{{ _('Image URL') }}">
-            {% for screenshot in game.screenshots %}
-              <input type="url" value="{{ screenshot }}" placeholder="{{ _('Image URL') }}" pattern="https?://.*">
-            {% endfor %}
-          </div>
-        </label>
-        <div class="file-size"></div><div class="file-preview"></div>
+          </label>
+        </div>
+      </div>
+      <div class="grid-cell">
+        <div class="form-help">
+          {{ _('Select a unique URL for your game detail page. By default we generate this from your game title.') }}
+        </div>
       </div>
     </div>
-    <div class="unit one-of-three">
-      <div class="videos media content form-field">
-        <label>
-          <div class="l">{{ _('Videos') }}
+
+    <div class="grid content">
+      <div class="grid-cell grid-flex-grow-two">
+        <div class="form-field">
+          <label>
+            <input type="url" name="app_url" pattern="https?://.*" placeholder="{{ _('Enter game URL here') }}" value="{{ game.app_url }}" required>
+            <span class="l">{{ _('Game URL') }}</span>
+            <span class="req" data-required="{{ _('Required') }}"></span>
+          </label>
+        </div>
+      </div>
+      <div class="grid-cell">
+        <div class="form-help">
+          {{ _('The URL to your game hosted on your servers.') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="grid content">
+      <div class="grid-cell grid-flex-grow-two">
+        <div class="form-field">
+          <label>
+            <textarea name="description" placeholder="{{ _('Enter game description here') }}" required>{{ game.description }}</textarea>
+            <span class="l">{{ _('Description') }}</span>
+            <span class="req" data-required="{{ _('Required') }}"></span>
+          </label>
+        </div>
+      </div>
+      <div class="grid-cell">
+        <div class="form-help">
+          {{ _('Your game&rsquo;s description should be concise and capture the essence of what it does. It will be shown on all listings, and on your Galaxy game detail page.') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="grid content">
+      <div class="grid-cell grid-flex-grow-two">
+        <div class="form-field">
+          <label>
+            <input type="url" name="privacy_policy_url" pattern="https?://.*" placeholder="{{ _('Enter privacy policy URL here') }}" value="{{ game.privacy_policy_url }}" class="optional">
+            <span class="l">{{ _('Privacy Policy URL') }}</span>
             <span class="req opt" data-required="{{ _('Optional') }}"></span>
-            <p class="form-help">
-              {{ _("Videos will be shown on your game detail page. Please use YouTube and/or Vimeo hosted videos only.") }}
-            </p>
+          </label>
+        </div>
+      </div>
+      <div class="grid-cell">
+        <div class="form-help">
+          {{ _('Provide a URL to your privacy policy explaining what data is transmitted from a user&rsquo;s computer and how it is used. You can generate one at <a href="{iubenda_url}" target="_blank">iubenda.com</a>.', iubenda_url='https://www.iubenda.com/') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="grid content">
+      <div class="grid-cell grid-flex-grow-two">
+        <div class="l">{{ _('Genre') }}</div>
+        <div class="form-field">
+          {% for slug, name in settings.genres.items() %}
+              <label class="choice"><input type="radio" name="genre"{{ ' checked' if slug == game.genre }} required value="{{ slug }}"> {{ name }}</label>
+          {% endfor %}
+          <span class="req" data-required="{{ _('Required') }}"></span>
+        </div>
+      </div>
+      <div class="grid-cell">
+        <div class="form-help">
+          {{ _('Genres are used to classify games in Galaxy.Choose the genre that best fits your game.') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="grid">
+        <div class="grid-cell grid-flex-grow-two">
+          <div class="l">{{ _('Icon') }}</div>
+            <span class="req" data-required="{{ _('Required') }}"></span>
+        </div>
+        <div class="grid-cell"></div>
+      </div>
+      <div class="grid">
+        <div class="grid-cell grid-flex-grow-two">
+          <div class="icons media form-field">
+            <label>
+              <div class="fallback" data-placeholder="{{ _('Icon URL') }}">
+                {% for icon in game.icons %}
+                  <input type="url" value="{{ icon }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
+                {% endfor %}
+              </div>
+            </label>
+            <div class="file-size"></div><div class="file-preview"></div>
           </div>
-          <div class="fallback" data-placeholder="{{ _('YouTube or Vimeo URL') }}">
-            {% if game.videos %}
-              {% for video in game.videos %}
-                <input type="url" value="{{ video }}" placeholder="{{ _('YouTube or Vimeo URL') }}" pattern="https?://.*">
-              {% endfor %}
-            {% endif %}
+        </div>
+        <div class="grid-cell">
+          <p class="form-help">
+            {{ _("The icon will be shown on all listings in Galaxy.<br/>Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="grid">
+        <div class="grid-cell grid-flex-grow-two">
+          <div class="l">{{ _('Screenshots') }}</div>
+          <span class="req" data-required="{{ _('Required') }}"></span>
+        </div>
+        <div class="grid-cell"></div>
+      </div>
+      <div class="grid">
+        <div class="grid-cell grid-flex-grow-two">
+          <div class="screenshots media form-field">
+            <label>
+              <div class="fallback" data-placeholder="{{ _('Image URL') }}">
+                {% for screenshot in game.screenshots %}
+                  <input type="url" value="{{ screenshot }}" placeholder="{{ _('Image URL') }}" pattern="https?://.*">
+                {% endfor %}
+              </div>
+            </label>
+            <div class="file-size"></div><div class="file-preview"></div>
           </div>
-        </label>
-        <div class="file-size"></div><div class="file-preview"></div>
+        </div>
+        <div class="grid-cell">
+          <p class="form-help">
+            {{ _("Screenshots will be shown on your game detail page. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="grid">
+        <div class="grid-cell grid-flex-grow-two">
+          <div class="l">{{ _('Videos') }}</div>
+          <span class="req opt" data-required="{{ _('Optional') }}"></span>
+        </div>
+        <div class="grid-cell"></div>
+      </div>
+      <div class="grid">
+        <div class="grid-cell grid-flex-grow-two">
+          <div class="videos media form-field">
+            <label>
+              <div class="fallback" data-placeholder="{{ _('YouTube or Vimeo URL') }}">
+                {% if game.videos %}
+                  {% for video in game.videos %}
+                    <input type="url" value="{{ video }}" placeholder="{{ _('YouTube or Vimeo URL') }}" pattern="https?://.*">
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </label>
+            <div class="file-size"></div><div class="file-preview"></div>
+          </div>
+        </div>
+        <div class="grid-cell">
+          <p class="form-help">
+            {{ _("Videos will be shown on your game detail page. Please use YouTube and/or Vimeo hosted videos only.") }}
+          </p>
+        </div>
       </div>
     </div>
 
