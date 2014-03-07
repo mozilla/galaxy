@@ -1,0 +1,27 @@
+@import 'lib';
+
+[data-page-type~="developer-dashboard"] .page {
+    .myGames-table {
+        border-collapse: separate; 
+        width: 100%;
+        
+        thead tr th {
+            text-align: left;
+            padding-bottom: 10px;
+        }
+
+        tbody td {
+            padding: 5px 0;
+            &:not(:last-child) {
+                padding-right: 10px;
+            }
+        }
+
+        .buttons {
+            text-align: right;
+            .btn {
+                margin-left: 10px;
+            }
+        }
+    }
+}
