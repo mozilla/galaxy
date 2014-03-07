@@ -39,7 +39,9 @@ body.overlayed {
     z-index: 60;
     .form-modal h2 {
     	color: #000;
-    	font-size: 16px;
+    	font-size: 12px;
+        font-weight: 500;
+        line-height: 12px;
     	margin-bottom: 5px;
     }
     &.show {
@@ -68,6 +70,16 @@ body.overlayed {
     button.alt {
         box-shadow: none;
     }
+    .form-close {
+        color: #666;
+        font-size: 24px;
+        position: absolute;
+        right: 10px;
+        top: 0;
+        &:hover {
+            color: #999;
+        }
+    }
 }
 
 @media $at-least-desktop {
@@ -76,12 +88,8 @@ body.overlayed {
         margin-left: -265px;
         top: 160px;
         width: 531px;
-        h2 {
-            color: $dark-gray;
-            font-size: 15px;
-            font-weight: 500;
-        }
         .form-footer {
+            margin-top: 10px;
             text-align: left;
         }
         &.confirmation {

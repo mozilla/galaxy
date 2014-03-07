@@ -37,7 +37,7 @@ define('overlay', ['keys', 'l10n', 'utils', 'z'], function(keys, l10n, utils, z)
     }).on('decloak', function() {
         z.body.addClass('overlayed');
         $cloak.addClass('show');
-    }).on('click', '.modal .btn-cancel, .modal .cancel', utils._pd(dismiss));
+    }).on('click', '.modal .form-close', utils._pd(dismiss));
 
     z.win.on('navigating', dismiss);
 });
