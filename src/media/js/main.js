@@ -10,7 +10,8 @@ require.config({
         'nunjucks.compat': 'lib/nunjucks.compat',
         'settings': ['settings_local', 'settings'],
         'templates': '../../templates',
-        'underscore': 'lib/underscore'
+        'underscore': 'lib/underscore',
+        'lunr': 'lib/lunr'
     }
 });
 
@@ -27,6 +28,7 @@ require.config({
             'l10n',
             'log',
             'login',
+            'lunr',
             'media-input',
             'navigation',
             'templates',

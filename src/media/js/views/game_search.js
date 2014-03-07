@@ -1,17 +1,46 @@
-define('views/game_search', ['requests', 'urls'], function(requests, urls) {
 
-	/* Load game data on first request */
-	requests.get(urls.api.url('game.list')).done(function (data) {
-		// TODO: Compress results
-		// TODO: Cache results
-		// TODO: Index results
-	});
+define('views/game_search', ['search'], function(search) {
+
+	var indexed = index();
+
+	function index() {
+		var promise = new Promise(function(resolve, reject) {
+			addEventListener('message', function(e) {
+				switch (e.data.type) {
+					case 'indexed':
+						return resolve();
+					case 'results':
+						// TODO: Render results
+						return resolve();
+				}
+			});
+			
+			postMessage({
+				type: 'index',
+				data: {
+					url: 'game.list',
+					fields: {
+						app_url: {boost: 25},
+						slug: {boost: 20},
+						name: {boost: 20}
+					},
+					ref: 'slug'
+				}
+			}, '*');
+		});
+		
+		return promise;
+	}
 
     return function(builder) {
-        builder.start('game/search.html');
 
-        builder.z('type', 'leaf game');
-        builder.z('title', null);
+    	indexed.then(function() {
+
+    		builder.start('game/search.html');
+
+        	builder.z('type', 'leaf game');
+        	builder.z('title', null);
+    	});
     };
 });
 
