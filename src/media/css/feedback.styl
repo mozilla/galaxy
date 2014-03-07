@@ -22,13 +22,28 @@
 
 @media $narrower-than-desktop {
     .feedback-form.form-modal {
-        border-bottom: 1px solid $cloud-gray;
-        padding: 15px 10px;
+        left: 50%;
+        right: auto;
     }
 }
 
 @media $at-least-desktop {
-    .feedback .support-list {
-        display: none;
+    .feedback {
+        &.modal {
+            bottom: 40px;
+            left: auto;
+            margin-left: 200px;
+            right: 8%; // TODO: Align with right side of page.
+            top: auto;
+            width: 400px;
+        }
+        .support-list {
+            display: none;
+        }
+        textarea {
+            border: 1px solid #8c8c8c;
+            border-radius: 2px;
+            height: 50px;
+        }
     }
 }
