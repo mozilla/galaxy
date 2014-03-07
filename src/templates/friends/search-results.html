@@ -4,6 +4,6 @@
   <li data-user-id="{{ user.id }}">
     <a href="{{ url('user', [user.id]) }}" class="profile-link">{{ avatar(user) }}</a>
     {# TODO: Mark as grayed out if friend is already requested. #}
-    <a href="#" class="btn btn-green add-friend">{{ _('Add Friend') }}</a>
+    <a href="#" class="btn btn-approve add-friend">{{ _('Add Friend') }}</a>
   </li>
 {% endfor %}

@@ -90,7 +90,7 @@ define('notification', ['defer', 'helpers', 'jquery', 'templates', 'z'], functio
         confirmationEl.on('touchend click', '.yes', function(e) {
             e.preventDefault();
             confirmationDef.resolve();
-        }).on('touchend click', '.btn-cancel, .close', function(e) {
+        }).on('touchend click', '.btn-reject, .close', function(e) {
             e.preventDefault();
             confirmationDef.reject();
         });
