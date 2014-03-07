@@ -21,11 +21,11 @@
           <td></td>
           <td></td>
           <td>{{ game.created|relativeDate }}</td>
-          <td class="buttons">
-            <a class="btn btn-blue"><div class="btn-text">{{ _('View') }}</div></a>
-            <a class="btn btn-green"><div class="btn-text">{{ _('Edit') }}</div></a>
-            <a class="btn btn-red"><div class="btn-text">{{ _('Delete') }}</div></a>
-            <a class="btn"><div class="btn-text">{{ _('Disable') }}</div></a>
+          <td class="myGames-buttons">
+            <a class="btn btn-blue" href="/game/{{ game.slug }}/detail" target="_blank"><div class="btn-text">{{ _('View') }}</div></a>
+            <a class="btn btn-green" href="/game/{{ game.slug }}/edit"><div class="btn-text">{{ _('Edit') }}</div></a>
+            <a class="btn btn-red myGames-delete"><div class="btn-text">{{ _('Delete') }}</div></a>
+            <a class="btn myGames-disable"><div class="btn-text">{{ _('Disable') }}</div></a>
           </td>
         </tr>
       {% endfor %}
