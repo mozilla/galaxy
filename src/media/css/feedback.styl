@@ -1,0 +1,34 @@
+@import 'lib';
+
+.modal.show {
+    nav.secondary-header, .support-list {
+        display: none;
+    }
+    div.secondary-header {
+        display: block;
+    }
+}
+
+.feedback .support-list {
+    list-style: none;
+    padding: 5px 10px 10px;
+    li {
+        margin-top: 10px;
+        .button {
+            display: block;
+        }
+    }
+}
+
+@media $narrower-than-desktop {
+    .feedback-form.form-modal {
+        border-bottom: 1px solid $cloud-gray;
+        padding: 15px 10px;
+    }
+}
+
+@media $at-least-desktop {
+    .feedback .support-list {
+        display: none;
+    }
+}

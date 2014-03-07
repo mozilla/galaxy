@@ -1,0 +1,99 @@
+@import 'lib';
+
+body.overlayed {
+    overflow: hidden;
+}
+
+.cloak {
+    background: rgba(0,0,0,.75);
+    color: #000;
+    display: none;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    transition(.5s opacity ease);
+    width: 100%;
+    z-index: 50;
+    &.show {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    &.light {
+        background: rgba(255,255,255,.75);
+    }
+}
+
+.modal {
+    background-color: #d8d8d8;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    display: none;
+    left: 5%;
+    position: fixed;
+    top: 49px;
+    width: 90%;
+    z-index: 60;
+    .form-modal h2 {
+    	color: #000;
+    	font-size: 16px;
+    	margin-bottom: 10px;
+    }
+    &.show {
+        display: block;
+        padding: 15px;
+    }
+    .btn-cancel {
+        right: 0;
+        top: -12px;
+    }
+    textarea {
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,.15) inset;
+    }
+    &.confirmation {
+        background: rgba(0,0,0,.85);
+        border: 1px solid #000;
+        border-radius: 5px;
+        color: #fff;
+        text-align: center;
+        top: 102px;
+        .content {
+            margin: 15px 0;
+        }
+    }
+    button.alt {
+        box-shadow: none;
+    }
+}
+
+@media $at-least-desktop {
+    .modal {
+        left: 50%;
+        margin-left: -265px;
+        top: 160px;
+        width: 531px;
+        h2 {
+            color: $dark-gray;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .form-footer {
+            text-align: left;
+            button {
+                width: 60%;
+            }
+        }
+        button {
+            height: 48px;
+            line-height: 48px;
+        }
+        &.confirmation {
+            margin-left: -215px;
+            width: 431px;
+        }
+    }
+}

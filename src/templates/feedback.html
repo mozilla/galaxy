@@ -1,0 +1,32 @@
+{% set current_page = 'feedback' %}
+
+<div class="main feedback modal c">
+  <div>
+    <form method="post" class="feedback-form form-modal">
+      <h2>Feedback</h2>
+      <a href="#" class="close btn-cancel">Close</a>
+      <p class="brform simple-field c">
+        <textarea name="feedback" placeholder="Tell us why we rock. Or how we can rock more." required></textarea>
+      </p>
+      <p class="form-footer">
+        <button class="btn btn-cta" type="submit">{{ _('Submit') }}</button>
+      </p>
+    </form>
+    <ul class="support-list">
+      <li>
+        <a href="#" class="button alt" target="_blank">
+          {{ _('Get Help') }}</a>
+      </li>
+      <li>
+        <a href="#" class="button alt">
+          {{ _('Privacy Policy') }}</a>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="button alt">
+          {{ _('Terms of Use') }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
