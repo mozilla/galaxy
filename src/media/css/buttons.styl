@@ -1,104 +1,96 @@
 @import 'lib';
 
-/*
-teal       #40dfc2  rgb(64,223,194)   rgba(80,227,194,.8)   edit/play
-blue       #3e94e0  rgb(62,148,224)   rgba(62,148,224,.8)    view
-red        #d0021b  rgb(208,2,27)     rgba(208,2,27,.8)     delete
-orange     #f9a530  rgb(249,165,48)   rgb(249,165,48,.8)    reject
-green      #7ccd2f  rgb(124,205,47)   rgba(80,227,194,.8)   approve
-gray       #9b9b9b  rgb(155,155,155)  rgba(155,155,155,.8)  disable
-*/
-
 .btn {
-  background: #40dfc2;  /* cyan */
-  border: 0;
-  border-radius: 4px;
-  box-shadow: inset 0 -1px 0 rgba(0,0,0,.1);
-  color: #fff;
-  cursor: pointer;
-  font: 400 14px/24px $sourceFontFamily;
-  min-width: 80px;
-  padding: 2px 15px;
+    background: $buttonColorTeal;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.1);
+    color: #fff;
+    cursor: pointer;
+    font: 400 14px/24px $sourceFontFamily;
+    min-width: 80px;
+    padding: 2px 15px;
 }
 
 .btn-approve {
-  background: #7ccd2f;  /* green */
+    background: $buttonColorGreen;
 }
 
 .btn-reject {
-  background: #f9a530;  /* orange */
+    background: $buttonColorOrange;
 }
 
 .btn-view {
-  background: #3e94e0;  /* blue */
+    background: $buttonColorBlue;
 }
 
 .btn-edit {
-  background: #40dfc2;  /* cyan (the default) */
+    background: $buttonColorTeal;
 }
 
 .btn-delete {
-  background: #d0021b;  /* red */
+    background: $buttonColorRed;
 }
 
 .btn.disabled,
 .btn[disabled] {
-  background: #9b9b9b;  /* gray */
+    background: $buttonColorGray;
+    cursor: not-allowed;
 }
 
 .btn-cta {
-  font-size: 18px;
-  line-height: 28px;
-  min-width: 200px;
-  padding: 4px 15px;
+    font-size: 18px;
+    line-height: 28px;
+    min-width: 200px;
+    padding: 4px 15px;
 }
 
 .btn-play {
-  min-width: 100px;
+    min-width: 100px;
 }
 
 .btn:hover {
-  box-shadow: inset 0 -1px 0 rgba(0,0,0,.35);
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.35);
 }
 
 /* darkened by 25% */
 .btn:hover,
 .btn-edit:hover {
-  background: #1fb89c;
+    background: darken($buttonColorTeal, $buttonHoverStateDarken);
 }
 .btn-approve:hover {
-  background: #5d9a23;
+    background: darken($buttonColorGreen, $buttonHoverStateDarken);
 }
 .btn-reject:hover {
-  background: #d88106;
+    background: darken($buttonColorOrange, $buttonHoverStateDarken);
 }
 .btn-view:hover {
-  background: #1e70b9;
+    background: darken($buttonColorBlue, $buttonHoverStateDarken);
 }
 .btn-delete:hover {
-  background: #9c0114;
+    background: darken($buttonColorRed, $buttonHoverStateDarken);
 }
 .btn.disabled:hover,
 .btn[disabled]:hover {
-  background: #747474;
+    background: darken($buttonColorGray, $buttonHoverStateDarken);
 }
 
 .btn:focus {
-  box-shadow: 0 0 10px rgba(55,55,55,.75) inset;
-  color: rgba(255,255,255,.75);
+    box-shadow: 0 0 10px rgba(55,55,55,.75) inset;
+    color: rgba(255,255,255,.75);
 }
 
 .btn-small {
-  font-size: .7em;
+    font-size: .7em;
 }
 .btn-big {
-  font-size: 1.2em;
-  line-height: 1.65em;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
+    font-size: 1.2em;
+    line-height: 1.65em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
 }
 .btn.btn-round {
-  border-radius: 20px;
+    border-radius: 20px;
 }
 
 /* Active  */
@@ -131,7 +123,6 @@ gray       #9b9b9b  rgb(155,155,155)  rgba(155,155,155,.8)  disable
     padding: 10px 24px;
     font-size: 20px;
 }
-
 
 /* Square */
 .btn-square {
