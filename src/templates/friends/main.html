@@ -3,7 +3,7 @@
 {% if not user.logged_in() %}
   <h1>{{ _('Friends') }}</h1>
   <p>{{ _('You must sign in/sign up to see your friends.') }}</p>
-  <p><a class="btn btn-blue btn-round btn-big btn-inline persona only-logged-out" href="#">{{ _('Sign in') }}</a></p>
+  <p><a class="btn btn-view btn-round btn-big btn-inline persona only-logged-out" href="#">{{ _('Sign in') }}</a></p>
 {% else %}
   <h1>{{ _('Friends') }}</h1>
 
@@ -15,8 +15,8 @@
           <li class="c" data-user-id="{{ user.id }}">
             <a href="{{ url('user', [user.id]) }}" class="profile-link">{{ avatar(user) }}</a>
             {# TODO: Mark as grayed out if friend is already requested. #}
-            <a href="#" class="btn btn-red ignore-friend">{{ _('Ignore') }}</a>
-            <a href="#" class="btn btn-green accept-friend">{{ _('Accept') }}</a>
+            <a href="#" class="btn btn-delete ignore-friend">{{ _('Ignore') }}</a>
+            <a href="#" class="btn btn-approve accept-friend">{{ _('Accept') }}</a>
           </li>
         {% endfor %}
       </ul>
@@ -31,7 +31,7 @@
         {% for user in this %}
           <li class="c" data-user-id="{{ user.id }}">
             <a href="{{ url('user', [user.id]) }}" class="profile-link">{{ avatar(user) }}</a>
-            <a href="#" class="btn btn-red unfriend-friend">{{ _('Remove') }}</a>
+            <a href="#" class="btn btn-delete unfriend-friend">{{ _('Remove') }}</a>
           </li>
         {% endfor %}
       </ul>
