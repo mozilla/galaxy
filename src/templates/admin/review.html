@@ -3,7 +3,7 @@
 {% endmacro %}
 
 <form class="grid" method="post" data-required="{{ _('Required') }}" data-formtype="submit">
-  <div class="unit span-grid">
+  <div class="grid-cell">
     <h1>{{ _('Review Queue') }}</h1>
     {% defer (url=api('game.list')|urlparams(status='pending')) %}
       <table class="review-table">
