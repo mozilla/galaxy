@@ -28,6 +28,7 @@ define('views/feedback',
 
     // Init desktop feedback form modal trigger.
     function addFeedbackModal() {
+        console.log('addFeedbackModal');
         if (!$('.main.feedback:not(.modal)').length && !$('.feedback.modal').length) {
             z.page.append(nunjucks.env.render('feedback.html'));
         }
@@ -44,6 +45,13 @@ define('views/feedback',
         }
         addFeedbackModal();
         $('.feedback.modal').addClass('show');
+    });
+
+    z.body.on('click', '.close', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('.feedback').removeClass('show');
+        return;
     });
 
     return function(builder) {
