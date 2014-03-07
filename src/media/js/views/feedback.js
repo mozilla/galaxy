@@ -1,6 +1,6 @@
 define('views/feedback',
-       ['l10n', 'jquery', 'notification', 'requests', 'routes_api', 'templates', 'urls', 'utils', 'z'],
-       function(l10n, $, notification, requests, routes_api, nunjucks, urls, utils, z) {
+       ['l10n', 'jquery', 'notification', 'requests', 'resize-textarea', 'routes_api', 'templates', 'urls', 'utils', 'z'],
+       function(l10n, $, notification, requests, rt, routes_api, nunjucks, urls, utils, z) {
 
     var gettext = l10n.gettext;
     var notify = notification.notification;
@@ -28,9 +28,9 @@ define('views/feedback',
 
     // Init desktop feedback form modal trigger.
     function addFeedbackModal() {
-        console.log('addFeedbackModal');
         if (!$('.main.feedback:not(.modal)').length && !$('.feedback.modal').length) {
             z.page.append(nunjucks.env.render('feedback.html'));
+            rt.resizeTextareas();
         }
         z.body.trigger('decloak');
     }
