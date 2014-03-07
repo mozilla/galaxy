@@ -7,6 +7,7 @@ var routes = [
     {'pattern': '^/friends$', 'view_name': 'friends'},
     {'pattern': '^/game/([^/<>"\']+)/detail/?$', 'view_name': 'game'},
     {'pattern': '^/game/([^/<>"\']+)/edit/?$', 'view_name': 'edit_game'},
+    {'pattern': '^/game/search$', 'view_name': 'game_search'},
     {'pattern': '^/genre/([^/<>"\']+)/?$', 'view_name': 'genre'},
     {'pattern': '^/user/([^/<>"\']+)/?$', 'view_name': 'user'},
     {'pattern': '^/settings$', 'view_name': 'settings'},
