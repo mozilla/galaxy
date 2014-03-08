@@ -1,0 +1,62 @@
+// For styles relating to dashboard screens (curation dashboard, review dashboard etc.);
+
+@import 'lib';
+
+[data-page-type~="dashboard"] .page, {
+    table {
+        border-collapse: separate; 
+        width: 100%;
+        
+        thead tr th {
+            text-align: left;
+            padding-bottom: 10px;
+        }
+
+        tbody td {
+            padding: 5px 0;
+            &:not(:last-child) {
+                padding-right: 10px;
+            }
+        }
+
+        .dashboard-buttons {
+            text-align: right;
+            .btn {
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+[data-page-type~="review"] .page, {
+    .review-table {
+
+    }
+}
+
+[data-page-type~="curation"] .page {
+    .curation-table {
+        .curation-status {
+            color: #7CCD2F;
+
+            span {
+                color: #A4A4A4;
+                font-size: 14px;
+            }
+
+        }
+
+        .curation-title {
+            a {
+                color: #33E0C2;
+                font-size: 26px;
+                vertical-align: middle;
+            }
+            img {
+                vertical-align: middle;
+                width: 64px;
+                height: 64px;
+            }
+        }
+    }
+}

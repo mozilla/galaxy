@@ -1,0 +1,44 @@
+<form class="grid" method="post" data-required="{{ _('Required') }}" data-formtype="submit">
+  <div class="grid-cell">
+    <h1>{{ _('Featured Games') }}</h1>
+      <table class="curation-table">
+        <tbody>
+            <tr class="curation-entry" data-game-slug="nutty-ninjas" data-game-title="Nutty Ninjas">
+              <td class="curation-title">
+                <img src="http://png-4.findicons.com/files/icons/2297/super_mario/256/paper_mario.png" title="{{ game.name|translate }}" /><a href="#">Nutty Ninjas</a>
+              </td>
+              <td class="curation-status" title="Public">
+                <span class="status-span">Status:</span><br>
+                Public
+              </td>
+              <td class="dashboard-buttons curation-buttons">
+                <a class="btn btn-yellow curation-unfeature"><div class="btn-text">{{ _('Unfeature') }}</div></a>
+                <a class="btn btn-blue curation-view"><div class="btn-text">{{ _('View') }}</div></a>
+                <a class="btn btn-green curation-edit"><div class="btn-text">{{ _('Edit') }}</div></a>
+                <a class="btn btn-red curation-delete"><div class="btn-text">{{ _('Delete') }}</div></a>
+                <a class="btn btn-grey curation-disable"><div class="btn-text">{{ _('Disable') }}</div></a>
+              </td>
+            </tr>
+            <tr class="curation-entry" data-game-slug="nutty-ninjas" data-game-title="Nutty Ninjas">
+              <td class="curation-title">
+                <img src="http://png-4.findicons.com/files/icons/2297/super_mario/256/paper_mario.png" title="{{ game.name|translate }}" /><a href="#">Nutty Ninjas</a>
+              </td>
+              <td class="curation-status" title="Public">
+                <span class="status-span">Status:</span><br>
+                Public
+              </td>
+              <td class="dashboard-buttons curation-buttons">
+                <a class="btn btn-yellow curation-unfeature"><div class="btn-text">{{ _('Unfeature') }}</div></a>
+                <a class="btn btn-blue curation-view"><div class="btn-text">{{ _('View') }}</div></a>
+                <a class="btn btn-green curation-edit"><div class="btn-text">{{ _('Edit') }}</div></a>
+                <a class="btn btn-red curation-delete"><div class="btn-text">{{ _('Delete') }}</div></a>
+                <a class="btn btn-grey curation-disable"><div class="btn-text">{{ _('Disable') }}</div></a>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+      <div id="empty-message" class="hidden">
+        {{ _('No games featured.') }}
+      </div>
+  </div>
+</form>
