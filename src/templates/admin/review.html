@@ -20,8 +20,8 @@
               <td class="review-title"><a href="{{ game.app_url }}">{{ game.name }}</a></td>
               <td class="review-wait" title="{{ game.created }}">{{ game.created|relativeDate }}</td>
               <td class="dashboard-buttons review-buttons">
-                <a class="btn btn-red review-reject"><div class="btn-text">{{ _('Reject') }}</div></a>
-                <a class="btn btn-green review-accept"><div class="btn-text">{{ _('Accept') }}</div></a>
+                <a class="btn btn-reject review-reject">{{ _('Reject') }}</a>
+                <a class="btn btn-approve review-accept">{{ _('Accept') }}</a>
               </td>
             </tr>
           {% endfor %}
