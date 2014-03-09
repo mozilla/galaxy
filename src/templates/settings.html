@@ -72,7 +72,12 @@
           </div>
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
-              <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required readonly x-inputmode="verbatim">
+              <div class="form-field">
+                <label>
+                <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required readonly x-inputmode="verbatim">
+                <span class="read-only">{{ _(Read only) }}</span>
+                </label>
+              </div>
             </div>
             <div class="grid-cell">
               <div class="form-help">

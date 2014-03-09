@@ -323,6 +323,20 @@ form {
     .span-grid {
         margin-top: 15px;
     }
+    .read-only {
+        border-radius: 2px;
+        border: 1px solid #fff;
+        bottom: 5px;
+        color: #FFF;
+        content: attr(data-required);        
+        display: block;
+        font-size: 10px;
+        padding: 1px 3px;
+        position: absolute;
+        right: 12px;
+        transition(unquote('.1s opacity, .1s visibility'));
+        z-index: 2;
+    }
     .req {
         position: absolute;
         right: 0;
@@ -331,7 +345,7 @@ form {
             border: 2px solid lighten(#da3e5a, 80%);
             bottom: 5px;
             color: lighten(#da3e5a, 20%);
-            content: attr(data-required);
+            content: attr(data-required);        
             display: block;
             font-size: 10px;
             padding: 1px 3px;
