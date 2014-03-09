@@ -1,16 +1,14 @@
 <div class="unit span-grid">
   <div class="content">
+    <div class="settings-body">
     {% if user.logged_in() %}
     {% set user_settings = user.get_settings('public') %}
-    <section style="max-width:1024px; margin:0 auto">
-      <div style="margin-bottom:5px">
-        <div class="avatar" style="display:inline-block; vertical-align:middle; background-image: url({{ user_settings.avatar|safeurl }})"></div>
-        <div style="display:inline-block; vertical-align:middle">
-        <h1 style="vertical-align:middle; margin:0">{{ _('User settings') }}</h1>
-        </div>
+      <div class="avatar" style="background-image: url({{ user_settings.avatar|safeurl }})"></div>
+      <div class="settings-header">
+        <h1>{{ _('User settings') }}</h1>
       </div>
       <div class="edit-avatar">
-        <a class="btn" href="http://en.gravatar.com/emails/" target="_blank" style="padding:2px 10px">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a>
+        <a class="btn btn-edit-avatar" href="http://en.gravatar.com/emails/" target="_blank">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a>
       </div>
       <form class="edit-profile">
         <div class="content">
@@ -21,7 +19,7 @@
           </div>
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
-              <input type="text" name="username" id="username" placeholder="{{ _('Username') }}" value="{{ user_settings.username }}" required x-inputmode="verbatim">
+              <input type="text" name="username" id="username" placeholder="{{ _('Username') }}" value="{{ user_settings.username }}">
             </div>
             <div class="grid-cell">
               <div class="form-help">
@@ -38,7 +36,7 @@
           </div>
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
-              <input type="text" name="teamname" id="teamname" placeholder="{{ _('Team name') }}" value="{{ user_settings.companyName }}" required x-inputmode="verbatim">
+              <input type="text" name="teamname" id="teamname" placeholder="{{ _('Team name') }}" value="{{ user_settings.companyName }}">
             </div>
             <div class="grid-cell">
               <div class="form-help">
@@ -55,7 +53,7 @@
           </div>
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
-              <input type="text" name="teamurl" id="teamurl" placeholder="{{ _('Team URL') }}" value="{{ user_settings.homepage }}" required x-inputmode="verbatim">
+              <input type="text" name="teamurl" id="teamurl" placeholder="{{ _('Team URL') }}" value="{{ user_settings.homepage }}">
             </div>
             <div class="grid-cell">
               <div class="form-help">
@@ -74,8 +72,8 @@
             <div class="grid-cell grid-flex-grow-two">
               <div class="form-field">
                 <label>
-                <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required readonly x-inputmode="verbatim">
-                <span class="read-only">{{ _(Read only) }}</span>
+                <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required readonly>
+                <span class="read-only">{{ _('Read only') }}</span>
                 </label>
               </div>
             </div>
@@ -91,9 +89,9 @@
           <button type="submit" class="btn btn-cta btn-submit">{{ _('Save Changes') }}</button>
         </div>
       </form>
-    </section>
     {% else %}
       {{ _('You must be <a class="persona">signed in</a> to access this page.') }}
     {% endif %}
+  </div>
   </div>
 </div>
