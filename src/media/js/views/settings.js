@@ -20,8 +20,8 @@ define('views/settings',
 
         var newData = {
             username: newUsername,
-            teamname: newTeamname,
-            teamurl: newTeamURL
+            companyName: newTeamname,
+            homepage: newTeamURL
         };
         
         requests.put(urls.api.url('user.profile'), newData).done(function(data) {
