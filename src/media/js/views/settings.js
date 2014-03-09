@@ -15,8 +15,13 @@ define('views/settings',
         forms.toggleSubmitFormState($this, false);
 
         var newUsername = $this.find('[name=username]').val();
+        var newTeamname = $this.find('[name=teamname]').val();
+        var newTeamURL = $this.find('[name=teamurl]').val();
+
         var newData = {
-            username: newUsername
+            username: newUsername,
+            teamname: newTeamname,
+            teamurl: newTeamURL
         };
         
         requests.put(urls.api.url('user.profile'), newData).done(function(data) {

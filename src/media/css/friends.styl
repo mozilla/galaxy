@@ -16,18 +16,14 @@
 
 $settings_avatar_size = 80px;
 [data-page-type~="settings"] .page {
-    .avatar-container {
-        float: left;
+    .avatar {
+        border-radius: $settings_avatar_size;
+        height: $settings_avatar_size;
+        width: $settings_avatar_size;
         margin-right: 20px;
-        .avatar {
-            border-radius: $settings_avatar_size;
-            height: $settings_avatar_size;
-            width: $settings_avatar_size;
-        }
-        .edit-avatar {
-            bottom: -5px;
-            text-align: center;
-        }
+    }
+    .edit-avatar {
+        bottom: -5px;
     }
     .edit-profile {
         display: inline-block;

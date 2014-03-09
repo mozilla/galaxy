@@ -2,28 +2,89 @@
   <div class="content">
     {% if user.logged_in() %}
     {% set user_settings = user.get_settings('public') %}
-    <div class="avatar-container">
-      <div class="avatar" style="background-image: url({{ user_settings.avatar|safeurl }})"></div>
-      <div class="edit-avatar"><a href="http://en.gravatar.com/emails/" target="_blank">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a></div>
-    </div>
-    <section>
-      <h1>{{ _('Profile') }}</h1>
+    <section style="max-width:1024px; margin:0 auto">
+      <div style="margin-bottom:5px">
+        <div class="avatar" style="display:inline-block; vertical-align:middle; background-image: url({{ user_settings.avatar|safeurl }})"></div>
+        <div style="display:inline-block; vertical-align:middle">
+        <h1 style="vertical-align:middle; margin:0">{{ _('User settings') }}</h1>
+        </div>
+      </div>
+      <div class="edit-avatar">
+        <a class="btn" href="http://en.gravatar.com/emails/" target="_blank" style="padding:2px 10px">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a>
+      </div>
       <form class="edit-profile">
-        <table>
-          <tr>
-            <td class="label-col"><label for="username">{{ _('Username:') }}</label></td>
-            <td>
+        <div class="content">
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <div class="l">{{ _('Username') }}</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
               <input type="text" name="username" id="username" placeholder="{{ _('Username') }}" value="{{ user_settings.username }}" required x-inputmode="verbatim">
-            </td>
-          </tr>
-          <tr>
-            <td class="label-col"><label for="email">{{ _('Email:') }}</label></td>
-            <td>
+            </div>
+            <div class="grid-cell">
+              <div class="form-help">
+                {{ _('Your username, which appears alongside all player activity in Galaxy.') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <div class="l">{{ _('Team name') }}</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <input type="text" name="teamname" id="teamname" placeholder="{{ _('Team name') }}" value="{{ user_settings.companyName }}" required x-inputmode="verbatim">
+            </div>
+            <div class="grid-cell">
+              <div class="form-help">
+                {{ _('Your company/team name, which is shown on all listings of games you&#39;ve submitted.') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <div class="l">{{ _('Team URL') }}</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <input type="text" name="teamurl" id="teamurl" placeholder="{{ _('Team URL') }}" value="{{ user_settings.homepage }}" required x-inputmode="verbatim">
+            </div>
+            <div class="grid-cell">
+              <div class="form-help">
+                {{ _('The homepage URL for your company/team, which is linked to from all listings of games you&#39;ve submitted.') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <div class="l">{{ _('Email') }}</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
               <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required readonly x-inputmode="verbatim">
-            </td>
-          </tr>
-        </table>
-        <button type="submit" class="btn btn-cta btn-submit">{{ _('Save') }}</button>
+            </div>
+            <div class="grid-cell">
+              <div class="form-help">
+                {{ _('Your email cannot be changed. Your password can be changed at ') }}
+                <a href="https://login.persona.org" target="_blank">{{ _('login.persona.org') }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <button type="submit" class="btn btn-cta btn-submit">{{ _('Save Changes') }}</button>
+        </div>
       </form>
     </section>
     {% else %}
