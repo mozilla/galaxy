@@ -3,7 +3,7 @@
 <div class="profile unit span-grid">
     <div class="content">
     {% defer (url=api('user.search')|urlparams(id=user_id), key=user_id, id='user-id') %}
-      <a class="btn btn-green request-friend" data-user-id="{{ this.id }}">{{ _('Add as friend') }}</a>
+      <a class="btn btn-cta request-friend" data-user-id="{{ this.id }}">{{ _('Add as friend') }}</a>
       <h1 class="user-name">{{ avatar(this) }}</h1>
       <section>
         <h2>{{ _('Games playing') }}</h2>
