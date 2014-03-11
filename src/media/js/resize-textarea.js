@@ -25,5 +25,5 @@ define('resize-textarea', ['underscore', 'z'], function(_, z) {
 
     z.page.on('loaded', resizeTextareasOnPage).on('input', 'textarea', delayedResize);
 
-    return { resizeTextareas: resizeTextareasOnPage };
+    return {resizeTextareas: resizeTextareasOnPage};
 });
