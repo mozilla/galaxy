@@ -95,11 +95,6 @@ define('views/submit',
             //     addRemoveLinks: true,
             //     accept: function(file, done) {
             //         console.log(file);
-            //         if (file.name !== "justinbieber.jpg") {
-            //           console.log("Naha, you don't.");
-            //         } else { 
-            //             done(); 
-            //         }
             //     }
             // });
         });
