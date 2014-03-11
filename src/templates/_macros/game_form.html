@@ -116,18 +116,25 @@
         <div class="grid-cell grid-flex-grow-two">
           <div class="icons media form-field">
             <label>
-              <div class="fallback" data-placeholder="{{ _('Icon URL') }}">
+              <div class="fallback" data-placeholder="{{ _('Icon URL') }}" data-type="icons">
                 {% for icon in game.icons %}
-                  <input type="url" value="{{ icon }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
+                  <input type="url" name="icon_url" class="media" data-type="icons" value="{{ icon }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
                 {% endfor %}
               </div>
             </label>
-            <div class="file-size"></div><div class="file-preview"></div>
+            <input type="file" name="icon_file" class="media" data-type="icons">
+
+            <div class="media-size"></div>
+            <img id="icon-preview" class="media-preview" data-type="icons">
+
+            {# `icon_final_url` contains the URL of the image that we'll want to save locally on the server. #}
+            <input type="hidden" name="icon_final_url" class="media-final-url" data-type="icons" data-height="128" data-width="128">
           </div>
         </div>
         <div class="grid-cell">
           <p class="form-help">
-            {{ _("The icon will be shown on all listings in Galaxy.<br/>Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
+            {{ _("The icon will be shown on all listings in Galaxy.<br>Allowed formats: <code>PNG</code>, <code>JPG</code><br>
+            Maximum dimensions: 128px &times; 128px") }}
           </p>
         </div>
       </div>
@@ -145,9 +152,9 @@
         <div class="grid-cell grid-flex-grow-two">
           <div class="screenshots media form-field">
             <label>
-              <div class="fallback" data-placeholder="{{ _('Image URL') }}">
+              <div class="fallback" data-placeholder="{{ _('Image URL') }}" data-type="screenshots">
                 {% for screenshot in game.screenshots %}
-                  <input type="url" value="{{ screenshot }}" placeholder="{{ _('Image URL') }}" pattern="https?://.*">
+                  <input type="url" class="media" data-type="screenshots" value="{{ screenshot }}" placeholder="{{ _('Image URL') }}" pattern="https?://.*">
                 {% endfor %}
               </div>
             </label>
@@ -174,10 +181,10 @@
         <div class="grid-cell grid-flex-grow-two">
           <div class="videos media form-field">
             <label>
-              <div class="fallback" data-placeholder="{{ _('YouTube or Vimeo URL') }}">
+              <div class="fallback" data-placeholder="{{ _('YouTube or Vimeo URL') }}" data-type="videos">
                 {% if game.videos %}
                   {% for video in game.videos %}
-                    <input type="url" value="{{ video }}" placeholder="{{ _('YouTube or Vimeo URL') }}" pattern="https?://.*">
+                    <input type="url" class="media media-final-url" data-type="videos" value="{{ video }}" placeholder="{{ _('YouTube or Vimeo URL') }}" pattern="https?://.*">
                   {% endfor %}
                 {% endif %}
               </div>
