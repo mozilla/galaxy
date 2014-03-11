@@ -109,33 +109,32 @@ define('media-input',
             // ONE empty input field for user to enter more URLs.
             $emptyInputs.slice(1).remove();
         }
-    });//.on('blur keypress', 'input[type=url].media', function(e) {
-    //     var $this = $(this);
-    //     var val = $this.val();
-    //     if (!this.checkValidity()) {
-    //         // Bail if we don't have a valid URL yet.
-    //         return;
-    //     }
-    //     if (e.type === 'keypress' || e.keyCode === 13) {
-    //         // After it's been blurred, the editor will get launched.
-    //         return this.blur();
-    //     }
-    //     // Launch editor only when input is blurred.
-    //     preview($this.data('type'), val, true);
-    // }).on('click', '.media-preview', function(e) {
-    //     // Clicking on the image preview should open the image
-    //     // for re-processing.
-    //     launchEditor('icon-preview',
-    //         $(this).siblings('.media-processed-url').val());
-    // }).on('blur change', 'input[type=file].media', function(e) {
-    //     // TODO: Allow images to be dragged and dropped to the file input.
-    //     var input = this;
-    //     input.blur();
+    }).on('keypress', 'input[type=url].media', function(e) {
+        var $this = $(this);
+        
+        if (this.checkValidity() && e.keyCode === 13) {
+             // After it's been blurred, the editor will get launched.
+             return this.blur();
+         }
+    }).on('blur', 'input[type=url].media', function(e) {
+        var $this = $(this);
+        // Launch editor only when input is blurred.
+        preview($this.data('type'), $this.val(), true);
 
-    //     getFileDataURI(input).then(function (data) {
-    //         preview(input.dataset.type, data, true);
-    //     }).catch(function (err) {
-    //         return console.error(err);
-    //     });
-    // });
+    }).on('click', '.media-preview', function(e) {
+        // Clicking on the image preview should open the image
+        // for re-processing.
+        launchEditor('icon-preview',
+            $(this).siblings('.media-processed-url').val());
+    }).on('blur change', 'input[type=file].media', function(e) {
+        // TODO: Allow images to be dragged and dropped to the file input.
+        var input = this;
+        input.blur();
+
+        getFileDataURI(input).then(function (data) {
+            preview(input.dataset.type, data, true);
+        }).catch(function (err) {
+            return console.error(err);
+        });
+    });
 });
