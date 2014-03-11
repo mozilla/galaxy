@@ -96,8 +96,20 @@ define('views/submit',
 
     return function(builder) {
         builder.start('submit.html').done(function() {
-            // new dropzone('.submit-form', {
-            //     uploadMultiple: true
+            // new dropzone('#test-zone', {
+            //     url: "#",
+            //     clickable: true,
+            //     maxFilesize: 10,
+            //     uploadMultiple: true,
+            //     addRemoveLinks: true,
+            //     accept: function(file, done) {
+            //         console.log(file);
+            //         if (file.name !== "justinbieber.jpg") {
+            //           console.log("Naha, you don't.");
+            //         } else { 
+            //             done(); 
+            //         }
+            //     }
             // });
         });
 
