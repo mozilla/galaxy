@@ -30,6 +30,30 @@ define('views/game',
         // TODO: Update game detail section with selected game details.
     })
 
+    z.body.on('click', '.game-media', function() {
+        $('.game-media').removeClass('selected');
+        var $this = $(this);
+        $this.addClass('selected');
+        var mediaSrc = $this.attr('src');
+        if (mediaSrc.search(/youtube|vimeo/) > -1) {
+            if (mediaSrc.indexOf('youtube') > -1) {
+                var youtubeId = mediaSrc.split('/')[4];
+                var $mediaObject = $('<iframe>', {
+                    autoplay: 1,
+                    frameborder: 0,
+                    src: '//www.youtube.com/embed/' + youtubeId
+                });
+            } else {
+                // TODO: Vimeo
+            }
+        } else {
+            var $mediaObject = $('<img>', { src: mediaSrc });
+        }
+        $mediaObject.attr('height', 300);
+        $mediaObject.attr('width', 480);
+        $('.game-current-media').html($mediaObject);
+    });
+
     var gettext = l10n.gettext;
 
     return function(builder, args) {
