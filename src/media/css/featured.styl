@@ -2,8 +2,12 @@
 
 .featured-games-section {
     ul {
+        height: 534px;
         list-style: none;
-    
+        overflow-y: scroll;        
+        &::-webkit-scrollbar { 
+            display: none; 
+        }
         > li {
             display: block;
             height: 64px;
