@@ -1,18 +1,33 @@
 {% defer (url=api('leaderboard', [slug]), key=slug) %}
-  <h1>{{ _('Leaderboard for {game}', {game: slug}) }}</h1>
-  <ul data-game-slug="{{ slug }}">
-    {% for board in this %}
-    <li class="c" data-board-slug="{{ board.slug }}">
-      <a class="board-name">{{ board.name }}</a>
-      <a class="board-slug">{{ board.slug }}</a>
-      <a class="btn btn-red board-del">{{ _('Remove') }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+  <h1>{{ _('Leaderboards for {game}', {game: slug}) }}</h1>
+  <table class="boards-table" data-game-slug="{{ slug }}">
+    <thead>
+      <tr>
+        <th>{{ _('Board Name') }}</th>
+        <th>{{ _('Board Slug') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for board in this %}
+      {# TODO: Add links of individual leaderboards to href attributes #}
+        <tr data-board-slug="{{ board.slug }}">
+          <td>
+            <a class="board-name">{{ board.name }}</a>
+          </td>
+          <td>
+            <a class="board-slug">{{ board.slug }}</a>
+          </td>
+          <td>
+            <a class="btn btn-delete board-del">{{ _('Remove') }}</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
   <h2>{{ _('Add a leaderboard') }}</h2>
-  <form data-game-slug="{{ slug }}" id="leaderboard-create">
+  <form class="create-board" data-game-slug="{{ slug }}" id="leaderboard-create">
     <p><input type="text" name="name" placeholder="{{ _('Board name') }}"></p>
     <p><input type="text" name="slug" placeholder="{{ _('Slug') }}"></p>
-    <button class="btn btn-green board-create" type="submit">Create</button>
+    <button class="btn btn-cta board-create" type="submit">Create</button>
   </form>
 {% end %}

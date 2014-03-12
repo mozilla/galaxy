@@ -238,7 +238,7 @@ input.input-search, input[type="search"] {
 }
 
 button, input, select, textarea {
-    font: 100% $source-stack;
+    font: 100% $sourceFontFamily;
     margin: 0;
     max-width: 100%;
     vertical-align: middle;
@@ -319,7 +319,7 @@ textarea {
     min-height: 50px;
 }
 
-form.grid {
+form {
     .span-grid {
         margin-top: 15px;
     }
@@ -344,6 +344,9 @@ form.grid {
     .opt:after {
         border: 2px solid #eee;
         color: #999;
+    }
+    .grid > .grid-flex-grow-two {
+        padding-right: 50px;
     }
     input.large ~ .req:after {
         bottom: 10px;
@@ -411,7 +414,7 @@ form.grid {
         padding: 5px;
     }
     input[name=slug] {
-        max-width: 397px;
+        max-width: 514px;
     }
 
     input[type=radio] {
@@ -427,44 +430,5 @@ form.grid {
     input[type=file] {
         color: #666;
         font-size: 11px;
-    }
-
-    .file-preview {
-        background: 0 50% no-repeat;
-        background-size: contain;
-        display: none;
-        height: 150px;
-        margin-top: 5px;
-        width: 200px;
-    }
-
-    .icon .file-preview {
-        height: 128px;
-        width: 128px;
-    }
-
-    .videos .file-preview {
-        height: 150px;
-        width: 200px;
-    }
-
-    .file-size {
-        color: $colorGrayLight;
-        font-size: 10px;
-        margin-top: 15px;
-    }
-
-    .media {
-        input {
-            margin-bottom: 5px;
-        }
-        .form-help {
-            margin-bottom: 5px;
-            margin-right: 50px;
-        }
-        .req:after {
-            bottom: auto;
-            top: 5px;
-        }
     }
 }

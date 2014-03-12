@@ -10,6 +10,7 @@
 [data-page-type~="profile"] .page {
     h1 .avatar {
         margin-right: 10px;
+        vertical-align: top;
     }
 }
 
@@ -86,8 +87,12 @@ $settings_avatar_size = 80px;
         ellipsis();
         line-height: 32px;
     }
-    .user-results .profile-link {
-        width: 300px;
+    .user-results {
+        list-style-type: none;
+
+        .profile-link {
+            width: 300px;
+        }
     }
     .avatar {
         float: left;
