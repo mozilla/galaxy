@@ -205,12 +205,15 @@
       </div>
     </div>
 
-    <div class="unit span-grid">
-      <div class="content">
+    <div class="grid content">
+      <div class="grid-cell">
         {# TODO: Still allow this page to be accessed anonymously, but save in localStorage and prompt user to log in/register. #}
-        <button class="btn btn-cta btn-submit" type="submit">{{ _('Submit') }}</button>
+        <button class="btn btn-cta btn-submit" type="submit">
+          {{ _('Save Changes') if game else _('Submit') }}
+        </button>
       </div>
     </div>
+
   </form>
-  {% endmacro %}
+{% endmacro %}
   
