@@ -1,6 +1,6 @@
 define('views/feedback',
-       ['l10n', 'jquery', 'notification', 'requests', 'resize-textarea', 'routes_api', 'templates', 'urls', 'utils', 'z'],
-       function(l10n, $, notification, requests, rt, routes_api, nunjucks, urls, utils, z) {
+       ['l10n', 'jquery', 'forms', 'notification', 'requests', 'resize-textarea', 'routes_api', 'templates', 'urls', 'utils', 'z'],
+       function(l10n, $, forms, notification, requests, rt, routes_api, nunjucks, urls, utils, z) {
 
     var gettext = l10n.gettext;
     var notify = notification.notification;
@@ -17,7 +17,9 @@ define('views/feedback',
             $this.find('textarea').val('');
             forms.toggleSubmitFormState($this, true);
             $('.cloak').trigger('dismiss');
-            notify({ message: gettext('Feedback submitted. Thanks!') });
+            notify({
+                message: gettext('Feedback submitted. Thanks!') 
+            });
         }).fail(function() {
             forms.toggleSubmitFormState($this, true);
             notify({
@@ -27,12 +29,14 @@ define('views/feedback',
     });
 
     // Init desktop feedback form modal trigger.
-    function addFeedbackModal() {
+    function addFeedbackModal(decloak) {
         if (!$('.main.feedback:not(.modal)').length && !$('.feedback.modal').length) {
             z.page.append(nunjucks.env.render('feedback.html'));
             rt.resizeTextareas();
         }
-        z.body.trigger('decloak');
+        if (!decloak) {
+            z.body.trigger('decloak');
+        }
     }
 
     z.body.on('click', '.submit-feedback', function(e) {
@@ -57,7 +61,7 @@ define('views/feedback',
     return function(builder) {
         builder.start('feedback.html').done(function() {
             $('.feedback').removeClass('modal');
-            addFeedbackModal();
+            addFeedbackModal(true);
         });
 
         builder.z('type', 'leaf');

@@ -1,7 +1,7 @@
-define('resize-textarea', ['underscore', 'z'], function(_, z) {
+define('resize-textarea', ['jquery', 'underscore', 'z'], function($, _, z) {
     // Auto-resizing functionality to all textareas on the page
     function resize(textarea) {
-        var minHeight = textarea.getAttribute('data-min-height');
+        var minHeight = parseInt($(textarea).css('min-height'));
         if (minHeight && minHeight > textarea.scrollHeight) {
             textarea.style.height = minHeight + 'px';
         } else {

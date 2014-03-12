@@ -2,6 +2,7 @@ define('routes_api', [], function() {
     return {
         'leaderboard': '/game/{0}/board',
         'login': '/user/login',
+        'feedback': '/feedback',
         'game': '/game/{0}/detail',
         'game.edit': '/game/edit',
         'game.list': '/game/list',
