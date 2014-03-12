@@ -6,7 +6,9 @@
     
         > li {
             display: block;
+            height: 64px;
             margin-bottom: 2em;
+            position: relative;
         }
         a {
             display: block;
@@ -41,6 +43,27 @@
         }
         .game-developer {
             color: #909090;
+        }
+    }
+}
+
+.game-details-page {
+    .featured-games-section {
+        li {
+            opacity: 0.25;
+            &.selected {
+                opacity: 1;
+
+                .select-bar {
+                    background-color: #dfe1e6;
+                    border-radius: 2px;
+                    height: 100%;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    width: 10px;
+                }
+            }
         }
     }
 }

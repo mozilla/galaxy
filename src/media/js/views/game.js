@@ -24,6 +24,12 @@ define('views/game',
         $el.addClass('current');
     });
 
+    z.body.on('click', '.featured-games-section li', function(e) {
+        $('.featured-games-section li').removeClass('selected');
+        $(this).addClass('selected');
+        // TODO: Update game detail section with selected game details.
+    })
+
     var gettext = l10n.gettext;
 
     return function(builder, args) {
