@@ -101,27 +101,26 @@ define('media-input',
         var $emptyInputs = $allInputs.filter(function() {
             return !$(this).val();
         });
-
-        if ($input.val() && $emptyInputs.length === 0) {
+        // TODO: Have a better check for the icons input field
+        if ($input.val() && $emptyInputs.length === 0 && $input.data('type') !== "icons") {
             createInput($input.parent());
         } else {
             // So that at any point in time, there will be exactly
             // ONE empty input field for user to enter more URLs.
             $emptyInputs.slice(1).remove();
         }
-    }).on('blur keypress', 'input[type=url].media', function(e) {
+    }).on('keypress', 'input[type=url].media', function(e) {
         var $this = $(this);
-        var val = $this.val();
-        if (!this.checkValidity()) {
-            // Bail if we don't have a valid URL yet.
-            return;
-        }
-        if (e.type === 'keypress' || e.keyCode === 13) {
-            // After it's been blurred, the editor will get launched.
-            return this.blur();
-        }
+        
+        if (this.checkValidity() && e.keyCode === 13) {
+             // After it's been blurred, the editor will get launched.
+             return this.blur();
+         }
+    }).on('blur', 'input[type=url].media', function(e) {
+        var $this = $(this);
         // Launch editor only when input is blurred.
-        preview($this.data('type'), val, true);
+        preview($this.data('type'), $this.val(), true);
+
     }).on('click', '.media-preview', function(e) {
         // Clicking on the image preview should open the image
         // for re-processing.
