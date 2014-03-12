@@ -16,13 +16,18 @@
 
 $settings_avatar_size = 80px;
 [data-page-type~="settings"] .page {
+    h1 {
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
+    }
     .avatar {
         border-radius: $settings_avatar_size;
         display: inline-block;
         height: $settings_avatar_size;
         margin-right: 20px;
+        vertical-align: middle;
         width: $settings_avatar_size;
-        vertical-align:middle;
     }
     .btn-edit-avatar {
         padding: 2px 10px;
@@ -38,15 +43,6 @@ $settings_avatar_size = 80px;
     .settings-body {
         margin: 0 auto;
         max-width: 1024px;
-    }
-    .settings-header {
-        display: inline-block;
-        vertical-align: middle;
-
-        h1 {
-            margin: 0;
-            vertical-align:middle;
-        }
     }
 }
 
