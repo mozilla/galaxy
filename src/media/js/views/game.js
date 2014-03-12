@@ -61,7 +61,11 @@ define('views/game',
         }
         ];
 
-        builder.start('game/main.html', {slug: slug, page_url: utils.urlencode(window.location.href), featured_games: featured_games});
+        builder.start('game/main.html', {
+            slug: slug, 
+            page_url: window.location.href, 
+            featured_games: featured_games
+        });
 
         builder.z('type', 'game');
         builder.z('title', gettext('Loading...'));
