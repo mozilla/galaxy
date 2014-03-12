@@ -1,5 +1,5 @@
 {% macro gameForm(game) %}
-	<form class="game-form" method="post" data-required="{{ _('Required') }}" data-formtype="{{'edit' if game else 'submit'}}">
+  <form class="game-form" method="post" data-required="{{ _('Required') }}" data-formtype="{{'edit' if game else 'submit'}}">
     <div class="grid content">
       <div class="grid-cell grid-flex-grow-two">
         <div class="form-field">
@@ -157,7 +157,13 @@
                 {% endfor %}
               </div>
             </label>
-            <div class="file-size"></div><div class="file-preview"></div>
+            <input type="file" name="screenshot_file" class="media" data-type="screenshots">
+<!-- 
+            <div class="media-size"></div>
+            <img id="screenshot-preview" class="media-preview" data-type="screenshots">
+
+            {# `screenshot_final_url` contains the URL of the image that we'll want to save locally on the server. #}
+            <input type="hidden" name="screenshot_final_url" class="media-final-url" data-type="screenshots"> -->
           </div>
         </div>
         <div class="grid-cell">
@@ -206,4 +212,5 @@
       </div>
     </div>
   </form>
-{% endmacro %}
+  {% endmacro %}
+  

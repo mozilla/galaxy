@@ -14,8 +14,9 @@ define('views/submit',
     }
 
     function editGame(data) {
-        // TODO: change the post to a put when the backend is ready
-        requests.post(urls.api.url('game.edit'), data).done(function(data) {
+        var slug = data.slug;
+        data = {data: JSON.stringify(data)};
+        requests.put(urls.api.url('game.edit', [slug]), data).done(function(data) {
             notification.notification({message: gettext('Game details updated')});
             require('views').reload();
         }).fail(function(data) {
@@ -86,8 +87,15 @@ define('views/submit',
 
     return function(builder) {
         builder.start('submit.html').done(function() {
-            // new dropzone('.submit-form', {
-            //     uploadMultiple: true
+            // new dropzone('#test-zone', {
+            //     url: "#",
+            //     clickable: true,
+            //     maxFilesize: 10,
+            //     uploadMultiple: true,
+            //     addRemoveLinks: true,
+            //     accept: function(file, done) {
+            //         console.log(file);
+            //     }
             // });
         });
 
