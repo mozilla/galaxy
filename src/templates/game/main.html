@@ -3,137 +3,101 @@
 
 {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
   {% set game = this %}
-  {% if game.artwork and game.artwork.background %}
-    <div class="game-bg" style="background-image: {{ game.artwork.background.src|bgurl }}"></div>
-  {% endif %}
-
-  <masthead class="game-masthead">
-    <div class="game-icon" style="background-image: url({{ game.icons[64] }})"></div>
-    <div class="game-release-info">
-      <h1 class="trunc" itemprop="name">{{ game.name|translate(game) }}</h1>
-      {% if game.developer and game.developer.name %}
-        <div class="author trunc">
-          {% if game.developer.url %}<a href="{{ game.developer.url }}" target="_blank">{% endif %}
-          {{ game.developer.name }}
-          {% if game.developer.url %}</a>{% endif %}
-        </div>
-      {% endif %}
-      <dl>
-        <dt>{{ _('Genre:') }}</dt><dd><a href="{{ url('genre', [game.genre]) }}">{{ settings.genres[game.genre] }}</a></dd>
-        {% if game.created %}
-          <dt>{{ _('Release Date:') }}</dt><dd><time>{{ game.created|date('long') }}</time></dd>
-        {% endif %}
-      </dl>
-      <div class="game-share">
-        <a class="btn btn-blue" href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}" target="_blank">
-          {{ _('Share on Facebook') }}
-        </a>
-        <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-size="large" data-text="Check this game out: {{ game.name }}!">Tweet</a>
+  
+  <div class="grid game-details-page">
+    <div class="grid-cell featured-games-section">
+      <ul>
+        {% for game in featured_games %}
+        <li>
+          <a href="#">
+            <div class="media">
+              <img class="media-figure game-icon" src="{{ media('img/new-game-details/' + game.icon) }}">
+              <div class="media-body">
+                <h3 class="game-title">{{ game.title }}</h3>
+                <p class="game-developer">{{ _('by {author}', author=game.developer) }}</p>
+              </div>
+            </div>
+          </a>
+          <div class="select-bar"></div>
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="arrow-container">
+        <div class="arrow"></div>
       </div>
     </div>
-    <div class="game-install">
-      <button data-app-url="{{ game.app_url }}" class="btn btn-big btn-green play">{{ _('Play') }}</button>
-    </div>
-  </masthead>
-
-  <section class="game-visuals">
-    <nav class="toggly">
-      <ul>
-        <li><a class="current" href="#game-media">{{ _('Media') }}</a></li>
-        <li><a href="#game-stats">{{ _('Game Stats') }}</a></li>
-        <li><a href="#game-achievements">{{ _('Achievements') }}</a></li>
-        <li><a href="#game-leaderboards">{{ _('Leaderboards') }}</a></li>
-        <li><a href="#game-friends">{{ _('Friend Activity') }}</a></li>
-      </ul>
-    </nav>
-    {% set hasVideos = game.videos and game.videos|length %}
-    {% set hasScreenshots = game.screenshots and game.screenshots|length %}
-    {% if hasVideos or hasScreenshots %}
-      <section id="game-media" class="toggly-section current">
-        {% if hasVideos %}
-          {% for video in game.videos %}
-            <figure>
-              {% if video.type == 'webm' %}
-                <video controls
-                  {% if video.width %} width="{{ video.width }}"{% endif %}
-                  {% if video.height %} height="{{ video.height }}"{% endif %}>
-                  <source src="{{ video.src }}" type="video/webm">
-                </video>
-              {% endif %}
-            </figure>
-          {% endfor %}
-        {% endif %}
-        {% if hasScreenshots %}
-          {% for screenshot in game.screenshots %}
-            <figure>
-              <img{% if screenshot.width %} width="{{ screenshot.width }}"{% endif %}
-                  {% if screenshot.height %} height="{{ screenshot.height }}"{% endif %}
-                src="{{ screenshot.src }}">
-            </figure>
-          {% endfor %}
-        {% endif %}
-      </section>
-    {% endif %}
-    <section id="game-stats" class="toggly-section">
-      <h1>{{ _('Game Stats') }}</h1>
-    </section>
-    <section id="game-achievements" class="toggly-section">
-      <h1>{{ _('Achievements') }}</h1>
-    </section>
-    <section id="game-leaderboards" class="toggly-section board-section">
-      <h1>{{ _('Leaderboards') }}</h1> 
-      {% defer (url=leaderboard, key=slug) %}
-      {% set boards = this %}
-        {% for board in boards %}
-          <div class="leaderboard">
-            {# TODO: Update href with link to leaderboard detail page #}
-            <h3><a href="#">{{ board.name }}</a></h3>
-
-            <table>
-              <tbody>
-                {% for entry in board.data %}
-                <tr>
-                  <td>
-                    <a href="{{ url('user', [entry.user.id]) }}">
-                      <div class="avatar" style="background-image: url({{ entry.user.avatar }})"></div>
-                    </a>
-                  </td>
-                  <td class="middle">
-                    <a href="{{ url('user', [entry.user.id]) }}">{{ entry.user.username }}</a>
-                  </td>
-                  <td>
-                    {{ entry.score }}
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+    <div class="grid-cell grid-flex-grow-two game-details-container">
+      <div class="grid">
+        <div class="grid-cell grid-flex-grow-two game-details-container-left">
+          <div class="game-current-media">
+            <iframe width="480" height="300" src="//www.youtube.com/embed/mX48y24t9iU" frameborder="0"></iframe>
           </div>
-        {% endfor %}
-      {% end %}
-    </section>
-    <section id="game-friends" class="toggly-section">
-      <h1>{{ _('Friends Activity') }}</h1>
-    </section>
+          <div class="game-details-section">
+            <div class="game-buttons-section">
+              <button data-app-url="{{ game.app_url }}" class="btn btn-big">{{ _('Play') }}</button>
+              <div>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}" target="_blank">
+                  <i class="icon-facebook icon-medium"></i> 
+                </a>
+                <a href="https://twitter.com/intent/tweet?source=webclient&text=Check+this+game+out:+{{ game.name }}+{{ page_url }}" target="_blank">
+                  <i class="icon-twitter icon-medium"></i> 
+                </a>
+                <!-- <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-size="large" data-text="Check this game out: {{ game.name }}!">Tweet</a> -->
+              </div>
+            </div>
+            <h1 class="game-title">Bastion</h1>
+            <p class="game-developer">by Supergiant Games</p>
+          </div>
+          <div class="game-details-section">
+            <p class="game-description">Bastion is an original action role-pplaying game featuring a reactive narrator who marks your every move, lush hand-painted 2D artwork, and tight responsive gameplay that rewards playing with finesse. The game is designed to be simple to pick up and start playing, while offering a lot of rich choices around character customization as well as a deep story and game world you can lose yourself in.</p>
+          </div>
+          <div class="game-details-section">
+            <div class="grid">
+              <div class="grid-cell game-detail-attribute">
+                <h2>Genre:</h2>
+                Action
+              </div>
+              <div class="grid-cell game-detail-attribute">
+                <h2>Release date:</h2>
+                Jan 15, 2014
+              </div>
+              <div class="grid-cell game-detail-attribute">
+                <h2>Browser support:</h2>
+                <ul class="game-browser-support">
+                  <li><i class="icon-firefox"></i> Firefox 6+</li>
+                  <li><i class="icon-chrome"></i> Chrome 6+</li>
+                </ul>
+              </div>
+              <div class="grid-cell game-detail-attribute">
+                <h2>Players:</h2>
+                1 &nbsp; <i class="icon-controller"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid-cell game-details-container-right">
+          <div class="game-details-media">
+            <img class="game-media selected" alt="" title="" src="//img.youtube.com/vi/mX48y24t9iU/maxresdefault.jpg">
+            <img class="game-media" alt="" title="" src="/media/img/new-game-details/screenshots/2.png">
+            <img class="game-media" alt="" title="" src="/media/img/new-game-details/screenshots/3.png">
+            <img class="game-media" alt="" title="" src="/media/img/new-game-details/screenshots/4.png">
+            <!-- {% if game.screenshots %}
+              {% for screenshot in game.screenshots %}
+                <img class="game-media"
+                  {% if screenshot.width %} width="{{ screenshot.width }}"{% endif %}
+                  {% if screenshot.height %} height="{{ screenshot.height }}"{% endif %}
+                  src="{{ screenshot }}">
+              {% endfor %}
+            {% endif %} -->
+          </div>
+          <div class="arrow-container">
+            <div class="arrow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    {# TODO: Links for admins/reviewers go here. #}
-
-    <section class="game-details">
-      <h3>{{ _('Description') }}</h3>
-      <p class="description" itemprop="description">
-        {{ this.description|translate(this)|nl2br }}
-      </p>
-      {% if game.homepage_url %}
-        <a href="{{ game.homepage_url }}" rel="external">{{ _('Homepage') }}</a>
-      {% endif %}
-      {% if game.license %}
-        {{ _('License: {license}', license=game.license) }}
-      {% endif %}
-      {% if game.privacy_policy_url %}
-        <a href="{{ game.privacy_policy_url }}" rel="external">{{ _('Privacy Policy') }}</a>
-      {% endif %}
-    </section>
-  </section>
 {% placeholder %}
   <masthead class="game-masthead">
     <div>
