@@ -1,44 +1,57 @@
 <form class="grid" method="post" data-required="{{ _('Required') }}" data-formtype="submit">
   <div class="grid-cell">
-    <h1>{{ _('Featured Games') }}</h1>
-      <table class="curation-table">
+    <div class="grid">
+      <div class="grid-cell curation-page-title">
+        <h1>{{ _('Featured Games') }}</h1>
+      </div>
+      <div class="grid-cell">
+        <a class="btn btn-big btn-edit curation-feature">{{ _('Feature a New Game') }}</a>
+      </div>
+    </div>
+    {% defer (url=api('game.featured'), id='featured-games') %}
+      <table class="dashboard-table curation-table">
         <tbody>
-            <tr class="curation-entry" data-game-slug="nutty-ninjas" data-game-title="Nutty Ninjas">
+          {% for game in this %}
+            <tr class="curation-entry" data-slug="{{game.slug}}">
               <td class="curation-title">
-                <img src="http://png-4.findicons.com/files/icons/2297/super_mario/256/paper_mario.png" title="{{ game.name|translate }}" /><a href="#">Nutty Ninjas</a>
+                <img src="{{game.icons }}" title="{{ game.name|translate }}" /><a href="#">{{ game.name|translate }}</a>
               </td>
-              <td class="curation-status" title="Public">
-                <span class="status-span">Status:</span><br>
-                Public
+              <td class="curation-status" title="{{ _(game.status) }}">
+                <span class="status-span">{{ _('Status') }}:</span><br>
+                {% if game.status == 'approved' %}
+                  <span class="game-status public-game-status" data-slug="{{game.slug}}">Public</span>
+                {% else %}
+                  <span class="game-status private-game-status" data-slug="{{game.slug}}">{{ _(game.status) }}</span>
+                {% endif %}
               </td>
-              <td class="dashboard-buttons curation-buttons">
+              <td class="dashboard-buttons curation-buttons" data-slug="{{game.slug}}">
                 <a class="btn btn-reject curation-unfeature">{{ _('Unfeature') }}</a>
-                <a class="btn btn-view curation-view">{{ _('View') }}</a>
-                <a class="btn btn-edit curation-edit">{{ _('Edit') }}</a>
+                <a class="btn btn-view curation-view" href="{{ url('game', [game.slug]) }}">{{ _('View') }}</a>
+                <a class="btn btn-edit curation-edit" href="{{ url('edit_game', [game.slug]) }}">{{ _('Edit') }}</a>
                 <a class="btn btn-delete curation-delete">{{ _('Delete') }}</a>
-                <a class="btn btn-disabled curation-disable">{{ _('Disable') }}</a>
+                {% if game.status == 'disabled' %}
+                <a class="btn btn-disable curation-enable">{{ _('Enable') }}</a>
+                {% else %}
+                <a class="btn btn-disable curation-disable">{{ _('Disable') }}</a>
+                {% endif %}
               </td>
             </tr>
-            <tr class="curation-entry" data-game-slug="nutty-ninjas" data-game-title="Nutty Ninjas">
-              <td class="curation-title">
-                <img src="http://png-4.findicons.com/files/icons/2297/super_mario/256/paper_mario.png" title="{{ game.name|translate }}" /><a href="#">Nutty Ninjas</a>
-              </td>
-              <td class="curation-status" title="Public">
-                <span class="status-span">Status:</span><br>
-                Public
-              </td>
-              <td class="dashboard-buttons curation-buttons">
-                <a class="btn btn-reject curation-unfeature">{{ _('Unfeature') }}</a>
-                <a class="btn btn-view curation-view">{{ _('View') }}</a>
-                <a class="btn btn-edit curation-edit">{{ _('Edit') }}</a>
-                <a class="btn btn-delete curation-delete">{{ _('Delete') }}</a>
-                <a class="btn btn-disabled curation-disable">{{ _('Disable') }}</a>
-              </td>
-            </tr>
+          {% endfor %}
         </tbody>
       </table>
       <div id="empty-message" class="hidden">
         {{ _('No games featured.') }}
       </div>
+    {% placeholder %}
+      {{ _('Loading games...') }}
+    {% empty %}
+      {{ emptyReview() }}
+    {% except %}
+      {% if error == 403 %}
+        {{ _('You are not authorized to access this page.') }}
+      {% else %}
+        {{ _('Oh no! An error occurred.') }}
+      {% endif %}
+    {% end %}
   </div>
 </form>

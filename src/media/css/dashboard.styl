@@ -2,47 +2,60 @@
 
 @import 'lib';
 
-[data-page-type~="dashboard"] .page, {
-    table {
-        border-collapse: separate; 
-        width: 100%;
-        
-        thead tr th {
-            text-align: left;
-            padding-bottom: 10px;
-        }
+.dashboard-table {
+    border-collapse: separate; 
+    width: 100%;
+    
+    thead tr th {
+        text-align: left;
+        padding-bottom: 10px;
+    }
 
-        tbody td {
-            padding: 5px 0;
-            &:not(:last-child) {
-                padding-right: 10px;
-            }
-        }
+    tbody td {
+        padding: 5px 0;
+    }
 
-        .dashboard-buttons {
-            text-align: right;
-            .btn {
-                margin-left: 10px;
-            }
+    tbody td + td {
+        padding-left: 10px;
+    }
+
+    .dashboard-buttons {
+        text-align: right;
+        .btn {
+            margin-left: 10px;
         }
     }
 }
 
 [data-page-type~="curation"] .page {
+
+    .curation-page-title {
+        flex: none;
+        width: 80%;
+    }
+
     .curation-table {
         .curation-status {
-            color: #7CCD2F;
+            
 
-            span {
-                color: #A4A4A4;
+            .status-span {
+                color: $colorGrayLight;
                 font-size: 14px;
+            }
+
+            .public-game-status {
+                color: $colorLightGreen;
+            }
+
+            .private-game-status {
+                color: $colorGray;
             }
 
         }
 
         .curation-title {
             a {
-                color: #33E0C2;
+                color: $colorTealLink;
                 font-size: 26px;
                 vertical-align: middle;
             }

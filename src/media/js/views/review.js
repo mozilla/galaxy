@@ -72,7 +72,7 @@ define('views/review',
     return function(builder, args) {
         builder.start('admin/review.html');
 
-        builder.z('type', 'leaf dashboard review');
+        builder.z('type', 'leaf review');
         builder.z('title', gettext('Review Queue'));
     };
 });

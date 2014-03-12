@@ -34,6 +34,10 @@
     background: $buttonColorRed;
 }
 
+.btn-disable {
+    background: $buttonColorGray;
+}
+
 .btn.disabled,
 .btn[disabled] {
     background: $buttonColorGray;
@@ -74,7 +78,8 @@
     background: darken($buttonColorRed, $buttonHoverStateDarken);
 }
 .btn.disabled:hover,
-.btn[disabled]:hover {
+.btn[disabled]:hover,
+.btn-disable:hover {
     background: darken($buttonColorGray, $buttonHoverStateDarken);
 }
 
