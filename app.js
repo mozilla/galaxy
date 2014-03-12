@@ -5,6 +5,18 @@ var zlib = require('zlib');
 var nodeStatic = require('node-static');
 
 
+const ENABLE_CACHE_MEDIA = true;
+const CACHE_SECONDS = 604800;  // 1 week in seconds
+const CACHE_CONTENT_TYPES = [
+  'application/.*',
+  'audio/.*',
+  'font/.*',
+  'image/.*',
+  'text/css',
+  'text/plain',
+  'video/.*'
+];
+
 const SERVER_HTML = '/server.html';
 const REWRITES = [
   {from: '^/([\?].*)?$', to: SERVER_HTML},
@@ -78,9 +90,36 @@ nodeStatic.Server.prototype.respondGzip = function(pathname, status,
   });
 };
 
+/* Monkeypatching `node-static`'s `respond` so we can set `Cache-Control`
+ * headers on only media assets, not HTML documents.
+ */
+nodeStatic.Server.prototype.respond = function (pathname, status, _headers, files, stat, req, res, finish) {
+    var contentType = _headers['Content-Type'] ||
+                      nodeStatic.mime.lookup(files[0]) ||
+                      'application/octet-stream';
+
+    if (ENABLE_CACHE_MEDIA) {
+      var cache = false;
+      CACHE_CONTENT_TYPES.some(function(ct) {
+        if ((new RegExp(ct)).test(contentType)) {
+          return cache = true;
+        }
+      });
+      if (cache) {
+        _headers['cache-control'] = 'max-age=' + CACHE_SECONDS;
+      }
+    }
+
+    if (this.options.gzip) {
+      this.respondGzip(pathname, status, contentType, _headers, files, stat, req, res, finish);
+    } else {
+      this.respondNoGzip(pathname, status, contentType, _headers, files, stat, req, res, finish);
+    }
+};
+
+
 var fileServer = new nodeStatic.Server('./src', {
-  // TODO: Set a reasonable `max-age` (issue #41).
-  cache: 0,
+  cache: 0,  // Caching on media handled above.
   deflate: true,
   gzip: true
 });
