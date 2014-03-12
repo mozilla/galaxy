@@ -6,12 +6,19 @@
 // usable on any header
 .header {
     background: rgba(92, 158, 191, 0.22);
-    border-bottom: 1px solid $seavan-salt-white;
     display-flex();
     height: 48px;
     max-height: 48px;
     position: relative;
     width: 100%;
+    &:after {
+        content: "";
+        gradient-two-color(#48526e, #202e4f);
+        height: 2px;
+        left: 0
+        position: absolute;
+        width: 100%;
+    }
     > * {
         flex-center();
     }
