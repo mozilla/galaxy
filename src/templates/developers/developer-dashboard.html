@@ -1,5 +1,5 @@
 {% macro emptyGames() %}
-  {{ _('You do not own any games.') }}
+  {{ _('You have not submitted any games yet.') }}
 {% endmacro %}
 
 <h1>{{ _('My Games') }}</h1>
@@ -18,14 +18,13 @@
       {% for game in this|sort(attribute='created') %}
         <tr data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
           <td><a href="{{ game.app_url }}">{{ game.name }}</a></td>
-          <td></td>
-          <td></td>
+          <td colspan="2"></td>
           <td>{{ game.created|relativeDate }}</td>
           <td class="myGames-buttons">
-            <a class="btn btn-blue" href="/game/{{ game.slug }}/detail" target="_blank"><div class="btn-text">{{ _('View') }}</div></a>
-            <a class="btn btn-green" href="/game/{{ game.slug }}/edit"><div class="btn-text">{{ _('Edit') }}</div></a>
-            <a class="btn btn-red myGames-delete"><div class="btn-text">{{ _('Delete') }}</div></a>
-            <a class="btn myGames-disable"><div class="btn-text">{{ _('Disable') }}</div></a>
+            <a class="btn btn-blue" href="{{ url('game', [game.slug]) }}" target="_blank">{{ _('View') }}</a>
+            <a class="btn btn-green" href="{{ url('edit_game', [game.slug]) }}">{{ _('Edit') }}</a>
+            <a class="btn btn-red my-games-delete">{{ _('Delete') }}</a>
+            <a class="btn my-games-disable">{{ _('Disable') }}</a>
           </td>
         </tr>
       {% endfor %}

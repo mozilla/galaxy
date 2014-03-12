@@ -1,10 +1,10 @@
 define('views/developer_dashboard', ['z'], function(z) {
 
-	z.body.on('click', '.myGames-delete', function() {
+    z.body.on('click', '.my-games-delete', function() {
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
         console.log('delete ' + $game.data('gameSlug'));
-    }).on('click', '.myGames-disable', function() {
+    }).on('click', '.my-games-disable', function() {
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
         console.log('disable ' + $game.data('gameSlug'));
