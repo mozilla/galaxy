@@ -1,6 +1,5 @@
 {% macro gameForm(game) %}
-  {% set type = 'edit' if game else 'submit' %}
-	<form class="game-form" method="post" data-required="{{ _('Required') }}" data-formtype="{{type}}">
+  <form class="game-form" method="post" data-required="{{ _('Required') }}" data-formtype="{{ type }}">
 
     <div class="grid content">
       <div class="grid-cell grid-flex-grow-two">
@@ -205,11 +204,7 @@
       <div class="grid-cell">
         {# TODO: Still allow this page to be accessed anonymously, but save in localStorage and prompt user to log in/register. #}
         <button class="btn btn-cta btn-submit" type="submit">
-          {% if type == 'submit' %}
-            {{ _('Submit') }}
-          {% else %}
-            {{ _('Save Changes') }}
-          {% endif %}
+          {{ _('Save Changes') if game else _('Submit') }}
         </button>
       </div>
     </div>
