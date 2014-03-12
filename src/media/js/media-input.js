@@ -101,7 +101,7 @@ define('media-input',
         var $emptyInputs = $allInputs.filter(function() {
             return !$(this).val();
         });
-
+        // TODO: Have a better check for the icons input field
         if ($input.val() && $emptyInputs.length === 0 && $input.data('type') !== "icons") {
             createInput($input.parent());
         } else {
