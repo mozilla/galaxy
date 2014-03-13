@@ -1,69 +1,63 @@
+define('search', ['lunr', 'requests', 'underscore', 'urls'], function(lunr, requests, _, urls) {
 
+    var index;
+    function index(data) {
 
-define('search', ['requests', 'urls', 'lunr', 'underscore'], function(requests, urls, lunr, _) {
+        // Define fields to index in lunr.
+        index = lunr(function() {
+            var that = this;
+            Object.keys(data.fields).forEach(function(k) {
+                that.field(k, data.fields[k]);
+            });
+            that.ref(data.ref || '_id');
+        });
 
-	var index;
-	function index(data) {
+        requests.get(urls.api.url(data.url)).done(load);
+        window.postMessage({type: 'indexed'}, '*');
+    }
 
-	 	// Define fields to index in lunr.
-		index = lunr(function() {
-			var that = this;
-			Object.keys(data.fields).forEach(function(k) {
-				that.field(k, data.fields[k]);
-			});
-			that.ref(data.ref || '_id');
-		});
+    function load(items) {
+        allItems = items;
+        items.forEach(function (item) {
+            index.add(item);
+        });
+    }
 
-		globalSearch = index;
+    function search(query) {
+        var results;
 
-		requests.get(urls.api.url(data.url)).done(load);
-		this.postMessage({type: 'indexed'}, '*');
-	}
+        if (!query) {
+            results = allItems;
+        } else {
+            results = index.search(query).map(function (v) {
+                return {
+                    item: v,
+                    score: v.score
+                };
+            });
+        }
 
-	function load(items)
-	{
-		allItems = items;
-		items.forEach(function (item) {
-			index.add(item);
-		});
-	}
+        window.postMessage({
+            type: 'results',
+            data: {
+                query: query,
+                results: results
+            }
+        }, '*');
+    }
 
-	function search(query) {
-		var results;
+    var methods = {
+        index: index,
+        search: search
+    };
 
-		if(!query) {
-			results = allItems;
-		} else {
-			results = index.search(query).map(function (v) {
-				return {
-					item: v,
-					score: v.score
-				};
-			});
-		}
+    window.addEventListener('message', function(e) {
+        console.log(e);
+        var method = methods[e.data.type];
+        if (method) {
+            method(e.data.data);
+        }
+    }, false);
 
-		postMessage({
-			type: 'results',
-			data: {
-				query: query,
-				results: results
-			}
-		}, '*');
-	}
-
-	var methods = {
-		index: index,
-		search: search
-	};
-
-	addEventListener('message', function(e) {
-		console.log(e);
-		var method = methods[e.data.type];
-		if (method) {
-			method(e.data.data);
-		}
-	}, false);
-
-	return methods;
+    return methods;
 })
-
