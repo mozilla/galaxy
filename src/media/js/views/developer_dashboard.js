@@ -1,13 +1,56 @@
-define('views/developer_dashboard', ['z'], function(z) {
+define('views/developer_dashboard', 
+    ['notification', 'requests', 'urls', 'z'], function(notification, requests, urls, z) {
+
+    function moderateGame($game, deleted) {
+        var gameSlug = $game.data('gameSlug');
+        var statusVerb = deleted ? 'delete' : 'disable';
+        requests.post(urls.api.url('game.moderate', [gameSlug, statusVerb]))
+                .done(function(data) {
+                    actionSubmitted(true);
+                }).fail(function(err) {
+                    console.error('Failed to submit review; error:', err);
+                    actionSubmitted(false);
+                });
+
+        function actionSubmitted(success) {
+            var gameTitle = $game.data('gameTitle');
+            var message;
+            var params = {game: gameTitle};
+            if (success) {
+                if (deleted) {
+                    message = gettext('Deleted game: {game}', params);
+                } else {
+                    message = gettext('Disabeled game: {game}', params);
+                }
+            } else {
+                if (deleted) {
+                    message = gettext('Failed to delete game: {game}', params);
+                } else {
+                    message = gettext('Failed to disable game: {game}', params);
+                }
+            }
+            notification.notification({message: message});
+
+            if (success && deleted) {
+                $game.remove();
+
+                var $table = $('.my-games-table');
+                if (!$table.find('tbody > tr').length) {
+                    $table.hide();
+                    $('#empty-message').show();
+                }
+            }
+        }
+    }
 
     z.body.on('click', '.my-games-delete', function() {
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
-        console.log('delete ' + $game.data('gameSlug'));
+        moderateGame($game, true);
     }).on('click', '.my-games-disable', function() {
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
-        console.log('disable ' + $game.data('gameSlug'));
+        moderateGame($game, false);
     });
 
     return function(builder, args) {

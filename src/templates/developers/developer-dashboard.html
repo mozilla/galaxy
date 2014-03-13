@@ -3,8 +3,9 @@
 {% endmacro %}
 
 <h1>{{ _('My Games') }}</h1>
+<!--TODO: Retrieve only one developer's games-->
 {% defer (url=api('game.list')) %}
-  <table class="myGames-table">
+  <table class="my-games-table">
     <thead>
       <tr>
         <th>{{ _('Game') }}</th>
@@ -18,9 +19,9 @@
       {% for game in this|sort(attribute='created') %}
         <tr data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
           <td><a href="{{ game.app_url }}">{{ game.name }}</a></td>
-          <td colspan="2"></td>
+          <td colspan="2"><!--TODO: Retrieve status and queue position--></td>
           <td>{{ game.created|relativeDate }}</td>
-          <td class="myGames-buttons">
+          <td class="my-games-buttons">
             <a class="btn btn-blue" href="{{ url('game', [game.slug]) }}" target="_blank">{{ _('View') }}</a>
             <a class="btn btn-green" href="{{ url('edit_game', [game.slug]) }}">{{ _('Edit') }}</a>
             <a class="btn btn-red my-games-delete">{{ _('Delete') }}</a>
