@@ -45,6 +45,23 @@
         <div class="content">
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
+              <div class="l">{{ _('Team slug') }}</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <input type="text" name="teamslug" id="teamslug" placeholder="{{ _('Team slug') }}" value="{{ user_settings.teamSlug }}" required>
+            </div>
+            <div class="grid-cell">
+              <div class="form-help">
+                {{ _('Your team/company name slug, which is used to address all player activity in Galaxy.') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
               <div class="l">{{ _('Team URL') }}</div>
             </div>
           </div>
