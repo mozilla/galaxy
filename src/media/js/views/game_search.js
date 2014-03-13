@@ -36,9 +36,7 @@ define('views/game_search', ['promise', 'search'], function(promise, search) {
             builder.start('game/search.html');
 
             builder.z('type', 'leaf');
-            builder.z('title', null);
-
-            gettext('Search');
+            builder.z('title', gettext('Search'));
         });
     };
 });
