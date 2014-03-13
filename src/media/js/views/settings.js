@@ -20,7 +20,7 @@ define('views/settings',
 
         var newData = {
             username: newUsername,
-            companyName: newTeamname,
+            teamName: newTeamname,
             homepage: newTeamURL
         };
         

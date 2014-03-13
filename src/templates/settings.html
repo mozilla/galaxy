@@ -1,6 +1,5 @@
 <div class="unit span-grid">
   <div class="content">
-    <div class="settings-body">
     {% if user.logged_in() %}
     {% set user_settings = user.get_settings('public') %}
       <div class="avatar" style="background-image: url({{ user_settings.avatar|safeurl }})"></div>
@@ -34,7 +33,7 @@
           </div>
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
-              <input type="text" name="teamname" id="teamname" placeholder="{{ _('Team name') }}" value="{{ user_settings.companyName }}">
+              <input type="text" name="teamname" id="teamname" placeholder="{{ _('Team name') }}" value="{{ user_settings.teamName }}">
             </div>
             <div class="grid-cell">
               <div class="form-help">
@@ -77,8 +76,7 @@
             </div>
             <div class="grid-cell">
               <div class="form-help">
-                {{ _('Your email cannot be changed. Your password can be changed at ') }}
-                <a href="https://login.persona.org" target="_blank">{{ _('login.persona.org') }}</a>
+                {{ _('Your email cannot be changed. Your password can be changed at <a href="{url}" target="_blank">{domain}</a>', url='https://login.persona.org', domain='login.persona.org') }}
               </div>
             </div>
           </div>
@@ -90,6 +88,5 @@
     {% else %}
       {{ _('You must be <a class="persona">signed in</a> to access this page.') }}
     {% endif %}
-  </div>
   </div>
 </div>
