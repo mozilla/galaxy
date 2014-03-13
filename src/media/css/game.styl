@@ -21,27 +21,12 @@
             top: 0;
             width: 100%;
         }
-
-        h1 {
-            color: #eff;
-            line-height: 1;
-        }
     }
 
     .game-masthead {
         min-height: 100px;
         position: relative;
         z-index: 2;
-    }
-
-    .game-icon {
-        background: no-repeat;
-        background-size: contain;
-        height: 64px;
-        left: 35px;
-        position: absolute;
-        top: 35px;
-        width: 64px;
     }
 
     .game-release-info {
@@ -164,6 +149,129 @@
             td.middle {
                 width: 100%;
             }
+        }
+    }
+    .game-details-container {
+        background-color: rgba(255, 255, 255, 0.4);
+        padding-top: 20px;
+
+        .game-details-container-left,
+        .game-details-container-right  {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .game-details-container-left {
+            .game-current-media {
+                margin-bottom: 20px;
+            }
+        }
+        .game-details-container-right {
+            .game-details-media {
+                height: 471px;
+                overflow-y: scroll;
+                padding: 5px;
+                &::-webkit-scrollbar { 
+                    display: none; 
+                }
+            }
+            .game-media {
+                cursor: pointer;
+                margin-bottom: 20px;
+                width: 100%;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+            .game-media.selected {
+                outline: 5px solid rgba(255, 255, 255, 0.5);
+            }
+            
+            .arrow-container {
+                .arrow {
+                    border-width: 15px 38px 0 37px;
+                }
+            }
+        }
+        .game-details-section {
+            margin-bottom: 20px;
+        }
+        .game-title {
+            color: #fff;
+            font-size: 48px;
+        }
+        .game-developer {
+            color: #cfcfcf;
+            font-size: 18px;
+            font-weight: 300;
+        }
+        .game-buttons-section {
+            float: right;
+            text-align: right;
+
+            [class^="icon-"],
+            [class*=" icon-"] {
+                margin-left: 3px;
+                margin-top: 6px;
+            }
+        }
+        .play-button {
+            border: 1px solid #467285;
+            background: #33e0c2;
+            color: #fff;
+            font-size: 16px;
+            padding: 10px 40px;
+            text-shadow: none;
+        }
+        .game-description {
+            color: #cfcfcf;
+            font-size: 12px;
+        }
+        
+        .game-detail-attribute {
+            color: #fff;
+            font-size: 0.8em;
+            font-weight: 500;
+            margin-bottom: 0;
+            
+            h2 {
+                color: #b1b1b1;
+                font-size: 0.8em;
+                font-weight: 400;
+                line-height: 0.8em;
+                margin-bottom: 5px;
+            }
+
+            .game-browser-support {
+                list-style: none;
+                
+                li {
+                    margin-bottom: 2px;
+                }
+
+                [class^="icon-"],
+                [class*=" icon-"] {
+                    background-size: 14px;
+                    height: 14px;
+                    margin-right: 2px;
+                    width: 14px;
+                }
+            }
+
+            .icon-controller {
+                margin-left: 2px
+            }
+        }
+    }
+    .arrow-container {
+        height: 10px;
+        margin-top: 20px;
+        .arrow {
+            border-style: solid;
+            border-width: 20px 50px 0 50px;
+            border-color: rgba(255, 255, 255, 0.5) transparent transparent transparent;
+            margin: 0 auto;
+            height: 0px;
+            width: 0px;
         }
     }
 }

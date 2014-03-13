@@ -1,0 +1,73 @@
+@import 'lib';
+
+.featured-games-section {
+    ul {
+        height: 534px;
+        list-style: none;
+        overflow-y: scroll;        
+        &::-webkit-scrollbar { 
+            display: none; 
+        }
+        > li {
+            display: block;
+            height: 64px;
+            margin-bottom: 2em;
+            position: relative;
+        }
+        a {
+            display: block;
+            ellipsis(); 
+            vertical-align: top;
+            text-decoration: none;
+        }
+        .media {
+            align-items: flex-start;
+            display: flex;
+        }
+        .media-figure {
+            margin-right: 1em;
+        }
+        .media-body {
+            flex: 1 0 0;
+            &, & :last-child {
+                margin-bottom: 0;
+            }
+        }
+        .game-icon {
+            border: 1px solid #ccc;
+            float: left;
+            height: 64px;
+            width: 64px;
+        }
+        .game-title {
+            color: #fff;
+            font-weight: 600; 
+            padding-bottom: 5px;
+            padding-top: 12px;
+        }
+        .game-developer {
+            color: #909090;
+        }
+    }
+}
+
+.game-details-page {
+    .featured-games-section {
+        li {
+            opacity: 0.25;
+            &.selected {
+                opacity: 1;
+
+                .select-bar {
+                    background-color: #dfe1e6;
+                    border-radius: 2px;
+                    height: 100%;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    width: 10px;
+                }
+            }
+        }
+    }
+}

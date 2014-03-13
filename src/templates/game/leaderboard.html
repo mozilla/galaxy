@@ -18,7 +18,7 @@
             <a class="board-slug">{{ board.slug }}</a>
           </td>
           <td>
-            <a class="btn btn-red board-del">{{ _('Remove') }}</a>
+            <a class="btn btn-delete board-del">{{ _('Remove') }}</a>
           </td>
         </tr>
       {% endfor %}
@@ -28,6 +28,6 @@
   <form class="create-board" data-game-slug="{{ slug }}" id="leaderboard-create">
     <p><input type="text" name="name" placeholder="{{ _('Board name') }}"></p>
     <p><input type="text" name="slug" placeholder="{{ _('Slug') }}"></p>
-    <button class="btn btn-green board-create" type="submit">Create</button>
+    <button class="btn btn-cta board-create" type="submit">Create</button>
   </form>
 {% end %}
