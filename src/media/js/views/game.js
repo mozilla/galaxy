@@ -1,6 +1,6 @@
 define('views/game',
-       ['jquery', 'l10n', 'requests', 'utils', 'urls', 'z'],
-       function($, l10n, requests, utils, urls, z) {
+       ['jquery', 'l10n', 'requests', 'user', 'utils', 'urls', 'z'],
+       function($, l10n, requests, user, utils, urls, z) {
 
     function updatePlay(gameSlug) {
         var newData = {
@@ -12,7 +12,9 @@ define('views/game',
     z.body.on('click', '.play', function(e) {
         var $this = $(this);
         e.preventDefault();
-        updatePlay($this.data('gameSlug'));
+        if (user.logged_in()) {
+            updatePlay($this.data('gameSlug'));
+        }
         window.open($this.data('appUrl'));
     });
     z.win.on('hashchange', function() {
