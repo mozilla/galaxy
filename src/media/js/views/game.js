@@ -1,6 +1,19 @@
 define('views/game',
-       ['jquery', 'l10n', 'utils', 'z'],
-       function($, l10n, utils, z) {
+       ['jquery', 'l10n', 'requests', 'utils', 'urls', 'z'],
+       function($, l10n, requests, utils, urls, z) {
+
+    function updatePlay(gameSlug) {
+        var newData = {
+            _user: '',
+            game: gameSlug
+        };
+
+        requests.put(urls.api.url('user.purchase'), newData).done(function(data) {
+
+        }).fail(function(data) {
+
+        });
+    };
 
     z.body.on('click', '.play', function(e) {
         var $this = $(this);
