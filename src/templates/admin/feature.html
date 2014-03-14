@@ -11,32 +11,6 @@
     {% defer (url=api('game.featured'), id='featured-games') %}
       <table class="dashboard-table curation-table">
         <tbody>
-          {% for game in this %}
-            <tr class="curation-entry" data-slug="{{game.slug}}">
-              <td class="curation-title">
-                <img src="{{game.icons }}" title="{{ game.name|translate }}" /><a href="#">{{ game.name|translate }}</a>
-              </td>
-              <td class="curation-status" title="{{ _(game.status) }}">
-                <span class="status-span">{{ _('Status') }}:</span><br>
-                {% if game.status == 'approved' %}
-                  <span class="game-status public-game-status" data-slug="{{game.slug}}">Public</span>
-                {% else %}
-                  <span class="game-status private-game-status" data-slug="{{game.slug}}">{{ _(game.status) }}</span>
-                {% endif %}
-              </td>
-              <td class="dashboard-buttons curation-buttons" data-slug="{{game.slug}}">
-                <a class="btn btn-reject curation-unfeature">{{ _('Unfeature') }}</a>
-                <a class="btn btn-view curation-view" href="{{ url('game', [game.slug]) }}">{{ _('View') }}</a>
-                <a class="btn btn-edit curation-edit" href="{{ url('edit_game', [game.slug]) }}">{{ _('Edit') }}</a>
-                <a class="btn btn-delete curation-delete">{{ _('Delete') }}</a>
-                {% if game.status == 'disabled' %}
-                <a class="btn btn-disable curation-enable">{{ _('Enable') }}</a>
-                {% else %}
-                <a class="btn btn-disable curation-disable">{{ _('Disable') }}</a>
-                {% endif %}
-              </td>
-            </tr>
-          {% endfor %}
         </tbody>
       </table>
       <div id="empty-message" class="hidden">

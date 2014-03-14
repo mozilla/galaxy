@@ -1,4 +1,4 @@
-// For styles relating to dashboard screens (curation dashboard, review dashboard etc.);
+// For styles relating to dashboard screens (curation dashboard, review dashboard etc.)
 
 @import 'lib';
 
@@ -13,10 +13,10 @@
 
     tbody td {
         padding: 5px 0;
-    }
 
-    tbody td + td {
-        padding-left: 10px;
+        + td {
+            padding-left: 10px;
+        }
     }
 
     .dashboard-buttons {
@@ -27,43 +27,40 @@
     }
 }
 
-[data-page-type~="curation"] .page {
+.curation-page-title {
+    flex: none;
+    width: 80%;
+}
 
-    .curation-page-title {
-        flex: none;
-        width: 80%;
-    }
+.curation-table {
+    .curation-status {
 
-    .curation-table {
-        .curation-status {
-            
-
-            .status-span {
-                color: $colorGrayLight;
-                font-size: 14px;
-            }
-
-            .public-game-status {
-                color: $colorLightGreen;
-            }
-
-            .private-game-status {
-                color: $colorGray;
-            }
-
+        .status-span {
+            color: $colorGrayLight;
+            font-size: 14px;
         }
 
-        .curation-title {
-            a {
-                color: $colorTealLink;
-                font-size: 26px;
-                vertical-align: middle;
-            }
-            img {
-                vertical-align: middle;
-                width: 64px;
-                height: 64px;
-            }
+        .status-public {
+            color: $colorLightGreen;
+        }
+
+        .status-private {
+            color: $colorGray;
+        }
+
+    }
+
+    .curation-title {
+        a {
+            color: $colorTealLink;
+            font-size: 26px;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        img {
+            vertical-align: middle;
+            max-width: 64px;
+            max-height: 64px;
         }
     }
 }

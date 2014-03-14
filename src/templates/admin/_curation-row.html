@@ -1,16 +1,16 @@
 <tr class="curation-entry" data-slug="{{game.slug}}">
   <td class="curation-title">
-    <img src="{{game.icons }}" title="{{ game.name|translate }}" /><a href="#">{{ game.name|translate }}</a>
+    <img src="{{ game.icons }}" title="{{ game.name|translate }}"><a href="#">{{ game.name|translate }}</a>
   </td>
   <td class="curation-status" title="{{ _(game.status) }}">
     <span class="status-span">{{ _('Status') }}:</span><br>
     {% if game.status == 'approved' %}
-      <span class="game-status public-game-status" data-slug="{{game.slug}}">Public</span>
+      <span class="game-status status-public" data-slug="{{ game.slug }}">{{ _(Public) }}</span>
     {% else %}
-      <span class="game-status private-game-status" data-slug="{{game.slug}}">{{ _(game.status) }}</span>
+      <span class="game-status status-private" data-slug="{{ game.slug }}">{{ getStatus(game.status) }}</span>
     {% endif %}
   </td>
-  <td class="dashboard-buttons curation-buttons" data-slug="{{game.slug}}">
+  <td class="dashboard-buttons curation-buttons" data-slug="{{ game.slug }}">
     <a class="btn btn-reject curation-unfeature">{{ _('Unfeature') }}</a>
     <a class="btn btn-view curation-view" href="{{ url('game', [game.slug]) }}">{{ _('View') }}</a>
     <a class="btn btn-edit curation-edit" href="{{ url('edit_game', [game.slug]) }}">{{ _('Edit') }}</a>
