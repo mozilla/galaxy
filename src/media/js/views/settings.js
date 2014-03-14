@@ -1,11 +1,18 @@
 define('views/settings', 
-    ['forms', 'log', 'notification', 'requests', 'urls', 'user', 'z'], 
-    function(forms, log, notification, requests, urls, user, z) {
+    ['forms', 'log', 'notification', 'requests', 'urls', 'user', 'utils', 'z'], 
+    function(forms, log, notification, requests, urls, user, utils, z) {
     
     var console = log('settings');
 
     function handleProfileUpdate(changes) {
-        user.update_settings(changes);
+        var newData = {
+            username: changes.username,
+            companyName: changes.teamName,
+            companySlug: changes.teamSlug,
+            homepage: changes.homepage
+        };
+
+        user.update_settings(newData);
         z.page.trigger('reload_chrome');
         require('views').reload().done(function() {
             notification.notification({message: gettext('Your settings have been saved')});
@@ -17,13 +24,15 @@ define('views/settings',
         var newUsername = $this.find('[name=username]').val();
         var newTeamname = $this.find('[name=teamname]').val();
         var newTeamURL = $this.find('[name=teamurl]').val();
+        var newTeamslug = $this.find('[name=teamslug]').val();
 
         var newData = {
             username: newUsername,
             teamName: newTeamname,
+            teamSlug: newTeamslug,
             homepage: newTeamURL
         };
-        
+
         requests.put(urls.api.url('user.profile'), newData).done(function(data) {
             handleProfileUpdate(newData);
         }).fail(function(data) {
@@ -37,6 +46,12 @@ define('views/settings',
     z.body.on('submit', 'form.edit-profile', function(e) {
         e.preventDefault();
         updateProfile($(this));
+    }).on('blur change keyup paste', 'input[name=teamname]', function(e) {
+        var $this = $(this);
+        var $slug = $this.closest('form').find('input[name=teamslug]');
+        $slug.val(utils.slugify($this.val()));
+        $slug.attr('tabIndex', this.checkValidity() ? '-1' : '');
+        $slug.toggleClass('focused', !!$this.val());
     });
 
     return function(builder, args) {

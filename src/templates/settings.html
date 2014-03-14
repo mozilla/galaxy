@@ -33,7 +33,7 @@
           </div>
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
-              <input type="text" name="teamname" id="teamname" placeholder="{{ _('Team name') }}" value="{{ user_settings.teamName }}">
+              <input type="text" name="teamname" id="teamname" placeholder="{{ _('Team name') }}" value="{{ user_settings.companyName }}">
             </div>
             <div class="grid-cell">
               <div class="form-help">
@@ -50,11 +50,11 @@
           </div>
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
-              <input type="text" name="teamslug" id="teamslug" placeholder="{{ _('Team slug') }}" value="{{ user_settings.teamSlug }}" required>
+              <input type="text" name="teamslug" id="teamslug" placeholder="{{ _('Team slug') }}" value="{{ user_settings.companySlug }}">
             </div>
             <div class="grid-cell">
               <div class="form-help">
-                {{ _('Your team/company name slug, which is used to address all player activity in Galaxy.') }}
+                {{ _('Your team/company name slug, which is shown on all URLs linked to your team/company.') }}
               </div>
             </div>
           </div>
