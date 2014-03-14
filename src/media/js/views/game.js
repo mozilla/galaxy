@@ -4,20 +4,15 @@ define('views/game',
 
     function updatePlay(gameSlug) {
         var newData = {
-            _user: '',
             game: gameSlug
         };
-
-        requests.put(urls.api.url('user.purchase'), newData).done(function(data) {
-
-        }).fail(function(data) {
-
-        });
+        requests.post(urls.api.url('user.purchase'), newData);
     };
 
     z.body.on('click', '.play', function(e) {
         var $this = $(this);
         e.preventDefault();
+        updatePlay($this.data('gameSlug'));
         window.open($this.data('appUrl'));
     });
     z.win.on('hashchange', function() {
