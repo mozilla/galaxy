@@ -21,16 +21,11 @@ define('views/settings',
     function updateProfile($this) {
         forms.toggleSubmitFormState($this, false);
 
-        var newUsername = $this.find('[name=username]').val();
-        var newTeamname = $this.find('[name=teamname]').val();
-        var newTeamURL = $this.find('[name=teamurl]').val();
-        var newTeamslug = $this.find('[name=teamslug]').val();
-
         var newData = {
-            username: newUsername,
-            teamName: newTeamname,
-            teamSlug: newTeamslug,
-            homepage: newTeamURL
+            username: $this.find('[name=username]').val(),
+            teamName: $this.find('[name=teamname]').val(),
+            teamSlug: $this.find('[name=teamslug]').val(),
+            homepage: $this.find('[name=teamurl]').val()
         };
 
         requests.put(urls.api.url('user.profile'), newData).done(function(data) {
