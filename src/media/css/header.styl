@@ -6,11 +6,10 @@
 // usable on any header
 .header {
     background: $mainHeaderBackgroundColor;
-    box-shadow: 0px 1px 1px 0px rgba(255,255,255,0.25);
-    border-bottom: 2px solid $headerBottomBorderColor;
+    border-bottom: 1px solid rgba(255,255,255,.5);
     display-flex();
-    height: 48px;
-    max-height: 48px;
+    height: 60px;
+    max-height: 60px;
     position: relative;
     width: 100%;
     > * {
@@ -47,7 +46,7 @@
         display: block;
     }
     .inner {
-        height: 48px;
+        height: 60px;
         display-flex();
         position: relative;
         text-align: left;
@@ -57,6 +56,9 @@
             flex-center();
             display: block;
         }
+    }
+    .site, .auth {
+        margin: 0 10px;
     }
     .wordmark {
         color: #fff;
@@ -269,7 +271,6 @@ selectedNav() {
 @media (min-width: 1200px) {
 
     .site-header {
-        height: 60px;
         max-height: 60px;
         position: relative;
         .inner {
@@ -277,9 +278,8 @@ selectedNav() {
             margin: 0 auto;
             max-width: 1200px;
         }
-        .site {
+        .site, .auth {
             margin: 0;
-            // width: 232px;
         }
         .site, .site a, .wordmark {
             height: 60px;
