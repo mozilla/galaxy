@@ -183,6 +183,7 @@ define('navigation',
         var href = el.getAttribute('href') || el.getAttribute('action');
         return !href || href.substr(0, 4) === 'http' ||
                 href.substr(0, 7) === 'mailto:' ||
+                href.substr(0, 11) === 'javascript:' ||
                 href[0] === '#' ||
                 href.indexOf('?modified=') !== -1 ||
                 el.getAttribute('target') ||

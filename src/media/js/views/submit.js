@@ -14,8 +14,9 @@ define('views/submit',
     }
 
     function editGame(data) {
-        // TODO: change the post to a put when the backend is ready
-        requests.post(urls.api.url('game.edit'), data).done(function(data) {
+        var slug = data.slug;
+        data = {data: JSON.stringify(data)};
+        requests.put(urls.api.url('game.edit', [slug]), data).done(function(data) {
             notification.notification({message: gettext('Game details updated')});
             require('views').reload();
         }).fail(function(data) {
@@ -23,7 +24,7 @@ define('views/submit',
         });
     }
 
-    z.body.on('blur change keyup paste', 'input[name=name]', function(e) {
+    z.body.on('blur input', 'input[name=name]', function(e) {
         // NOTE: We're using `keyup` instead of `keypress` to detect when
         // the user tabs within this field.
         var $this = $(this);
@@ -37,29 +38,6 @@ define('views/submit',
         // Upon presence/absence of name, toggle the `focused` class so
         // :valid/:invalid styles get set on slug.
         $slug.toggleClass('focused', !!$this.val());
-    }).on('blur change', 'input[type=file]', function(e) {
-        // TODO: Replace with drag-and-drop library.
-        var input = this;
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var $filePreview = $(input).closest('.form-field').find('.file-preview');
-                    $filePreview.show().css('background-image', 'url(' + e.target.result + ')');
-                    var img = new Image();
-                    img.src = e.target.result;
-                    img.onload = function() {
-                        $filePreview.siblings('.file-size').html(this.width + 'px &times; ' + this.height + 'px').show();
-                    };
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        input.blur();
-        readURL(this);
-        // TODO: Allow user to delete/replace (and possibly resize/crop) images.
-        // TODO: Allow previewing of videos.
-        // TODO: Allow multiple icons/screenshots/videos.
     }).on('submit', '.game-form', function(e) {
         e.preventDefault();
         var $this = $(this);
@@ -71,10 +49,6 @@ define('views/submit',
             }).filter(_.identity);
         }
 
-        var icons = stringifyURLs('icons');
-        var screenshots = stringifyURLs('screenshots');
-        var videos = stringifyURLs('videos');
-        
         var data = {
             name: $this.find('[name=name]').val(),
             slug: $this.find('[name=slug]').val(),
@@ -82,10 +56,28 @@ define('views/submit',
             description: $this.find('[name=description]').val(),
             privacy_policy_url: $this.find('[name=privacy_policy_url]').val(),
             genre: $this.find('[name=genre]:checked').val(),
-            icons: JSON.stringify(icons),
-            screenshots: JSON.stringify(screenshots),
-            videos: JSON.stringify(videos)
+            icons: [],
+            screenshots: [],
         };
+
+        // Handle URLs for icons, screenshots, and videos.
+        $('.media-final-url').each(function () {
+            var $this = $(this);
+            var item = {src: $this.val()};
+
+            var height = $this.data('height');
+            if (height) {
+                item.height = height;
+            }
+
+            var width = $this.data('width');
+            if (width) {
+                item.width = width;
+            }
+
+            data[$this.data('type')].push(item);
+        });
+
         if ($this.data('formtype') === 'submit') {
             submitGame(data);
         } else if ($this.data('formtype') === 'edit') {
@@ -95,8 +87,15 @@ define('views/submit',
 
     return function(builder) {
         builder.start('submit.html').done(function() {
-            // new dropzone('.submit-form', {
-            //     uploadMultiple: true
+            // new dropzone('#test-zone', {
+            //     url: "#",
+            //     clickable: true,
+            //     maxFilesize: 10,
+            //     uploadMultiple: true,
+            //     addRemoveLinks: true,
+            //     accept: function(file, done) {
+            //         console.log(file);
+            //     }
             // });
         });
 
