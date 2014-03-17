@@ -21,8 +21,8 @@ define('views/review',
         requests.post(urls.api.url('game.moderate', [gameSlug, statusVerb]))
                 .done(function(data) {
                     reviewSubmitted(true);
-                }).fail(function(err) {
-                    console.error('Failed to submit review; error:', err);
+                }).fail(function(xhr, err, statusCode, resp) {
+                    console.error('Failed to submit review; error:', resp.error);
                     reviewSubmitted(false);
                 });
 
