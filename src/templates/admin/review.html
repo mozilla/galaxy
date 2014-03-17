@@ -16,42 +16,33 @@
     </div>
     {% defer (url=api('game.list')|urlparams(status=status)) %}
       <table class="dashboard-table review-table">
-        <thead>
-          <tr>
-            <th>{{ _('Game') }}</th>
-            <th>{{ _('Waiting Time') }}</th>
-            <th></th>
+        {% for game in this|sort(attribute='created') %}
+          <tr class="review-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
+            <td class="review-title">
+              <a href="{{ game.app_url }}">
+                <div class="game-icon" style="background-image: url({{ game.icons[0].src }})"></div>
+              </a>
+              <div class="game-title"><a href="{{ game.app_url }}">{{ game.name }}</a></div>
+            </td>
+            <td class="review-submitted" title="{{ game.created }}">
+              <div class="submitted-title">{{ _('Date submitted:') }}</div>
+              <div class="submitted-date">
+                <span class="date-abs">{{ game.created|date('med', false) }}</span>
+                <span class="date-rel">({{ game.created|relativeDate }})</span>
+              </div>
+            </td>
+            <td class="review-buttons">
+              <a class="btn btn-approve review-approve"><div class="btn-text">{{ _('Approve') }}</div></a>
+              <a class="btn btn-reject review-reject"><div class="btn-text">{{ _('Reject') }}</div></a>
+              <div class="secondary-buttons">
+                <a class="review-view hint--right" data-hint="{{ _('View') }}"><div class="btn-text fa fa-desktop"></div></a>
+                <a class="review-edit hint--right" data-hint="{{ _('Edit') }}"><div class="btn-text fa fa-edit"></div></a>
+                <a class="review-delete hint--right" data-hint="{{ _('Delete') }}"><div class="btn-text fa fa-trash-o"></div></a>
+                <a class="review-disable hint--right" data-hint="{{ _('Disable') }}"><div class="btn-text fa fa-ban"></div></a>
+              </div>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {% for game in this|sort(attribute='created') %}
-            <tr class="review-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
-              <td class="review-title">
-                <a href="{{ game.app_url }}">
-                  <div class="game-icon" style="background-image: url({{ game.icons[0].src }})"></div>
-                </a>
-                <div class="game-title"><a href="{{ game.app_url }}">{{ game.name }}</a></div>
-              </td>
-              <td class="review-submitted" title="{{ game.created }}">
-                <div class="submitted-title">{{ _('Date submitted:') }}</div>
-                <div class="submitted-date">
-                  <span class="date-abs">{{ game.created|date('med', false) }}</span>
-                  <span class="date-rel">({{ game.created|relativeDate }})</span>
-                </div>
-              </td>
-              <td class="dashboard-buttons review-buttons">
-                <a class="btn btn-approve review-approve"><div class="btn-text">{{ _('Approve') }}</div></a>
-                <a class="btn btn-reject review-reject"><div class="btn-text">{{ _('Reject') }}</div></a>
-                <div class="secondary-buttons">
-                  <a class="review-view hint--right" data-hint="{{ _('View') }}"><div class="btn-text fa fa-desktop"></div></a>
-                  <a class="review-edit hint--right" data-hint="{{ _('Edit') }}"><div class="btn-text fa fa-edit"></div></a>
-                  <a class="review-delete hint--right" data-hint="{{ _('Delete') }}"><div class="btn-text fa fa-trash-o"></div></a>
-                  <a class="review-disable hint--right" data-hint="{{ _('Disable') }}"><div class="btn-text fa fa-ban"></div></a>
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
+        {% endfor %}
       </table>
       <div id="empty-message" class="hidden">
         {{ emptyList() }}
