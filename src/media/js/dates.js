@@ -2,13 +2,13 @@ define('dates', ['underscore', 'l10n'], function(_, l10n) {
     var ngettext = l10n.ngettext;
 
     var unitFormatters = {
-        s: function(n) { return ngettext('1 second', '{n} seconds', {n: n}); },
-        m: function(n) { return ngettext('1 minute', '{n} minutes', {n: n}); },
-        h: function(n) { return ngettext('1 hour', '{n} hours', {n: n}); },
-        d: function(n) { return ngettext('1 day', '{n} days', {n: n}); },
-        w: function(n) { return ngettext('1 week', '{n} weeks', {n: n}); },
-        M: function(n) { return ngettext('1 month', '{n} months', {n: n}); },
-        y: function(n) { return ngettext('1 year', '{n} years', {n: n}); }
+        s: function(n) { return ngettext('1 second ago', '{n} seconds ago', {n: n}); },
+        m: function(n) { return ngettext('1 minute ago', '{n} minutes ago', {n: n}); },
+        h: function(n) { return ngettext('1 hour ago', '{n} hours ago', {n: n}); },
+        d: function(n) { return ngettext('1 day ago', '{n} days ago', {n: n}); },
+        w: function(n) { return ngettext('1 week ago', '{n} weeks ago', {n: n}); },
+        M: function(n) { return ngettext('1 month ago', '{n} months ago', {n: n}); },
+        y: function(n) { return ngettext('1 year ago', '{n} years ago', {n: n}); }
     };
     var unitSizes = {
         s: 1,
@@ -23,7 +23,7 @@ define('dates', ['underscore', 'l10n'], function(_, l10n) {
 
     /*
     Forms a localized relative date string from a given Date object. 
-    For example, '1 day'.
+    For example, '1 day ago'.
 
     Options:
         referenceDate: The date to compare to. Defaults to Date.now().

@@ -20,21 +20,21 @@ function deltaDate(units) {
 }
 
 test('dates.relativeDateString', function(done) {
-    eq_(dateslib.relativeDateString(deltaDate({h: 1}), opts), '1 hour');
-    eq_(dateslib.relativeDateString(deltaDate({h: 4}), opts), '4 hours');
+    eq_(dateslib.relativeDateString(deltaDate({h: 1}), opts), '1 hour ago');
+    eq_(dateslib.relativeDateString(deltaDate({h: 4}), opts), '4 hours ago');
 
-    eq_(dateslib.relativeDateString(deltaDate({d: 1}), opts), '1 day');
-    eq_(dateslib.relativeDateString(deltaDate({d: 6}), opts), '6 days');
+    eq_(dateslib.relativeDateString(deltaDate({d: 1}), opts), '1 day ago');
+    eq_(dateslib.relativeDateString(deltaDate({d: 6}), opts), '6 days ago');
 
-    eq_(dateslib.relativeDateString(deltaDate({M: 1}), opts), '1 month');
-    eq_(dateslib.relativeDateString(deltaDate({M: 6}), opts), '6 months');
+    eq_(dateslib.relativeDateString(deltaDate({M: 1}), opts), '1 month ago');
+    eq_(dateslib.relativeDateString(deltaDate({M: 6}), opts), '6 months ago');
 
-    eq_(dateslib.relativeDateString(deltaDate({y: 1}), opts), '1 year');
-    eq_(dateslib.relativeDateString(deltaDate({y: 4}), opts), '4 years');
-    eq_(dateslib.relativeDateString(deltaDate({y: 20}), opts), '20 years');
+    eq_(dateslib.relativeDateString(deltaDate({y: 1}), opts), '1 year ago');
+    eq_(dateslib.relativeDateString(deltaDate({y: 4}), opts), '4 years ago');
+    eq_(dateslib.relativeDateString(deltaDate({y: 20}), opts), '20 years ago');
 
     // This will likely change behaviour when future relative dates are needed
-    eq_(dateslib.relativeDateString(deltaDate({h: -1}), opts), '0 seconds');
+    eq_(dateslib.relativeDateString(deltaDate({h: -1}), opts), '0 seconds ago');
 
     done();
 });
