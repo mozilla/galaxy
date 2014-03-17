@@ -18,7 +18,13 @@
           {% for game in this|sort(attribute='created') %}
             <tr class="review-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
               <td class="review-title"><a href="{{ game.app_url }}">{{ game.name }}</a></td>
-              <td class="review-wait" title="{{ game.created }}">{{ game.created|relativeDate }}</td>
+              <td class="review-submitted" title="{{ game.created }}">
+                <div class="submitted-title">{{ _('Date submitted:') }}</div>
+                <div class="submitted-date">
+                  <span class="date-abs">{{ game.created|date('med', false) }}</span>
+                  <span class="date-rel">({{ game.created|relativeDate }})</span>
+                </div>
+              </td>
               <td class="dashboard-buttons review-buttons">
                 <a class="btn btn-approve review-approve"><div class="btn-text">{{ _('Approve') }}</div></a>
                 <a class="btn btn-reject review-reject"><div class="btn-text">{{ _('Reject') }}</div></a>
