@@ -104,7 +104,8 @@ define('builder',
                     if ('as' in signature && 'key' in signature) {
                         request = models(signature.as).get(url, signature.key, pool.get);
                     } else {
-                        request = pool.get(url);
+                        var noCache = !!signature.nocache;
+                        request = pool.get(url, noCache);
                     }
 
                     if ('id' in signature) {

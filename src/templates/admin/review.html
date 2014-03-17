@@ -14,7 +14,7 @@
         <option value="deleted">{{ _('Deleted') }}</option>
       </select>
     </div>
-    {% defer (url=api('game.list')|urlparams(status=status)) %}
+    {% defer (url=api('game.list')|urlparams(status=status), nocache=true) %}
       <table class="dashboard-table review-table">
         {% for game in this|sort(attribute='created') %}
           <tr class="review-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
