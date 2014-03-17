@@ -17,7 +17,12 @@
         <tbody>
           {% for game in this|sort(attribute='created') %}
             <tr class="review-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
-              <td class="review-title"><a href="{{ game.app_url }}">{{ game.name }}</a></td>
+              <td class="review-title">
+                <a href="{{ game.app_url }}">
+                  <div class="game-icon" style="background-image: url({{ game.icons[0].src }})"></div>
+                </a>
+                <div class="game-title"><a href="{{ game.app_url }}">{{ game.name }}</a></div>
+              </td>
               <td class="review-submitted" title="{{ game.created }}">
                 <div class="submitted-title">{{ _('Date submitted:') }}</div>
                 <div class="submitted-date">
