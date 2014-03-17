@@ -1,6 +1,6 @@
 define('views/review', 
-    ['format', 'log', 'notification', 'requests', 'urls', 'z'], 
-    function(format, log, notification, requests, urls, z) {
+    ['format', 'log', 'notification', 'requests', 'urls', 'utils', 'z'],
+    function(format, log, notification, requests, urls, utils, z) {
     
     var console = log('review');
 
@@ -67,12 +67,22 @@ define('views/review',
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
         submitReview($game, $this, false);
+    }).on('change', '#select-status', function() {
+        var params = {status: this.value};
+        z.page.trigger('navigate', utils.urlparams(urls.reverse('review'), params));
     });
 
     return function(builder, args) {
-        builder.start('admin/review.html');
+        var status = utils.getVars().status || 'pending';
+        builder.start('admin/review.html', {status: status})
+            .done(updateStatus)
+            .fail(updateStatus);
+
+        function updateStatus() {
+            $('#select-status').val(status);
+        }
 
         builder.z('type', 'leaf review');
-        builder.z('title', gettext('Review Queue'));
+        builder.z('title', gettext('Reviewer Dashboard'));
     };
 });

@@ -1,11 +1,20 @@
-{% macro emptyReview() %}
-  {{ _('No games pending review.') }}
+{% macro emptyList() %}
+  {{ _('No games matching this status.') }}
 {% endmacro %}
 
 <form class="grid" method="post" data-required="{{ _('Required') }}" data-formtype="submit">
   <div class="grid-cell">
-    <h1>{{ _('Review Queue') }}</h1>
-    {% defer (url=api('game.list')|urlparams(status='pending')) %}
+    <div class="status-title">
+      <h1>{{ _('Games by Status') }}</h1>
+      <select id="select-status" name="{{ _('Status') }}">
+        <option value="pending">{{ _('Pending') }}</option>
+        <option value="approved">{{ _('Approved') }}</option>
+        <option value="rejected">{{ _('Rejected') }}</option>
+        <option value="disabled">{{ _('Disabled') }}</option>
+        <option value="deleted">{{ _('Deleted') }}</option>
+      </select>
+    </div>
+    {% defer (url=api('game.list')|urlparams(status=status)) %}
       <table class="dashboard-table review-table">
         <thead>
           <tr>
@@ -45,12 +54,12 @@
         </tbody>
       </table>
       <div id="empty-message" class="hidden">
-        {{ emptyReview() }}
+        {{ emptyList() }}
       </div>
     {% placeholder %}
       {{ _('Loading games...') }}
     {% empty %}
-      {{ emptyReview() }}
+      {{ emptyList() }}
     {% except %}
       {% if error == 403 %}
         {{ _('You are not authorized to access this page.') }}
