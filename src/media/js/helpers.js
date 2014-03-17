@@ -183,7 +183,7 @@ define('helpers',
     }
 
     // Used for getting translated Game Status
-    function getStatus(status) {
+    filters.statusName = function(status) {
         return {
             'pending': gettext('Pending'),
             'approved': gettext('Public'),
@@ -234,7 +234,6 @@ define('helpers',
             return obj;
         },
         gravatar: gravatar,
-        getStatus: getStatus,
         
         navigator: window.navigator,
         screen: window.screen,

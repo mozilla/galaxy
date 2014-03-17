@@ -4,21 +4,17 @@
   </td>
   <td class="curation-status" title="{{ _(game.status) }}">
     <span class="status-span">{{ _('Status') }}:</span><br>
-    {% if game.status == 'approved' %}
-      <span class="game-status status-public" data-slug="{{ game.slug }}">{{ _(Public) }}</span>
-    {% else %}
-      <span class="game-status status-private" data-slug="{{ game.slug }}">{{ getStatus(game.status) }}</span>
-    {% endif %}
+    <span class="game-status status-{{ game.status }}" data-slug="{{ game.slug }}">{{ game.status|statusName }}</span>
   </td>
   <td class="dashboard-buttons curation-buttons" data-slug="{{ game.slug }}">
-    <a class="btn btn-reject curation-unfeature">{{ _('Unfeature') }}</a>
-    <a class="btn btn-view curation-view" href="{{ url('game', [game.slug]) }}">{{ _('View') }}</a>
-    <a class="btn btn-edit curation-edit" href="{{ url('edit_game', [game.slug]) }}">{{ _('Edit') }}</a>
-    <a class="btn btn-delete curation-delete">{{ _('Delete') }}</a>
+    <a class="btn btn-reject curation-unfeature"><span class=".btn-text">{{ _('Unfeature') }}</span></a>
+    <a class="btn btn-view curation-view" href="{{ url('game', [game.slug]) }}"><span class=".btn-text">{{ _('View') }}</span></a>
+    <a class="btn btn-edit curation-edit" href="{{ url('edit_game', [game.slug]) }}"><span class=".btn-text">{{ _('Edit') }}</span></a>
+    <a class="btn btn-delete curation-delete"><span class=".btn-text">{{ _('Delete') }}</span></a>
     {% if game.status == 'disabled' %}
-    <a class="btn btn-disable curation-enable">{{ _('Enable') }}</a>
+      <a class="btn btn-enable curation-enable"><span class=".btn-text">{{ _('Enable') }}</span></a>
     {% else %}
-    <a class="btn btn-disable curation-disable">{{ _('Disable') }}</a>
+      <a class="btn btn-disable curation-disable"><span class=".btn-text">{{ _('Disable') }}</span></a>
     {% endif %}
   </td>
 </tr>

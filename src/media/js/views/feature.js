@@ -2,82 +2,112 @@ define('views/feature',
     ['l10n', 'log', 'notification', 'templates', 'requests', 'urls', 'z'], 
     function(l10n, log, notification, nunjucks, requests, urls, z) {
     
-    var gettext = l10n.gettext,
-    errorMsg = gettext("An error occured. Please try again.");
+    var gettext = l10n.gettext;
 
-    // Send request to featured endpoint to unfeature
+    function controlSpinner($button, addSpinner, newText) {
+        var $textSpan = $button.children('span');
+        if (addSpinner) {
+            $textSpan.hide();
+            $button.append('<div class="spinner btn-replace"></div>');
+        } else {
+            $textSpan.text(newText ? newText : $textSpan.text());
+            $textSpan.show();
+            $button.children('.spinner').remove();
+        }
+    }
+
+    // Send request to featured endpoint to unfeature.
     function unfeatureGame() {
-        var gameSlug = $(this).parent().data('slug');
+        var $this = $(this);
+        var gameSlug = $this.parent().data('slug');
+
+        controlSpinner($this, true);
 
         requests.del(urls.api.url('game.featured', [], {
             game: gameSlug
         })).done(function(data) {
-            notification.notification({message: gettext("Game unfeatured")});
+            notification.notification({message: gettext('Game unfeatured')});
             removeGameRow(gameSlug);
         }).fail(function() {
-            notification.notification({message: gettext(errorMsg)});
+            notification.notification({message: gettext('Error: A problem occured while unfeaturing this game. Please try again.')});
         });
     }
 
-    //TODO: Hook up with Front-end
+    // TODO: Hook up with curation modal (#126).
     function featureGame() {
         var gameSlug = $(this).parent().data('slug');
 
         requests.post(urls.api.url('game.featured'), {
             game: gameSlug
         }).done(function(data) {
-            notification.notification({message: gettext("Game featured")});
+            notification.notification({message: gettext('Game featured')});
             addGameRow(gameSlug);
         }).fail(function() {
-            notification.notification({message: gettext(errorMsg)});
+            notification.notification({message: gettext('Error: A problem occured while featuring this game. Please try again.')});
         });
     }
 
-    // Send request to moderate endpoint for deletion
+    // Send request to moderate endpoint for deletion.
     function deleteGame() {
-        var gameSlug = $(this).parent().data('slug');
+        var $this = $(this);
+        var gameSlug = $this.parent().data('slug');
 
-        if (window.confirm(gettext("Are you sure you want to delete this game?"))) { 
+        controlSpinner($this, true);
+
+        notification.confirmation({message: gettext('Are you sure you want to delete this game?')}).done(function() { 
             requests.post(urls.api.url('game.moderate', [gameSlug, 'delete'])).done(function(data) {
-                notification.notification({message: gettext("Game deleted")});
+                notification.notification({message: gettext('Game deleted')});
                 removeGameRow(gameSlug);
             }).fail(function() {
-                notification.notification({message: gettext(errorMsg)});
+                notification.notification({message: gettext('Error: A problem occured while deleting this game. Please try again.')});
             });
-        }
+        }).fail(function() {
+            // Add back text.
+            controlSpinner($this, false);
+        });
     }
 
-    // Send request to moderate endpoint
+    // Send request to moderate endpoint.
     function moderateGame($this, action) {
         var gameSlug = $this.parent().data('slug');
 
+        controlSpinner($this, true);
+
         requests.post(urls.api.url('game.moderate', [gameSlug, action])).done(function(data) {
-            notification.notification({message: gettext("Game status successfully changed")});
+            notification.notification({message: gettext('Game status successfully changed')});
             if (action === 'disable') {
-                //change status to disabled
-                $(".game-status[data-slug="+ gameSlug +"]").text("Disabled")
-                .removeClass('public-game-status').addClass('private-game-status');
-                // change button
-                $this.removeClass('curation-disable').addClass('curation-enable').text(gettext('Enable'));
+                var $statusSpan = $('.game-status[data-slug='+ gameSlug +']');
+                var previousStatus = $statusSpan.text().toLowerCase();
+
+                // Change status to disabled.
+                $statusSpan.text(gettext('Disabled')).removeClass('status-' + previousStatus).addClass('status-disabled');
+                // Change button.
+                $this.removeClass('curation-disable btn-disable').addClass('btn-enable curation-enable');
+                controlSpinner($this, false, gettext('Enable'));
             } else if (action === 'approve') {
-                //change status to disabled
-                $(".game-status[data-slug="+ gameSlug +"]").text("Public")
-                    .removeClass('status-private').addClass('status-public');
-                // change button
-                $this.removeClass('curation-enable').addClass('curation-disable').text(gettext('Disable'));
+                var $statusSpan = $('.game-status[data-slug='+ gameSlug +']');
+                var previousStatus = $statusSpan.text().toLowerCase();
+
+                // Change status to enabled.
+                $statusSpan.text('Public').removeClass('status-'+ previousStatus).addClass('status-approved');
+                // Change button.
+                $this.removeClass('curation-enable btn-enable').addClass('btn-disable curation-disable');
+                controlSpinner($this, false, gettext('Disable'));
             }
+
+            
         }).fail(function() {
-            notification.notification({message: gettext(errorMsg)});
+            notification.notification({message: gettext('Error: A problem occured while changing the game status. Please try again.')});
         });
     }
 
-    // Remove table representing game with specified slug
+    // Remove table representing game with specified slug.
     function removeGameRow(slug) {
         var $row = $('tr[data-slug=' + slug + ']');
         $row.remove();
         
-        // If no more games, hide table and show message
-        if ($('.curation-table tr').length === 0) {
+        // If no more games, hide table and show message.
+        if (!$('.curation-table tr').length) {
             $('#empty-message').show();
             $('.curation-table').hide();
         }
@@ -110,11 +140,10 @@ define('views/feature',
         builder.z('title', gettext('Curation Dashboard'));
 
         builder.onload('featured-games', function(data) {
-            for (var i = 0, len=data.length; i<len; i++) {
-                var game = data[i];
+            data.forEach(function(game) {
                 var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: game});
                 $('.curation-table tbody').append(rowToAdd);
-            }
+            });
         });
     };
 });
