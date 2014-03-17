@@ -12,10 +12,15 @@ define('views/game',
     z.body.on('click', '.play', function(e) {
         var $this = $(this);
         e.preventDefault();
+        window.open($this.data('appUrl'));
+    }).on('click', '.install', function(e) {
+        var $this = $(this);
         if (user.logged_in()) {
             updatePlay($this.data('gameSlug'));
         }
-        window.open($this.data('appUrl'));
+        $this.text('Play');
+        $this.removeClass('install');
+        $this.addClass('play');
     });
     z.win.on('hashchange', function() {
         // TODO: allow builder to accept hash.
