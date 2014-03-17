@@ -38,7 +38,7 @@ define('views/review',
                 }
             } else {
                 if (accepted) {
-                    message = gettext('Failed to accept game: {game}', params);
+                    message = gettext('Failed to approve game: {game}', params);
                 } else {
                     message = gettext('Failed to reject game: {game}', params);
                 }
@@ -59,7 +59,7 @@ define('views/review',
         }
     }
 
-    z.body.on('click', '.review-accept', function() {
+    z.body.on('click', '.review-approve', function() {
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
         submitReview($game, $this, true);
