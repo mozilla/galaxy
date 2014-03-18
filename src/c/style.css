@@ -391,7 +391,7 @@ h1 {
 }
 
 dt {
-  color: #cacaca;
+  color: #999;
   font-size: 10px;
   font-weight: 300;
 }
@@ -401,8 +401,9 @@ dt::after {
 }
 
 dd {
-  color: #666;
+  color: #cacaca;
   font-size: 12px;
+  line-height: 1.5;
   font-weight: 500;
 }
 
@@ -618,7 +619,7 @@ h2 {
 
 .game-section {
   float: left;
-  margin-top: 15px;
+  margin-top: 45px;
   padding-right: 15px;
   width: 33.33%;
 }
@@ -633,14 +634,16 @@ h2 {
 
 .game-section hgroup {
   display: flex;
+  margin-bottom: 15px;
 }
 
 .game-section h2 + div {
+  background: rgba(255,255,255,.5);
   border-radius: 10px;
-  border-top: 2px solid rgba(255,255,255,.5);
   flex: 1;
+  height: 2px;
   position: relative;
-  top: -11px;
+  top: 4px;
 }
 
 .game-section h2 {
@@ -648,10 +651,6 @@ h2 {
   padding-right: 8px;
   font-size: 12px;
   text-transform: uppercase;
-}
-
-.game-section h2 + * {
-  margin-top: 15px;
 }
 
 h3, table {
@@ -665,7 +664,7 @@ h3, table {
 }
 
 .avatar {
-  background-repeat: no-repeat;
+  background: #fff no-repeat;
   background-size: contain;
   display: block;
   float: left;
@@ -732,4 +731,8 @@ h2 + h3 {
   margin-left: 4px;
   padding: 3px 4px 1px;
   text-transform: uppercase;
+}
+
+.score {
+  text-align: right;
 }
