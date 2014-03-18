@@ -337,8 +337,16 @@ form {
             padding: 1px 3px;
             position: absolute;
             right: 12px;
-            transition(unquote('.1s opacity, .1s visibility'));
+            transition(unquote('opacity .1s, visibility .1s'));
             z-index: 2;
+        }
+    }
+    .read-only {
+        &:after {
+            border: 2px solid #f0f0f0;
+            color: #fff;
+            display: inline;
+            min-width: 45px;
         }
     }
     .opt:after {

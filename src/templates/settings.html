@@ -2,30 +2,106 @@
   <div class="content">
     {% if user.logged_in() %}
     {% set user_settings = user.get_settings('public') %}
-    <div class="avatar-container">
       <div class="avatar" style="background-image: url({{ user_settings.avatar|safeurl }})"></div>
-      <div class="edit-avatar"><a href="http://en.gravatar.com/emails/" target="_blank">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a></div>
-    </div>
-    <section>
-      <h1>{{ _('Profile') }}</h1>
+      <h1>{{ _('User settings') }}</h1>
+      <div class="edit-avatar">
+        <a class="btn btn-edit-avatar" href="http://en.gravatar.com/emails/" target="_blank">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a>
+      </div>
       <form class="edit-profile">
-        <table>
-          <tr>
-            <td class="label-col"><label for="username">{{ _('Username:') }}</label></td>
-            <td>
-              <input type="text" name="username" id="username" placeholder="{{ _('Username') }}" value="{{ user_settings.username }}" required x-inputmode="verbatim">
-            </td>
-          </tr>
-          <tr>
-            <td class="label-col"><label for="email">{{ _('Email:') }}</label></td>
-            <td>
-              <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required readonly x-inputmode="verbatim">
-            </td>
-          </tr>
-        </table>
-        <button type="submit" class="btn btn-cta btn-submit">{{ _('Save') }}</button>
+        <div class="content">
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <div class="l">{{ _('Username') }}</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <input type="text" name="username" id="username" placeholder="{{ _('Username') }}" value="{{ user_settings.username }}" required>
+            </div>
+            <div class="grid-cell">
+              <div class="form-help">
+                {{ _('Your username, which appears alongside all player activity in Galaxy.') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <div class="l">{{ _('Team name') }}</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <input type="text" name="teamname" id="teamname" placeholder="{{ _('Team name') }}" value="{{ user_settings.teamName }}">
+            </div>
+            <div class="grid-cell">
+              <div class="form-help">
+                {{ _('Your company/team name, which is shown on all listings of games you&#39;ve submitted.') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <div class="l">{{ _('Team slug') }}</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <input type="text" name="teamslug" id="teamslug" placeholder="{{ _('Team slug') }}" value="{{ user_settings.teamSlug }}">
+            </div>
+            <div class="grid-cell">
+              <div class="form-help">
+                {{ _('Your team/company name slug, which is shown on all URLs linked to your team/company.') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <div class="l">{{ _('Team URL') }}</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <input type="text" name="teamurl" id="teamurl" placeholder="{{ _('Team URL') }}" value="{{ user_settings.homepage }}">
+            </div>
+            <div class="grid-cell">
+              <div class="form-help">
+                {{ _('The homepage URL for your company/team, which is linked to from all listings of games you&#39;ve submitted.') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <div class="l">{{ _('Email') }}</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-cell grid-flex-grow-two">
+              <div class="form-field">
+                <label>
+                  <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required readonly>
+                  <span class="read-only req" data-required="Read Only"></span>
+                </label>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="form-help">
+                {{ _('Your email cannot be changed. Your password can be changed at <a href="{url}" target="_blank">{domain}</a>', url='https://login.persona.org', domain='login.persona.org') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <button type="submit" class="btn btn-cta btn-submit">{{ _('Save Changes') }}</button>
+        </div>
       </form>
-    </section>
     {% else %}
       {{ _('You must be <a class="persona">signed in</a> to access this page.') }}
     {% endif %}

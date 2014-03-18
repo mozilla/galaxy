@@ -16,43 +16,33 @@
 
 $settings_avatar_size = 80px;
 [data-page-type~="settings"] .page {
-    .avatar-container {
-        float: left;
+    h1 {
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
+    }
+    .avatar {
+        border-radius: $settings_avatar_size;
+        display: inline-block;
+        height: $settings_avatar_size;
         margin-right: 20px;
-        .avatar {
-            border-radius: $settings_avatar_size;
-            height: $settings_avatar_size;
-            width: $settings_avatar_size;
-        }
-        .edit-avatar {
-            bottom: -5px;
-            text-align: center;
+        vertical-align: middle;
+        width: $settings_avatar_size;
+    }
+    .btn-edit-avatar {
+        padding: 2px 10px;
+        
+        &:hover {
+            text-decoration: none;
         }
     }
-    .edit-profile {
-        display: inline-block;
-        width: 80%;  // can't use 100% width or it'll be displayed below avatar-container
-        table {
-            border-collapse: separate; 
-            border-spacing: 10px;
-            margin-bottom: 20px;
-            width: 100%;
-            td.label-col {
-                white-space: nowrap;
-                width: 1px;
-            }
-            label {
-                font-size: 18px;
-                line-height: 22px;
-                margin-right: 10px;
-                text-align: right;
-            }
-            input {
-                line-height: normal;  // needed to align placeholder correctly
-                max-width: 350px;
-                width: 100%;
-            }
-        }
+    .edit-avatar {
+        bottom: -5px;
+        margin-top: 5px;
+    }
+    .settings-body {
+        margin: 0 auto;
+        max-width: 1024px;
     }
 }
 
