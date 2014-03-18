@@ -5,14 +5,7 @@ define('views/settings',
     var console = log('settings');
 
     function handleProfileUpdate(changes) {
-        var newData = {
-            username: changes.username,
-            companyName: changes.teamName,
-            companySlug: changes.teamSlug,
-            homepage: changes.homepage
-        };
-
-        user.update_settings(newData);
+        user.update_settings(changes);
         z.page.trigger('reload_chrome');
         require('views').reload().done(function() {
             notification.notification({message: gettext('Your settings have been saved')});

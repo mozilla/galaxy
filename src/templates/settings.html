@@ -7,7 +7,7 @@
       <div class="edit-avatar">
         <a class="btn btn-edit-avatar" href="http://en.gravatar.com/emails/" target="_blank">{{ _('Edit Avatar') if user_settings.avatar else _('Add Avatar') }}</a>
       </div>
-      <form>
+      <form class="edit-profile">
         <div class="content">
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
@@ -33,7 +33,7 @@
           </div>
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
-              <input type="text" name="teamname" id="teamname" placeholder="{{ _('Team name') }}" value="{{ user_settings.companyName }}">
+              <input type="text" name="teamname" id="teamname" placeholder="{{ _('Team name') }}" value="{{ user_settings.teamName }}">
             </div>
             <div class="grid-cell">
               <div class="form-help">
@@ -50,7 +50,7 @@
           </div>
           <div class="grid">
             <div class="grid-cell grid-flex-grow-two">
-              <input type="text" name="teamslug" id="teamslug" placeholder="{{ _('Team slug') }}" value="{{ user_settings.companySlug }}">
+              <input type="text" name="teamslug" id="teamslug" placeholder="{{ _('Team slug') }}" value="{{ user_settings.teamSlug }}">
             </div>
             <div class="grid-cell">
               <div class="form-help">
@@ -86,8 +86,8 @@
             <div class="grid-cell grid-flex-grow-two">
               <div class="form-field">
                 <label>
-                <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required readonly>
-                <span class="read-only">{{ _('Read only') }}</span>
+                  <input type="email" name="email" id="email" placeholder="{{ _('Email address') }}" value="{{ user_settings.email }}" required readonly>
+                  <span class="read-only req" data-required="Read Only"></span>
                 </label>
               </div>
             </div>

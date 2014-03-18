@@ -323,20 +323,6 @@ form {
     .span-grid {
         margin-top: 15px;
     }
-    .read-only {
-        border-radius: 2px;
-        border: 2px solid #f0f0f0;
-        bottom: 5px;
-        color: #fff;
-        content: attr(data-required);        
-        display: block;
-        font-size: 10px;
-        padding: 1px 3px;
-        position: absolute;
-        right: 12px;
-        transition(unquote('.1s opacity, .1s visibility'));
-        z-index: 2;
-    }
     .req {
         position: absolute;
         right: 0;
@@ -351,8 +337,16 @@ form {
             padding: 1px 3px;
             position: absolute;
             right: 12px;
-            transition(unquote('.1s opacity, .1s visibility'));
+            transition(unquote('opacity .1s, visibility .1s'));
             z-index: 2;
+        }
+    }
+    .read-only {
+        &:after {
+            border: 2px solid #f0f0f0;
+            color: #fff;
+            display: inline;
+            min-width: 45px;
         }
     }
     .opt:after {
