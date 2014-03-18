@@ -151,15 +151,15 @@ label {
 
 .header {
   background: #213b59;
-  border-bottom: 1px solid rgba(255,255,255,.25);
-  padding: 0 5%;
+  /*border-bottom: 1px solid rgba(255,255,255,.25);*/
+  padding: 0 5vw;
 }
 
 .wordmark {
   color: #eff;
   display: inline-block;
   font-size: 36px;
-  padding: 2.5% 0;
+  padding: 2.5vw 0;
   min-width: 25%;
   position: relative;
   text-shadow: 0 0 4px rgba(0,255,255,.5);
@@ -201,21 +201,38 @@ label {
 }
 
 nav {
-  padding: 2.5% 0 2.5% 5%;
   width: 30%;
+}
+
+nav h1 {
+  /*background: rgba(127,219,255,.5);*/
+  background: rgba(0,0,0,.5);
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: .5px;
+  padding: 1vw 0 1vw 5vw;
+}
+
+nav ul,
+nav h1 {
+  border-bottom: 1px solid rgba(255,255,255,.15);
 }
 
 nav ul {
   list-style: none;
+  padding: 1vw 0 1vw 5vw;
 }
 
 nav a {
   display: block;
   font-size: 16px;
-  min-height: 64px;
+  min-height: 32px;
   line-height: 20px;
   opacity: .25;
-  padding: 0 25px 0 79px;  /* 25px = 10px border + 15px margin;
+  padding: 0 25px 0 47px;  /* 25px = 10px border + 15px margin;
                               79px = 64px icon + 15px margin */
   position: relative;
 }
@@ -275,18 +292,19 @@ nav input {
 }
 
 nav li + li {
-  margin-top: 30px;
+  margin-top: 15px;
 }
 
 .nav-game-icon {
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: 32px;
   box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
   margin-right: 15px;
   position: absolute;
   left: 0;
-  height: 64px;
-  width: 64px;
+  height: 32px;
+  width: 32px;
 }
 
 .nav-game-title,
@@ -295,11 +313,13 @@ nav li + li {
 }
 
 .nav-game-title {
-  font-weight: 600;
+  font-weight: 400;
+  line-height: 32px;
 }
 
 .nav-game-dev {
   color: #9b9b9b;
+  display: none;
   font-weight: 400;
 }
 
@@ -344,23 +364,23 @@ nav, main {
 }
 
 main {
-  background: rgba(255,255,255,.5);
-  padding: 2.5%;
+  background: #fff;
+  padding: 2.5vw;
   width: 70%;
 }
 
 .prose {
-  color: #fff;
+  color: #666;
 }
 
 .detail-game-title {
-  color: #eff;
+  color: #036;
   font-size: 48px;
   line-height: 1;
 }
 
 .detail-game-dev {
-  color: #d4d4d4;
+  color: #9cf;
   font-size: 18px;
   font-weight: 300;
 }
@@ -368,7 +388,7 @@ main {
 .detail-game-description {
   line-height: 1.3;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   margin: 15px 0;
 }
 
@@ -383,7 +403,7 @@ dt::after {
 }
 
 dd {
-  color: #fff;
+  color: #666;
   font-size: 12px;
   font-weight: 500;
 }
@@ -554,6 +574,9 @@ dd + dt {
 }
 
 .trunc {
+  padding-bottom: 6px;
+  margin-bottom: -6px;
+  position: relative;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -583,7 +606,7 @@ dd + dt {
 .detail-game-thumbnail {
   background-repeat: no-repeat;
   background-size: cover;
-  border: 5px solid #666;
+  border: 5px solid #ccc;
   height: 182px;
   width: 284px;
 }
@@ -597,5 +620,5 @@ dd + dt {
 }
 
 .detail-game-thumbnail.selected {
-  border-color: #fff;
+  border-color: #369;
 }

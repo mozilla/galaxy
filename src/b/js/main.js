@@ -40,28 +40,6 @@
         }
     }
 
-// var firstRadio = $('nav input');
-// firstRadio.checked = true;
-
-
-// var keys = {};
-// window.addEventListener('keydown', function (e) {
-//   console.log(e.keyCode)
-//   switch (e.keyCode) {
-//     case 39:  // right arrow key
-//       var $group = $('input[type=radio]:checked').closest('label').next('.horiz');
-//       if ($group.find('input[type=radio]:checked').length) {
-//         $group.find('input[type=radio]:checked').trigger('focus');
-//       } else {
-//         $group.find('label:first-child input[type=radio]').trigger('focus').prop('checked', true);
-//       }
-//       e.preventDefault();
-//       break;
-//     case 37:  // left arrow key
-//       $('input[type=radio]:checked').closest('.horiz').prev('label').find('input[type=radio]').trigger('focus').prop('checked', true);
-//       e.preventDefault();
-//   }
-// }, false);
-
+    $('nav').slinky();
 
 })();
