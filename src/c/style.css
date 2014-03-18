@@ -631,23 +631,23 @@ h2 {
   padding-right: 0;
 }
 
-.game-section::before {
+.game-section hgroup {
+  display: flex;
+}
+
+.game-section h2 + div {
   border-radius: 10px;
   border-top: 2px solid rgba(255,255,255,.5);
-  content: "";
-  display: block;
+  flex: 1;
   position: relative;
-  top: 9px;
+  top: -11px;
 }
 
 .game-section h2 {
-  background-color: #062a54;
-  display: inline;
+  display: inline-block;
+  padding-right: 8px;
   font-size: 12px;
   text-transform: uppercase;
-  padding-right: 10px;
-  position: relative;
-  z-index: 1;
 }
 
 .game-section h2 + * {
