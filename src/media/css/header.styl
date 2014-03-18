@@ -5,11 +5,11 @@
 
 // usable on any header
 .header {
-    background: rgba(92, 158, 191, 0.22);
-    border-bottom: 1px solid $seavan-salt-white;
+    background: $mainHeaderBackgroundColor;
+    border-bottom: 1px solid rgba(255,255,255,.5);
     display-flex();
-    height: 48px;
-    max-height: 48px;
+    height: 60px;
+    max-height: 60px;
     position: relative;
     width: 100%;
     > * {
@@ -46,7 +46,7 @@
         display: block;
     }
     .inner {
-        height: 48px;
+        height: 60px;
         display-flex();
         position: relative;
         text-align: left;
@@ -56,6 +56,9 @@
             flex-center();
             display: block;
         }
+    }
+    .site, .auth {
+        margin: 0 10px;
     }
     .wordmark {
         color: #fff;
@@ -123,7 +126,7 @@ selectedNav() {
 .site-header nav {
     font-size: 0;
     height: 58px;
-    max-width: 1024px;
+    max-width: 1200px;
     position: absolute;
 
     li {
@@ -265,20 +268,18 @@ selectedNav() {
 // ***************** Cursor (Desktop) (>= 1024px)
 
 // This probably shouldn't be media query based.
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
 
     .site-header {
-        height: 60px;
         max-height: 60px;
         position: relative;
         .inner {
             height: 60px;
             margin: 0 auto;
-            max-width: 1024px;
+            max-width: 1200px;
         }
-        .site {
+        .site, .auth {
             margin: 0;
-            // width: 232px;
         }
         .site, .site a, .wordmark {
             height: 60px;

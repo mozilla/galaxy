@@ -1,0 +1,63 @@
+@import 'lib';
+
+.modal.show {
+    nav.secondary-header, .support-list {
+        display: none;
+    }
+    div.secondary-header {
+        display: block;
+    }
+}
+
+.feedback .support-list {
+    list-style: none;
+    padding: 5px 10px 10px;
+    li {
+        margin-top: 10px;
+        .button {
+            display: block;
+        }
+    }
+}
+
+@media $narrower-than-desktop {
+    .feedback-form.form-modal {
+        left: 50%;
+        right: auto;
+    }
+}
+
+@media $at-least-desktop {
+    .feedback {
+        &.modal {
+            bottom: 40px;
+            left: auto;
+            margin-left: 200px;
+            right: 8%;
+            top: auto;
+            width: 400px;
+            &:before {
+                border: transparent solid 10px;
+                border-top-color: $modalBackgroundColor;
+                bottom: -20px;
+                content: '';
+                display: block;
+                height: 0;
+                left: 20%;
+                margin-left: -10px;
+                position: absolute;
+                width: 0;
+                z-index: 99;
+            }
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        textarea {
+            min-height: 100px;
+        }
+        .support-list {
+            display: none;
+        }
+    }
+}
