@@ -24,10 +24,6 @@
 
     function selectIt() {
         var hash = window.location.hash;
-        if (hash) {
-            $('a[href="' + hash + '"] input').prop('checked', true).focus();
-            $('a[href="' + hash + '"]').click();
-        }
         if (hash.substr(0, 2) === '#!') {
             var section = hash.substr(2).replace('/dashboard/', '');
             var $section = $('#' + section);
@@ -39,6 +35,6 @@
         }
     }
 
-    $('nav').slinky();
+    // $('nav').slinky();
 
 })();
