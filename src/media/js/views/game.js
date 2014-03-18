@@ -14,8 +14,8 @@ define('views/game',
         var $this = $(this);
         if (user.logged_in()) {
             updatePlay($this.data('gameSlug'));
+            $this.removeClass('btn-install');
         }
-        $this.removeClass('btn-install');
     });
     z.win.on('hashchange', function() {
         // TODO: allow builder to accept hash.
