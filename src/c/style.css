@@ -610,7 +610,7 @@ main > section {
 }
 
 h2 {
-  color: #ccc;
+  color: #cacaca;
 }
 
 .btn-play {
@@ -634,7 +634,7 @@ h2 {
 
 .game-section hgroup {
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .game-section h2 + div {
@@ -647,6 +647,7 @@ h2 {
 }
 
 .game-section h2 {
+  color: #9cf;
   display: inline-block;
   padding-right: 8px;
   font-size: 12px;
@@ -735,4 +736,79 @@ h2 + h3 {
 
 .score {
   text-align: right;
+}
+
+.badge {
+  color: #fff;
+  display: inline-block;
+  font-size: 16px;
+  font-family: FontAwesome;
+  height: 2em;
+  line-height: 2em;
+  margin: 2px 20px 2px 4px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 0 5px #0ff;
+  width: 2em;
+}
+
+.badge::after,
+.badge::before {
+  border: 1px solid #fff;
+  bottom: 0;
+  box-shadow: 0 0 5px #0ff, inset 0 0 10px #0aa;
+  content: "";
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: transform .5s;
+  -webkit-transition: -webkit-transform .5s;
+}
+
+.badge::before {
+  transform: rotate(10deg);
+  -webkit-transform: rotate(10deg);
+}
+
+.badge::after {
+  transform: rotate(-10deg);
+  -webkit-transform: rotate(-10deg);
+}
+
+.badge:hover,
+a:hover .badge {
+  text-decoration: none;
+}
+
+.badge:hover::before,
+a:hover .badge::before {
+  transform: rotate(25deg);
+}
+
+.badge:hover::after,
+a:hover .badge::after {
+  transform: rotate(-25deg);
+  -webkit-transform: rotate(-25deg);
+}
+
+.game-achievements ul {
+  list-style: none;
+}
+
+.game-achievements a {
+  color: #999;
+  display: block;
+  font-size: 11px;
+  position: relative;
+}
+
+.game-achievements a:hover {
+  color: #cacaca;
+}
+
+.game-achievements li + li {
+  margin-top: 25px;
 }
