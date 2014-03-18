@@ -1,0 +1,108 @@
+@import 'lib';
+
+body.overlayed {
+    overflow: hidden;
+}
+
+.cloak {
+    background: $cloakBackgroundColor;
+    color: $colorBlack;
+    display: none;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    transition(.5s opacity ease);
+    width: 100%;
+    z-index: 50;
+    &.show {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    &.light {
+        background: rgba(255,255,255,.75);
+    }
+}
+
+.form-close {
+    display: none;
+}
+
+.modal {
+    background-color: $modalBackgroundColor;
+    border: 1px solid $modalBorderColor;
+    display: none;
+    left: 5%;
+    position: fixed;
+    top: 49px;
+    width: 90%;
+    z-index: 60;
+    .form-modal h2 {
+        color: #4a4a4a;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 12px;
+        margin-bottom: 10px;
+    }
+    &.show {
+        display: block;
+        padding: 10px;
+    }
+    .btn-cancel {
+        right: 0;
+        top: -12px;
+    }
+    textarea {
+        border: 1px solid #8c8c8c;
+        border-radius: 2px;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,.15) inset;
+        padding: 5px;
+    }
+    &.confirmation {
+        background: rgba(0,0,0,.85);
+        border: 1px solid #000;
+        border-radius: 5px;
+        color: #fff;
+        text-align: center;
+        top: 102px;
+        .content {
+            margin: 15px 0;
+        }
+    }
+    button.alt {
+        box-shadow: none;
+    }
+    .form-close {
+        color: $colorGrayDark;
+        display: initial;
+        font-size: 24px;
+        position: absolute;
+        right: 10px;
+        top: 0;
+        &:hover {
+            color: $colorGrayLight;
+            text-decoration: none;
+        }
+    }
+}
+
+@media $at-least-desktop {
+    .modal {
+        left: 50%;
+        margin-left: -265px;
+        top: 160px;
+        width: 531px;
+        .form-footer {
+            margin-top: 10px;
+            text-align: left;
+        }
+        &.confirmation {
+            margin-left: -215px;
+            width: 431px;
+        }
+    }
+}

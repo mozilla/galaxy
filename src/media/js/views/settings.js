@@ -1,6 +1,6 @@
 define('views/settings', 
-    ['forms', 'log', 'notification', 'requests', 'urls', 'user', 'z'], 
-    function(forms, log, notification, requests, urls, user, z) {
+    ['forms', 'log', 'notification', 'requests', 'urls', 'user', 'utils', 'z'], 
+    function(forms, log, notification, requests, urls, user, utils, z) {
     
     var console = log('settings');
 
@@ -14,11 +14,13 @@ define('views/settings',
     function updateProfile($this) {
         forms.toggleSubmitFormState($this, false);
 
-        var newUsername = $this.find('[name=username]').val();
         var newData = {
-            username: newUsername
+            username: $this.find('[name=username]').val(),
+            teamName: $this.find('[name=teamname]').val(),
+            teamSlug: $this.find('[name=teamslug]').val(),
+            homepage: $this.find('[name=teamurl]').val()
         };
-        
+
         requests.put(urls.api.url('user.profile'), newData).done(function(data) {
             handleProfileUpdate(newData);
         }).fail(function(data) {
@@ -32,6 +34,12 @@ define('views/settings',
     z.body.on('submit', 'form.edit-profile', function(e) {
         e.preventDefault();
         updateProfile($(this));
+    }).on('blur change keyup paste', 'input[name=teamname]', function(e) {
+        var $this = $(this);
+        var $slug = $this.closest('form').find('input[name=teamslug]');
+        $slug.val(utils.slugify($this.val()));
+        $slug.attr('tabIndex', this.checkValidity() ? '-1' : '');
+        $slug.toggleClass('focused', !!$this.val());
     });
 
     return function(builder, args) {

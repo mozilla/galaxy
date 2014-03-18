@@ -1,8 +1,13 @@
-define('resize-textarea', ['underscore', 'z'], function(_, z) {
+define('resize-textarea', ['jquery', 'underscore', 'z'], function($, _, z) {
     // Auto-resizing functionality to all textareas on the page
     function resize(textarea) {
-        textarea.style.height = 'auto';
-        textarea.style.height = textarea.scrollHeight + 'px';
+        var minHeight = parseInt($(textarea).css('min-height'));
+        if (minHeight && minHeight > textarea.scrollHeight) {
+            textarea.style.height = minHeight + 'px';
+        } else {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
     }
 
     /* 0-timeout to get the already changed text */
@@ -19,4 +24,6 @@ define('resize-textarea', ['underscore', 'z'], function(_, z) {
     }
 
     z.page.on('loaded', resizeTextareasOnPage).on('input', 'textarea', delayedResize);
+
+    return {resizeTextareas: resizeTextareasOnPage};
 });

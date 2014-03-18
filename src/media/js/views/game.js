@@ -1,11 +1,21 @@
 define('views/game',
-       ['jquery', 'l10n', 'utils', 'z'],
-       function($, l10n, utils, z) {
+       ['jquery', 'l10n', 'requests', 'user', 'utils', 'urls', 'z'],
+       function($, l10n, requests, user, utils, urls, z) {
 
-    z.body.on('click', '.play', function(e) {
+    function updatePlay(gameSlug) {
+        requests.post(urls.api.url('user.purchase'), {game: gameSlug});
+    };
+
+    z.body.on('click', '.btn-play', function(e) {
         var $this = $(this);
         e.preventDefault();
         window.open($this.data('appUrl'));
+    }).on('click', '.btn-install', function(e) {
+        var $this = $(this);
+        if (user.logged_in()) {
+            updatePlay($this.data('gameSlug'));
+            $this.removeClass('btn-install');
+        }
     });
     z.win.on('hashchange', function() {
         // TODO: allow builder to accept hash.
