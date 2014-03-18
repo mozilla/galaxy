@@ -3,24 +3,19 @@ define('views/game',
        function($, l10n, requests, user, utils, urls, z) {
 
     function updatePlay(gameSlug) {
-        var newData = {
-            game: gameSlug
-        };
-        requests.post(urls.api.url('user.purchase'), newData);
+        requests.post(urls.api.url('user.purchase'), {game: gameSlug});
     };
 
-    z.body.on('click', '.play', function(e) {
+    z.body.on('click', '.btn-play', function(e) {
         var $this = $(this);
         e.preventDefault();
         window.open($this.data('appUrl'));
-    }).on('click', '.install', function(e) {
+    }).on('click', '.btn-install', function(e) {
         var $this = $(this);
         if (user.logged_in()) {
             updatePlay($this.data('gameSlug'));
         }
-        $this.text('Play');
-        $this.removeClass('install');
-        $this.addClass('play');
+        $this.removeClass('btn-install');
     });
     z.win.on('hashchange', function() {
         // TODO: allow builder to accept hash.
