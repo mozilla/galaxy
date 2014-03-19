@@ -5,7 +5,7 @@
         <h1>{{ _('Featured Games') }}</h1>
       </div>
       <div class="grid-cell">
-        <a class="btn btn-big btn-edit curation-feature">{{ _('Feature a New Game') }}</a>
+        <a class="btn btn-big btn-edit curation-feature"><span class="btn-text">{{ _('Feature a New Game') }}</span></a>
       </div>
     </div>
     {% defer (url=api('game.featured'), id='featured-games') %}
