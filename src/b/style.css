@@ -277,7 +277,8 @@ nav label {
   pointer-events: none;
 }
 
-nav input {
+nav input,
+.detail-game-thumbnails input {
   left: -9999px;
   opacity: 0;
   position: absolute;
@@ -603,16 +604,16 @@ dd + dt {
   width: 30%;
 }
 
+.detail-game-thumbnails label + label {
+  margin-top: 15px;
+}
+
 .detail-game-thumbnail {
   background-repeat: no-repeat;
   background-size: cover;
   border: 5px solid #ccc;
   height: 182px;
   width: 284px;
-}
-
-.detail-game-thumbnail + .detail-game-thumbnail {
-  margin-top: 15px;
 }
 
 #bastion-screenshot-4 {
