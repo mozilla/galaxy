@@ -30,12 +30,16 @@ define('views/feature',
             removeGameRow(gameSlug);
         }).fail(function() {
             notification.notification({message: gettext('Error: A problem occured while unfeaturing this game. Please try again.')});
+            controlSpinner($this, false);
         });
     }
 
     // TODO: Hook up with curation modal (#126).
     function featureGame() {
-        var gameSlug = $(this).parent().data('slug');
+        var $this = $(this);
+        var gameSlug = $this.parent().data('slug');
+
+        controlSpinner($this, true);
 
         requests.post(urls.api.url('game.featured'), {
             game: gameSlug
@@ -44,6 +48,7 @@ define('views/feature',
             addGameRow(gameSlug);
         }).fail(function() {
             notification.notification({message: gettext('Error: A problem occured while featuring this game. Please try again.')});
+            controlSpinner($this, false);
         });
     }
 
@@ -60,6 +65,7 @@ define('views/feature',
                 removeGameRow(gameSlug);
             }).fail(function() {
                 notification.notification({message: gettext('Error: A problem occured while deleting this game. Please try again.')});
+                controlSpinner($this, false);
             });
         }).fail(function() {
             // Add back text.
@@ -98,6 +104,7 @@ define('views/feature',
             
         }).fail(function() {
             notification.notification({message: gettext('Error: A problem occured while changing the game status. Please try again.')});
+            controlSpinner($this, false);
         });
     }
 

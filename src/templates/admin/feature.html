@@ -19,7 +19,7 @@
     {% placeholder %}
       {{ _('Loading games...') }}
     {% empty %}
-      {{ emptyReview() }}
+      {{ _('No games featured.') }}
     {% except %}
       {% if error == 403 %}
         {{ _('You are not authorized to access this page.') }}
