@@ -1,23 +1,24 @@
-define('views/game_search', ['promise', 'search'], function(promise, search) {
+define('views/game_search', ['promise',  'urls', 'worker'], function(promise, urls, worker) {
 
     var indexed = index();
 
     function index() {
         return new Promise(function(resolve, reject) {
-            window.addEventListener('message', function(e) {
+            worker.addEventListener('message', function(e) {
                 switch (e.data.type) {
                     case 'indexed':
+                        console.log("Games indexed.");
                         return resolve();
                     case 'results':
-                        // TODO: Render results
+                        // TODO: Render Results
                         return resolve();
                 }
             });
-            
-            window.postMessage({
+
+            worker.postMessage({
                 type: 'index',
                 data: {
-                    url: 'game.list',
+                    url: urls.api.url('game.list'),
                     fields: {
                         app_url: {boost: 25},
                         slug: {boost: 20},
@@ -25,7 +26,7 @@ define('views/game_search', ['promise', 'search'], function(promise, search) {
                     },
                     ref: 'slug'
                 }
-            }, '*');
+            });
         });
     }
 
@@ -37,6 +38,7 @@ define('views/game_search', ['promise', 'search'], function(promise, search) {
 
             builder.z('type', 'leaf');
             builder.z('title', gettext('Search'));
+
         });
     };
 });

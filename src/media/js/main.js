@@ -30,7 +30,6 @@ require.config({
             'l10n',
             'log',
             'login',
-            'lunr',
             'media-input',
             'navigation',
             'overlay',
