@@ -182,6 +182,17 @@ define('helpers',
         return utils.urlparams(url + md5(email) + '.jpg',  params);
     }
 
+    // Used for getting translated Game Status
+    filters.statusName = function(status) {
+        return {
+            'pending': gettext('Pending'),
+            'approved': gettext('Public'),
+            'rejected': gettext('Rejected'),
+            'disabled': gettext('Disabled'),
+            'deleted': gettext('Deleted')
+        }[status];
+    }
+
     safe_filter('stringify', JSON.stringify);
 
     filters.format = require('format').format;
@@ -223,7 +234,7 @@ define('helpers',
             return obj;
         },
         gravatar: gravatar,
-
+        
         navigator: window.navigator,
         screen: window.screen,
         // TODO: Pull the default value from settings.

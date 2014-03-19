@@ -5,6 +5,7 @@ define('routes_api', [], function() {
         'feedback': '/feedback',
         'game': '/game/{0}/detail',
         'game.edit': '/game/edit',
+        'game.featured': '/featured',
         'game.list': '/game/list',
         'game.moderate': '/game/{0}/{1}',
         'game.submit': '/game/submit',

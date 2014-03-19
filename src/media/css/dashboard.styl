@@ -1,0 +1,68 @@
+// For styles relating to dashboard screens (curation dashboard, review dashboard etc.)
+
+@import 'lib';
+
+.dashboard-table {
+    width: 100%;
+    
+    thead tr th {
+        text-align: left;
+        padding-bottom: 10px;
+    }
+
+    tbody td {
+        padding: 5px 0;
+
+        + td {
+            padding-left: 10px;
+        }
+    }
+
+    .dashboard-buttons {
+        text-align: right;
+        .btn {
+            margin-left: 10px;
+        }
+    }
+}
+
+.curation-page-title {
+    flex: none;
+    width: 80%;
+}
+
+.curation-table {
+    .curation-status {
+
+        .status-span {
+            color: $colorGrayLight;
+            font-size: 14px;
+        }
+
+        .status-approved {
+            color: $colorLightGreen;
+        }
+
+        .status-pending, 
+        .status-rejected,
+        .status-disabled,
+        .status-deleted {
+            color: $colorGray;
+        }
+
+    }
+
+    .curation-title {
+        a {
+            color: $colorTealLink;
+            font-size: 26px;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        img {
+            vertical-align: middle;
+            max-width: 64px;
+            max-height: 64px;
+        }
+    }
+}
