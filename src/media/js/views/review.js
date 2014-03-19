@@ -29,8 +29,18 @@ define('views/review',
         function setSpinning(spinning) {
             var newVisibility = spinning ? 'hidden' : 'visible';
             $button.children('.btn-text').css('visibility', newVisibility);
+
+            var isBtn = $button.hasClass('btn');
+            if (!isBtn) {
+                // Need to use spinner-container class to get spinner to be
+                // positioned and sized correctly
+                $button.toggleClass('spinner-container', spinning);
+            }
+
             if (spinning) {
-                $button.append('<div class="spinner"></div>');
+                // Use alternate (dark) spinner for non-bordered buttons
+                var spinnerClasses = 'spinner' + (isBtn ? '' : ' alt');
+                $button.append('<div class="'+ spinnerClasses + '"></div>');
             } else {
                 $button.children('.spinner').remove();
             }
