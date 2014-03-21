@@ -49,6 +49,19 @@
             color: #909090;
         }
     }
+
+    .arrow-container {
+        height: 10px;
+        margin-top: 20px;
+        .arrow {
+            border-style: solid;
+            border-width: 20px 50px 0 50px;
+            border-color: rgba(255, 255, 255, 0.5) transparent transparent transparent;
+            margin: 0 auto;
+            height: 0px;
+            width: 0px;
+        }
+    }
 }
 
 .game-details-page {
@@ -57,7 +70,6 @@
             opacity: 0.25;
             &.selected {
                 opacity: 1;
-
                 .select-bar {
                     background-color: #dfe1e6;
                     border-radius: 2px;
