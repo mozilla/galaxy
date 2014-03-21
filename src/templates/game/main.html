@@ -5,27 +5,8 @@
   {% set game = this %}
   
   <div class="grid game-details-page">
-    <div class="grid-cell featured-games-section">
-      <ul>
-        {% for game in featured_games %}
-        <li>
-          <a href="#">
-            <div class="media">
-              <img class="media-figure game-icon" src="{{ media('img/new-game-details/' + game.icon) }}">
-              <div class="media-body">
-                <h3 class="game-title">{{ game.title }}</h3>
-                <p class="game-developer">{{ _('by {author}', author=game.developer) }}</p>
-              </div>
-            </div>
-          </a>
-          <div class="select-bar"></div>
-        </li>
-        {% endfor %}
-      </ul>
-      <div class="arrow-container">
-        <div class="arrow"></div>
-      </div>
-    </div>
+    {% include '_macros/featured-games.html' %}
+    {{ featuredGames() }}
     <div class="grid-cell grid-flex-grow-two game-details-container">
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two game-details-container-left">

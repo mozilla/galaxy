@@ -1,6 +1,6 @@
 define('views/game',
-       ['jquery', 'l10n', 'requests', 'user', 'utils', 'urls', 'z'],
-       function($, l10n, requests, user, utils, urls, z) {
+       ['featured-games', 'jquery', 'l10n', 'requests', 'user', 'utils', 'urls', 'z'],
+       function(fg, $, l10n, requests, user, utils, urls, z) {
 
     function updatePlay(gameSlug) {
         requests.post(urls.api.url('user.purchase'), {game: gameSlug});
@@ -68,73 +68,11 @@ define('views/game',
 
     return function(builder, args) {
         var slug = args[0];
-        var featured_games = [
-        {
-            title: 'Hex GL',
-            developer: 'Thibaut Despoulain',
-            icon: 'hexgl.png'
-        },
-        {
-            title: 'Batman: Arkham Origins',
-            developer: 'Armature Studio',
-            icon: 'batman.png'
-        },
-        {
-            title: 'Bastion',
-            developer: 'Supergiant Games',
-            icon: 'bastion.png'
-        },
-        {
-            title: 'Windborne',
-            developer: 'Hidden Path Entertainment',
-            icon: 'windborne.png'
-        },
-        {
-            title: 'Orion',
-            developer: 'Spiral Game Studios',
-            icon: 'orion.png'
-        },
-        {
-            title: 'Banished',
-            developer: 'Shining Rock Software',
-            icon: 'banished.png'
-        },
-        {
-            title: 'Hex GL',
-            developer: 'Thibaut Despoulain',
-            icon: 'hexgl.png'
-        },
-        {
-            title: 'Batman: Arkham Origins',
-            developer: 'Armature Studio',
-            icon: 'batman.png'
-        },
-        {
-            title: 'Bastion',
-            developer: 'Supergiant Games',
-            icon: 'bastion.png'
-        },
-        {
-            title: 'Windborne',
-            developer: 'Hidden Path Entertainment',
-            icon: 'windborne.png'
-        },
-        {
-            title: 'Orion',
-            developer: 'Spiral Game Studios',
-            icon: 'orion.png'
-        },
-        {
-            title: 'Banished',
-            developer: 'Shining Rock Software',
-            icon: 'banished.png'
-        }
-        ];
 
         builder.start('game/main.html', {
             slug: slug, 
-            page_url: window.location.href, 
-            featured_games: featured_games
+            page_url: window.location.href,
+            featured_games: fg.getFeaturedGames()
         });
 
         builder.z('type', 'game');
