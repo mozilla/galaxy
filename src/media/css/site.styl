@@ -273,9 +273,28 @@ a:hover .badge {
     padding: 35px;
 }
 
-[data-page-type="root"] .page,
-[data-page-type="game"] .page {
-    padding: 30px 0;
+[data-page-type="root"],
+[data-page-type="game"] {
+    .page {
+        padding: 30px 0;
+    }
+    .right-container {
+        background-color: rgba(255,255,255,0.4);
+        box-shadow: 0 5px 10px 0 rgba(0,0,0,0.75);
+        padding-top: 20px;
+    }
+    .arrow-container {
+        height: 10px;
+        margin-top: 20px;
+        .arrow {
+            border-style: solid;
+            border-width: 20px 50px 0 50px;
+            border-color: rgba(255, 255, 255, 0.5) transparent transparent transparent;
+            margin: 0 auto;
+            height: 0px;
+            width: 0px;
+        }
+    }
 }
 
 /* Solved by Flexbox */

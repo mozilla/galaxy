@@ -1,7 +1,20 @@
-<div class="grid home-page">
+<div class="grid homepage">
   {% include '_macros/featured-games.html' %}
   {{ featuredGames() }}
-  <div class="grid-cell grid-flex-grow-two game-details-container">
-    
-  </div>
+  <div class="grid-cell grid-flex-grow-two right-container">
+    <div class="homepage-content">
+        <div class="homepage-heading">
+            <img src="{{ media('img/homepage/green-controller.png') }}">
+            <span>+</span>
+            <img src="{{ media('img/homepage/html5-logo.png') }}">
+            <span>=</span>
+            <img src="{{ media('img/homepage/heart-html5.png') }}">
+        </div>
+        <h1>{{ _('Play your favorite console games<br/> in your favorite web browsers.') }}</h1>
+        <div class="screenshots">
+            <img src="{{ media('img/homepage/browser-1.png') }}">
+            <img src="{{ media('img/homepage/browser-2.png') }}">
+        </div>
+    </div>
+  </div>     
 </div>
