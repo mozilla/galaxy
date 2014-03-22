@@ -29,18 +29,57 @@
     ::-webkit-input-placeholder {
         font-size: 12px;
     }
+    input[type=file] {
+        display: none;
+    }
+
 }
 
-.media-preview {
+.media-preview-container {
     background-color: $mediaPreviewBackgroundColor;
+    border: $mediaPreviewBorder;
+    border-radius: 2px;
     display: block;
     cursor: pointer;
     margin: 5px 0;
     max-width: 100%;
     position: relative;
-    &:empty {
-        border: $mediaPreviewBorder;
-        border-radius: 2px;
+    
+    img, iframe {
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+    }
+    &.processed {
+        background-color: transparent; // TODO: Use crosshatch background.
+        border: $colorGray;
+        .media-delete {
+            background-color: rgba(217,21,24,0.75);
+            border: 1px solid #d91518;
+            border-radius: 5px;
+            bottom: 5px;
+            color: #fff;
+            display: none;
+            height: 30px;
+            position: absolute;
+            width: 30px;
+            right: 5px;
+            text-align: center;
+            z-index: 2;
+            &:after {
+                content: "\00d7";
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 30px;
+            }
+        }
+        &:hover {
+            .media-delete {
+                display: initial;
+            }
+        }
     }
 }
 
@@ -54,7 +93,7 @@
         padding: 1px 3px;
     }
 
-    .media-preview {
+    .media-preview-container {
         height: 128px;
         width: 128px;
         &:before {
@@ -90,7 +129,7 @@
 }
 
 .screenshots {
-    .media-preview {
+    .media-preview-container {
         height: 210px;
         &:before {
             background: url('../img/game-submission/upload-blue.png') 50% 0 no-repeat;
@@ -125,7 +164,7 @@
 }
 
 .videos {
-    .media-preview {
+    .media-preview-container {
         cursor: default;
         height: 210px;
         &:before {
@@ -146,10 +185,6 @@
             position: absolute;
             text-align: center;
             width: 100%;
-        }
-        iframe {
-            position: relative;
-            z-index: 1;
         }
     }
 }
