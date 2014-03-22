@@ -110,11 +110,11 @@
     <div class="grid content">
       <div class="grid-cell grid-flex-grow-two">
         <div class="l">{{ _('Genre') }}</div>
+        <span class="req" data-required="{{ _('Required') }}"></span>
         <div class="form-field">
           {% for slug, name in settings.genres.items() %}
               <label class="choice"><input type="radio" name="genre"{{ ' checked' if slug == game.genre }} required value="{{ slug }}"> {{ name }}</label>
           {% endfor %}
-          <span class="req" data-required="{{ _('Required') }}"></span>
         </div>
       </div>
       <div class="grid-cell">
@@ -128,7 +128,7 @@
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
           <div class="l">{{ _('Icon') }}</div>
-            <span class="req" data-required="{{ _('Required') }}"></span>
+          <span class="req" data-required="{{ _('Required') }}"></span>
         </div>
         <div class="grid-cell"></div>
       </div>
