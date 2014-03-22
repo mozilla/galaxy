@@ -136,12 +136,13 @@
         <div class="grid-cell grid-flex-grow-two">
           <div class="grid icons media form-field grid-bottom">
             <div class="grid-cell media-left">
-              <span class="icons-dimensions">{{ _('128px &times; 128px') }}</span>
+              <span class="media-size">{{ _('128px &times; 128px') }}</span>
               <div class="media-preview"></div>
               <input type="url" data-type="icons" value="{{ game.icons }}" placeholder="{{ _('Or enter URL to 128px icon here') }}" pattern="https?://.*">
             </div>
-            <div class="grid-cell media-right">
-              <span class="icons-dimensions">{{ _('64px &times; 64px') }}</span>
+            <div class="grid-cell media-right"></div> <!-- Placeholder -->
+            <div class="grid-cell media-right" style="display:none"> <!-- Not in use for now -->
+              <span class="media-size">{{ _('64px &times; 64px') }}</span>
               <div class="media-preview icons-64"></div>
               <input type="url" data-type="icons" value="{{ game.icons }}" placeholder="{{ _('Or enter URL to 64px icon here') }}" pattern="https?://.*">
             </div>
@@ -191,6 +192,35 @@
         </div>
         <div class="grid-cell"></div>
       </div>
+      <div class="grid">
+        <div class="grid-cell grid-flex-grow-two">
+          <div class="grid screenshots media form-field grid-bottom">
+            <div class="grid-cell media-left">
+              <span class="media-size">4:3 <span class="inner">(1024px &times; 768px)</span></span>
+              <!-- {% for screenshot in game.screenshots %}
+                <div class="media-preview">
+                </div>
+              {% endfor %} -->
+              <div class="media-preview"></div>
+              <input type="url" data-type="icons" value="{{ game.icons }}" placeholder="{{ _('Or enter URL to 4:3 screenshot here') }}" pattern="https?://.*">
+            </div>
+            <div class="grid-cell media-right">
+              <span class="media-size">16:9 <span class="inner">(1280px &times; 720px)</span></span>
+              <div class="media-preview screenshots-16-9"></div>
+              <input type="url" data-type="icons" value="{{ game.icons }}" placeholder="{{ _('Or enter URL to 16:9 screenshot here') }}" pattern="https?://.*">
+            </div>
+          </div>
+        </div>
+        <div class="grid-cell">
+          <p class="form-help">
+            {{ _("The icon will be shown on all listings in Galaxy.<br>Allowed formats: PNG, JPG<br>
+            Maximum dimensions: 128px &times; 128px") }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
           <div class="screenshots media form-field">

@@ -1,5 +1,36 @@
 @import 'lib';
 
+.media {
+    .form-help {
+        margin-bottom: 5px;
+        margin-right: 50px;
+    }
+    .req:after {
+        bottom: auto;
+        top: 5px;
+    }
+    .media-left,
+    .media-right {
+        padding-right: 80px;
+    }
+    .media-size {
+        border: 1px solid $colorGrayLightest;
+        border-radius: 2px;
+        color: $colorGrayLighter;
+        display: inline-block;
+        font-size: 10px;
+        margin-top: 15px;
+        padding: 1px 3px;
+        .inner {
+            color: $colorGrayLightest;
+        }
+    }
+    input,
+    ::-webkit-input-placeholder {
+        font-size: 12px;
+    }
+}
+
 .media-preview {
     background-color: $mediaPreviewBackgroundColor;
     display: block;
@@ -58,55 +89,71 @@
     }
 }
 
-.videos .media-preview {
-    cursor: default;
-    height: 210px;
-    &:before {
-        background: url('../img/game-submission/preview-blue.png') 53% 0 no-repeat;
-        background-size: 80px 80px;
-        content: "";
-        display: block;
-        height: 80px;
-        position: absolute;
-        top: 60px;
-        width: 100%;
-    }
-    &:after {
-        bottom: 55px;
-        color: $colorLightBlue;
-        content: "Preview";
-        display: block;
-        position: absolute;
-        text-align: center;
-        width: 100%;
-    }
-    iframe {
-        position: relative;
-        z-index: 1;
+.screenshots {
+    .media-preview {
+        height: 210px;
+        &:before {
+            background: url('../img/game-submission/upload-blue.png') 50% 0 no-repeat;
+            background-size: 80px 80px;
+            content: "";
+            display: block;
+            height: 80px;
+            position: absolute;
+            top: 50px;
+            width: 100%;
+        }
+        &:after {
+            bottom: 35px;
+            color: $colorLightBlue;
+            content: "Drag and drop or select";
+            display: block;
+            margin-left: 32%;
+            position: absolute;
+            text-align: center;
+            width: 36%;
+        }
+        &.screenshots-16-9 {
+            height: 157px;
+            &:before {
+                top: 20px;
+            }
+            &:after {
+                bottom: 15px;
+            }
+        }
     }
 }
 
-.media-size {
-    color: $colorGrayLight;
-    font-size: 10px;
-    margin-top: 15px;
+.videos {
+    .media-preview {
+        cursor: default;
+        height: 210px;
+        &:before {
+            background: url('../img/game-submission/preview-blue.png') 53% 0 no-repeat;
+            background-size: 80px 80px;
+            content: "";
+            display: block;
+            height: 80px;
+            position: absolute;
+            top: 60px;
+            width: 100%;
+        }
+        &:after {
+            bottom: 55px;
+            color: $colorLightBlue;
+            content: "Preview";
+            display: block;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+        }
+        iframe {
+            position: relative;
+            z-index: 1;
+        }
+    }
 }
 
 input[type=url].media {
     margin-bottom: 5px;
-}
-
-.media {
-    .form-help {
-        margin-bottom: 5px;
-        margin-right: 50px;
-    }
-    .req:after {
-        bottom: auto;
-        top: 5px;
-    }
-    .media-left,
-    .media-right {
-        padding-right: 80px;
-    }
 }
