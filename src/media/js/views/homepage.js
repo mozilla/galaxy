@@ -7,5 +7,6 @@ define('views/homepage', ['featured-games'], function(fg) {
 
         builder.z('type', 'root');
         builder.z('title', null);
+        fg.attachScrollEvents();
     };
 });

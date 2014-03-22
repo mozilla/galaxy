@@ -67,7 +67,7 @@ define('views/game',
         $('.game-current-media').html($mediaObject);
     });
 
-    z.body.on('click', '.game-details-container-right .arrow', function() {
+    z.body.on('click', '.game-details-media .arrow', function() {
         // TODO: Scroll media gallery section downwards
     });
 
@@ -86,6 +86,7 @@ define('views/game',
         builder.onload('game-data', function(game) {
             builder.z('title', utils.translate(game.name));
             twttr.widgets.load(); // Needed for loaded twitter widget scripts
+            fg.attachScrollEvents();
         });
     };
 });
