@@ -2,12 +2,14 @@
 
 .media-preview {
     background-color: $mediaPreviewBackgroundColor;
-    border: $mediaPreviewBorder;
-    border-radius: 2px;
     display: block;
     margin: 5px 0;
     max-width: 100%;
     position: relative;
+    &:empty {
+        border: $mediaPreviewBorder;
+        border-radius: 2px;
+    }
 }
 
 .icons .media-preview {
@@ -31,9 +33,14 @@
         bottom: 55px;
         color: $colorLightBlue;
         content: "Preview";
+        display: block;
         position: absolute;
         text-align: center;
         width: 100%;
+    }
+    iframe {
+        position: relative;
+        z-index: 1;
     }
 }
 
