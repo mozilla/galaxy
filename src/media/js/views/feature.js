@@ -138,6 +138,9 @@ define('views/feature',
         moderateGame($(this), 'disable');
     }).on('click', '.curation-enable', function() {
         moderateGame($(this), 'approve');
+    }).on('click', '.curation-feature', function() {
+        z.page.append(nunjucks.env.render('feedback.html'));
+        z.body.trigger('decloak');
     });
 
     return function(builder, args) {
