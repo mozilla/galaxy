@@ -134,9 +134,34 @@
       </div>
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
+          <div class="grid icons media form-field grid-bottom">
+            <div class="grid-cell media-left">
+              <span class="icons-dimensions">{{ _('128px &times; 128px') }}</span>
+              <div class="media-preview"></div>
+              <input type="url" data-type="icons" value="{{ game.icons }}" placeholder="{{ _('Or enter URL to 128px icon here') }}" pattern="https?://.*">
+            </div>
+            <div class="grid-cell media-right">
+              <span class="icons-dimensions">{{ _('64px &times; 64px') }}</span>
+              <div class="media-preview icons-64"></div>
+              <input type="url" data-type="icons" value="{{ game.icons }}" placeholder="{{ _('Or enter URL to 64px icon here') }}" pattern="https?://.*">
+            </div>
+          </div>
+        </div>
+        <div class="grid-cell">
+          <p class="form-help">
+            {{ _("The icon will be shown on all listings in Galaxy.<br>Allowed formats: PNG, JPG<br>
+            Maximum dimensions: 128px &times; 128px") }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="grid">
+        <div class="grid-cell grid-flex-grow-two">
           <div class="icons media form-field">
             <label>
-              <div class="fallback" data-placeholder="{{ _('Icon URL') }}" data-type="icons">
+              <div data-placeholder="{{ _('Icon URL') }}" data-type="icons">
                 <input type="url" name="icon_url" class="media" data-type="icons" value="{{ game.icons }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
               </div>
             </label>

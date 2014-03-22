@@ -3,6 +3,7 @@
 .media-preview {
     background-color: $mediaPreviewBackgroundColor;
     display: block;
+    cursor: pointer;
     margin: 5px 0;
     max-width: 100%;
     position: relative;
@@ -12,12 +13,53 @@
     }
 }
 
-.icons .media-preview {
-    max-height: 128px;
-    max-width: 128px;
+.icons {
+    .icons-dimensions {
+        border: 1px solid $colorGrayLighter;
+        border-radius: 2px;
+        color: $colorGrayLighter;
+        display: inline-block;
+        font-size: 10px
+        padding: 1px 3px;
+    }
+
+    .media-preview {
+        height: 128px;
+        width: 128px;
+        &:before {
+            background: url('../img/game-submission/upload-blue.png') 50% 0 no-repeat;
+            background-size: 50px 50px;
+            content: "";
+            display: block;
+            height: 50px;
+            position: absolute;
+            top: 25px;
+            width: 100%;
+        }
+        &:not(.icons-64):after {
+            bottom: 17px;
+            color: $colorLightBlue;
+            content: "Drag and drop or select";
+            display: block;
+            font-size: 12px;
+            margin-left: 20%;
+            position: absolute;
+            text-align: center;
+            width: 60%;
+        }
+        &.icons-64 {
+            height: 64px;
+            width: 64px;
+            &:before {
+                background-size: 25px 25px;
+                top: 20px;
+            }
+        }
+    }
 }
 
 .videos .media-preview {
+    cursor: default;
     height: 210px;
     &:before {
         background: url('../img/game-submission/preview-blue.png') 53% 0 no-repeat;
