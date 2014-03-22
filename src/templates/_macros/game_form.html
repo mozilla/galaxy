@@ -155,8 +155,7 @@
         </div>
         <div class="grid-cell">
           <p class="form-help">
-            {{ _("The icon will be shown on all listings in Galaxy.<br>Allowed formats: PNG, JPG<br>
-            Maximum dimensions: 128px &times; 128px") }}
+            {{ _("The icon will be shown on all listings in Galaxy.<br>Allowed image formats: PNG, JPG<br>Maximum dimensions: 128px &times; 128px") }}
           </p>
         </div>
       </div>
@@ -191,14 +190,13 @@
         </div>
         <div class="grid-cell">
           <p class="form-help">
-            {{ _("The icon will be shown on all listings in Galaxy.<br>Allowed formats: PNG, JPG<br>
-            Maximum dimensions: 128px &times; 128px") }}
+            {{ _("Screenshots will be shown on your game detail page.<br/>Allowed image formats: PNG, JPG") }}
           </p>
         </div>
       </div>
     </div>
 
-    <div class="content">
+    <!-- <div class="content">
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
           <div class="screenshots media form-field">
@@ -209,13 +207,8 @@
                 {% endfor %}
               </div>
             </label>
-            <input type="file" name="screenshot_file" class="media" data-type="screenshots">
-<!-- 
-            <div class="media-size"></div>
-            <img id="screenshot-preview" class="media-preview" data-type="screenshots">
-
-            {# `screenshot_final_url` contains the URL of the image that we'll want to save locally on the server. #}
-            <input type="hidden" name="screenshot_final_url" class="media-final-url" data-type="screenshots"> -->
+            <input type="file" name="screenshot_file" class="media" data-type="screenshots" multiple>
+            <div id="sc-list"></div>
           </div>
         </div>
         <div class="grid-cell">
@@ -224,7 +217,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="content">
       <div class="grid">
