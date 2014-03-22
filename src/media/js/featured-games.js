@@ -8,7 +8,12 @@ define('featured-games',
         $('.featured-games-section li').removeClass('selected');
         $(this).addClass('selected');
         // TODO: Update game detail section with selected game details.
-    })
+    });
+
+    z.body.on('click', '.featured-games-section .arrow', function() {
+        var $featuredGamesList = $('.featured-games-section ul');
+        // TODO: Scroll featured games section downwards.
+    });
 
     function getFeaturedGames() {
         return [

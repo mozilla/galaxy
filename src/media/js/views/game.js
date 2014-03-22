@@ -2,6 +2,8 @@ define('views/game',
        ['featured-games', 'jquery', 'l10n', 'requests', 'user', 'utils', 'urls', 'z'],
        function(fg, $, l10n, requests, user, utils, urls, z) {
 
+    var gettext = l10n.gettext;
+
     function updatePlay(gameSlug) {
         requests.post(urls.api.url('user.purchase'), {game: gameSlug});
     };
@@ -17,6 +19,7 @@ define('views/game',
             $this.removeClass('btn-install');
         }
     });
+
     z.win.on('hashchange', function() {
         // TODO: allow builder to accept hash.
         var hash = window.location.hash.substr(1);
@@ -64,7 +67,9 @@ define('views/game',
         $('.game-current-media').html($mediaObject);
     });
 
-    var gettext = l10n.gettext;
+    z.body.on('click', '.game-details-container-right .arrow', function() {
+        // TODO: Scroll media gallery section downwards
+    });
 
     return function(builder, args) {
         var slug = args[0];
