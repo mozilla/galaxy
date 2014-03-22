@@ -1,15 +1,13 @@
 @import 'lib';
 
 .media-preview {
-    cursor: pointer;
+    background-color: $mediaPreviewBackgroundColor;
+    border: $mediaPreviewBorder;
+    border-radius: 2px;
     display: block;
-}
-
-.media-preview {
-    display: none;
-    margin-top: 5px;
-    max-height: 150px;
-    max-width: 200px;
+    margin: 5px 0;
+    max-width: 100%;
+    position: relative;
 }
 
 .icons .media-preview {
@@ -18,8 +16,25 @@
 }
 
 .videos .media-preview {
-    max-height: 150px;
-    max-width: 200px;
+    height: 210px;
+    &:before {
+        background: url('../img/game-submission/preview-blue.png') 53% 0 no-repeat;
+        background-size: 80px 80px;
+        content: "";
+        display: block;
+        height: 80px;
+        position: absolute;
+        top: 60px;
+        width: 100%;
+    }
+    &:after {
+        bottom: 55px;
+        color: $colorLightBlue;
+        content: "Preview";
+        position: absolute;
+        text-align: center;
+        width: 100%;
+    }
 }
 
 .media-size {
@@ -40,5 +55,9 @@ input[type=url].media {
     .req:after {
         bottom: auto;
         top: 5px;
+    }
+    .media-left,
+    .media-right {
+        padding-right: 80px;
     }
 }

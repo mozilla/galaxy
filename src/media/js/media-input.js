@@ -102,7 +102,7 @@ define('media-input',
             return !$(this).val();
         });
         // TODO: Have a better check for the icons input field
-        if ($input.val() && $emptyInputs.length === 0 && $input.data('type') !== "icons") {
+        if ($input.val() && $emptyInputs.length === 0 && $input.data('type') === 'screenshots') {
             createInput($input.parent());
         } else {
             // So that at any point in time, there will be exactly
