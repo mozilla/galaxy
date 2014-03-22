@@ -24,7 +24,6 @@ define('media-input',
             preview(img.dataset.type, newURL);
             var $img = $(img);
             $img.parent().addClass('processed');
-            $img.show();
             $img.parent().siblings('.media-input').css('visibility', 'hidden');
             // This is the URL that gets POST'd to the API.
             // TODO: As there will be multiple fields for screenshots,
@@ -106,6 +105,33 @@ define('media-input',
         });
     }
 
+    function loadVideo($input) {
+        var mediaSrc = $input.val();
+        // TODO: Handle case of invalid video URLs.
+        if (mediaSrc.search(/youtube|vimeo/) > -1) {
+            // TODO: Handle all formats of youtube and vimeo URLs.
+            if (mediaSrc.indexOf('youtube') > -1) {
+                var youtubeId = mediaSrc.split('/')[4];
+                var $mediaObject = $('<iframe>', {
+                    autoplay: 1,
+                    frameborder: 0,
+                    src: '//www.youtube.com/embed/' + youtubeId
+                });
+            } else {
+                var vimeoId = mediaSrc.split('/')[3];
+                var $mediaObject = $('<iframe>', {
+                    frameborder: 0,
+                    src: '//player.vimeo.com/video/' + vimeoId
+                });
+            }
+        } else {
+            return;
+        }
+        $mediaObject.attr('height', 210);
+        $mediaObject.attr('width', 280); 
+        $input.siblings('.media-preview-container').html($mediaObject);
+    }
+
     z.page.on('loaded', function() {
         $('.fallback').each(function() {
             var $this = $(this);
@@ -174,7 +200,6 @@ define('media-input',
 =======
     }).on('click', '.media-delete', function(e) {
         e.stopPropagation();
-        $(this).siblings('.media-preview').hide();
         $(this).siblings('input[type=file].media-input').val('');
 
         var $mediaPreviewContainer = $(this).parent();
@@ -188,7 +213,7 @@ define('media-input',
             loadVideo($(this));
         } else {
             // Clear the loaded iframe
-            $(this).siblings('.media-preview').html('');
+            $(this).siblings('.media-preview-container').html('');
         }
 >>>>>>> Handle deletion of icon
     });
