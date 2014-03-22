@@ -89,7 +89,7 @@ define('views/submit',
             screenshots: [],
         };
 
-        // Handle URLs for icons, screenshots, and videos.
+        // Handle URLs for icons and screenshots.
         $('.media-final-url').each(function () {
             var $this = $(this);
             var item = {src: $this.val()};
@@ -106,6 +106,11 @@ define('views/submit',
 
             data[$this.data('type')].push(item);
         });
+
+        // Handle URLs for videos.
+        $('.videos input[type=url').each(function() {
+            data.screenshots.push($(this).val());
+        })
 
         if ($this.data('formtype') === 'submit') {
             submitGame(data);
