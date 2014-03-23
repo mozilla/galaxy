@@ -91,16 +91,21 @@ define('media-input',
 
     function getFileDataURI(input, callback) {
         return new Promise(function(resolve, reject) {
-            if (input.files && input.files[0]) {
-                // This is so we can get the data URI of the image uploaded.
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    resolve(e.target.result);
-                };
-                reader.onerror = function (err) {
-                    reject(err.getMessage());
-                };
-                reader.readAsDataURL(input.files[0]);
+            var files = input.files;
+            if (files && files[0]) {
+                // Loop through the files and render image files.
+                for (var i = 0, f; f = files[i]; i++) {
+                    // This is so we can get the data URI of the image uploaded.
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        resolve(e.target.result);
+                        // preview(input.dataset.type, e.target.result, false);
+                    };
+                    reader.onerror = function (err) {
+                        reject(err.getMessage());
+                    };
+                    reader.readAsDataURL(input.files[i]);
+                }
             }
         });
     }
@@ -175,6 +180,18 @@ define('media-input',
         if (!$(this).hasClass('processed')) {
             $(this).children('input[type=file]')[0].click();
         }
+    }).on('drop', '.media-preview-container', function(e) {
+        e.preventDefault();
+        $(this).toggleClass('dragenter', false);
+        if (!$(this).hasClass('processed')) {
+            e = e.originalEvent;
+            var type = $(this).data('type');
+            getFileDataURI(e.dataTransfer).then(function(data) {
+                preview(type, data, true);
+            }).catch(function(err) {
+                return console.error(err);
+            });
+        }
     }).on('click', '.media-preview', function(e) {
         // Clicking on the image preview should open the image for re-processing.
         // Only happens if image is loaded inside preview container.
@@ -212,9 +229,26 @@ define('media-input',
         if ($(this).val()) {
             loadVideo($(this));
         } else {
-            // Clear the loaded iframe
+            // Clear the loaded iframe.
             $(this).siblings('.media-preview-container').html('');
         }
+<<<<<<< HEAD
 >>>>>>> Handle deletion of icon
+=======
+    }).on('dragover dragenter', function(e) {
+        e.preventDefault();
+        if ($(e.target).hasClass('media-preview-container')) {
+            e.originalEvent.dataTransfer.dropEffect = "copy";
+            $(e.target).toggleClass('dragenter', true);
+        } else {
+            e.originalEvent.dataTransfer.dropEffect = "none";
+        }
+        // Prevent file dropping from triggering at other parts of the page.
+        return false;
+    }).on('dragleave dragend', '.media-preview-container', function(e) {
+        $(this).toggleClass('dragenter', false);
+        return false;
+>>>>>>> Drag and drop upload works for icon-128
     });
+
 });

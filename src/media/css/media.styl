@@ -101,6 +101,16 @@
     .media-preview-container {
         height: 128px;
         width: 128px;
+        &.dragenter {
+            background-color: #efefef;
+            border-color: $colorGray;
+            &:before {
+                background-image: url('../img/game-submission/upload.png');
+            }
+            &:after {
+                color: $colorGray;
+            }
+        }
         &:before {
             background: url('../img/game-submission/upload-blue.png') 50% 0 no-repeat;
             background-size: 50px 50px;
@@ -111,7 +121,7 @@
             top: 25px;
             width: 100%;
         }
-        &:not(.icons-64):after {
+        &:after {
             bottom: 17px;
             color: $colorLightBlue;
             content: "Drag and drop or select";
@@ -128,6 +138,9 @@
             &:before {
                 background-size: 25px 25px;
                 top: 20px;
+            }
+            &:after {
+                content: "";
             }
         }
     }
