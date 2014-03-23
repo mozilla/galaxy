@@ -70,3 +70,52 @@
 a.show {
     z-index: 60;
 }
+
+.feature-game {
+    left: auto;
+    min-height: 100px;
+    right: 8%;
+    top: 160px;
+    width: 500px;
+
+    &:before {
+        border: transparent solid 10px;
+        border-bottom-color: $modalBackgroundColor;
+        content: '';
+        display: block;
+        height: 0;
+        position: absolute;
+        right: 20%;
+        top: -20px;
+        width: 0;
+        z-index: 60;
+    }
+}
+
+ul.game-results {
+    background: #888;
+    list-style: none;
+
+    li {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+        position: relative;
+
+        p {
+            display: inline-block;
+            vertical-align: middle;
+            width: 370px;
+        }
+
+        a {
+            display: inline-block;
+            vertical-align: middle;
+            visibility: hidden;
+        }
+    }
+
+    li:hover {
+        background: #aaa;
+    }
+}
