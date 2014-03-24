@@ -11,8 +11,6 @@ define('media-input',
         apiVersion: 3,
         theme: 'dark',
         // TODO: We should probably enforce a minimum size.
-        // TODO: `maxSize` will have to be different for screenshots.
-        maxSize: 128,
         // TODO: `cropPresets` will have to be different for screenshots.
         cropPresets: [
             ['Square', '1:1']
@@ -23,6 +21,8 @@ define('media-input',
             // Replace the contents of the preview box + dimensions.
             preview(img.dataset.type, newURL);
             var $img = $(img);
+            // At any one time, there should only be one image with the 'aviary-image' id
+            $img.removeAttr('id');
             $img.parent().addClass('processed');
             $img.parent().siblings('.media-input').css('visibility', 'hidden');
             // This is the URL that gets POST'd to the API.
@@ -38,10 +38,20 @@ define('media-input',
         }
     });
 
-    function launchEditor(id, src) {
+    function launchEditor(id, src, type) {
+        if (type === 'icons') {
+            var message = gettext('Crop your icon to a square');
+            var ratio = '1:1';
+            var size = 128;
+        } else {
+            var message = gettext('Crop your icon to a 4:3 rectangle');
+            var ratio = '4:3';
+            var size = 1024;
+        }
         featherEditor.launch({
-            forceCropPreset: [gettext('Crop your icon to a square'), '1:1'],
+            forceCropPreset: [message, ratio],
             forceCropMessage: '&nbsp;',
+            maxSize: size,
             image: id,
             url: src
         });
@@ -49,17 +59,7 @@ define('media-input',
     }
 
     function preview(type, src, launch) {
-<<<<<<< HEAD
-        var $filePreview = $('.media-preview[data-type="' + type + '"]');
-        $filePreview.show();
 
-        var img = $filePreview[0];
-        img.src = src;
-        img.onload = function() {
-            $filePreview.siblings('.media-size').html(
-                this.width + 'px &times; ' + this.height + 'px').show();
-        };
-=======
         if (type === "icons") {
             var $imgPreview = $('.media-preview-container[data-type="' + type + '"]').children();
             var img = $imgPreview[0];
@@ -70,12 +70,15 @@ define('media-input',
             span.innerHTML = ['<img src="', src, '"/>'].join('');
             document.getElementById('sc-list').insertBefore(span, null);
         }
->>>>>>> Handle deletion of icon
+
+        var img = $('.media-preview-container[data-type="' + type + '"]').children()[0];
+        img.src = src;
+        img.id = 'aviary-img';
 
         if (launch) {
             // If we've exited the editor, for example,
             // we don't we want to relaunch the editor.
-            launchEditor(img.id, img.src);
+            launchEditor(img.id, img.src, type);
         }
     }
 
@@ -196,25 +199,18 @@ define('media-input',
         // Clicking on the image preview should open the image for re-processing.
         // Only happens if image is loaded inside preview container.
         if ($(this).parent().hasClass('processed')) {
-            launchEditor($(this).id,
-                $(this).siblings('.media-input-processed-url').val());
+            var src = $(this).siblings('.media-input-processed-url').val();
+            launchEditor($(this).id, src, $(this).data('type'));
         }
     }).on('blur change', 'input[type=file].media-input', function(e) {
-        // TODO: Allow images to be dragged and dropped to the file input.
         var input = this;
         input.blur();
-<<<<<<< HEAD
 
-=======
-        // getFileDataURI(input);
->>>>>>> Handle deletion of icon
         getFileDataURI(input).then(function (data) {
             preview(input.dataset.type, data, true);
         }).catch(function (err) {
             return console.error(err);
         });
-<<<<<<< HEAD
-=======
     }).on('click', '.media-delete', function(e) {
         e.stopPropagation();
         $(this).siblings('input[type=file].media-input').val('');
@@ -232,9 +228,7 @@ define('media-input',
             // Clear the loaded iframe.
             $(this).siblings('.media-preview-container').html('');
         }
-<<<<<<< HEAD
->>>>>>> Handle deletion of icon
-=======
+
     }).on('dragover dragenter', function(e) {
         e.preventDefault();
         if ($(e.target).hasClass('media-preview-container')) {
@@ -248,7 +242,6 @@ define('media-input',
     }).on('dragleave dragend', '.media-preview-container', function(e) {
         $(this).toggleClass('dragenter', false);
         return false;
->>>>>>> Drag and drop upload works for icon-128
     });
 
 });

@@ -40,6 +40,7 @@
     border: $mediaPreviewBorder;
     border-radius: 2px;
     display: block;
+
     cursor: pointer;
     margin: 5px 0;
     max-width: 100%;
@@ -54,9 +55,16 @@
     .media-preview {
         display: none;
     }
+    &:not(.processed):before {
+        background: url('../img/game-submission/upload-blue.png') 50% 0 no-repeat;
+    }
+    &:not(.processed):after {
+        color: $colorLightBlue;
+        content: "Drag and drop or select";
+    }
     &.processed {
         background-color: transparent; // TODO: Use crosshatch background.
-        border: $colorGray;
+        border: 1px solid $colorGray;
         .media-preview {
             display: initial;
         }
@@ -73,7 +81,7 @@
             right: 5px;
             text-align: center;
             z-index: 2;
-            &:after {
+            &:before {
                 content: "\00d7";
                 font-size: 24px;
                 font-weight: 600;
@@ -84,6 +92,16 @@
             .media-delete {
                 display: initial;
             }
+        }
+    }
+    &.dragenter {
+        background-color: #efefef;
+        border-color: $colorGray;
+        &:before {
+            background-image: url('../img/game-submission/upload.png');
+        }
+        &:after {
+            color: $colorGray;
         }
     }
 }
@@ -101,18 +119,7 @@
     .media-preview-container {
         height: 128px;
         width: 128px;
-        &.dragenter {
-            background-color: #efefef;
-            border-color: $colorGray;
-            &:before {
-                background-image: url('../img/game-submission/upload.png');
-            }
-            &:after {
-                color: $colorGray;
-            }
-        }
         &:before {
-            background: url('../img/game-submission/upload-blue.png') 50% 0 no-repeat;
             background-size: 50px 50px;
             content: "";
             display: block;
@@ -150,7 +157,6 @@
     .media-preview-container {
         height: 210px;
         &:before {
-            background: url('../img/game-submission/upload-blue.png') 50% 0 no-repeat;
             background-size: 80px 80px;
             content: "";
             display: block;
@@ -161,8 +167,7 @@
         }
         &:after {
             bottom: 35px;
-            color: $colorLightBlue;
-            content: "Drag and drop or select";
+            
             display: block;
             margin-left: 32%;
             position: absolute;
@@ -176,6 +181,14 @@
             }
             &:after {
                 bottom: 15px;
+            }
+        }
+        &.processed {
+            .media-delete {
+                // width: 80px;
+                // &:after {
+                //     content: " Delete";
+                // }
             }
         }
     }
