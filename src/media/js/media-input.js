@@ -17,12 +17,12 @@ define('media-input',
             var img = document.getElementById(imageID);
 
             // Replace the contents of the preview box + dimensions.
-            preview(img.dataset.type, newURL);
             var $img = $(img);
+            preview($img.closest('.media-preview-container'), newURL);
+
             // At any one time, there should only be one image with the 'aviary-image' id
             $img.removeAttr('id');
             $img.closest('.media-item').addClass('processed');
-            $img.parent().siblings('.media-input').css('visibility', 'hidden');
             // This is the URL that gets POST'd to the API.
             // TODO: As there will be multiple fields for screenshots,
             // we need to update the correct hidden `input` field.
@@ -56,24 +56,14 @@ define('media-input',
         return false;
     }
 
-    function preview(type, src, launch) {
 
-        if (type === "icons") {
-            var $imgPreview = $('.media-preview-container[data-type="' + type + '"]').children();
-            var img = $imgPreview[0];
-            img.src = src;
-            img.id = 'icon-128';
-        } else {
-            var span = document.createElement('span');
-            span.innerHTML = ['<img src="', src, '"/>'].join('');
-            document.getElementById('sc-list').insertBefore(span, null);
-        }
-
-        var img = $('.media-preview-container[data-type="' + type + '"]').children()[0];
+    function preview($obj, src, launch) {
+        var img = $obj.children('.media-preview')[0];
         img.src = src;
-        img.id = 'aviary-img';
-
+        
         if (launch) {
+            var type = $obj.data('type');
+            img.id = 'aviary-img';
             // If we've exited the editor, for example,
             // we don't we want to relaunch the editor.
             launchEditor(img.id, img.src, type);
@@ -173,7 +163,7 @@ define('media-input',
         // Launch editor only when input is blurred.
         if ($this.val() !== 'http://') {
             // Launch on non-empty inputs.
-            preview($this.data('type'), $this.val(), true);
+            preview($this.siblings('.media-preview-container'), $this.val(), true);
         }
     }).on('click', '.media-preview-container', function(e) {
         // Open the file upload dialog when user clicks on dropzone.
@@ -189,11 +179,11 @@ define('media-input',
     }).on('drop', '.media-preview-container', function(e) {
         e.preventDefault();
         $(this).toggleClass('dragenter', false);
+        var $this = $(this);
         if (!$(this).closest('.media-item').hasClass('processed')) {
             e = e.originalEvent;
-            var type = $(this).data('type');
             getFileDataURI(e.dataTransfer).then(function(data) {
-                preview(type, data, true);
+                preview($this, data, true);
             }).catch(function(err) {
                 return console.error(err);
             });
@@ -201,9 +191,13 @@ define('media-input',
     }).on('blur change', 'input[type=file].media-input', function(e) {
         var input = this;
         input.blur();
+<<<<<<< HEAD
 
+=======
+        var $this = $(this);
+>>>>>>> Fixed bug with modification of existing screenshots
         getFileDataURI(input).then(function (data) {
-            preview(input.dataset.type, data, true);
+            preview($this.closest('.media-preview-container'), data, true);
         }).catch(function (err) {
             return console.error(err);
         });
@@ -213,7 +207,6 @@ define('media-input',
 
         var $mediaPreviewContainer = $(this).parent();
         $mediaPreviewContainer.closest('.media-item').removeClass('processed');
-        $mediaPreviewContainer.siblings('.media-input').css('visibility','visible');
         $mediaPreviewContainer.siblings('.media-input').val('');
         $mediaPreviewContainer.siblings('.media-input-processed-url').val('');
     }).on('blur', '.videos input', function() {
