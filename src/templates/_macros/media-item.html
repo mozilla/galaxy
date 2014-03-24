@@ -1,5 +1,5 @@
 {% macro mediaItem(item, new) %}
-  <div class="media-item {{ '' if new else 'processed'  }}">
+  <div class="media-item {{ 'media-item-template' if new else 'processed'  }}">
     <div class="media-preview-container" data-type="screenshots-4-3">
       <img class="media-preview" data-type="screenshots-4-3" src="{{ item.src }}">
       <input type="file" name="screenshot_file" class="media-input" data-type="screenshots-4-3">

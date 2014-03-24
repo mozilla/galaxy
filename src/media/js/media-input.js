@@ -22,11 +22,12 @@ define('media-input',
 
             // At any one time, there should only be one image with the 'aviary-image' id
             $img.removeAttr('id');
+
             $img.closest('.media-item').addClass('processed');
             // This is the URL that gets POST'd to the API.
-            // TODO: As there will be multiple fields for screenshots,
-            // we need to update the correct hidden `input` field.
             $img.parent().siblings('.media-input-processed-url').val(newURL);
+
+            // TODO: Duplicate media-item HTML upon successful save.
 
             // Close the editor.
             featherEditor.close();
@@ -205,10 +206,15 @@ define('media-input',
         e.stopPropagation();
         $(this).siblings('input[type=file].media-input').val('');
 
-        var $mediaPreviewContainer = $(this).parent();
-        $mediaPreviewContainer.closest('.media-item').removeClass('processed');
-        $mediaPreviewContainer.siblings('.media-input').val('');
-        $mediaPreviewContainer.siblings('.media-input-processed-url').val('');
+        var $mediaList = $(this).closest('.media-list');
+        if ($mediaList.children('.media-item').length == 1) {
+            var $mediaPreviewContainer = $(this).parent();
+            $mediaPreviewContainer.closest('.media-item').removeClass('processed');
+            $mediaPreviewContainer.siblings('.media-input').val('');
+            $mediaPreviewContainer.siblings('.media-input-processed-url').val('');
+        } else {
+            $(this).closest('.media-item').remove();
+        }
     }).on('blur', '.videos input', function() {
         // Videos section
         if ($(this).val()) {
@@ -231,6 +237,9 @@ define('media-input',
     }).on('dragleave dragend', '.media-preview-container', function(e) {
         $(this).toggleClass('dragenter', false);
         return false;
+    }).on('click', '.add-button', function(e) {
+        e.preventDefault();
+        $(this).siblings('.media-item-template').removeClass('media-item-template').addClass('add-item');
     });
 
 });

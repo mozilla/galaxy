@@ -34,7 +34,16 @@
     }
     .media-item {
         margin-bottom: 10px;
-        &.processed + .add-button {
+        &.media-item-template {
+            display: none;
+            &:first-child {
+                display: initial;
+            }
+            &:not(:first-child) + .add-button {
+                display: initial;
+            }
+        }
+        &.add-item {
             display: initial;
         }
     }

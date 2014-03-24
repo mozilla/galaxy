@@ -185,12 +185,14 @@
           <div class="grid screenshots media form-field grid-bottom">
             <div class="grid-cell media-left">
               <span class="media-size">4:3 <span class="inner">(1024px &times; 768px)</span></span>
-              {% set count = game.screenshots|length + 1 if game.screenshots else 1 %}
-              {% for i in range(count) %}
-                {% include '_macros/media-item.html' %}
-                {{ mediaItem(game.screenshots[i], i == count - 1) }}
-              {% endfor %}
-              <button class="btn add-button"><i class="fa fa-plus"></i> Add</button>
+              <div class="media-list">
+                {% set count = game.screenshots|length + 1 if game.screenshots else 1 %}
+                {% for i in range(count) %}
+                  {% include '_macros/media-item.html' %}
+                  {{ mediaItem(game.screenshots[i], i == count - 1) }}
+                {% endfor %}
+                <button class="btn add-button"><i class="fa fa-plus"></i> Add</button>
+              </div>              
             </div>
             <div class="grid-cell media-right">
               <span class="media-size">16:9 <span class="inner">(1280px &times; 720px)</span></span>
