@@ -10,8 +10,6 @@ define('media-input',
         apiKey: '18dd09ec2d40f716',
         apiVersion: 3,
         theme: 'dark',
-        // TODO: We should probably enforce a minimum size.
-        // TODO: `cropPresets` will have to be different for screenshots.
         cropPresets: [
             ['Square', '1:1']
         ],
@@ -23,7 +21,7 @@ define('media-input',
             var $img = $(img);
             // At any one time, there should only be one image with the 'aviary-image' id
             $img.removeAttr('id');
-            $img.parent().addClass('processed');
+            $img.closest('.media-item').addClass('processed');
             $img.parent().siblings('.media-input').css('visibility', 'hidden');
             // This is the URL that gets POST'd to the API.
             // TODO: As there will be multiple fields for screenshots,
@@ -180,13 +178,18 @@ define('media-input',
     }).on('click', '.media-preview-container', function(e) {
         // Open the file upload dialog when user clicks on dropzone.
         // Only happens if there's no image inside the preview container.
-        if (!$(this).hasClass('processed')) {
+        if ($(this).closest('.media-item').hasClass('processed')) {
+            var src = $(this).siblings('.media-input-processed-url').val();
+            var $img = $(this).children('.media-preview');
+            $img[0].id = 'aviary-img';
+            launchEditor($img[0].id, src, $(this).data('type'));
+        } else {
             $(this).children('input[type=file]')[0].click();
         }
     }).on('drop', '.media-preview-container', function(e) {
         e.preventDefault();
         $(this).toggleClass('dragenter', false);
-        if (!$(this).hasClass('processed')) {
+        if (!$(this).closest('.media-item').hasClass('processed')) {
             e = e.originalEvent;
             var type = $(this).data('type');
             getFileDataURI(e.dataTransfer).then(function(data) {
@@ -194,13 +197,6 @@ define('media-input',
             }).catch(function(err) {
                 return console.error(err);
             });
-        }
-    }).on('click', '.media-preview', function(e) {
-        // Clicking on the image preview should open the image for re-processing.
-        // Only happens if image is loaded inside preview container.
-        if ($(this).parent().hasClass('processed')) {
-            var src = $(this).siblings('.media-input-processed-url').val();
-            launchEditor($(this).id, src, $(this).data('type'));
         }
     }).on('blur change', 'input[type=file].media-input', function(e) {
         var input = this;
@@ -216,7 +212,7 @@ define('media-input',
         $(this).siblings('input[type=file].media-input').val('');
 
         var $mediaPreviewContainer = $(this).parent();
-        $mediaPreviewContainer.removeClass('processed');
+        $mediaPreviewContainer.closest('.media-item').removeClass('processed');
         $mediaPreviewContainer.siblings('.media-input').css('visibility','visible');
         $mediaPreviewContainer.siblings('.media-input').val('');
         $mediaPreviewContainer.siblings('.media-input-processed-url').val('');
