@@ -185,19 +185,11 @@
           <div class="grid screenshots media form-field grid-bottom">
             <div class="grid-cell media-left">
               <span class="media-size">4:3 <span class="inner">(1024px &times; 768px)</span></span>
-              <!-- {% for screenshot in game.screenshots %}
-                <div class="media-preview">
-                </div>
-              {% endfor %} -->
-              <div class="media-item">
-                <div class="media-preview-container" data-type="screenshots-4-3">
-                  <img class="media-preview" data-type="screenshots-4-3">
-                  <input type="file" name="screenshot_file" class="media-input" data-type="screenshots-4-3">
-                  <div class="media-delete"></div>
-                </div>
-                <input type="url" class="media-input" data-type="screenshots-4-3" value="{{ game.icons }}" placeholder="{{ _('Or enter URL to 4:3 screenshot here') }}" pattern="https?://.*">
-                <input type="hidden" name="screenshot_final_url" class="media-input-processed-url" data-type="screenshots-4-3" data-height="1024" data-width="768">
-              </div>
+              {% set count = game.screenshots|length + 1 if game.screenshots else 1 %}
+              {% for i in range(count) %}
+                {% include '_macros/media-item.html' %}
+                {{ mediaItem(game.screenshots[i], i == count - 1) }}
+              {% endfor %}
               <button class="btn add-button"><i class="fa fa-plus"></i> Add</button>
             </div>
             <div class="grid-cell media-right">

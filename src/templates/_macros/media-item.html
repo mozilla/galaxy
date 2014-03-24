@@ -1,0 +1,11 @@
+{% macro mediaItem(item, new) %}
+  <div class="media-item {{ '' if new else 'processed'  }}">
+    <div class="media-preview-container" data-type="screenshots-4-3">
+      <img class="media-preview" data-type="screenshots-4-3" src="{{ item.src }}">
+      <input type="file" name="screenshot_file" class="media-input" data-type="screenshots-4-3">
+      <div class="media-delete"></div>
+    </div>
+    <input type="url" class="media-input" data-type="screenshots-4-3" value="{{ game.screenshots[i].src }}" placeholder="{{ _('Or enter URL to 4:3 screenshot here') }}" value="{{ item.src }}" pattern="https?://.*">
+    <input type="hidden" name="screenshot_final_url" class="media-input-processed-url" data-type="screenshots-4-3" data-height="1024" value="{{ item.src }}" data-width="768">
+  </div>
+{% endmacro %}
