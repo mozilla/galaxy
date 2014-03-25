@@ -1,7 +1,7 @@
 define('views/feature', 
-    ['l10n', 'log', 'notification', 'templates', 'requests', 'urls', 'z'], 
-    function(l10n, log, notification, nunjucks, requests, urls, z) {
-    
+    ['l10n', 'log', 'notification', 'templates', 'requests', 'urls', 'utils', 'z'], 
+    function(l10n, log, notification, nunjucks, requests, urls, utils, z) {
+
     var gettext = l10n.gettext;
 
     function controlSpinner($button, addSpinner, newText) {
@@ -132,6 +132,12 @@ define('views/feature',
         $('#empty-message').hide();        
     }
 
+    function showSearchResults(games) {
+        $('.game-results').html(
+            nunjucks.env.render('admin/game-results.html', {games: games})
+        );
+    }
+
     z.body.on('click', '.curation-unfeature', unfeatureGame)
     .on('click', '.curation-delete', deleteGame)
     .on('click', '.curation-disable', function() {
@@ -142,6 +148,24 @@ define('views/feature',
         $('.modal').addClass('show');
         $(this).addClass('show');
         z.body.trigger('decloak');
+    }).on('mouseover', '.game-results li', function() {
+        var button = $(this).find('a');
+        button.addClass('show');
+    }).on('mouseout', '.game-results li', function() {
+        var button = $(this).find('a');
+        button.removeClass('show');
+    }).on('change keyup', 'input[name=game-search]', function(e) {
+        setTimeout(function() {
+            requests.get(urls.api.url('game.list')).done(function(data) {
+                if (data.error) {
+                    $('.game-results').html('');
+                    return;
+                }
+                showSearchResults(data);
+            }).fail(function() {
+                $('.game-results').html('');
+            });
+        }, 500);
     });
 
     return function(builder, args) {
