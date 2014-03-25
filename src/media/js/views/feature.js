@@ -35,21 +35,15 @@ define('views/feature',
     }
 
     // TODO: Hook up with curation modal (#126).
-    function featureGame() {
-        var $this = $(this);
-        var gameSlug = $this.parent().data('slug');
-
-        controlSpinner($this, true);
-
-        requests.post(urls.api.url('game.featured'), {
+    function featureGame(gameSlug) {
+        return requests.post(urls.api.url('game.featured'), {
             game: gameSlug
-        }).done(function(data) {
+        }).then(function(data) {
             notification.notification({message: gettext('Game featured')});
-            addGameRow(gameSlug);
-        }).fail(function() {
+        }, function(data) {
             notification.notification({message: gettext('Error: A problem occured while featuring this game. Please try again.')});
-            controlSpinner($this, false);
-        });
+            console.error(data);
+        }).promise();
     }
 
     // Send request to moderate endpoint for deletion.
@@ -149,23 +143,21 @@ define('views/feature',
         $(this).addClass('show');
         z.body.trigger('decloak');
     }).on('mouseover', '.game-results li', function() {
-        var button = $(this).find('a');
-        button.addClass('show');
+        var $button = $(this).children('a.feature_game');
+        $button.addClass('show');
     }).on('mouseout', '.game-results li', function() {
-        var button = $(this).find('a');
-        button.removeClass('show');
+        var $button = $(this).children('a.feature_game');
+        $button.removeClass('show');
     }).on('change keyup', 'input[name=game-search]', function(e) {
-        setTimeout(function() {
-            requests.get(urls.api.url('game.list')).done(function(data) {
-                if (data.error) {
-                    $('.game-results').html('');
-                    return;
-                }
-                showSearchResults(data);
-            }).fail(function() {
-                $('.game-results').html('');
-            });
-        }, 500);
+        // TODO: hook this up with local game searching index
+    }).on('click', 'a.feature_game', function() {
+        var $this = $(this);
+        var $game = $this.closest('li');
+        var gameSlug = $game.data('gameSlug');
+        featureGame(gameSlug).then(function() {
+            z.body.trigger('cloak');
+            addGameRow(gameSlug);
+        }, function() {});
     });
 
     return function(builder, args) {
