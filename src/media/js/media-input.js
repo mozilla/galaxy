@@ -238,7 +238,6 @@ define('media-input',
         $(this).toggleClass('dragenter', false);
         return false;
     }).on('click', '.add-button', function(e) {
-        e.preventDefault();
         $(this).siblings('.media-item-template').removeClass('media-item-template').addClass('add-item');
     });
 
