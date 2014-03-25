@@ -22,12 +22,19 @@ define('media-input',
 
             // At any one time, there should only be one image with the 'aviary-image' id
             $img.removeAttr('id');
+            
+            var $mediaItem = $img.closest('.media-item');
 
-            $img.closest('.media-item').addClass('processed');
+            if ($mediaItem.data('type') !== 'icons') {
+                var $clone = $mediaItem.clone();
+                $mediaItem.before($clone);
+                cleanUpTemplate($mediaItem);
+                $mediaItem = $clone;
+            } 
+
             // This is the URL that gets POST'd to the API.
-            $img.parent().siblings('.media-input-processed-url').val(newURL);
-
-            // TODO: Duplicate media-item HTML upon successful save.
+            $mediaItem.children('.media-input-processed-url').val(newURL);
+            $mediaItem.removeClass('add-item').addClass('processed');
 
             // Close the editor.
             featherEditor.close();
@@ -36,6 +43,13 @@ define('media-input',
             console.error(errorObj.message);
         }
     });
+
+    function cleanUpTemplate($mediaItem) {
+        // To reset all input fields and img src in a media-item-template
+        $mediaItem.removeClass('add-item').addClass('media-item-template');
+        $mediaItem.children('.media-preview').removeAttr('src');
+        $mediaItem.children('.media-input').val('');
+    }
 
     function launchEditor(id, src, type) {
         if (type === 'icons') {
