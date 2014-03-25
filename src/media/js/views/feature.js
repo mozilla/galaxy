@@ -1,6 +1,6 @@
 define('views/feature', 
-    ['l10n', 'log', 'notification', 'templates', 'requests', 'urls', 'utils', 'z'], 
-    function(l10n, log, notification, nunjucks, requests, urls, utils, z) {
+    ['l10n', 'log', 'notification', 'templates', 'requests', 'urls', 'z'], 
+    function(l10n, log, notification, nunjucks, requests, urls, z) {
 
     var gettext = l10n.gettext;
 
