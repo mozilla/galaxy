@@ -105,25 +105,25 @@ ul.game-results {
         padding: 0 10px;
         position: relative;
 
+        &:hover {
+            background: #aaa;
+        color: #eee;
+        }
+        
+        a {
+            display: inline-block;
+            vertical-align: middle;
+            visibility: hidden;
+
+            &.show {
+                visibility: visible;
+            }
+        }
+
         p {
             display: inline-block;
             vertical-align: middle;
             width: 370px;
         }
-
-        a {
-            display: inline-block;
-            vertical-align: middle;
-            visibility: hidden;
-        }
-
-        a.show {
-            visibility: visible;
-        }
-    }
-
-    li:hover {
-        background: #aaa;
-        color: #eee;
     }
 }
