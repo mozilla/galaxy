@@ -1,18 +1,32 @@
 define('views/developer_dashboard', 
-    ['notification', 'requests', 'urls', 'z'], function(notification, requests, urls, z) {
+    ['format', 'log', 'notification', 'requests', 'urls', 'z'], 
+    function(format, log, notification, requests, urls, z) {
+    
+    var console = log('developer-dashboard');
 
-    function moderateGame($game, deleted) {
+    function moderateGame($game, $button, deleted) {
+        function setSpinning(spinning) {
+            var newVisibility = spinning ? 'hidden' : 'visible';
+            $button.children('.btn-text').css('visibility', newVisibility);
+            if (spinning) {
+                $button.append('<div class="spinner"></div>');
+            } else {
+                $button.children('.spinner').remove();
+            }
+        }
+        setSpinning(true);
+
         var gameSlug = $game.data('gameSlug');
         var statusVerb = deleted ? 'delete' : 'disable';
         requests.post(urls.api.url('game.moderate', [gameSlug, statusVerb]))
                 .done(function(data) {
-                    actionSubmitted(true);
+                    gameModerated(true);
                 }).fail(function(err) {
-                    console.error('Failed to submit review; error:', err);
-                    actionSubmitted(false);
+                    console.error('Failed to moderate game; error:', err);
+                    gameModerated(false);
                 });
 
-        function actionSubmitted(success) {
+        function gameModerated(success) {
             var gameTitle = $game.data('gameTitle');
             var message;
             var params = {game: gameTitle};
@@ -20,7 +34,7 @@ define('views/developer_dashboard',
                 if (deleted) {
                     message = gettext('Deleted game: {game}', params);
                 } else {
-                    message = gettext('Disabeled game: {game}', params);
+                    message = gettext('Disabled game: {game}', params);
                 }
             } else {
                 if (deleted) {
@@ -31,10 +45,12 @@ define('views/developer_dashboard',
             }
             notification.notification({message: message});
 
-            if (success && deleted) {
+            setSpinning(false);
+            if (success) {
+                // TODO: Animate this
                 $game.remove();
 
-                var $table = $('.my-games-table');
+                var $table = $('.developer-dashboard-table');
                 if (!$table.find('tbody > tr').length) {
                     $table.hide();
                     $('#empty-message').show();
@@ -43,18 +59,17 @@ define('views/developer_dashboard',
         }
     }
 
-    z.body.on('click', '.my-games-delete', function() {
+    z.body.on('click', '.developer-dashboard-delete', function() {
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
-        moderateGame($game, true);
-    }).on('click', '.my-games-disable', function() {
+        moderateGame($game, $this, true);
+    }).on('click', '.developer-dashboard-disable', function() {
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
-        moderateGame($game, false);
+        moderateGame($game, $this, false);
     });
 
     return function(builder, args) {
-        var user_id = args[0];
         builder.start('developers/developer-dashboard.html');
 
         builder.z('type', 'leaf developer-dashboard');
