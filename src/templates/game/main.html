@@ -34,7 +34,12 @@
           </div>
           <div class="game-details-section">
             <div class="game-buttons-section">
-              <button data-app-url="{{ game.app_url }}" class="btn btn-big">{{ _('Play') }}</button>
+              {% if game.purchased %}
+                {% set buttonClass = 'btn-play' %}
+              {% else %}
+                {% set buttonClass = 'btn-play btn-install' %}
+              {% endif %}
+              <button data-app-url="{{ game.app_url }}" data-game-slug="{{ game.slug }}" class="btn btn-big {{ buttonClass }}">{{ _('Play') }}</button>
               <div>
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}" target="_blank">
                   <i class="icon-facebook icon-medium"></i> 

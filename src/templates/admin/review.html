@@ -6,7 +6,7 @@
   <div class="grid-cell">
     <h1>{{ _('Review Queue') }}</h1>
     {% defer (url=api('game.list')|urlparams(status='pending')) %}
-      <table class="review-table">
+      <table class="dashboard-table review-table">
         <thead>
           <tr>
             <th>{{ _('Game') }}</th>
@@ -19,7 +19,7 @@
             <tr class="review-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
               <td class="review-title"><a href="{{ game.app_url }}">{{ game.name }}</a></td>
               <td class="review-wait" title="{{ game.created }}">{{ game.created|relativeDate }}</td>
-              <td class="review-buttons">
+              <td class="dashboard-buttons review-buttons">
                 <a class="btn btn-reject review-reject"><div class="btn-text">{{ _('Reject') }}</div></a>
                 <a class="btn btn-approve review-accept"><div class="btn-text">{{ _('Accept') }}</div></a>
               </td>
