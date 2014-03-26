@@ -141,7 +141,7 @@
               <span class="media-size">{{ _('128px &times; 128px') }}</span>
               <div class="media-list">
                 <div class="media-item {{ 'processed' if game.icons[0] }}">
-                  <div class="media-preview-container" data-type="icons">
+                  <div class="media-preview-container" data-type="icons" data-message="{{ _('Drag and drop or select') }}">
                     <img class="media-preview" data-type="icons" src="{{ game.icons[0].src }}">
                     <input type="file" name="icon_file" class="media-input" data-type="icons">
                     <div class="media-delete"></div>
@@ -156,7 +156,7 @@
               <div class="media-list">
                 <div class="media-item">
                   <span class="media-size">{{ _('64px &times; 64px') }}</span>
-                  <div class="media-preview-container icons-64">
+                  <div class="media-preview-container icons-64" data-message="{{ _('Drag and drop or select') }}">
                     <img class="media-preview" data-type="icons">
                     <input type="file" name="icon_file" class="media-input" data-type="icons">
                     <div class="media-delete"></div>
@@ -201,7 +201,7 @@
             <div class="grid-cell media-right">
               <span class="media-size">16:9 <span class="inner">(1280px &times; 720px)</span></span>
               <div class="media-item">
-                <div class="media-preview-container screenshots-16-9"></div>
+                <div class="media-preview-container screenshots-16-9" data-message="{{ _('Drag and drop or select') }}"></div>
                 <input type="url" data-type="icons" value="{{ game.icons }}" placeholder="{{ _('Or enter URL to 16:9 screenshot here') }}" pattern="https?://.*">
               </div>
             </div>
@@ -251,13 +251,13 @@
           <div class="grid videos media form-field">
             <div class="grid-cell media-left">
               <div class="media-item">
-                <div class="media-preview-container"></div>
+                <div class="media-preview-container" data-message="{{ _('Preview') }}"></div>
               </div>
               <input type="url" data-type="videos" value="{{ game.videos[0] }}" placeholder="{{ _('Enter YouTube/Vimeo URL here') }}" pattern="https?://.*">
             </div>
             <div class="grid-cell media-right">
               <div class="media-item">
-                <div class="media-preview-container"></div>
+                <div class="media-preview-container" data-message="{{ _('Preview') }}"></div>
               </div>
               <input type="url" data-type="videos" value="{{ game.videos[1] }}" placeholder="{{ _('Enter YouTube/Vimeo URL here') }}" pattern="https?://.*">
             </div>

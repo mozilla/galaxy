@@ -25,8 +25,7 @@
             color: $colorGrayLightest;
         }
     }
-    input,
-    ::-webkit-input-placeholder {
+    input {
         font-size: 12px;
     }
     input[type=file] {
@@ -60,9 +59,8 @@
         background-color: $mediaPreviewBackgroundColor;
         border: $mediaPreviewBorder;
         border-radius: 2px;
-        display: block;
-
         cursor: pointer;
+        display: block;
         margin: 5px 0;
         max-width: 100%;
         position: relative;
@@ -78,10 +76,17 @@
         }
         &:before {
             background: url('../img/game-submission/upload-blue.png') 50% 0 no-repeat;
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
         }
         &:after {
             color: $colorLightBlue;
-            content: "Drag and drop or select";
+            content: attr(data-message);
+            display: block;
+            position: absolute;
+            text-align: center;
         }
         &.dragenter {
             background-color: #efefef;
@@ -154,22 +159,13 @@
         width: 128px;
         &:before {
             background-size: 50px 50px;
-            content: "";
-            display: block;
             height: 50px;
-            position: absolute;
             top: 25px;
-            width: 100%;
         }
         &:after {
             bottom: 17px;
-            color: $colorLightBlue;
-            content: "Drag and drop or select";
-            display: block;
             font-size: 12px;
             margin-left: 20%;
-            position: absolute;
-            text-align: center;
             width: 60%;
         }
         &.icons-64 {
@@ -191,20 +187,12 @@
         height: 210px;
         &:before {
             background-size: 80px 80px;
-            content: "";
-            display: block;
             height: 80px;
-            position: absolute;
             top: 50px;
-            width: 100%;
         }
         &:after {
             bottom: 35px;
-            
-            display: block;
             margin-left: 32%;
-            position: absolute;
-            text-align: center;
             width: 36%;
         }
         &.screenshots-16-9 {
@@ -226,20 +214,12 @@
         &:before {
             background: url('../img/game-submission/preview-blue.png') 53% 0 no-repeat;
             background-size: 80px 80px;
-            content: "";
-            display: block;
             height: 80px;
-            position: absolute;
             top: 60px;
-            width: 100%;
         }
         &:after {
             bottom: 55px;
-            color: $colorLightBlue;
-            content: "Preview";
-            display: block;
-            position: absolute;
-            text-align: center;
+            content: attr(data-message);
             width: 100%;
         }
     }
