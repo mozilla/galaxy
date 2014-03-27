@@ -11,7 +11,8 @@ define('views/feedback',
         var $this = $(this);
         var data = utils.getVars($this.serialize());
         data.page_url = window.location.pathname;
-        
+        data = JSON.stringify(data);
+
         forms.toggleSubmitFormState($this);
 
         requests.post(urls.api.url('feedback'), data).done(function(data) {
