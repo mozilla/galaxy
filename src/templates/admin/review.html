@@ -18,20 +18,20 @@
       <table class="dashboard-table review-table">
         {% for game in this|sort(attribute='created') %}
           <tr class="review-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
-            <td class="review-title">
+            <td class="game-title-container">
               <a href="{{ game.app_url }}">
                 <div class="game-icon" style="background-image: url({{ game.icons[0].src }})"></div>
               </a>
               <div class="game-title"><a href="{{ game.app_url }}">{{ game.name }}</a></div>
             </td>
-            <td class="review-submitted" title="{{ game.created }}">
-              <div class="submitted-title">{{ _('Date submitted:') }}</div>
-              <div class="submitted-date">
+            <td class="game-date-container" title="{{ game.created }}">
+              <div class="game-date-title">{{ _('Date submitted:') }}</div>
+              <div class="game-date">
                 <span class="date-abs">{{ game.created|date('med', false) }}</span>
                 <span class="date-rel">({{ game.created|relativeDate }})</span>
               </div>
             </td>
-            <td class="review-buttons">
+            <td class="review-buttons dashboard-buttons">
               <a class="btn btn-approve review-approve" data-status-verb="approve">
                 <div class="btn-text">{{ _('Approve') }}</div>
               </a>
@@ -39,16 +39,16 @@
                 <div class="btn-text">{{ _('Reject') }}</div>
               </a>
               <div class="secondary-buttons">
-                <a class="review-view hint--right" data-hint="{{ _('View') }}">
+                <a class="btn-secondary-view hint--right" data-hint="{{ _('View') }}">
                   <div class="btn-text fa fa-desktop"></div>
                 </a>
-                <a class="review-edit hint--right" data-hint="{{ _('Edit') }}">
+                <a class="btn-secondary-edit hint--right" data-hint="{{ _('Edit') }}">
                   <div class="btn-text fa fa-edit"></div>
                 </a>
-                <a class="review-delete hint--right" data-status-verb="delete" data-hint="{{ _('Delete') }}">
+                <a class="btn-secondary-delete hint--right" data-status-verb="delete" data-hint="{{ _('Delete') }}">
                   <div class="btn-text fa fa-trash-o"></div>
                 </a>
-                <a class="review-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}">
+                <a class="btn-secondary-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}">
                   <div class="btn-text fa fa-ban"></div>
                 </a>
               </div>

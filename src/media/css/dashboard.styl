@@ -2,6 +2,8 @@
 
 @import 'lib';
 
+$iconSize = 56px;
+
 .dashboard-table {
     width: 100%;
     
@@ -20,8 +22,57 @@
 
     .dashboard-buttons {
         text-align: right;
+
+        a {
+            margin-left: 8px;
+            margin-right: 8px;
+        }
         .btn {
             margin-left: 10px;
+        }
+
+        .secondary-buttons {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 1.25em;
+            vertical-align: middle;
+        }
+    }
+
+    .game-title-container {
+        padding: 12px 0;
+        .game-icon {
+            background: no-repeat;
+            background-size: contain;
+            float: left;
+            margin-right: 20px;
+            height: $iconSize;
+            width: $iconSize;
+        }
+        .game-title {
+            display: inline-block;
+            height: $iconSize;
+            a {
+                color: $buttonColorTeal;
+                font-size: $bigFontSize;
+                line-height: $iconSize;
+            }
+        }
+    }
+
+    .game-date-container {
+        .game-date-title {
+            color: $colorGrayUltraLight;
+            font-size: $smallFontSize;
+        }
+        .game-date {
+            .date-abs {
+                font-weight: 600;
+            }
+            .date-rel {
+                color: $colorGrayUltraLight;
+                margin-left: 3px;
+            }
         }
     }
 }
@@ -131,7 +182,6 @@
     }
 }
 
-$iconSize = 56px;
 [data-page-type~="review"] .page {
     .status-title {
         margin-bottom: 25px;
@@ -150,67 +200,5 @@ $iconSize = 56px;
 
     .grid-cell {
         margin: 0 5%;
-    }
-
-    .review-title {
-        padding: 12px 0;
-        .game-icon {
-            background: no-repeat;
-            background-size: contain;
-            float: left;
-            margin-right: 20px;
-            height: $iconSize;
-            width: $iconSize;
-        }
-        .game-title {
-            display: inline-block;
-            height: $iconSize;
-            a {
-                color: $buttonColorTeal;
-                font-size: $bigFontSize;
-                line-height: $iconSize;
-            }
-        }
-    }
-
-    .submitted-title {
-        color: $colorGrayUltraLight;
-        font-size: $smallFontSize;
-    }
-    .submitted-date {
-        .date-abs {
-            font-weight: 600;
-        }
-        .date-rel {
-            color: $colorGrayUltraLight;
-            margin-left: 3px;
-        }
-    }
-
-    .review-buttons {
-        text-align: right;
-        a {
-            margin-left: 8px;
-            margin-right: 8px;
-        }
-        .secondary-buttons {
-            display: inline-block;
-            margin-left: 10px;
-            font-size: 1.25em;
-            vertical-align: middle;
-        }
-
-        .review-view {
-            darken-text-on-hover($buttonColorBlue, $buttonHoverStateDarken);
-        }
-        .review-edit {
-            darken-text-on-hover($buttonColorTeal, $buttonHoverStateDarken);
-        }
-        .review-delete {
-            darken-text-on-hover($buttonColorRed, $buttonHoverStateDarken);
-        }
-        .review-disable {
-            darken-text-on-hover($buttonColorGray, $buttonHoverStateDarken);
-        }
     }
 }
