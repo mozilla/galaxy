@@ -1,16 +1,19 @@
-define('views/game_search', ['promise',  'urls', 'worker'], function(promise, urls, worker) {
+define('views/game_search', ['promise',  'urls', 'search_worker'], function(promise, urls, worker) {
 
     var indexed = index();
+
+    searchWorker = worker;
 
     function index() {
         return new Promise(function(resolve, reject) {
             worker.addEventListener('message', function(e) {
+
                 switch (e.data.type) {
                     case 'indexed':
                         console.log("Games indexed.");
                         return resolve();
                     case 'results':
-                        // TODO: Render Results
+                        console.log(e.data);
                         return resolve();
                 }
             });

@@ -1,6 +1,4 @@
 importScripts('lunr.js');
-importScripts('require.js');
-importScripts('underscore.js');
 
 var index;
 function index(data) {
@@ -21,9 +19,10 @@ function index(data) {
 
 function load(items) {
     var allItems = JSON.parse(this.responseText);
-    _.forEach(allItems, function (item) {
-        index.add(item);
-    });
+    for(itemId in allItems)
+    {
+        index.add(allItems[itemId]);
+    }
     postMessage({type: 'indexed'});
 }
 
