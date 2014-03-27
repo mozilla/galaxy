@@ -23,7 +23,7 @@
               <td class="developer-dashboard-status">{{ game.status }}</td>
               <!--TODO: retrieve queue position -->
               <td class="developer-dashboard-position"></td>
-              <td class="developer-dashboard-wait" title="{{ game.created }}">{{ game.created|relativeDate }}</td>
+              <td class="developer-dashboard-wait" title="{{ game.created }}">{{ game.created|relativeDate(useRelativeSuffix=false) }}</td>
               <td class="dashboard-buttons developer-dashboard-buttons">
                 <a class="btn btn-view developer-dashboard-view" href="{{ url('game', [game.slug]) }}" target="_blank">{{ _('View') }}</a>
                 <a class="btn btn-edit developer-dashboard-edit" href="{{ url('edit_game', [game.slug]) }}">{{ _('Edit') }}</a>

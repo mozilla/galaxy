@@ -63,10 +63,11 @@ require.config({
             return addSlashes(obj);
         };
         var dateslib = require('dates');
-        filters.relativeDate = function(date) {
-            return dateslib.relativeDateString(new Date(date), {
-                minUnit: 'm',
+        filters.relativeDate = function(date, kwargs) {
+            var opts = _.defaults(kwargs || {}, {
+                minUnit: 'm'
             });
+            return dateslib.relativeDateString(new Date(date), opts);
         };
 
         nunjucks.env.dev = true;

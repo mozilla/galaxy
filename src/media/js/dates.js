@@ -1,7 +1,7 @@
 define('dates', ['underscore', 'l10n'], function(_, l10n) {
     var ngettext = l10n.ngettext;
 
-    var unitFormatters = {
+    var pastUnitFormatters = {
         s: function(n) { return ngettext('1 second ago', '{n} seconds ago', {n: n}); },
         m: function(n) { return ngettext('1 minute ago', '{n} minutes ago', {n: n}); },
         h: function(n) { return ngettext('1 hour ago', '{n} hours ago', {n: n}); },
@@ -9,6 +9,15 @@ define('dates', ['underscore', 'l10n'], function(_, l10n) {
         w: function(n) { return ngettext('1 week ago', '{n} weeks ago', {n: n}); },
         M: function(n) { return ngettext('1 month ago', '{n} months ago', {n: n}); },
         y: function(n) { return ngettext('1 year ago', '{n} years ago', {n: n}); }
+    };
+    var noSuffixUnitFormatters = {
+        s: function(n) { return ngettext('1 second', '{n} seconds', {n: n}); },
+        m: function(n) { return ngettext('1 minute', '{n} minutes', {n: n}); },
+        h: function(n) { return ngettext('1 hour', '{n} hours', {n: n}); },
+        d: function(n) { return ngettext('1 day', '{n} days', {n: n}); },
+        w: function(n) { return ngettext('1 week', '{n} weeks', {n: n}); },
+        M: function(n) { return ngettext('1 month', '{n} months', {n: n}); },
+        y: function(n) { return ngettext('1 year', '{n} years', {n: n}); }
     };
     var unitSizes = {
         s: 1,
@@ -35,15 +44,21 @@ define('dates', ['underscore', 'l10n'], function(_, l10n) {
                 'd': days
                 'M': months
                 'y': years
+        useRelativeSuffix: Whether to append a relative descriptor suffix to
+            the string, ie. '3 days ago'. Defaults to true.
     */
     function relativeDateString(date, opts) {
         opts = opts || {};
+        _.defaults(opts, {
+            useRelativeSuffix: true
+        });
         opts.minUnit = opts.minUnit || 's';
         opts.referenceDate = opts.referenceDate || Date.now();
 
         // TODO: Mark negative diffs so they can be handled differently
         // in the future (ie. adding an 'ago' vs 'from now' suffix)
         var diffInSeconds = Math.max((opts.referenceDate - date) / 1000, 0);
+        var unitFormatters = opts.useRelativeSuffix ? pastUnitFormatters : noSuffixUnitFormatters;
 
         var dateString;
         var maxOrdinalityIdx = unitOrdinality.indexOf(opts.minUnit);
