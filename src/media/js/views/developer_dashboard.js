@@ -1,6 +1,6 @@
 define('views/developer_dashboard', 
-    ['format', 'log', 'notification', 'requests', 'urls', 'z'], 
-    function(format, log, notification, requests, urls, z) {
+    ['log', 'notification', 'requests', 'urls', 'z'], 
+    function(log, notification, requests, urls, z) {
     
     var console = log('developer-dashboard');
 
