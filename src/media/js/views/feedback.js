@@ -9,6 +9,13 @@ define('views/feedback',
         e.preventDefault();
 
         var $this = $(this);
+        if ($.trim($this.val()) === '') {
+            notify({
+                message: gettext('Please enter a feedback.')
+            });
+            return;
+        }
+
         var data = utils.getVars($this.serialize());
         data.page_url = window.location.pathname;
         
