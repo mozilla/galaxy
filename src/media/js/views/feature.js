@@ -120,10 +120,11 @@ define('views/feature',
         requests.get(urls.api.url('game', [slug]))
         .done(function(gameData) {
             var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: gameData});
+            console.log(rowToAdd);
             $('.curation-table tbody').append(rowToAdd);
-        });
-
-        $('#empty-message').hide();        
+            $('.curation-table').show();
+            $('#empty-message').hide(); 
+        });       
     }
 
     function showSearchResults(games) {
@@ -167,7 +168,6 @@ define('views/feature',
         var gameSlug = $game.data('gameSlug');
         featureGame(gameSlug).then(function() {
             z.body.trigger('cloak');
-            console.log(gameSlug);
             addGameRow(gameSlug);
         }, function() {});
     });
