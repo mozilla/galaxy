@@ -32,7 +32,7 @@ body.overlayed {
     display: none;
 }
 
-div.modal {
+.modal {
     background-color: $modalBackgroundColor;
     border: 1px solid $modalBorderColor;
     display: none;
@@ -90,8 +90,14 @@ div.modal {
     }
 }
 
+.modal-btn {
+    &.show {
+        z-index: 60;
+    }
+}
+
 @media $at-least-desktop {
-    div.modal {
+    .modal {
         left: 50%;
         margin-left: -265px;
         top: 160px;

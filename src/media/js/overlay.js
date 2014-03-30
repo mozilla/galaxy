@@ -9,6 +9,7 @@ define('overlay', ['keys', 'l10n', 'utils', 'z'], function(keys, l10n, utils, z)
     function dismiss() {
         if ($cloak.is('.show')) {
             $('.modal').removeClass('show');
+            $('.modal-btn').removeClass('show');
             // Reset class to `cloak`, since we may have added other classes.
             $cloak.attr('class', 'cloak').trigger('overlay_dismissed');
         }

@@ -143,19 +143,31 @@ define('views/feature',
         $(this).addClass('show');
         z.body.trigger('decloak');
     }).on('mouseover', '.game-results li', function() {
-        var $button = $(this).children('a.feature_game');
+        var $button = $(this).children('.feature-btn');
         $button.addClass('show');
     }).on('mouseout', '.game-results li', function() {
-        var $button = $(this).children('a.feature_game');
+        var $button = $(this).children('.feature-btn');
         $button.removeClass('show');
     }).on('change keyup', 'input[name=game-search]', function(e) {
         // TODO: hook this up with local game searching index
-    }).on('click', 'a.feature_game', function() {
+        setTimeout(function() {
+            requests.get(urls.api.url('game.list')).done(function(data) {
+                if (data.error) {
+                    $('.game-results').html('');
+                    return;
+                }
+                showSearchResults(data);
+            }).fail(function() {
+                $('.game-results').html('');
+            });
+        }, 500);
+    }).on('click', '.feature-btn', function() {
         var $this = $(this);
         var $game = $this.closest('li');
         var gameSlug = $game.data('gameSlug');
         featureGame(gameSlug).then(function() {
             z.body.trigger('cloak');
+            console.log(gameSlug);
             addGameRow(gameSlug);
         }, function() {});
     });

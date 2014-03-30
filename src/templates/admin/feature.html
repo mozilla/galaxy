@@ -5,16 +5,14 @@
         <h1>{{ _('Featured Games') }}</h1>
       </div>
       <div class="grid-cell">
-        <a class="btn btn-big btn-edit curation-feature modal"><span class="btn-text">{{ _('Feature a New Game') }}</span></a>
+        <a class="btn btn-big btn-edit curation-feature modal-btn"><span class="btn-text">{{ _('Feature a New Game') }}</span></a>
         <div class="modal feature-game">
-          <div>
-            <form method="post" class="feedback-form form-modal">
-              <h3 style="margin-bottom:10px">{{ _('Feature a new game') }}</h3>
-              <a href="#" class="form-close">&times;</a>
-              <input type="search" name="game-search" autocapitalize="off" autocomplete="off" class="large empty game-search" novalidate title>
-              <ul class="game-results"></ul>
-            </form>
-          </div>
+          <form method="post" class="feedback-form form-modal">
+            <h3>{{ _('Feature a new game') }}</h3>
+            <a class="form-close">&times;</a>
+            <input type="search" name="game-search" autocapitalize="off" autocomplete="off" class="large empty game-search" novalidate title>
+            <ul class="game-results"></ul>
+          </form>
         </div>
       </div>
     </div>
