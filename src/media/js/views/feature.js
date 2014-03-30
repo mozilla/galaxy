@@ -150,17 +150,6 @@ define('views/feature',
         $button.removeClass('show');
     }).on('change keyup', 'input[name=game-search]', function(e) {
         // TODO: hook this up with local game searching index
-        setTimeout(function() {
-            requests.get(urls.api.url('game.list')).done(function(data) {
-                if (data.error) {
-                    $('.game-results').html('');
-                    return;
-                }
-                showSearchResults(data);
-            }).fail(function() {
-                $('.game-results').html('');
-            });
-        }, 500);
     }).on('click', '.feature-btn', function() {
         var $this = $(this);
         var $game = $this.closest('li');
