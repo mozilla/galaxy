@@ -120,7 +120,6 @@ define('views/feature',
         requests.get(urls.api.url('game', [slug]))
         .done(function(gameData) {
             var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: gameData});
-            console.log(rowToAdd);
             $('.curation-table tbody').append(rowToAdd);
             $('.curation-table').show();
             $('#empty-message').hide(); 
