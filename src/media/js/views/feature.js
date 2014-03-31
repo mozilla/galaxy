@@ -13,7 +13,7 @@ define('views/feature',
                     case 'indexed':
                         return resolve();
                     case 'results':
-                        showSearchResults(e.data.data.results);
+                        showSearchResults(e.data.data.results, e.data.data.query);
                         return resolve();
                 }
             });
@@ -155,10 +155,21 @@ define('views/feature',
         });       
     }
 
-    function showSearchResults(games) {
+    function showSearchResults(games, query) {
         $('.game-results').html(
             nunjucks.env.render('admin/game-results.html', {games: games})
         );
+        $('.game-results').find('.game-result-name').each(function () {
+            $this = $(this);
+            var matchStart = $this.text().toLowerCase().indexOf(query.toLowerCase());
+            if (matchStart != -1) {
+                var matchEnd = matchStart + query.length - 1;
+                var beforeMatch = $this.text().slice(0, matchStart);
+                var matchText = $this.text().slice(matchStart, matchEnd + 1);
+                var afterMatch = $this.text().slice(matchEnd + 1);
+                $this.html(beforeMatch + "<span class='highlight'>" + matchText + "</span>" + afterMatch);
+            }
+        });
     }
 
     z.body.on('click', '.curation-unfeature', unfeatureGame)
@@ -201,10 +212,12 @@ define('views/feature',
         builder.z('title', gettext('Curation Dashboard'));
 
         builder.onload('featured-games', function(data) {
+            if (data.length === 0) {
+                $('#empty-message').show();
+            }
             data.forEach(function(game) {
                 var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: game});
                 $('.curation-table tbody').append(rowToAdd);
-                $('#empty-message').hide();
             });
         });
     };

@@ -1,6 +1,6 @@
 {% for game in games %}
   <li data-game-slug="{{ game.item.slug }}">
-    <p style="display:inline-block">{{ game.item.name }}</p>
-    <a class="btn btn-approve feature-btn" style="display:inline-block">{{ _('feature') }}</a>
+    <p class="game-result-name">{{ game.item.name }}</p>
+    <a class="btn btn-approve feature-btn">{{ _('Feature') }}</a>
   </li>
 {% endfor %}
