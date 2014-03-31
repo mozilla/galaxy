@@ -150,7 +150,6 @@ define('views/feature',
         .done(function(gameData) {
             var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: gameData});
             $('.curation-table tbody').append(rowToAdd);
-            console.log(rowToAdd);
             $('.curation-table').show();
             $('#empty-message').hide(); 
         });       
@@ -173,21 +172,17 @@ define('views/feature',
         $(this).addClass('show');
         z.body.trigger('decloak');
     }).on('mouseover', '.game-results li', function() {
-        console.log('mouseover');
         var $button = $(this).children('.feature-btn');
         $button.addClass('show');
     }).on('mouseout', '.game-results li', function() {
-        console.log('mouseout');
         var $button = $(this).children('.feature-btn');
         $button.removeClass('show');
-    }).on('change keyup', 'input[name=game-search]', function(e) {
-        console.log('keyup');
+    }).on('keyup', 'input[name=game-search]', function(e) {
         worker.postMessage({
             type: 'search',
             data: $(this).val()
         });
     }).on('click', '.feature-btn', function() {
-        console.log('clicked');
         var $game = $(this).closest('li');
         var gameSlug = $game.data('gameSlug');
         featureGame(gameSlug).then(function() {
@@ -206,6 +201,7 @@ define('views/feature',
             data.forEach(function(game) {
                 var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: game});
                 $('.curation-table tbody').append(rowToAdd);
+                $('#empty-message').hide();
             });
         });
     };
