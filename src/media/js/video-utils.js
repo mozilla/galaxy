@@ -1,12 +1,13 @@
 define('video-utils',
-       ['l10n', 'jquery', 'underscore'],
-       function(l10n, $, _) {
+       ['l10n', 'jquery'],
+       function(l10n, $) {
 
     function parseVideo(url) {
         // - Supported YouTube URL formats:
         //   - http://www.youtube.com/watch?v=My2FRPA3Gf8
         //   - http://youtu.be/My2FRPA3Gf8
         //   - https://youtube.googleapis.com/v/My2FRPA3Gf8
+        //   - //www.youtube.com/embed/My2FRPA3Gf8
         // - Supported Vimeo URL formats:
         //   - http://vimeo.com/25451551
         //   - http://player.vimeo.com/video/25451551
@@ -39,19 +40,20 @@ define('video-utils',
         return $iframe;
     }
 
-    function getVideoThumbnail(url) {
+    function getVideoThumbnail(url, cb) {
         var videoObj = parseVideo(url);
         if (videoObj.type == 'youtube') {
-            return '//img.youtube.com/vi/' + videoObj.id + '/maxresdefault.jpg';
+            cb('//img.youtube.com/vi/' + videoObj.id + '/maxresdefault.jpg');
         } else if (videoObj.type == 'vimeo') {
             $.get('http://vimeo.com/api/v2/video/' + videoObj.id + '.json', function(data) {
-                return data.thumbnail_large;
+                cb(data[0].thumbnail_large);
             });
         }
     }
 
     return function() {
         parseVideo: parseVideo,
-        createVideo: createVideo
+        createVideo: createVideo,
+        getVideoThumbnail: getVideoThumbnail
     };
 });
