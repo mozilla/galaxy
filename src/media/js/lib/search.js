@@ -1,14 +1,18 @@
 importScripts('lunr.js');
 
 var index;
+var allItems;
+var refKey;
+
 function index(data) {
     // Define fields to index in lunr.
+    refKey = data.ref || '_id';
     index = lunr(function() {
         var that = this;
         Object.keys(data.fields).forEach(function(k) {
             that.field(k, data.fields[k]);
         });
-        that.ref(data.ref || '_id');
+        that.ref(refKey);
     });
 
     var xhr = new XMLHttpRequest();
@@ -18,10 +22,15 @@ function index(data) {
 }
 
 function load(items) {
-    var allItems = JSON.parse(this.responseText);
-    for(itemId in allItems)
+    rawItems = JSON.parse(this.responseText);
+    allItems = [];
+
+    for(itemId in rawItems)
     {
-        index.add(allItems[itemId]);
+        item = rawItems[itemId];
+
+        allItems[item[refKey]] = item;
+        index.add(item);
     }
     postMessage({type: 'indexed'});
 }
@@ -34,7 +43,7 @@ function search(query) {
     } else {
         results = index.search(query).map(function (v) {
             return {
-                item: v,
+                item: allItems[v.ref],
                 score: v.score
             };
         });

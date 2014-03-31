@@ -1,8 +1,38 @@
 define('views/feature', 
-    ['l10n', 'log', 'notification', 'templates', 'requests', 'urls', 'z'], 
-    function(l10n, log, notification, nunjucks, requests, urls, z) {
+    ['l10n', 'log', 'notification', 'templates', 'requests', 'search_worker', 'urls', 'z'], 
+    function(l10n, log, notification, nunjucks, requests, worker, urls, z) {
 
     var gettext = l10n.gettext;
+
+    var indexed = index();
+
+    function index() {
+        return new Promise(function(resolve, reject) {
+            worker.addEventListener('message', function(e) {
+
+                switch (e.data.type) {
+                    case 'indexed':
+                        return resolve();
+                    case 'results':
+                        showSearchResults(e.data.data.results);
+                        return resolve();
+                }
+            });
+
+            worker.postMessage({
+                type: 'index',
+                data: {
+                    url: urls.api.url('game.list'),
+                    fields: {
+                        app_url: {boost: 25},
+                        slug: {boost: 20},
+                        name: {boost: 30}
+                    },
+                    ref: 'slug'
+                }
+            });
+        });
+    }
 
     function controlSpinner($button, addSpinner, newText) {
         var $textSpan = $button.children('span');
@@ -116,7 +146,6 @@ define('views/feature',
 
     function addGameRow(slug) {
         // Get Game Details
-        // TODO: Maybe modify /featured endpoint to return newly featured game's game object so as to not make two requests
         requests.get(urls.api.url('game', [slug]))
         .done(function(gameData) {
             var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: gameData});
@@ -149,7 +178,10 @@ define('views/feature',
         var $button = $(this).children('.feature-btn');
         $button.removeClass('show');
     }).on('change keyup', 'input[name=game-search]', function(e) {
-        // TODO: hook this up with local game searching index
+        worker.postMessage({
+            type: 'search',
+            data: $(this).val()
+        });
     }).on('click', '.feature-btn', function() {
         var $this = $(this);
         var $game = $this.closest('li');
