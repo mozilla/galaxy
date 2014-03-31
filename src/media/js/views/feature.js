@@ -26,7 +26,8 @@ define('views/feature',
                     fields: {
                         app_url: {boost: 25},
                         slug: {boost: 20},
-                        name: {boost: 30}
+                        name: {boost: 30},
+                        description: {boost: 15}
                     },
                     ref: 'slug'
                 }
