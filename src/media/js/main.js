@@ -12,7 +12,7 @@ require.config({
         'promise': 'lib/promise-0.1.1',
         'settings': ['settings_local', 'settings'],
         'templates': '../../templates',
-        'underscore': 'lib/underscore',
+        'underscore': 'lib/underscore'
     }
 });
 

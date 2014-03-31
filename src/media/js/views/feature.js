@@ -9,7 +9,6 @@ define('views/feature',
     function index() {
         return new Promise(function(resolve, reject) {
             worker.addEventListener('message', function(e) {
-
                 switch (e.data.type) {
                     case 'indexed':
                         return resolve();
@@ -179,9 +178,12 @@ define('views/feature',
         var $button = $(this).children('.feature-btn');
         $button.removeClass('show');
     }).on('keyup', 'input[name=game-search]', function(e) {
-        worker.postMessage({
-            type: 'search',
-            data: $(this).val()
+        var $query = $(this).val();
+        indexed.then(function(val) {
+            worker.postMessage({
+                type: 'search',
+                data: $query
+            });
         });
     }).on('click', '.feature-btn', function() {
         var $game = $(this).closest('li');
