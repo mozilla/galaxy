@@ -21,13 +21,11 @@
         <tbody>
         </tbody>
       </table>
-      <div id="empty-message" class="hidden">
+      <div id="empty-message" class="shown">
         {{ _('No games featured') }}
       </div>
     {% placeholder %}
       {{ _('Loading games...') }}
-    {% empty %}
-      {{ _('No games featured') }}
     {% except %}
       {% if error == 403 %}
         {{ _('You are not authorized to access this page.') }}

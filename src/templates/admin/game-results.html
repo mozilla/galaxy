@@ -1,5 +1,5 @@
 {% for game in games %}
-  <li data-game-slug="{{ game.slug }}">
+  <li data-game-slug="{{ game.item.slug }}">
     <p style="display:inline-block">{{ game.item.name }}</p>
     <a class="btn feature-btn" style="display:inline-block">{{ _('feature') }}</a>
   </li>
