@@ -21,21 +21,21 @@
             <td class="game-title-container">
               <a href="{{ game.app_url }}">
                 <div class="game-icon" style="background-image: url({{ game.icons[0].src }})"></div>
+                <div class="game-title">{{ game.name }}</div>
               </a>
-              <div class="game-title"><a href="{{ game.app_url }}">{{ game.name }}</a></div>
             </td>
             <td class="game-date-container" title="{{ game.created }}">
-              <div class="game-date-title">{{ _('Date submitted:') }}</div>
+              <h3 class="game-date-title">{{ _('Date submitted:') }}</h3>
               <div class="game-date">
                 <span class="date-abs">{{ game.created|date('med', false) }}</span>
                 <span class="date-rel">({{ game.created|relativeDate }})</span>
               </div>
             </td>
             <td class="review-buttons dashboard-buttons">
-              <a class="btn btn-approve review-approve" data-status-verb="approve">
+              <a class="btn btn-approve" data-status-verb="approve">
                 <div class="btn-text">{{ _('Approve') }}</div>
               </a>
-              <a class="btn btn-reject review-reject" data-status-verb="reject">
+              <a class="btn btn-reject" data-status-verb="reject">
                 <div class="btn-text">{{ _('Reject') }}</div>
               </a>
               <div class="secondary-buttons">

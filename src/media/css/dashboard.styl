@@ -24,8 +24,7 @@ $iconSize = 56px;
         text-align: right;
 
         a {
-            margin-left: 8px;
-            margin-right: 8px;
+            margin: 0 8px;
         }
         .btn {
             margin-left: 10px;
@@ -44,19 +43,18 @@ $iconSize = 56px;
         .game-icon {
             background: no-repeat;
             background-size: contain;
+            background-position: center;
             float: left;
-            margin-right: 20px;
             height: $iconSize;
+            margin-right: 20px;
             width: $iconSize;
         }
         .game-title {
+            color: $buttonColorTeal;
             display: inline-block;
+            font-size: $bigFontSize;
             height: $iconSize;
-            a {
-                color: $buttonColorTeal;
-                font-size: $bigFontSize;
-                line-height: $iconSize;
-            }
+            line-height: $iconSize;
         }
     }
 
@@ -64,6 +62,7 @@ $iconSize = 56px;
         .game-date-title {
             color: $colorGrayUltraLight;
             font-size: $smallFontSize;
+            font-weight: normal;
         }
         .game-date {
             .date-abs {
@@ -192,9 +191,9 @@ $iconSize = 56px;
             margin-bottom: 0;
         }
         #select-status {
-            top: 30%;
-            position: absolute;
             margin-left: 25px;
+            position: absolute;
+            top: 30%;
         }
     }
 
