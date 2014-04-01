@@ -1,0 +1,52 @@
+{% macro emptyGames() %}
+  {{ _('You have not submitted any games yet.') }}
+{% endmacro %}
+
+<form class="grid" method="post" data-required="{{ _('Required') }}" data-formtype="submit">
+  <div class="grid-cell">
+    <h1>{{ _('My Games') }}</h1>
+    {% defer (url=api('game.list')|urlparams(developer='1')) %}
+      <table class="dashboard-table developer-dashboard-table">
+        <thead>
+          <tr>
+            <th>{{ _('Game') }}</th>
+            <th>{{ _('Status') }}</th>
+            <th>{{ _('Queue Position') }}</th>
+            <th>{{ _('Waiting Time') }}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for game in this|sort(attribute='created') %}
+            <tr class="developer-dashboard-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
+              <td class="developer-dashboard-title"><a href="{{ game.app_url }}">{{ game.name }}</a></td>
+              <td class="developer-dashboard-status">{{ game.status }}</td>
+              <!--TODO: retrieve queue position -->
+              <td class="developer-dashboard-position"></td>
+              <td class="developer-dashboard-wait" title="{{ game.created }}">{{ game.created|relativeDate }}</td>
+              <td class="dashboard-buttons developer-dashboard-buttons">
+                <a class="btn btn-view developer-dashboard-view" href="{{ url('game', [game.slug]) }}" target="_blank">{{ _('View') }}</a>
+                <a class="btn btn-edit developer-dashboard-edit" href="{{ url('edit_game', [game.slug]) }}">{{ _('Edit') }}</a>
+                <a class="btn btn-delete developer-dashboard-delete"><div class="btn-text">{{ _('Delete') }}</div></a>
+                <a class="btn btn-disable developer-dashboard-disable"><div class="btn-text">{{ _('Disable') }}</div></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div id="empty-message" class="hidden">
+        {{ emptyGames() }}
+      </div>
+    {% placeholder %}
+      {{ _('Loading games...') }}
+    {% empty %}
+      {{ emptyGames() }}
+    {% except %}
+      {% if error == 403 %}
+        {{ _('You are not authorized to access this page.') }}
+      {% else %}
+        {{ _('Oh no! An error occurred.') }}
+      {% endif %}
+    {% end %}
+  </div>
+</form>
