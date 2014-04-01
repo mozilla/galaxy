@@ -85,6 +85,15 @@ define('views/review',
         z.page.trigger('navigate', utils.urlparams(urls.reverse('review'), params));
     });
 
+    z.page.on('fragment_load_failed fragment_loaded', function(e) {
+        var data = e.originalEvent.detail;
+        if (data.signature.id === 'gameList') {
+            var $select = $('#select-status');
+            var unauthorized = data.context.ctx.error === 403;
+            unauthorized ? $select.hide() : $select.show();
+        }
+    });
+
     return function(builder, args) {
         var status = utils.getVars().status || 'pending';
         builder.start('admin/review.html', {status: status})
