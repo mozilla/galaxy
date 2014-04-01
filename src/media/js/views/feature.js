@@ -161,13 +161,14 @@ define('views/feature',
         );
         $('.game-results').find('.game-result-name').each(function () {
             $this = $(this);
-            var matchStart = $this.text().toLowerCase().indexOf(query.toLowerCase());
-            if (matchStart != -1) {
+            $text = $this.text();
+            var matchStart = $text.toLowerCase().indexOf(query.toLowerCase());
+            if (matchStart !== -1) {
                 var matchEnd = matchStart + query.length - 1;
-                var beforeMatch = $this.text().slice(0, matchStart);
-                var matchText = $this.text().slice(matchStart, matchEnd + 1);
-                var afterMatch = $this.text().slice(matchEnd + 1);
-                $this.html(beforeMatch + "<span class='highlight'>" + matchText + "</span>" + afterMatch);
+                var beforeMatch = $text.slice(0, matchStart);
+                var matchText = $text.slice(matchStart, matchEnd + 1);
+                var afterMatch = $text.slice(matchEnd + 1);
+                $this.html(beforeMatch + '<span class="highlight">' + matchText + '</span>' + afterMatch);
             }
         });
     }
