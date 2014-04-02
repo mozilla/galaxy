@@ -1,13 +1,13 @@
 importScripts('lunr.js');
 
-var index;
+var itemIndex;
 var allItems;
 var refKey;
 
 function index(data) {
     // Define fields to index in lunr.
     refKey = data.ref || '_id';
-    index = lunr(function() {
+    itemIndex = lunr(function() {
         var that = this;
         Object.keys(data.fields).forEach(function(k) {
             that.field(k, data.fields[k]);
@@ -30,7 +30,7 @@ function load(items) {
         item = rawItems[itemId];
 
         allItems[item[refKey]] = item;
-        index.add(item);
+        itemIndex.add(item);
     }
     postMessage({type: 'indexed'});
 }
@@ -41,7 +41,7 @@ function search(query) {
     if (!query) {
         results = allItems;
     } else {
-        results = index.search(query).map(function (v) {
+        results = itemIndex.search(query).map(function (v) {
             return {
                 item: allItems[v.ref],
                 score: v.score
