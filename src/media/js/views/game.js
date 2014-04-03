@@ -1,6 +1,6 @@
 define('views/game',
-       ['featured-games', 'jquery', 'l10n', 'requests', 'user', 'utils', 'urls', 'z'],
-       function(fg, $, l10n, requests, user, utils, urls, z) {
+       ['jquery', 'l10n', 'featured-games', 'requests', 'user', 'utils', 'urls', 'z'],
+       function($, l10n, fg, requests, user, utils, urls, z) {
 
     var gettext = l10n.gettext;
 
