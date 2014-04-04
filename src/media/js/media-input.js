@@ -140,7 +140,8 @@ define('media-input',
         }
         $mediaObject.attr('height', 210);
         $mediaObject.attr('width', 280); 
-        $input.siblings('.media-preview-container').html($mediaObject);
+        // TODO: Replace $mediaObject with media parser's returned iframe
+        $input.siblings('.media-item').children('.media-preview-container').html($mediaObject);
     }
 
     z.page.on('loaded', function() {
