@@ -14,7 +14,7 @@ define('video-utils',
         // - Also supports relative URLs:
         //   - //player.vimeo.com/video/25451551
 
-        url.match(/(http:|https:|)\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/);
+        url.match(/(https?:|)\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/);
 
         if (RegExp.$3.indexOf('youtu') > -1) {
             var type = 'youtube';
@@ -32,9 +32,9 @@ define('video-utils',
         var videoObj = parseVideo(url);
         var $iframe = $('<iframe>', { width: width, height: height });
         $iframe.attr('frameborder', 0);
-        if (videoObj.type == 'youtube') {
+        if (videoObj.type === 'youtube') {
             $iframe.attr('src', '//www.youtube.com/embed/' + videoObj.id);
-        } else if (videoObj.type == 'vimeo') {
+        } else if (videoObj.type === 'vimeo') {
             $iframe.attr('src', '//player.vimeo.com/video/' + videoObj.id);
         }
         return $iframe;
@@ -42,9 +42,9 @@ define('video-utils',
 
     function getVideoThumbnail(url, cb) {
         var videoObj = parseVideo(url);
-        if (videoObj.type == 'youtube') {
+        if (videoObj.type === 'youtube') {
             cb('//img.youtube.com/vi/' + videoObj.id + '/maxresdefault.jpg');
-        } else if (videoObj.type == 'vimeo') {
+        } else if (videoObj.type === 'vimeo') {
             $.get('http://vimeo.com/api/v2/video/' + videoObj.id + '.json', function(data) {
                 cb(data[0].thumbnail_large);
             });
