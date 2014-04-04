@@ -24,6 +24,7 @@ require.config({
             'helpers',  // Must come before mostly everything else.
             'capabilities',
             'dates',
+            'featured-games',
             'forms',
             'keys',
             'l10n',

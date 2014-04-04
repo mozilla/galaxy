@@ -1,176 +1,60 @@
 @import 'lib';
 
-[data-page-type~="root"] .page:before {
-    background: #fdfe98 url(../img/homepage/hero.jpg) 50% 0 repeat-y;
-    background-size: auto 785px;
-    content: "";
-    display: block;
-    height: 785px;
-    left: 0;
-    opacity: .1;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
+[data-page-type~="root"] .right-container {
+    
+    position: relative; 
 
-.activity-board {
-    min-height: 385px;
-    padding: 40px 35px;
-    position: relative;
-    z-index: 2;
-
-    h1 {
-        color: #eff;
+    &:before {
+        background: #fdfe98 url(../img/homepage/hero.jpg) 50% 0;
+        background-size: cover;
+        content: "";
+        display: block;
+        height: 100%;
+        left: 0;
+        opacity: .1;
+        position: absolute;
+        top: 0;
+        width: 100%;
     }
 
-    h2 {
-        color: $flamin-hot-cheetos-orange;
-        font-size: 16px;
-    }
+    .homepage-content {
 
-    section {
-        float: left;
-        width: 33.333%;
+        position: relative;
+        text-align: center;
+        z-index: 1;
 
-        ul {
-            list-style: none;
-
-            > li {
-                margin-bottom: 5px;
-            }
-            a {
-                color: #d7d7d7;
-                display: block;
-                font-size: 13px;
-            }
-            .badge {
-                margin-right: 15px;
-            }
+        h1 {
+            color: #fff;
+            font-weight: 200;
+            line-height: 1.2em;
         }
 
-        .games-list {
-            > li > a {
-                display: block;
-                ellipsis();
-                line-height: 40px;
+        .homepage-heading {
+            margin: 30px 0;
+            text-align: center;
+            img, span {
+                display: inline-block;
+            }
+            img {
+                height: 135px;
+            }
+            span {
+                color: #fff;
+                font-size: 64px;
+                font-weight: 600;
+                line-height: 135px;
+                margin: 0 40px;
                 vertical-align: top;
             }
-            .game-icon {
-                float: left;
-                margin-right: 10px;
-            }
         }
 
-        .games-friends-list {
-            > li {
-                margin-bottom: 16px;
-                > a {
-                    line-height: 15px;
-                }
+        .screenshots {
+            margin: 20px;
+            img {
+                height: 230px;
+                margin: 10px;
             }
-            .avatars {
-                font-size: 0;
-                margin: -23px 0 0 51px;
-                li {
-                    display: inline-block;
-                    + li {
-                        margin-left: 10px;
-                    }
-                }
-            }
-            .avatar {
-                background-size: contain;
-                height: 20px;
-                width: 20px;
-            }
-        }
-
-        .game-icon {
-            background: no-repeat;
-            background-size: contain;
-            display: inline-block;
-            height: 40px;
-            width: 40px;
-        }
-
-        .achievements-in-progress {
         }
     }
 }
 
-.featured {
-    background: rgb(255,255,255,.2);
-    padding: 40px 35px;
-
-    h1 {
-        color: #999;
-    }
-}
-
-menu.games {
-    margin: 40px 0;
-    text-align: center;
-    perspective: 200px;
-    -webkit-perspective: 400px;
-    perspective-origin: 50% 50%;
-    -webkit-perspective-origin: 50% 50%;
-
-    a.game {
-        background: rgba(100, 200, 200, 0.75);
-        border: 2px solid #fff;
-        border-radius: 2px;
-        box-shadow: inset 0 0 10px #0ff;
-        color: #fff;
-        display: inline-block;
-        padding: 0.75em;
-        position: relative;
-        transition: unquote('transform 0.5s, opacity 0.25s');
-        -webkit-transition: unquote('-webkit-transform 0.5s');
-        text-shadow: 0 0 4px #0ff;
-        z-index: 5;
-
-        img {
-            height: 175px;
-            width: 175px;
-        }
-        > div {
-            background: rgba(0, 0, 0, 0.5);
-            bottom: 0;
-            left: 0;
-            padding: 0.5em;
-            position: absolute;
-            right: 0;
-
-            > strong {
-                display: block;
-                font-family: $electroFontFamily;
-                font-size: 1.5em;
-            }
-        }
-
-        &.prev, &.next {
-            opacity: 0.5;
-            z-index: 4;
-
-            + .next {
-                z-index: 3;
-            }
-        }
-        &.prev {
-            margin-right: -100px;
-            transform: rotateY(30deg) scaleX(0.9);
-            -webkit-transform: rotateY(30deg) scaleX(0.9);
-        }
-        &.next {
-            margin-left: -100px;
-            transform: rotateY(-30deg) scaleX(0.9);
-            -webkit-transform: rotateY(-30deg) scaleX(0.9);
-        }
-        &:hover, &.next:hover {
-            opacity: 1;
-            transform: scale(1.1, 1.1);
-            -webkit-transform: scale(1.2, 1.2);
-            z-index: 6;
-        }
-    }
-}

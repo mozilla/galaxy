@@ -1,6 +1,8 @@
 define('views/game',
-       ['jquery', 'l10n', 'requests', 'user', 'utils', 'urls', 'z'],
-       function($, l10n, requests, user, utils, urls, z) {
+       ['jquery', 'l10n', 'featured-games', 'requests', 'user', 'utils', 'urls', 'z'],
+       function($, l10n, featured_games, requests, user, utils, urls, z) {
+
+    var gettext = l10n.gettext;
 
     function updatePlay(gameSlug) {
         requests.post(urls.api.url('user.purchase'), {game: gameSlug});
@@ -17,6 +19,7 @@ define('views/game',
             $this.removeClass('btn-install');
         }
     });
+
     z.win.on('hashchange', function() {
         // TODO: allow builder to accept hash.
         var hash = window.location.hash.substr(1);
@@ -64,77 +67,17 @@ define('views/game',
         $('.game-current-media').html($mediaObject);
     });
 
-    var gettext = l10n.gettext;
+    z.body.on('click', '.game-details-media .arrow', function() {
+        // TODO: Scroll media gallery section downwards
+    });
 
     return function(builder, args) {
         var slug = args[0];
-        var featured_games = [
-        {
-            title: 'Hex GL',
-            developer: 'Thibaut Despoulain',
-            icon: 'hexgl.png'
-        },
-        {
-            title: 'Batman: Arkham Origins',
-            developer: 'Armature Studio',
-            icon: 'batman.png'
-        },
-        {
-            title: 'Bastion',
-            developer: 'Supergiant Games',
-            icon: 'bastion.png'
-        },
-        {
-            title: 'Windborne',
-            developer: 'Hidden Path Entertainment',
-            icon: 'windborne.png'
-        },
-        {
-            title: 'Orion',
-            developer: 'Spiral Game Studios',
-            icon: 'orion.png'
-        },
-        {
-            title: 'Banished',
-            developer: 'Shining Rock Software',
-            icon: 'banished.png'
-        },
-        {
-            title: 'Hex GL',
-            developer: 'Thibaut Despoulain',
-            icon: 'hexgl.png'
-        },
-        {
-            title: 'Batman: Arkham Origins',
-            developer: 'Armature Studio',
-            icon: 'batman.png'
-        },
-        {
-            title: 'Bastion',
-            developer: 'Supergiant Games',
-            icon: 'bastion.png'
-        },
-        {
-            title: 'Windborne',
-            developer: 'Hidden Path Entertainment',
-            icon: 'windborne.png'
-        },
-        {
-            title: 'Orion',
-            developer: 'Spiral Game Studios',
-            icon: 'orion.png'
-        },
-        {
-            title: 'Banished',
-            developer: 'Shining Rock Software',
-            icon: 'banished.png'
-        }
-        ];
 
         builder.start('game/main.html', {
             slug: slug, 
-            page_url: window.location.href, 
-            featured_games: featured_games
+            page_url: window.location.href,
+            featured_games: featured_games.getFeaturedGames()
         });
 
         builder.z('type', 'game');
@@ -143,6 +86,7 @@ define('views/game',
         builder.onload('game-data', function(game) {
             builder.z('title', utils.translate(game.name));
             twttr.widgets.load(); // Needed for loaded twitter widget scripts
+            featured_games.attachScrollEvents();
         });
     };
 });

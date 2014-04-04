@@ -152,8 +152,6 @@
         }
     }
     .game-details-container {
-        background-color: rgba(255, 255, 255, 0.4);
-        padding-top: 20px;
 
         .game-details-container-left,
         .game-details-container-right  {
@@ -166,7 +164,7 @@
             }
         }
         .game-details-container-right {
-            .game-details-media {
+            .game-media-list {
                 height: 471px;
                 overflow-y: scroll;
                 padding: 5px;
@@ -186,10 +184,9 @@
                 outline: 5px solid rgba(255, 255, 255, 0.5);
             }
             
-            .arrow-container {
-                .arrow {
-                    border-width: 15px 38px 0 37px;
-                }
+            .arrow:before {
+                border-width: 15px 38px 0 37px;
+                margin-left: -38px;
             }
         }
         .game-details-section {
@@ -260,18 +257,6 @@
             .icon-controller {
                 margin-left: 2px
             }
-        }
-    }
-    .arrow-container {
-        height: 10px;
-        margin-top: 20px;
-        .arrow {
-            border-style: solid;
-            border-width: 20px 50px 0 50px;
-            border-color: rgba(255, 255, 255, 0.5) transparent transparent transparent;
-            margin: 0 auto;
-            height: 0px;
-            width: 0px;
         }
     }
 }
