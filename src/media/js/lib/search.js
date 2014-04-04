@@ -22,16 +22,14 @@ function index(data) {
 }
 
 function load(items) {
-    rawItems = JSON.parse(this.responseText);
+    var rawItems = JSON.parse(this.responseText);
     allItems = [];
 
-    for(itemId in rawItems)
-    {
-        item = rawItems[itemId];
-
+    rawItems.forEach( function (item) {
         allItems[item[refKey]] = item;
         itemIndex.add(item);
-    }
+    });
+    
     postMessage({type: 'indexed'});
 }
 
