@@ -197,6 +197,16 @@ btn-spinner-size($size) {
 
 // Flex Box (trim me!)
 
+flex($flex) {
+    -ms-box-flex: $flex;
+    -moz-box-flex: $flex;
+    -webkit-box-flex: $flex;
+    flex: $flex;
+    -ms-flex: $flex;
+    -moz-flex: $flex;
+    -webkit-flex: $flex;
+}
+
 display-flex() {
     display: -ms-box;
     display: -moz-box;
@@ -205,6 +215,27 @@ display-flex() {
     display: -ms-flex;
     display: -moz-flex;
     display: -webkit-flex;
+}
+
+flex-grow($number) {
+    flex-grow: $number;
+    -ms-flex-grow: $number;
+    -moz-flex-grow: $number;
+    -webkit-flex-grow: $number;
+}
+
+flex-align-items($value) {
+    align-items: $value;
+    -ms-align-items: $value;
+    -moz-align-items: $value;
+    -webkit-align-items: $value;
+}
+
+flex-align-self($value) {
+    align-self: $value;
+    -ms-align-self: $value;
+    -moz-align-self: $value;
+    -webkit-align-self: $value;
 }
 
 flex-stack() {
@@ -235,14 +266,4 @@ flex-center() {
     -ms-align-self: center;
     -moz-align-self: center;
     -webkit-align-self: center;
-}
-
-flex($flex) {
-    -ms-box-flex: $flex;
-    -moz-box-flex: $flex;
-    -webkit-box-flex: $flex;
-    flex: $flex;
-    -ms-flex: $flex;
-    -moz-flex: $flex;
-    -webkit-flex: $flex;
 }
