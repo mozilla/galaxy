@@ -1,6 +1,6 @@
 define('views/game',
        ['jquery', 'l10n', 'featured-games', 'requests', 'user', 'utils', 'urls', 'z'],
-       function($, l10n, fg, requests, user, utils, urls, z) {
+       function($, l10n, featured_games, requests, user, utils, urls, z) {
 
     var gettext = l10n.gettext;
 
@@ -77,7 +77,7 @@ define('views/game',
         builder.start('game/main.html', {
             slug: slug, 
             page_url: window.location.href,
-            featured_games: fg.getFeaturedGames()
+            featured_games: featured_games.getFeaturedGames()
         });
 
         builder.z('type', 'game');
@@ -86,7 +86,7 @@ define('views/game',
         builder.onload('game-data', function(game) {
             builder.z('title', utils.translate(game.name));
             twttr.widgets.load(); // Needed for loaded twitter widget scripts
-            fg.attachScrollEvents();
+            featured_games.attachScrollEvents();
         });
     };
 });
