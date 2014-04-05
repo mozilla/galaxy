@@ -1,8 +1,38 @@
 define('views/feature', 
-    ['l10n', 'log', 'notification', 'templates', 'requests', 'urls', 'z'], 
-    function(l10n, log, notification, nunjucks, requests, urls, z) {
-    
+    ['l10n', 'log', 'notification', 'templates', 'requests', 'search_worker', 'urls', 'z'], 
+    function(l10n, log, notification, nunjucks, requests, worker, urls, z) {
+
     var gettext = l10n.gettext;
+
+    var indexed = index();
+
+    function index() {
+        return new Promise(function(resolve, reject) {
+            worker.addEventListener('message', function(e) {
+                switch (e.data.type) {
+                    case 'indexed':
+                        return resolve();
+                    case 'results':
+                        showSearchResults(e.data.data.results, e.data.data.query);
+                        return resolve();
+                }
+            });
+
+            worker.postMessage({
+                type: 'index',
+                data: {
+                    url: urls.api.url('game.list'),
+                    fields: {
+                        app_url: {boost: 25},
+                        slug: {boost: 20},
+                        name: {boost: 30},
+                        description: {boost: 15}
+                    },
+                    ref: 'slug'
+                }
+            });
+        });
+    }
 
     function controlSpinner($button, addSpinner, newText) {
         var $textSpan = $button.children('span');
@@ -35,21 +65,15 @@ define('views/feature',
     }
 
     // TODO: Hook up with curation modal (#126).
-    function featureGame() {
-        var $this = $(this);
-        var gameSlug = $this.parent().data('slug');
-
-        controlSpinner($this, true);
-
-        requests.post(urls.api.url('game.featured'), {
+    function featureGame(gameSlug) {
+        return requests.post(urls.api.url('game.featured'), {
             game: gameSlug
-        }).done(function(data) {
+        }).then(function(data) {
             notification.notification({message: gettext('Game featured')});
-            addGameRow(gameSlug);
-        }).fail(function() {
+        }, function(data) {
             notification.notification({message: gettext('Error: A problem occured while featuring this game. Please try again.')});
-            controlSpinner($this, false);
-        });
+            console.error(data);
+        }).promise();
     }
 
     // Send request to moderate endpoint for deletion.
@@ -122,14 +146,31 @@ define('views/feature',
 
     function addGameRow(slug) {
         // Get Game Details
-        // TODO: Maybe modify /featured endpoint to return newly featured game's game object so as to not make two requests
         requests.get(urls.api.url('game', [slug]))
         .done(function(gameData) {
             var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: gameData});
             $('.curation-table tbody').append(rowToAdd);
-        });
+            $('.curation-table').show();
+            $('#empty-message').hide(); 
+        });       
+    }
 
-        $('#empty-message').hide();        
+    function showSearchResults(games, query) {
+        $('.game-results').html(
+            nunjucks.env.render('admin/game-results.html', {games: games})
+        );
+        $('.game-results').find('.game-result-name').each(function () {
+            $this = $(this);
+            $text = $this.text();
+            var matchStart = $text.toLowerCase().indexOf(query.toLowerCase());
+            if (matchStart !== -1) {
+                var matchEnd = matchStart + query.length - 1;
+                var beforeMatch = $text.slice(0, matchStart);
+                var matchText = $text.slice(matchStart, matchEnd + 1);
+                var afterMatch = $text.slice(matchEnd + 1);
+                $this.html(beforeMatch + '<span class="highlight">' + matchText + '</span>' + afterMatch);
+            }
+        });
     }
 
     z.body.on('click', '.curation-unfeature', unfeatureGame)
@@ -138,6 +179,31 @@ define('views/feature',
         moderateGame($(this), 'disable');
     }).on('click', '.curation-enable', function() {
         moderateGame($(this), 'approve');
+    }).on('click', '.curation-feature', function() {
+        $('.feature-game').addClass('show');
+        $(this).addClass('show');
+        z.body.trigger('decloak');
+    }).on('mouseover', '.game-results li', function() {
+        var $button = $(this).children('.feature-btn');
+        $button.addClass('show');
+    }).on('mouseout', '.game-results li', function() {
+        var $button = $(this).children('.feature-btn');
+        $button.removeClass('show');
+    }).on('keyup', 'input[name=game-search]', function(e) {
+        var $query = $(this).val();
+        indexed.then(function(val) {
+            worker.postMessage({
+                type: 'search',
+                data: $query
+            });
+        });
+    }).on('click', '.feature-btn', function() {
+        var $game = $(this).closest('li');
+        var gameSlug = $game.data('gameSlug');
+        featureGame(gameSlug).then(function() {
+            z.body.trigger('cloak');
+            addGameRow(gameSlug);
+        }, function() {});
     });
 
     return function(builder, args) {
@@ -147,6 +213,9 @@ define('views/feature',
         builder.z('title', gettext('Curation Dashboard'));
 
         builder.onload('featured-games', function(data) {
+            if (data.length === 0) {
+                $('#empty-message').show();
+            }
             data.forEach(function(game) {
                 var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: game});
                 $('.curation-table tbody').append(rowToAdd);

@@ -6,6 +6,7 @@ require.config({
         'dropzone': 'lib/dropzone',
         'format': 'lib/format',
         'jquery': 'lib/jquery-2.0.2',
+        'lunr': 'lib/lunr',
         'nunjucks': 'lib/nunjucks',
         'nunjucks.compat': 'lib/nunjucks.compat',
         'promise': 'lib/promise-0.1.1',

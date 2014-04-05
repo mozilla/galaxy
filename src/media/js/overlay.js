@@ -9,6 +9,7 @@ define('overlay', ['keys', 'l10n', 'utils', 'z'], function(keys, l10n, utils, z)
     function dismiss() {
         if ($cloak.is('.show')) {
             $('.modal').removeClass('show');
+            $('.modal-btn').removeClass('show');
             // Reset class to `cloak`, since we may have added other classes.
             $cloak.attr('class', 'cloak').trigger('overlay_dismissed');
         }
@@ -37,6 +38,9 @@ define('overlay', ['keys', 'l10n', 'utils', 'z'], function(keys, l10n, utils, z)
     }).on('decloak', function() {
         z.body.addClass('overlayed');
         $cloak.addClass('show');
+    }).on('cloak', function() {
+        dismiss();
+        $cloak.removeClass('show');
     }).on('click', '.modal .form-close', utils._pd(dismiss));
 
     z.win.on('navigating', dismiss);
