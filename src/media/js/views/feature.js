@@ -180,7 +180,7 @@ define('views/feature',
     }).on('click', '.curation-enable', function() {
         moderateGame($(this), 'approve');
     }).on('click', '.curation-feature', function() {
-        $('.modal').addClass('show');
+        $('.feature-game').addClass('show');
         $(this).addClass('show');
         z.body.trigger('decloak');
     }).on('mouseover', '.game-results li', function() {
