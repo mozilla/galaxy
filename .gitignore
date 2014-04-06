@@ -3,7 +3,6 @@
 *.elc
 *.gz
 *.less.css
-*.png
 *.po.js
 *.pyc
 *.styl.css
@@ -29,6 +28,7 @@ npm-debug.log
 settings_local.js
 settings_local_hosted.js
 smokealarm/captures/
+src/functional-test/*.png
 src/locales/*
 src/media/build_id.txt
 src/media/css/include.css
