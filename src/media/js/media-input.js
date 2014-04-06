@@ -194,9 +194,9 @@ define('media-input',
         }
     }).on('drop', '.media-preview-container', function(e) {
         e.preventDefault();
-        $(this).toggleClass('dragenter', false);
         var $this = $(this);
-        if (!$(this).closest('.media-item').hasClass('processed')) {
+        $(this).toggleClass('dragenter', false);
+        if (!$this.closest('.media-item').hasClass('processed')) {
             e = e.originalEvent;
             getFileDataURI(e.dataTransfer).then(function(data) {
                 preview($this, data, true);
@@ -232,22 +232,23 @@ define('media-input',
         }
     }).on('blur', '.videos input', function() {
         // Videos section
-        if ($(this).val()) {
-            loadVideo($(this));
+        var $this = $(this);
+        if ($this.val()) {
+            loadVideo($this);
         } else {
             // Clear the loaded iframe.
-            $(this).siblings('.media-preview-container').html('');
+            $this.siblings('.media-preview-container').html('');
         }
 
     }).on('dragover dragenter', function(e) {
         e.preventDefault();
-        if ($(e.target).hasClass('media-preview-container')) {
-            e.originalEvent.dataTransfer.dropEffect = "copy";
-            $(e.target).toggleClass('dragenter', true);
+        var $this = $(this);
+        if ($this.hasClass('media-preview-container')) {
+            e.originalEvent.dataTransfer.dropEffect = 'copy';
+            $this.toggleClass('dragenter', true);
         } else {
-            e.originalEvent.dataTransfer.dropEffect = "none";
+            e.originalEvent.dataTransfer.dropEffect = 'none';
         }
-        // Prevent file dropping from triggering at other parts of the page.
         return false;
     }).on('dragleave dragend', '.media-preview-container', function(e) {
         $(this).toggleClass('dragenter', false);
