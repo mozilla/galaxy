@@ -4,7 +4,7 @@
     <ul>
       {% for game in this %}
         <li>
-          <a href="#">
+          <a href="/game/{{ game.slug }}/detail">
             <div class="media">
               <img class="media-figure game-icon" src="{{ game.icons[0].src }}">
               <div class="media-body">

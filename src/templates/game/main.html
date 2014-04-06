@@ -33,21 +33,21 @@
                 <!-- <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-size="large" data-text="Check this game out: {{ game.name }}!">Tweet</a> -->
               </div>
             </div>
-            <h1 class="game-title">Bastion</h1>
-            <p class="game-developer">by Supergiant Games</p>
+            <h1 class="game-name">{{ game.name }}</h1>
+            <p class="game-developer">by Developer Name</p>
           </div>
           <div class="game-details-section">
-            <p class="game-description">Bastion is an original action role-pplaying game featuring a reactive narrator who marks your every move, lush hand-painted 2D artwork, and tight responsive gameplay that rewards playing with finesse. The game is designed to be simple to pick up and start playing, while offering a lot of rich choices around character customization as well as a deep story and game world you can lose yourself in.</p>
+            <p class="game-description">{{ game.description }}</p>
           </div>
           <div class="game-details-section">
             <div class="grid">
               <div class="grid-cell game-detail-attribute">
                 <h2>Genre:</h2>
-                Action
+                <div class="capitalize">{{ game.genre }}</div>
               </div>
               <div class="grid-cell game-detail-attribute">
                 <h2>Release date:</h2>
-                Jan 15, 2014
+                <div>Jan 15, 2014</div>
               </div>
               <div class="grid-cell game-detail-attribute">
                 <h2>Browser support:</h2>
@@ -58,7 +58,7 @@
               </div>
               <div class="grid-cell game-detail-attribute">
                 <h2>Players:</h2>
-                1 &nbsp; <i class="icon-controller"></i>
+                <div class="capitalize">{{ game.number_of_players }} &nbsp; <i class="icon-controller"></i></div>
               </div>
             </div>
           </div>
@@ -67,17 +67,9 @@
           <div class="game-details-media">
             <div class="game-media-list">
               <img class="game-media selected" alt="" title="" src="//img.youtube.com/vi/mX48y24t9iU/maxresdefault.jpg">
-              <img class="game-media" alt="" title="" src="/media/img/new-game-details/screenshots/2.png">
-              <img class="game-media" alt="" title="" src="/media/img/new-game-details/screenshots/3.png">
-              <img class="game-media" alt="" title="" src="/media/img/new-game-details/screenshots/4.png">
-              <!-- {% if game.screenshots %}
-                {% for screenshot in game.screenshots %}
-                  <img class="game-media"
-                    {% if screenshot.width %} width="{{ screenshot.width }}"{% endif %}
-                    {% if screenshot.height %} height="{{ screenshot.height }}"{% endif %}
-                    src="{{ screenshot }}">
-                {% endfor %}
-              {% endif %} -->
+              {% for screenshot in game.screenshots %}
+                <img class="game-media" alt="" title="" src="{{ screenshot.src }}">
+              {% endfor %}
             </div>
             <div class="arrow"></div>            
           </div>
