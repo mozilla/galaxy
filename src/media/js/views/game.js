@@ -8,18 +8,6 @@ define('views/game',
         requests.post(urls.api.url('user.purchase'), {game: gameSlug});
     };
 
-    z.body.on('click', '.btn-play', function(e) {
-        var $this = $(this);
-        e.preventDefault();
-        window.open($this.data('appUrl'));
-    }).on('click', '.btn-install', function(e) {
-        var $this = $(this);
-        if (user.logged_in()) {
-            updatePlay($this.data('gameSlug'));
-            $this.removeClass('btn-install');
-        }
-    });
-
     z.win.on('hashchange', function() {
         // TODO: allow builder to accept hash.
         var hash = window.location.hash.substr(1);
@@ -37,13 +25,22 @@ define('views/game',
         $el.addClass('current');
     });
 
-    z.body.on('click', '.featured-games-section li', function(e) {
+    z.body.on('click', '.btn-play', function(e) {
+        e.preventDefault();
+        window.open($(this).data('appUrl'));
+
+    }).on('click', '.btn-install', function(e) {
+        var $this = $(this);
+        if (user.logged_in()) {
+            updatePlay($this.data('gameSlug'));
+            $this.removeClass('btn-install');
+        }
+
+    }).on('click', '.featured-games-section li', function(e) {
         $('.featured-games-section li').removeClass('selected');
         $(this).addClass('selected');
-        // TODO: Update game detail section with selected game details.
-    })
 
-    z.body.on('click', '.game-media', function() {
+    }).on('click', '.game-media', function() {
         $('.game-media').removeClass('selected');
         var $this = $(this);
         $this.addClass('selected');
@@ -65,9 +62,8 @@ define('views/game',
         $mediaObject.attr('height', 300);
         $mediaObject.attr('width', 480);
         $('.game-current-media').html($mediaObject);
-    });
 
-    z.body.on('click', '.game-details-media .arrow', function() {
+    }).on('click', '.game-details-media .arrow', function() {
         // TODO: Scroll media gallery section downwards
     });
 

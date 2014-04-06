@@ -9,7 +9,7 @@
               <img class="media-figure game-icon" src="{{ game.icons[0].src }}">
               <div class="media-body">
                 <h3 class="game-title">{{ game.name }}</h3>
-                <p class="game-developer">{{ _('by {author}', author=game.developer) }}</p>
+                <p class="game-developer">{{ _('by {author}', author=game.developer.name) }}</p>
               </div>
             </div>
           </a>
