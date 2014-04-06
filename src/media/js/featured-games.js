@@ -27,73 +27,7 @@ define('featured-games',
         });
     }
 
-    function getFeaturedGames() {
-        return [
-        {
-            title: 'Hex GL',
-            developer: 'Thibaut Despoulain',
-            icon: 'hexgl.png'
-        },
-        {
-            title: 'Batman: Arkham Origins',
-            developer: 'Armature Studio',
-            icon: 'batman.png'
-        },
-        {
-            title: 'Bastion',
-            developer: 'Supergiant Games',
-            icon: 'bastion.png'
-        },
-        {
-            title: 'Windborne',
-            developer: 'Hidden Path Entertainment',
-            icon: 'windborne.png'
-        },
-        {
-            title: 'Orion',
-            developer: 'Spiral Game Studios',
-            icon: 'orion.png'
-        },
-        {
-            title: 'Banished',
-            developer: 'Shining Rock Software',
-            icon: 'banished.png'
-        },
-        {
-            title: 'Hex GL',
-            developer: 'Thibaut Despoulain',
-            icon: 'hexgl.png'
-        },
-        {
-            title: 'Batman: Arkham Origins',
-            developer: 'Armature Studio',
-            icon: 'batman.png'
-        },
-        {
-            title: 'Bastion',
-            developer: 'Supergiant Games',
-            icon: 'bastion.png'
-        },
-        {
-            title: 'Windborne',
-            developer: 'Hidden Path Entertainment',
-            icon: 'windborne.png'
-        },
-        {
-            title: 'Orion',
-            developer: 'Spiral Game Studios',
-            icon: 'orion.png'
-        },
-        {
-            title: 'Banished',
-            developer: 'Shining Rock Software',
-            icon: 'banished.png'
-        }
-        ];
-    }
-
     return {
-        getFeaturedGames: getFeaturedGames,
         attachScrollEvents: attachScrollEvents
     };
 });

@@ -76,8 +76,7 @@ define('views/game',
 
         builder.start('game/main.html', {
             slug: slug, 
-            page_url: window.location.href,
-            featured_games: featured_games.getFeaturedGames()
+            page_url: window.location.href
         });
 
         builder.z('type', 'game');
