@@ -66,3 +66,67 @@
         }
     }
 }
+
+.feature-game {
+    left: auto;
+    min-height: 100px;
+    right: 8%;
+    top: 160px;
+    width: 500px;
+
+    &:before {
+        border: transparent solid 10px;
+        border-bottom-color: $modalBackgroundColor;
+        content: '';
+        display: block;
+        height: 0;
+        position: absolute;
+        right: 20%;
+        top: -20px;
+        width: 0;
+        z-index: 60;
+    }
+
+    h3 {
+        margin-bottom: 10px;
+    }
+}
+
+.game-results {
+    background: #888;
+    list-style: none;
+
+    li {
+        color: #bbb;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+        position: relative;
+
+        &:hover {
+            background: #aaa;
+            color: #ddd;
+        }
+        
+        .feature-btn {
+            display: inline-block;
+            vertical-align: middle;
+            visibility: hidden;
+
+            &.show {
+                visibility: visible;
+            }
+        }
+
+        .game-result-name {
+            display: inline-block;
+            vertical-align: middle;
+            width: 370px;
+        }
+
+        .highlight {
+            color: #eee;
+            font-weight: bold;
+        }
+    }
+}
