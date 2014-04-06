@@ -47,21 +47,15 @@ define('media-input',
     }
 
     function preview(type, src, launch) {
-        if (type === "icons") {
-            var $filePreview = $('.media-preview[data-type="' + type + '"]');
-            $filePreview.show();
+        var $filePreview = $('.media-preview[data-type="' + type + '"]');
+        $filePreview.show();
 
-            var img = $filePreview[0];
-            img.src = src;
-            img.onload = function() {
-                $filePreview.siblings('.media-size').html(
-                    this.width + 'px &times; ' + this.height + 'px').show();
-            };
-        } else {
-            var span = document.createElement('span');
-            span.innerHTML = ['<img src="', src, '"/>'].join('');
-            document.getElementById('sc-list').insertBefore(span, null);
-        }
+        var img = $filePreview[0];
+        img.src = src;
+        img.onload = function() {
+            $filePreview.siblings('.media-size').html(
+                this.width + 'px &times; ' + this.height + 'px').show();
+        };
 
         if (launch) {
             // If we've exited the editor, for example,
@@ -80,54 +74,23 @@ define('media-input',
         }));
     }
 
-    // function getFileDataURI(input, callback) {
-    //     return new Promise(function(resolve, reject) {
-    //         if (input.files && input.files[0]) {
-    //             // This is so we can get the data URI of the image uploaded.
-    //             var reader = new FileReader();
-    //             reader.onload = function (e) {
-    //                 resolve(e.target.result);
-    //             };
-    //             reader.onerror = function (err) {
-    //                 reject(err.getMessage());
-    //             };
-    //             reader.readAsDataURL(input.files[0]);
-    //         }
-    //     });
-    // }
-
     function getFileDataURI(input, callback) {
         return new Promise(function(resolve, reject) {
-            var files = input.files;
-            if (files && files[0]) {
-                // Loop through the files and render image files.
-                for (var i = 0, f; f = files[i]; i++) {
-                    // This is so we can get the data URI of the image uploaded.
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        resolve(e.target.result);
-                        preview(input.dataset.type, e.target.result, false);
-                    };
-                    reader.onerror = function (err) {
-                        reject(err.getMessage());
-                    };
-                    reader.readAsDataURL(input.files[i]);
-                }
+            if (input.files && input.files[0]) {
+                // This is so we can get the data URI of the image uploaded.
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    resolve(e.target.result);
+                };
+                reader.onerror = function (err) {
+                    reject(err.getMessage());
+                };
+                reader.readAsDataURL(input.files[0]);
             }
         });
     }
 
     z.page.on('loaded', function() {
-        // Dropzone.options.myAwesomeDropzone = {
-        //     url: "#",
-        //     clickable: true,
-        //     maxFilesize: 10,
-        //     uploadMultiple: true,
-        //     addRemoveLinks: true,
-        //     accept: function(file, done) {
-        //         console.log(file);
-        //     }
-        // };
         $('.fallback').each(function() {
             var $this = $(this);
             createInput($this);
@@ -167,11 +130,11 @@ define('media-input',
         // TODO: Allow images to be dragged and dropped to the file input.
         var input = this;
         input.blur();
-        getFileDataURI(input);
-        // getFileDataURI(input).then(function (data) {
-        //     preview(input.dataset.type, data, true);
-        // }).catch(function (err) {
-        //     return console.error(err);
-        // });
+
+        getFileDataURI(input).then(function (data) {
+            preview(input.dataset.type, data, true);
+        }).catch(function (err) {
+            return console.error(err);
+        });
     });
 });
