@@ -1,13 +1,14 @@
-{% macro featuredGames() %}
-  <div class="grid-cell featured-games-section">
+{% macro featuredGames(featured_games) %}
+  <div class="featured-games-section">
+    {% defer (url=api('game.featured')) %}
     <ul>
-      {% for game in featured_games %}
+      {% for game in this %}
         <li>
           <a href="#">
             <div class="media">
-              <img class="media-figure game-icon" src="{{ media('img/new-game-details/' + game.icon) }}">
+              <img class="media-figure game-icon" src="{{ game.icons[0].src }}">
               <div class="media-body">
-                <h3 class="game-title">{{ game.title }}</h3>
+                <h3 class="game-title">{{ game.name }}</h3>
                 <p class="game-developer">{{ _('by {author}', author=game.developer) }}</p>
               </div>
             </div>
@@ -17,5 +18,6 @@
       {% endfor %}
     </ul>
     <div class="arrow"></div>
+    {% end %}
   </div>
 {% endmacro %}

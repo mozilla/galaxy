@@ -5,8 +5,10 @@
   {% set game = this %}
   
   <div class="grid game-details-page">
-    {% include '_macros/featured-games.html' %}
-    {{ featuredGames() }}
+    <div class="grid-cell">
+      {% include '_macros/featured-games.html' %}
+      {{ featuredGames() }} 
+    </div>
     <div class="grid-cell grid-flex-grow-two game-details-container right-container">
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two game-details-container-left">
