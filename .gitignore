@@ -3,6 +3,7 @@
 *.elc
 *.gz
 *.less.css
+*.png
 *.po.js
 *.pyc
 *.styl.css
