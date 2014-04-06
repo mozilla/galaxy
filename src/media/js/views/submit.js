@@ -54,6 +54,7 @@ define('views/submit',
             slug: $this.find('[name=slug]').val(),
             app_url: $this.find('[name=app_url]').val(),
             description: $this.find('[name=description]').val(),
+            number_of_players: $this.find('[name=number_of_players]:checked').val(),
             privacy_policy_url: $this.find('[name=privacy_policy_url]').val(),
             genre: $this.find('[name=genre]:checked').val(),
             icons: [],
@@ -86,19 +87,7 @@ define('views/submit',
     });
 
     return function(builder) {
-        builder.start('submit.html').done(function() {
-            // new dropzone('#test-zone', {
-            //     url: "#",
-            //     clickable: true,
-            //     maxFilesize: 10,
-            //     uploadMultiple: true,
-            //     addRemoveLinks: true,
-            //     accept: function(file, done) {
-            //         console.log(file);
-            //     }
-            // });
-        });
-
+        builder.start('submit.html');
         builder.z('type', 'leaf submit');
         builder.z('title', gettext('Submit a Game'));
     };
