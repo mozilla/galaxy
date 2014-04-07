@@ -8,7 +8,7 @@ define('views/game',
         requests.post(urls.api.url('user.purchase'), {game: gameSlug});
     };
 
-    function loadSelectedGame(media) {
+    function showSelectedMedia(media) {
         var $media = $(media);
         $('.game-media').removeClass('selected');
         if ($media.data('video-type')) {
@@ -58,17 +58,17 @@ define('views/game',
         var slug = $(this).data('game-slug');
         requests.get(urls.api.url('game', [slug])).done(function(gameData) {
             $('.game-details-container').html(nunjucks.env.render('game/detail.html', {game: gameData}));
-            loadSelectedGame($('.game-media')[0]);
-            // z.page.trigger('divert', urls.reverse('game', [slug]));
+            showSelectedMedia($('.game-media')[0]);
             history.pushState({}, '', urls.reverse('game', [slug]));
-            document.title = gameData.name + ' | Mozilla Galaxy';
+            z('title', utils.translate(game.name));
+            // TODO: Navigate to pages in history when user clicks back button.
         });
 
     }).on('click', '.game-media', function() {
-        loadSelectedGame($(this));
+        showSelectedMedia($(this));
 
     }).on('click', '.game-details-media .arrow', function() {
-        // TODO: Scroll media gallery section downwards
+        // TODO: Scroll media gallery section downwards.
     });
 
     return function(builder, args) {
@@ -84,7 +84,10 @@ define('views/game',
         builder.z('pagetitle', gettext('App Details'));
         builder.onload('game-data', function(game) {
             builder.z('title', utils.translate(game.name));
-            loadSelectedGame($('.game-media')[0]);
+            showSelectedMedia($('.game-media')[0]);
+            $('.featured-games-section li[data-game-slug="' + game.slug + '"]').addClass('selected');
+            // TODO: Scroll to that particular game in the featured games listings.
+            
             twttr.widgets.load(); // Needed for loaded twitter widget scripts
             featured_games.attachScrollEvents();
         });
