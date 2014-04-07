@@ -3,8 +3,8 @@
     {% defer (url=api('game.featured')) %}
     <ul>
       {% for game in this %}
-        <li>
-          <a href="{{ url('game', [game.slug]) }}">
+        <li data-game-slug="{{ game.slug }}">
+          <!-- <a href="{{ url('game', [game.slug]) }}"> -->
             <div class="media">
               <img class="media-figure game-icon" src="{{ game.icons[0].src }}">
               <div class="media-body">
@@ -12,7 +12,7 @@
                 <p class="game-developer">{{ _('by {author}', author=game.developer.name) }}</p>
               </div>
             </div>
-          </a>
+          <!-- </a> -->
           <div class="select-bar"></div>
         </li>
       {% endfor %}

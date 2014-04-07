@@ -1,11 +1,34 @@
+{% include '_macros/featured-games.html' %}
 {% set leaderboard = api('leaderboard', [slug]) %}
 <div class="grid game-details-page">
   <div class="grid-cell">
-    {% include '_macros/featured-games.html' %}
     {{ featuredGames() }} 
   </div>
   <div class="grid-cell grid-flex-grow-two game-details-container right-container">
-    {% include 'game/detail.html' %}
-    {{ gameDetail(slug) }} 
+    {% set endpoint = api('game', [slug]) %}
+    {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
+      {% set game = this %}
+      {% include 'game/detail.html' %}
+    {% placeholder %}
+      <masthead class="game-masthead">
+        <div>
+          <h1>{{ _('Loading&hellip;') }}</h1>
+        </div>
+      </div>
+    {% except %}
+      <div class="game-detail-error">
+        <h2>{{ _('Oh no!') }}</h2>
+        {% if error == 403 %}
+          <p>{{ _('The game requested is not public.') }}</p>
+        {% elif error == 404 %}
+          <p>{{ _('The game requested was not found.') }}</p>
+        {% elif error == 451 %}
+          <p>{{ _('The game requested is not available for your region.') }}</p>
+          <p>{{ _('You may wish to contact the developer if you would like to see a version of this game for your region.') }}</p>
+        {% else %}
+          <p>{{ _('A server error occurred. Please try again later.') }}</p>
+        {% endif %}
+      </div>
+    {% end %} 
   </div>
 </div>

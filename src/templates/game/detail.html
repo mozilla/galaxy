@@ -1,90 +1,67 @@
-{% macro gameDetail(slug) %}
-  {% set endpoint = api('game', [slug]) %}
-  {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
-    {% set game = this %}
-    <div class="grid">
-      <div class="grid-cell grid-flex-grow-two game-details-container-left">
-        <div class="game-current-media"></div>
-        <div class="game-details-section">
-          <div class="game-buttons-section">
-            {% if game.purchased %}
-              {% set buttonClass = 'btn-play' %}
-            {% else %}
-              {% set buttonClass = 'btn-play btn-install' %}
-            {% endif %}
-            <button data-app-url="{{ game.app_url }}" data-game-slug="{{ game.slug }}" class="btn btn-big {{ buttonClass }}">{{ _('Play') }}</button>
-            <div>
-              <a href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}" target="_blank">
-                <i class="icon-facebook icon-medium"></i> 
-              </a>
-              <a href="https://twitter.com/intent/tweet?source=webclient&text=Check+this+game+out:+{{ game.name }}+{{ page_url }}" target="_blank">
-                <i class="icon-twitter icon-medium"></i> 
-              </a>
-            </div>
-          </div>
-          <h2 class="game-name">{{ game.name|translate(game) }}</h2>
-          <p class="game-developer">{{ game.developer.name }}</p>
-        </div>
-        <div class="game-details-section">
-          <div class="game-description">{{ game.description }}</div>
-        </div>
-        <div class="game-details-section">
-          <div class="grid">
-            <div class="grid-cell game-detail-attribute">
-              <h2>{{ _('Genre:') }}</h2>
-              <div class="capitalize">{{ game.genre }}</div>
-            </div>
-            <div class="grid-cell game-detail-attribute">
-              <h2>{{ _('Release date:') }}</h2>
-              <div>Jan 15, 2014</div>
-            </div>
-            <!-- <div class="grid-cell game-detail-attribute">
-              <h2>{{ _('Browser support:') }}</h2>
-              <ul class="game-browser-support">
-                <li><i class="icon-firefox"></i> Firefox 6+</li>
-                <li><i class="icon-chrome"></i> Chrome 6+</li>
-              </ul>
-            </div> -->
-            <div class="grid-cell game-detail-attribute">
-              <h2>{{ _('Players:') }}</h2>
-              <div class="capitalize">{{ game.number_of_players }} &nbsp; <i class="icon-controller"></i></div>
-            </div>
-          </div>
+<div class="grid">
+  <div class="grid-cell grid-flex-grow-two game-details-container-left">
+    <div class="game-current-media"></div>
+    <div class="game-details-section">
+      <div class="game-buttons-section">
+        {% if game.purchased %}
+          {% set buttonClass = 'btn-play' %}
+        {% else %}
+          {% set buttonClass = 'btn-play btn-install' %}
+        {% endif %}
+        <button data-app-url="{{ game.app_url }}" data-game-slug="{{ game.slug }}" class="btn btn-big {{ buttonClass }}">{{ _('Play') }}</button>
+        <div>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}" target="_blank">
+            <i class="icon-facebook icon-medium"></i> 
+          </a>
+          <a href="https://twitter.com/intent/tweet?source=webclient&text=Check+this+game+out:+{{ game.name }}+{{ page_url }}" target="_blank">
+            <i class="icon-twitter icon-medium"></i> 
+          </a>
         </div>
       </div>
-      <div class="grid-cell game-details-container-right">
-        <div class="game-details-media">
-          <div class="game-media-list">
-            {% for video in game.videos %}
-              <img class="game-media" alt="" title="" src="{{ video.thumbnail }}" data-video-id="{{ video.id }}" data-video-type="{{ video.type }}">
-            {% endfor %}
-            {% for screenshot in game.screenshots %}
-              <img class="game-media" alt="" title="" src="{{ screenshot.src }}">
-            {% endfor %}
-          </div>
-          <div class="arrow"></div>            
+      <h2 class="game-name">{{ game.name|translate(game) }}</h2>
+      <p class="game-developer">{{ game.developer.name }}</p>
+    </div>
+    <div class="game-details-section">
+      <div class="game-description">
+        <p>{{ game.description|escape|replace('\n\n', '</p><p>')|replace('\n', '<br/>')|safe }}</p>
+      </div>
+    </div>
+    <div class="game-details-section">
+      <div class="grid">
+        <div class="grid-cell game-detail-attribute">
+          <h2>{{ _('Genre:') }}</h2>
+          <div class="capitalize">{{ game.genre }}</div>
+        </div>
+        <div class="grid-cell game-detail-attribute">
+          <h2>{{ _('Release date:') }}</h2>
+          <div>Jan 15, 2014</div>
+        </div>
+        <!-- <div class="grid-cell game-detail-attribute">
+          <h2>{{ _('Browser support:') }}</h2>
+          <ul class="game-browser-support">
+            <li><i class="icon-firefox"></i> Firefox 6+</li>
+            <li><i class="icon-chrome"></i> Chrome 6+</li>
+          </ul>
+        </div> -->
+        <div class="grid-cell game-detail-attribute">
+          <h2>{{ _('Players:') }}</h2>
+          <div class="capitalize">{{ game.number_of_players }} &nbsp; <i class="icon-controller"></i></div>
         </div>
       </div>
     </div>
-  {% placeholder %}
-    <masthead class="game-masthead">
-      <div>
-        <h1>{{ _('Loading&hellip;') }}</h1>
+  </div>
+  <div class="grid-cell game-details-container-right">
+    <div class="game-details-media">
+      <div class="game-media-list">
+        {% for video in game.videos %}
+          <img class="game-media" alt="" title="" src="{{ video.thumbnail }}" data-video-id="{{ video.id }}" data-video-type="{{ video.type }}">
+        {% endfor %}
+        {% for screenshot in game.screenshots %}
+          <img class="game-media" alt="" title="" src="{{ screenshot.src }}">
+        {% endfor %}
       </div>
+      <div class="arrow"></div>            
     </div>
-  {% except %}
-    <div class="game-detail-error">
-      <h2>{{ _('Oh no!') }}</h2>
-      {% if error == 403 %}
-        <p>{{ _('The game requested is not public.') }}</p>
-      {% elif error == 404 %}
-        <p>{{ _('The game requested was not found.') }}</p>
-      {% elif error == 451 %}
-        <p>{{ _('The game requested is not available for your region.') }}</p>
-        <p>{{ _('You may wish to contact the developer if you would like to see a version of this game for your region.') }}</p>
-      {% else %}
-        <p>{{ _('A server error occurred. Please try again later.') }}</p>
-      {% endif %}
-    </div>
-  {% end %}
-{% endmacro %}
+  </div>
+</div>
+

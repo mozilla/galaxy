@@ -1,6 +1,6 @@
 define('views/game',
-       ['jquery', 'l10n', 'featured-games', 'requests', 'user', 'utils', 'urls', 'video-utils', 'z'],
-       function($, l10n, featured_games, requests, user, utils, urls, video_utils, z) {
+       ['jquery', 'l10n', 'featured-games', 'requests', 'templates', 'user', 'utils', 'urls', 'video-utils', 'z'],
+       function($, l10n, featured_games, requests, nunjucks, user, utils, urls, video_utils, z) {
 
     var gettext = l10n.gettext;
 
@@ -55,6 +55,14 @@ define('views/game',
     }).on('click', '.featured-games-section li', function(e) {
         $('.featured-games-section li').removeClass('selected');
         $(this).addClass('selected');
+        var slug = $(this).data('game-slug');
+        requests.get(urls.api.url('game', [slug])).done(function(gameData) {
+            $('.game-details-container').html(nunjucks.env.render('game/detail.html', {game: gameData}));
+            loadSelectedGame($('.game-media')[0]);
+            // z.page.trigger('divert', urls.reverse('game', [slug]));
+            history.pushState({}, '', urls.reverse('game', [slug]));
+            document.title = gameData.name + ' | Mozilla Galaxy';
+        });
 
     }).on('click', '.game-media', function() {
         loadSelectedGame($(this));
