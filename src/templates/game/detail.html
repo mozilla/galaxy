@@ -20,34 +20,33 @@
               <a href="https://twitter.com/intent/tweet?source=webclient&text=Check+this+game+out:+{{ game.name }}+{{ page_url }}" target="_blank">
                 <i class="icon-twitter icon-medium"></i> 
               </a>
-              <!-- <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-size="large" data-text="Check this game out: {{ game.name }}!">Tweet</a> -->
             </div>
           </div>
-          <h1 class="game-name">{{ game.name }}</h1>
+          <h2 class="game-name">{{ game.name|translate(game) }}</h2>
           <p class="game-developer">{{ game.developer.name }}</p>
         </div>
         <div class="game-details-section">
-          <p class="game-description">{{ game.description }}</p>
+          <div class="game-description">{{ game.description }}</div>
         </div>
         <div class="game-details-section">
           <div class="grid">
             <div class="grid-cell game-detail-attribute">
-              <h2>Genre:</h2>
+              <h2>{{ _('Genre:') }}</h2>
               <div class="capitalize">{{ game.genre }}</div>
             </div>
             <div class="grid-cell game-detail-attribute">
-              <h2>Release date:</h2>
+              <h2>{{ _('Release date:') }}</h2>
               <div>Jan 15, 2014</div>
             </div>
-            <div class="grid-cell game-detail-attribute">
-              <h2>Browser support:</h2>
+            <!-- <div class="grid-cell game-detail-attribute">
+              <h2>{{ _('Browser support:') }}</h2>
               <ul class="game-browser-support">
                 <li><i class="icon-firefox"></i> Firefox 6+</li>
                 <li><i class="icon-chrome"></i> Chrome 6+</li>
               </ul>
-            </div>
+            </div> -->
             <div class="grid-cell game-detail-attribute">
-              <h2>Players:</h2>
+              <h2>{{ _('Players:') }}</h2>
               <div class="capitalize">{{ game.number_of_players }} &nbsp; <i class="icon-controller"></i></div>
             </div>
           </div>
@@ -57,7 +56,7 @@
         <div class="game-details-media">
           <div class="game-media-list">
             {% for video in game.videos %}
-              <img class="game-media" alt="" title="" src="{{ video.screenshot }}" data-video-id="{{ video.id }}" data-video-type="{{ video.type }}">
+              <img class="game-media" alt="" title="" src="{{ video.thumbnail }}" data-video-id="{{ video.id }}" data-video-type="{{ video.type }}">
             {% endfor %}
             {% for screenshot in game.screenshots %}
               <img class="game-media" alt="" title="" src="{{ screenshot.src }}">
