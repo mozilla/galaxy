@@ -2,7 +2,7 @@
 {% set leaderboard = api('leaderboard', [slug]) %}
 <div class="grid game-details-page">
   <div class="grid-cell">
-    {{ featuredGames() }} 
+    {{ featuredGames(false) }} 
   </div>
   <div class="grid-cell grid-flex-grow-two game-details-container right-container">
     {% set endpoint = api('game', [slug]) %}

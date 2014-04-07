@@ -53,6 +53,7 @@ define('views/game',
         }
 
     }).on('click', '.featured-games-section li', function(e) {
+        e.preventDefault();
         $('.featured-games-section li').removeClass('selected');
         $(this).addClass('selected');
         var slug = $(this).data('game-slug');
