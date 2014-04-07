@@ -1,12 +1,29 @@
 define('views/game',
-       ['jquery', 'l10n', 'featured-games', 'requests', 'user', 'utils', 'urls', 'z'],
-       function($, l10n, featured_games, requests, user, utils, urls, z) {
+       ['jquery', 'l10n', 'featured-games', 'requests', 'user', 'utils', 'urls', 'video-utils', 'z'],
+       function($, l10n, featured_games, requests, user, utils, urls, video_utils, z) {
 
     var gettext = l10n.gettext;
 
     function updatePlay(gameSlug) {
         requests.post(urls.api.url('user.purchase'), {game: gameSlug});
     };
+
+    function loadSelectedGame(media) {
+        var $media = $(media);
+        $('.game-media').removeClass('selected');
+        if ($media.data('video-type')) {
+            // Video type
+            var $mediaObject = video_utils.createVideoFromId($media.data('video-id'), $media.data('video-type'), 480, 300);
+        } else {
+            // Screenshot type
+            var $mediaObject = $('<img>', {src: $media[0].src});
+            $mediaObject.attr('height', 300);
+            $mediaObject.attr('width', 480);
+        }
+        
+        $media.addClass('selected');
+        $('.game-current-media').html($mediaObject);
+    }
 
     z.win.on('hashchange', function() {
         // TODO: allow builder to accept hash.
@@ -41,27 +58,7 @@ define('views/game',
         $(this).addClass('selected');
 
     }).on('click', '.game-media', function() {
-        $('.game-media').removeClass('selected');
-        var $this = $(this);
-        $this.addClass('selected');
-        var mediaSrc = $this.attr('src');
-        if (mediaSrc.search(/youtube|vimeo/) > -1) {
-            if (mediaSrc.indexOf('youtube') > -1) {
-                var youtubeId = mediaSrc.split('/')[4];
-                var $mediaObject = $('<iframe>', {
-                    autoplay: 1,
-                    frameborder: 0,
-                    src: '//www.youtube.com/embed/' + youtubeId
-                });
-            } else {
-                // TODO: Vimeo
-            }
-        } else {
-            var $mediaObject = $('<img>', { src: mediaSrc });
-        }
-        $mediaObject.attr('height', 300);
-        $mediaObject.attr('width', 480);
-        $('.game-current-media').html($mediaObject);
+        loadSelectedGame($(this));
 
     }).on('click', '.game-details-media .arrow', function() {
         // TODO: Scroll media gallery section downwards
@@ -80,6 +77,7 @@ define('views/game',
         builder.z('pagetitle', gettext('App Details'));
         builder.onload('game-data', function(game) {
             builder.z('title', utils.translate(game.name));
+            loadSelectedGame($('.game-media')[0]);
             twttr.widgets.load(); // Needed for loaded twitter widget scripts
             featured_games.attachScrollEvents();
         });

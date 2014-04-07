@@ -4,9 +4,7 @@
     {% set game = this %}
     <div class="grid">
       <div class="grid-cell grid-flex-grow-two game-details-container-left">
-        <div class="game-current-media">
-          <iframe width="480" height="300" src="//www.youtube.com/embed/mX48y24t9iU" frameborder="0"></iframe>
-        </div>
+        <div class="game-current-media"></div>
         <div class="game-details-section">
           <div class="game-buttons-section">
             {% if game.purchased %}
@@ -58,7 +56,9 @@
       <div class="grid-cell game-details-container-right">
         <div class="game-details-media">
           <div class="game-media-list">
-            <img class="game-media selected" alt="" title="" src="//img.youtube.com/vi/mX48y24t9iU/maxresdefault.jpg">
+            {% for video in game.videos %}
+              <img class="game-media" alt="" title="" src="{{ video.screenshot }}" data-video-id="{{ video.id }}" data-video-type="{{ video.type }}">
+            {% endfor %}
             {% for screenshot in game.screenshots %}
               <img class="game-media" alt="" title="" src="{{ screenshot.src }}">
             {% endfor %}
@@ -67,7 +67,6 @@
         </div>
       </div>
     </div>
-
   {% placeholder %}
     <masthead class="game-masthead">
       <div>
