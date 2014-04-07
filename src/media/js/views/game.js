@@ -16,9 +16,8 @@ define('views/game',
             var $mediaObject = video_utils.createVideoFromId($media.data('video-id'), $media.data('video-type'), 480, 300);
         } else {
             // Screenshot type
-            var $mediaObject = $('<img>', {src: $media[0].src});
-            $mediaObject.attr('height', 300);
-            $mediaObject.attr('width', 480);
+            var $mediaObject = $('<div>', {height: 304, width: 480});
+            $mediaObject.css('background-image', 'url(\'' + $media[0].src + '\')');
         }
         
         $media.addClass('selected');
