@@ -30,7 +30,7 @@
       <div class="grid">
         <div class="grid-cell game-detail-attribute">
           <h2>{{ _('Genre:') }}</h2>
-          <div class="capitalize">{{ game.genre }}</div>
+          <div>{{ settings.genres[game.genre] }}</div>
         </div>
         <div class="grid-cell game-detail-attribute">
           <h2>{{ _('Release date:') }}</h2>
@@ -45,7 +45,7 @@
         </div> -->
         <div class="grid-cell game-detail-attribute">
           <h2>{{ _('Players:') }}</h2>
-          <div class="capitalize">{{ game.number_of_players }} &nbsp; <i class="icon-controller"></i></div>
+          <div>{{ settings.number_of_players[game.number_of_players] }} &nbsp; <i class="icon-controller"></i></div>
         </div>
       </div>
     </div>
@@ -64,4 +64,3 @@
     </div>
   </div>
 </div>
-
