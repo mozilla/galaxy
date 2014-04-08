@@ -30,6 +30,12 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'strategy': gettext('Strategy')
         },
 
+        number_of_players: {
+            '1': gettext('1 Player'),
+            '2': gettext('2 Players'),
+            'multiplayer': gettext('Multiplayer')
+        },
+
         // Error template paths. Used by builder.js.
         fragment_error_template: 'errors/fragment.html',
         pagination_error_template: 'errors/pagination.html',
