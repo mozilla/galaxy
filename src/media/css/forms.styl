@@ -305,19 +305,26 @@ input[type=email], input[type=search], input[type=text], input[type=url], textar
 input[type=email],
 input[type=search],
 input[type=text],
+input[type=number],
 input[type=url],
 textarea {
-    font-size: 18px;
-    line-height: 22px;
-    height: 30px;
-    padding: 2px 4px;
-    width: 100%;
-    z-index: 2;
+  font-size: 18px;
+  line-height: 22px;
+  height: 30px;
+  padding: 2px 4px;
+  width: 100%;
+  z-index: 2;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 textarea {
     height: auto;
     min-height: 50px;
 }
+
 form {
     .span-grid {
         margin-top: 15px;

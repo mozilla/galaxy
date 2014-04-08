@@ -18,8 +18,7 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         // The list of models and their primary key mapping. Used by caching.
         model_prototypes: {
             'game': 'slug',
-            'genre': 'slug',
-            'number_of_players': 'slug'
+            'genre': 'slug'
         },
 
         genres: {
@@ -29,12 +28,6 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'simulation': gettext('Simulation'),
             'sports': gettext('Sports'),
             'strategy': gettext('Strategy')
-        },
-
-        number_of_players: {
-            '1': gettext('1'),
-            '2': gettext('2'),
-            'multiplayer': gettext('Multiplayer')
         },
 
         // Error template paths. Used by builder.js.

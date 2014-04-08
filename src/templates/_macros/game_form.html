@@ -88,17 +88,17 @@
 
     <div class="grid content">
       <div class="grid-cell grid-flex-grow-two">
-        <div class="l">{{ _('Number of Players') }}</div>
         <div class="form-field">
-          {% for slug, name in settings.number_of_players.items() %}
-              <label class="choice"><input type="radio" name="number_of_players"{{ ' checked' if slug == game['number_of_players'] }} required value="{{ slug }}"> {{ name }}</label>
-          {% endfor %}
-          <span class="req" data-required="{{ _('Required') }}"></span>
+          <label>
+            <input type="number" name="number_of_players" placeholder="{{ _('Enter the number of players here') }}" value="{{ game.number_of_players }}" min=1 required>
+            <span class="l">{{ _('Number of Players') }}</span>
+            <span class="req" data-required="{{ _('Required') }}"></span>
+          </label>
         </div>
       </div>
       <div class="grid-cell">
         <div class="form-help">
-          {{ _('Provide the number of players that can play your game.') }}
+          {{ _('Provide the maximum number of players that can play your game.') }}
         </div>
       </div>
     </div>
