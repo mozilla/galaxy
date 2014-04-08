@@ -31,8 +31,8 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         },
 
         number_of_players: {
-            '1 player': gettext('1 Player'),
-            '2 players': gettext('2 Players'),
+            '1': gettext('1 Player'),
+            '2': gettext('2 Players'),
             'multiplayer': gettext('Multiplayer')
         },
 
