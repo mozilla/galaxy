@@ -2,6 +2,8 @@
 
 @import 'lib';
 
+$iconSize = 56px;
+
 .dashboard-table {
     width: 100%;
     
@@ -10,7 +12,7 @@
         padding-bottom: 10px;
     }
 
-    tbody td {
+    tbody td, & > td {
         padding: 5px 0;
 
         + td {
@@ -20,8 +22,56 @@
 
     .dashboard-buttons {
         text-align: right;
+
+        a {
+            margin: 0 8px;
+        }
         .btn {
             margin-left: 10px;
+        }
+
+        .secondary-buttons {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 1.25em;
+            vertical-align: middle;
+        }
+    }
+
+    .game-title-container {
+        padding: 12px 0;
+        .game-icon {
+            background: no-repeat;
+            background-size: contain;
+            background-position: center;
+            float: left;
+            height: $iconSize;
+            margin-right: 20px;
+            width: $iconSize;
+        }
+        .game-title {
+            color: $buttonColorTeal;
+            display: inline-block;
+            font-size: $bigFontSize;
+            height: $iconSize;
+            line-height: $iconSize;
+        }
+    }
+
+    .game-date-container {
+        .game-date-title {
+            color: $colorGrayUltraLight;
+            font-size: $smallFontSize;
+            font-weight: normal;
+        }
+        .game-date {
+            .date-abs {
+                font-weight: 600;
+            }
+            .date-rel {
+                color: $colorGrayUltraLight;
+                margin-left: 3px;
+            }
         }
     }
 }
@@ -128,5 +178,26 @@
             color: #eee;
             font-weight: bold;
         }
+    }
+}
+
+[data-page-type~="review"] .page {
+    .status-title {
+        margin-bottom: 25px;
+        position: relative;
+        h1 {
+            color: $colorGrayDark;
+            display: inline-block;
+            margin-bottom: 0;
+        }
+        #select-status {
+            margin-left: 25px;
+            position: absolute;
+            top: 30%;
+        }
+    }
+
+    .grid-cell {
+        margin: 0 5%;
     }
 }

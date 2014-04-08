@@ -90,6 +90,20 @@ define('helpers',
         gettext('November'),
         gettext('December')
     ];
+    var shortMonthNames = [
+        gettext('Jan'),
+        gettext('Feb'),
+        gettext('Mar'),
+        gettext('Apr'),
+        gettext('May'),
+        gettext('Jun'),
+        gettext('Jul'),
+        gettext('Aug'),
+        gettext('Sep'),
+        gettext('Oct'),
+        gettext('Nov'),
+        gettext('Dec')
+    ];
 
     function formatDateTime(date, format, time) {
         var day = date.getDate(),
@@ -101,6 +115,7 @@ define('helpers',
 
         var d = {
             'B': function() { return monthNames[date.getMonth()]; },
+            'b': function() { return shortMonthNames[date.getMonth()]; },
             'MM': function() { return month.toString(); },
             'yyyy': function() { return year.toString(); },
             'yy': function() { return year.toString().substr(2, 2); },
@@ -124,6 +139,8 @@ define('helpers',
                        d.HH() + ':' + d.mm() + ':' + d.ss();
             case 'date-short':
                 return d.MM() + '/' + d.dd() + '/' + d.yyyy();
+            case 'date-med':
+                return d.b() + ' ' + d.dd() + ', ' + d.yyyy();
             case 'date-long':
                 return d.B() + ' ' + d.dd() + ', ' + d.yyyy();
         }

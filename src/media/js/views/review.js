@@ -1,15 +1,46 @@
 define('views/review', 
-    ['format', 'log', 'notification', 'requests', 'urls', 'z'], 
-    function(format, log, notification, requests, urls, z) {
+    ['format', 'log', 'notification', 'requests', 'urls', 'utils', 'z'],
+    function(format, log, notification, requests, urls, utils, z) {
     
     var console = log('review');
 
-    function submitReview($game, $button, accepted) {
+    function successMessage(statusVerb, game) {
+        var params = {game: game};
+        switch (statusVerb) {
+            case 'approve': return gettext('Approved game: {game}', params);
+            case 'reject':  return gettext('Rejected game: {game}', params);
+            case 'disable': return gettext('Disabled game: {game}', params);
+            case 'delete':  return gettext('Deleted game: {game}', params);
+            default:        return '';
+        }
+    }
+    function failureMessage(statusVerb, game) {
+        var params = {game: game};
+        switch (statusVerb) {
+            case 'approve': return gettext('Failed to approve game: {game}', params);
+            case 'reject':  return gettext('Failed to reject game: {game}', params);
+            case 'disable': return gettext('Failed to disable game: {game}', params);
+            case 'delete':  return gettext('Failed to delete game: {game}', params);
+            default:        return '';
+        }
+    }
+
+    function submitStatusChange($game, $button, statusVerb) {
         function setSpinning(spinning) {
             var newVisibility = spinning ? 'hidden' : 'visible';
             $button.children('.btn-text').css('visibility', newVisibility);
+
+            var isBtn = $button.hasClass('btn');
+            if (!isBtn) {
+                // Need to use spinner-container class to get spinner to be
+                // positioned and sized correctly
+                $button.toggleClass('spinner-container', spinning);
+            }
+
             if (spinning) {
-                $button.append('<div class="spinner"></div>');
+                // Use alternate (dark) spinner for non-bordered buttons
+                var spinnerClasses = 'spinner' + (isBtn ? '' : ' alt');
+                $button.append('<div class="'+ spinnerClasses + '"></div>');
             } else {
                 $button.children('.spinner').remove();
             }
@@ -17,32 +48,17 @@ define('views/review',
         setSpinning(true);
 
         var gameSlug = $game.data('gameSlug');
-        var statusVerb = accepted ? 'approve' : 'reject';
         requests.post(urls.api.url('game.moderate', [gameSlug, statusVerb]))
                 .done(function(data) {
-                    reviewSubmitted(true);
-                }).fail(function(err) {
-                    console.error('Failed to submit review; error:', err);
-                    reviewSubmitted(false);
+                    statusSubmitted(true);
+                }).fail(function(xhr, err, statusCode, resp) {
+                    console.error('Failed to submit review; error:', resp.error);
+                    statusSubmitted(false);
                 });
 
-        function reviewSubmitted(success) {
+        function statusSubmitted(success) {
             var gameTitle = $game.data('gameTitle');
-            var message;
-            var params = {game: gameTitle};
-            if (success) {
-                if (accepted) {
-                    message = gettext('Approved game: {game}', params);
-                } else {
-                    message = gettext('Rejected game: {game}', params);
-                }
-            } else {
-                if (accepted) {
-                    message = gettext('Failed to accept game: {game}', params);
-                } else {
-                    message = gettext('Failed to reject game: {game}', params);
-                }
-            }
+            var message = (success ? successMessage : failureMessage)(statusVerb, gameTitle);
             notification.notification({message: message});
 
             setSpinning(false);
@@ -59,20 +75,36 @@ define('views/review',
         }
     }
 
-    z.body.on('click', '.review-accept', function() {
+    z.body.on('click', '.review-buttons [data-status-verb]', function() {
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
-        submitReview($game, $this, true);
-    }).on('click', '.review-reject', function() {
-        var $this = $(this);
-        var $game = $this.closest('[data-game-slug]');
-        submitReview($game, $this, false);
+        var statusVerb = $this.data('statusVerb');
+        submitStatusChange($game, $this, statusVerb);
+    }).on('change', '#select-status', function() {
+        var params = {status: this.value};
+        z.page.trigger('navigate', utils.urlparams(urls.reverse('review'), params));
+    });
+
+    z.page.on('fragment_load_failed fragment_loaded', function(e) {
+        var data = e.originalEvent.detail;
+        if (data.signature.id === 'gameList') {
+            var $select = $('#select-status');
+            var unauthorized = data.context.ctx.error === 403;
+            unauthorized ? $select.hide() : $select.show();
+        }
     });
 
     return function(builder, args) {
-        builder.start('admin/review.html');
+        var status = utils.getVars().status || 'pending';
+        builder.start('admin/review.html', {status: status})
+            .done(updateStatus)
+            .fail(updateStatus);
+
+        function updateStatus() {
+            $('#select-status').val(status);
+        }
 
         builder.z('type', 'leaf review');
-        builder.z('title', gettext('Review Queue'));
+        builder.z('title', gettext('Reviewer Dashboard'));
     };
 });
