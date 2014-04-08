@@ -88,12 +88,12 @@
 
     <div class="grid content">
       <div class="grid-cell grid-flex-grow-two">
+        <div class="l">{{ _('Number of Players') }}</div>
         <div class="form-field">
           <label>
-            <input type="number" name="number_of_players" placeholder="{{ _('Enter the number of players here') }}" value="{{ game.number_of_players }}" min=1 required>
-            <span class="l">{{ _('Number of Players') }}</span>
-            <span class="req" data-required="{{ _('Required') }}"></span>
+            <input type="number" name="number_of_players" placeholder="{{ _('Enter the number of players here') }}" value="{{ game.number_of_players }}" required>
           </label>
+          <span class="req" data-required="{{ _('Required') }}"></span>
         </div>
       </div>
       <div class="grid-cell">
