@@ -86,7 +86,19 @@ define('views/submit',
     });
 
     return function(builder) {
-        builder.start('submit.html');
+        builder.start('submit.html').done(function() {
+            // new dropzone('#test-zone', {
+            //     url: "#",
+            //     clickable: true,
+            //     maxFilesize: 10,
+            //     uploadMultiple: true,
+            //     addRemoveLinks: true,
+            //     accept: function(file, done) {
+            //         console.log(file);
+            //     }
+            // });
+        });
+
         builder.z('type', 'leaf submit');
         builder.z('title', gettext('Submit a Game'));
     };
