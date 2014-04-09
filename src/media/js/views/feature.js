@@ -1,5 +1,5 @@
-define('views/feature', 
-    ['l10n', 'log', 'notification', 'templates', 'requests', 'search_worker', 'urls', 'z'], 
+define('views/feature',
+    ['l10n', 'log', 'notification', 'templates', 'requests', 'search_worker', 'urls', 'z'],
     function(l10n, log, notification, nunjucks, requests, worker, urls, z) {
 
     var gettext = l10n.gettext;
@@ -83,7 +83,7 @@ define('views/feature',
 
         controlSpinner($this, true);
 
-        notification.confirmation({message: gettext('Are you sure you want to delete this game?')}).done(function() { 
+        notification.confirmation({message: gettext('Are you sure you want to delete this game?')}).done(function() {
             requests.post(urls.api.url('game.moderate', [gameSlug, 'delete'])).done(function(data) {
                 notification.notification({message: gettext('Game deleted')});
                 removeGameRow(gameSlug);
@@ -125,7 +125,7 @@ define('views/feature',
                 controlSpinner($this, false, gettext('Disable'));
             }
 
-            
+
         }).fail(function() {
             notification.notification({message: gettext('Error: A problem occured while changing the game status. Please try again.')});
             controlSpinner($this, false);
@@ -136,7 +136,7 @@ define('views/feature',
     function removeGameRow(slug) {
         var $row = $('tr[data-slug=' + slug + ']');
         $row.remove();
-        
+
         // If no more games, hide table and show message.
         if (!$('.curation-table tr').length) {
             $('#empty-message').show();
@@ -151,8 +151,8 @@ define('views/feature',
             var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: gameData});
             $('.curation-table tbody').append(rowToAdd);
             $('.curation-table').show();
-            $('#empty-message').hide(); 
-        });       
+            $('#empty-message').hide();
+        });
     }
 
     function showSearchResults(games, query) {
@@ -170,6 +170,17 @@ define('views/feature',
                 var afterMatch = $text.slice(matchEnd + 1);
                 $this.html(beforeMatch + '<span class="highlight">' + matchText + '</span>' + afterMatch);
             }
+        });
+    }
+
+    function reorderGame(slug, rank) {
+        requests.post(urls.api.url('game.featured'), {
+            game: slug,
+            rank: rank
+        }).then(function(data) {
+            notification.notification({message: gettext('Game order saved')});
+        }, function(data) {
+            notification.notification({message: gettext('Error: A problem occured while changing the order of this game. Please try again.')});
         });
     }
 
@@ -204,6 +215,10 @@ define('views/feature',
             z.body.trigger('cloak');
             addGameRow(gameSlug);
         }, function() {});
+    }).on('mouseover', '.curation-entry', function() {
+        $(this).find('.curation-draggable').css('visibility', 'visible');
+    }).on('mouseout', '.curation-entry', function() {
+        $(this).find('.curation-draggable').css('visibility', 'hidden');
     });
 
     return function(builder, args) {
@@ -219,6 +234,28 @@ define('views/feature',
             data.forEach(function(game) {
                 var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: game});
                 $('.curation-table tbody').append(rowToAdd);
+            });
+
+            //enable drag and drop
+            var sortable = new Sortable($(".curation-table tbody")[0], {
+                handle: ".curation-draggable",
+
+                onUpdate: function (evt){
+                    console.log(evt);
+                    var slug = $(evt.item).data('slug');
+                    var rank;
+                    //find rank
+
+                    var rows = $('.curation-table tbody').children('.curation-entry');
+
+                    for (var i = 0, len = rows.length; i< len; i++) {
+                        if ($(rows[i]).data('slug') == slug) {
+                            rank = i;
+                        }
+                    }
+
+                    reorderGame(slug, rank);
+                }
             });
         });
     };
