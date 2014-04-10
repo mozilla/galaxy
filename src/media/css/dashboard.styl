@@ -74,6 +74,26 @@ $iconSize = 56px;
             }
         }
     }
+
+    .cell-container {
+        .cell-title {
+            color: $colorGrayUltraLight;
+            font-size: $smallFontSize;
+            font-weight: normal;
+        }
+        .cell-content {
+            font-weight: 600;
+        }
+        .status-approved {
+            color: $colorLightGreen;
+        }
+        .status-pending, 
+        .status-rejected,
+        .status-disabled,
+        .status-deleted {
+            color: $colorGray;
+        }
+    }
 }
 
 .curation-page-title {
