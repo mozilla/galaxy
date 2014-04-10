@@ -31,10 +31,10 @@
             </td>
             <td class="developer-dashboard-buttons dashboard-buttons">
               <div class="secondary-buttons">
-                <a class="btn-secondary-view hint--right" data-hint="{{ _('View') }}">
+                <a class="btn-secondary-view hint--right" data-hint="{{ _('View') }}" href="{{ url('game', [game.slug]) }}" target="_blank">
                   <div class="btn-text fa fa-desktop"></div>
                 </a>
-                <a class="btn-secondary-edit hint--right" data-hint="{{ _('Edit') }}">
+                <a class="btn-secondary-edit hint--right" data-hint="{{ _('Edit') }}" href="{{ url('edit_game', [game.slug]) }}">
                   <div class="btn-text fa fa-edit"></div>
                 </a>
                 <a class="btn-secondary-delete hint--right" data-status-verb="delete" data-hint="{{ _('Delete') }}">
