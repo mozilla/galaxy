@@ -38,6 +38,22 @@ define('views/submit',
         // Upon presence/absence of name, toggle the `focused` class so
         // :valid/:invalid styles get set on slug.
         $slug.toggleClass('focused', !!$this.val());
+    }).on('keyup', 'textarea[name=description]', function(e) {
+        console.log("AM");
+        var $this = $(this);
+        $('.description-preview').html(markdown.toHTML($this.val()));
+        if ($this.val().length !== 0) {
+            $('.toggle-preview').show();
+        } else {
+            $('.toggle-preview').hide(); 
+        }
+    }).on('click', '.toggle-preview', function(e){
+        e.preventDefault();
+        var $this = $(this);
+        $this.toggleClass("fa-eye-slash");
+        var textarea = $('textarea[name=description]');
+        textarea.toggle();
+        $('.description-preview').toggle();
     }).on('submit', '.game-form', function(e) {
         e.preventDefault();
         var $this = $(this);
@@ -88,16 +104,10 @@ define('views/submit',
 
     return function(builder) {
         builder.start('submit.html').done(function() {
-            // new dropzone('#test-zone', {
-            //     url: "#",
-            //     clickable: true,
-            //     maxFilesize: 10,
-            //     uploadMultiple: true,
-            //     addRemoveLinks: true,
-            //     accept: function(file, done) {
-            //         console.log(file);
-            //     }
-            // });
+            // var $this = $(this);
+            // var input = $this.find('[name=description]');
+            // var preview = $(".description-preview");
+            // new MarkDownEditor($("text-input"), $("preview"));
         });
 
         builder.z('type', 'leaf submit');

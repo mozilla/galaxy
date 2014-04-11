@@ -56,8 +56,10 @@
       <div class="grid-cell grid-flex-grow-two">
         <div class="form-field">
           <label>
-            <textarea name="description" placeholder="{{ _('Enter game description here') }}" required>{{ game.description }}</textarea>
             <span class="l">{{ _('Description') }}</span>
+            <i class="fa fa-eye toggle-preview"></i>
+            <textarea name="description" placeholder="{{ _('Enter game description here') }}" required>{{ game.description }}</textarea>
+            <div class="description-preview" style="display:none;"></div>    
             <span class="req" data-required="{{ _('Required') }}"></span>
           </label>
         </div>

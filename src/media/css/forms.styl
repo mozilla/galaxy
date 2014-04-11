@@ -155,7 +155,7 @@ input[type="number"],
 input[type="date"],
 input[type="url"],
 input[type="search"],
-textarea {
+textarea, .description-preview {
     position: relative;
     z-index: 2;
     font-family: $inputFontFamily;
@@ -171,10 +171,12 @@ textarea {
     box-shadow: 0 0 1px rgba(0, 0, 0, .2) inset;
     transition(border .3s ease-in);
 }
+
 .potato-captcha {
     display: none;
 }
-textarea {
+
+textarea, .description-preview{
     line-height: 1.4em;
 }
 
@@ -241,7 +243,7 @@ input.input-search, input[type="search"] {
     z-index: 2;
 }
 
-button, input, select, textarea {
+button, input, select, textarea, .description-preview{
     font: 100% $sourceFontFamily;
     margin: 0;
     max-width: 100%;
@@ -289,7 +291,7 @@ label {
     }
 }
 
-input[type=email], input[type=search], input[type=text], input[type=url], textarea, .input-prepend {
+input[type=email], input[type=search], input[type=text], input[type=url], textarea, .input-prepend, .description-preview {
     border-radius: 2px;
     border: 1px solid $light-gray;
     padding: 5px;
@@ -310,7 +312,7 @@ input[type=email],
 input[type=search],
 input[type=text],
 input[type=url],
-textarea {
+textarea, .description-preview {
     font-size: 18px;
     line-height: 22px;
     height: 30px;
@@ -318,7 +320,7 @@ textarea {
     width: 100%;
     z-index: 2;
 }
-textarea {
+textarea, .description-preview {
     height: auto;
     min-height: 50px;
 }
@@ -326,6 +328,10 @@ textarea {
 form {
     .span-grid {
         margin-top: 15px;
+    }
+    .toggle-preview {
+        display: none;
+        cursor: pointer;
     }
     .req {
         position: absolute;
