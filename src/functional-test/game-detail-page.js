@@ -18,6 +18,7 @@ casper.test.begin('Game Detail Page Test', 5, function suite(test) {
             width: 1200,
             height: 700
         });
+        // to do: assertian social media buttons
     }, function timeout() {
         this.echo("Timeout: page did not load in time...").exit();
     }).then(function() {
@@ -37,6 +38,10 @@ casper.test.begin('Game Detail Page Test', 5, function suite(test) {
                 }));
             }
         });
+
+        // to do: 
+        //      - click on social media share button
+        //      - click on game play button
     }).run(function() {
         test.done();
     });
