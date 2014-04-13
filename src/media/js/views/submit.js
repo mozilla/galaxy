@@ -39,19 +39,18 @@ define('views/submit',
         // :valid/:invalid styles get set on slug.
         $slug.toggleClass('focused', !!$this.val());
     }).on('keyup', 'textarea[name=description]', function(e) {
-        console.log("AM");
-        var $this = $(this);
-        $('.description-preview').html(markdown.toHTML($this.val()));
-        if ($this.val().length !== 0) {
+        var $this = $(this).val();
+        // $('.description-preview').html(markdown.toHTML($this));
+        if ($this.length !== 0) {
             $('.toggle-preview').show();
         } else {
             $('.toggle-preview').hide(); 
         }
     }).on('click', '.toggle-preview', function(e){
         e.preventDefault();
-        var $this = $(this);
-        $this.toggleClass("fa-eye-slash");
         var textarea = $('textarea[name=description]');
+        $('.description-preview').html(markdown.toHTML(textarea.val()));
+        $(this).toggleClass('fa-eye-slash');
         textarea.toggle();
         $('.description-preview').toggle();
     }).on('submit', '.game-form', function(e) {
@@ -103,13 +102,7 @@ define('views/submit',
     });
 
     return function(builder) {
-        builder.start('submit.html').done(function() {
-            // var $this = $(this);
-            // var input = $this.find('[name=description]');
-            // var preview = $(".description-preview");
-            // new MarkDownEditor($("text-input"), $("preview"));
-        });
-
+        builder.start('submit.html');
         builder.z('type', 'leaf submit');
         builder.z('title', gettext('Submit a Game'));
     };
