@@ -9,9 +9,9 @@ define('views/feedback',
         e.preventDefault();
 
         var $this = $(this);
-        if ($.trim($this.val()) === '') {
+        if (!$.trim($this.val())) {
             notify({
-                message: gettext('Please enter a feedback.')
+                message: gettext('Please enter feedback.')
             });
             return;
         }

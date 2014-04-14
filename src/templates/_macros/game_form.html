@@ -4,7 +4,7 @@
       <div class="grid-cell grid-flex-grow-two">
         <div class="form-field">
           <label>
-            <input type="text" class="large" name="name" placeholder="{{ _('Enter game title here') }}" value="{{ game.name|translate(game) }}" pattern="[^\s].*|\s+\S.+" required>
+            <input type="text" class="large" name="name" placeholder="{{ _('Enter game title here') }}" value="{{ game.name|translate(game) }}" pattern="[^\s].+|\s+\S.*" required>
             <span class="l">{{ _('Name') }}</span>
             <span class="req" data-required="{{ _('Required') }}"></span>
           </label>
