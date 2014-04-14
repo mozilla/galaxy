@@ -39,9 +39,9 @@ define('views/submit',
         // :valid/:invalid styles get set on slug.
         $slug.toggleClass('focused', !!$this.val());
     }).on('keyup', 'textarea[name=description]', function(e) {
-        var $this = $(this).val();
+        var value = $(this).val();
         // $('.description-preview').html(markdown.toHTML($this));
-        if ($this.length !== 0) {
+        if (value.length !== 0) {
             $('.toggle-preview').show();
         } else {
             $('.toggle-preview').hide(); 
