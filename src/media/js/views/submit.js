@@ -24,6 +24,14 @@ define('views/submit',
         });
     }
 
+    var delay = (function(){
+        var timer = 0;
+        return function(callback, duration){
+            clearTimeout(timer);
+            timer = setTimeout(callback, duration);
+        };
+    })();
+
     z.body.on('blur input', 'input[name=name]', function(e) {
         // NOTE: We're using `keyup` instead of `keypress` to detect when
         // the user tabs within this field.
@@ -40,12 +48,13 @@ define('views/submit',
         $slug.toggleClass('focused', !!$this.val());
     }).on('keyup', 'textarea[name=description]', function(e) {
         var value = $(this).val();
-        // $('.description-preview').html(markdown.toHTML($this));
-        if (value.length !== 0) {
-            $('.toggle-preview').show();
-        } else {
-            $('.toggle-preview').hide(); 
-        }
+        $('.toggle-preview').hide();
+        delay(function() {
+            if (value.length) {
+                $('.toggle-preview').show(); 
+            }
+        }, 300);
+        
     }).on('click', '.toggle-preview', function(e){
         e.preventDefault();
         var textarea = $('textarea[name=description]');
