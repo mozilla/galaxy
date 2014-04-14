@@ -174,15 +174,17 @@ define('views/feature',
     }
 
     function reorderGame(slug, rank) {
-        requests.post(urls.api.url('game.featured'), {
+        return requests.post(urls.api.url('game.featured'), {
             game: slug,
             rank: rank
         }).then(function(data) {
             notification.notification({message: gettext('Game order saved')});
         }, function(data) {
             notification.notification({message: gettext('Error: A problem occured while changing the order of this game. Please try again.')});
-        });
+        }).promise();
     }
+
+    var prevRowIndex;
 
     z.body.on('click', '.curation-unfeature', unfeatureGame)
     .on('click', '.curation-delete', deleteGame)
@@ -215,10 +217,8 @@ define('views/feature',
             z.body.trigger('cloak');
             addGameRow(gameSlug);
         }, function() {});
-    }).on('mouseover', '.curation-entry', function() {
-        $(this).find('.curation-draggable').css('visibility', 'visible');
-    }).on('mouseout', '.curation-entry', function() {
-        $(this).find('.curation-draggable').css('visibility', 'hidden');
+    }).on('dragstart', '.curation-entry', function() {
+        prevRowIndex = $('.curation-entry').index(this);
     });
 
     return function(builder, args) {
@@ -237,24 +237,24 @@ define('views/feature',
             });
 
             //enable drag and drop
-            var sortable = new Sortable($(".curation-table tbody")[0], {
-                handle: ".curation-draggable",
+            var sortable = new Sortable(document.querySelector('.curation-table tbody'), {
+                handle: '.curation-draggable',
 
                 onUpdate: function (evt){
-                    console.log(evt);
-                    var slug = $(evt.item).data('slug');
-                    var rank;
-                    //find rank
+                    var $movedRow = $(evt.item);
+                    var slug = $movedRow.data('slug');
+                    var rank = $('.curation-entry[data-slug="' + slug + '"]').index();
 
-                    var rows = $('.curation-table tbody').children('.curation-entry');
-
-                    for (var i = 0, len = rows.length; i< len; i++) {
-                        if ($(rows[i]).data('slug') == slug) {
-                            rank = i;
+                    reorderGame(slug, rank).fail(function() {
+                        $movedRow.detach();
+                        //nth-child is not zero-based
+                        if (prevRowIndex === 0) {
+                            $('.curation-entry:nth-child(1)').before($movedRow);
+                        } else {
+                            var rowToInsertAfter = $('.curation-entry:nth-child(' + prevRowIndex + ')');
+                            rowToInsertAfter.after($movedRow);
                         }
-                    }
-
-                    reorderGame(slug, rank);
+                    });
                 }
             });
         });

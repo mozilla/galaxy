@@ -82,12 +82,19 @@ $iconSize = 56px;
 }
 
 .curation-table {
-    .curation-draggable {
-        vertical-align: middle;
-        color: $buttonColorGray;
-        cursor: move;
-        visibility: hidden;
+    .curation-entry {
+        .curation-draggable {
+            vertical-align: middle;
+            color: $buttonColorGray;
+            cursor: move;
+            visibility: hidden;
+        }
+
+        &:hover .curation-draggable {
+            visibility: visible;
+        }
     }
+
 
     .curation-status {
 
