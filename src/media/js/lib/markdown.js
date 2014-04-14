@@ -698,7 +698,7 @@
       },
 
       setextHeader: function setextHeader( block, next ) {
-        var m = block.match( /^(.*)\n([-=])\2\2+(?:\n|$)/ );
+        var m = block.match( /^(.*)\n([-=])\2*(?:\n|$)/ );
 
         if ( !m )
           return undefined;
