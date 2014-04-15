@@ -6,7 +6,7 @@ $iconSize = 56px;
 
 .dashboard-table {
     width: 100%;
-    
+
     thead tr th {
         text-align: left;
         padding-bottom: 10px;
@@ -82,6 +82,20 @@ $iconSize = 56px;
 }
 
 .curation-table {
+    .curation-entry {
+        .curation-draggable {
+            color: $buttonColorGray;
+            cursor: move;
+            vertical-align: middle;
+            visibility: hidden;
+        }
+
+        &:hover .curation-draggable {
+            visibility: visible;
+        }
+    }
+
+
     .curation-status {
 
         .status-span {
@@ -93,7 +107,7 @@ $iconSize = 56px;
             color: $colorLightGreen;
         }
 
-        .status-pending, 
+        .status-pending,
         .status-rejected,
         .status-disabled,
         .status-deleted {
@@ -157,7 +171,7 @@ $iconSize = 56px;
             background: #aaa;
             color: #ddd;
         }
-        
+
         .feature-btn {
             display: inline-block;
             vertical-align: middle;

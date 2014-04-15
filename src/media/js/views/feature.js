@@ -1,5 +1,5 @@
-define('views/feature', 
-    ['l10n', 'log', 'notification', 'templates', 'requests', 'search_worker', 'urls', 'z'], 
+define('views/feature',
+    ['l10n', 'log', 'notification', 'templates', 'requests', 'search_worker', 'urls', 'z'],
     function(l10n, log, notification, nunjucks, requests, worker, urls, z) {
 
     var gettext = l10n.gettext;
@@ -83,7 +83,7 @@ define('views/feature',
 
         controlSpinner($this, true);
 
-        notification.confirmation({message: gettext('Are you sure you want to delete this game?')}).done(function() { 
+        notification.confirmation({message: gettext('Are you sure you want to delete this game?')}).done(function() {
             requests.post(urls.api.url('game.moderate', [gameSlug, 'delete'])).done(function(data) {
                 notification.notification({message: gettext('Game deleted')});
                 removeGameRow(gameSlug);
@@ -125,7 +125,7 @@ define('views/feature',
                 controlSpinner($this, false, gettext('Disable'));
             }
 
-            
+
         }).fail(function() {
             notification.notification({message: gettext('Error: A problem occured while changing the game status. Please try again.')});
             controlSpinner($this, false);
@@ -136,7 +136,7 @@ define('views/feature',
     function removeGameRow(slug) {
         var $row = $('tr[data-slug=' + slug + ']');
         $row.remove();
-        
+
         // If no more games, hide table and show message.
         if (!$('.curation-table tr').length) {
             $('#empty-message').show();
@@ -151,8 +151,8 @@ define('views/feature',
             var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: gameData});
             $('.curation-table tbody').append(rowToAdd);
             $('.curation-table').show();
-            $('#empty-message').hide(); 
-        });       
+            $('#empty-message').hide();
+        });
     }
 
     function showSearchResults(games, query) {
@@ -172,6 +172,19 @@ define('views/feature',
             }
         });
     }
+
+    function reorderGame(slug, rank) {
+        return requests.post(urls.api.url('game.featured'), {
+            game: slug,
+            rank: rank
+        }).then(function(data) {
+            notification.notification({message: gettext('Game order saved')});
+        }, function(data) {
+            notification.notification({message: gettext('Error: A problem occured while changing the order of this game. Please try again.')});
+        }).promise();
+    }
+
+    var prevRowIndex;
 
     z.body.on('click', '.curation-unfeature', unfeatureGame)
     .on('click', '.curation-delete', deleteGame)
@@ -204,6 +217,8 @@ define('views/feature',
             z.body.trigger('cloak');
             addGameRow(gameSlug);
         }, function() {});
+    }).on('dragstart', '.curation-entry', function() {
+        prevRowIndex = $('.curation-entry').index(this);
     });
 
     return function(builder, args) {
@@ -219,6 +234,28 @@ define('views/feature',
             data.forEach(function(game) {
                 var rowToAdd = nunjucks.env.render('admin/_curation-row.html', {game: game});
                 $('.curation-table tbody').append(rowToAdd);
+            });
+
+            //enable drag and drop
+            var sortable = new Sortable(document.querySelector('.curation-table tbody'), {
+                handle: '.curation-draggable',
+
+                onUpdate: function (evt){
+                    var $movedRow = $(evt.item);
+                    var slug = $movedRow.data('slug');
+                    var rank = $('.curation-entry[data-slug="' + slug + '"]').index();
+
+                    reorderGame(slug, rank).fail(function() {
+                        $movedRow.detach();
+                        //nth-child is not zero-based
+                        if (prevRowIndex === 0) {
+                            $('.curation-entry:nth-child(1)').before($movedRow);
+                        } else {
+                            var rowToInsertAfter = $('.curation-entry:nth-child(' + prevRowIndex + ')');
+                            rowToInsertAfter.after($movedRow);
+                        }
+                    });
+                }
             });
         });
     };
