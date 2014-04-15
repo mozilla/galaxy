@@ -72,7 +72,7 @@ define('views/game',
             $('.game-details-container').html(nunjucks.env.render('game/detail.html', {game: gameData}));
             showSelectedMedia($('.game-media')[0]);
             history.pushState({}, '', urls.reverse('game', [slug]));
-            document.title = utils.translate(gameData.name);
+            document.title = utils.translate(gameData.name) + ' | Mozilla Galaxy';
             renderGalleryArrow();
             featured_games.attachScrollEvents($('.game-media-list'));
             // TODO: Navigate to pages in history when user clicks back button.
