@@ -4,17 +4,13 @@ define('featured-games',
 
     var gettext = l10n.gettext;
 
-    function attachScrollEvents() {
+    function attachScrollEvents(el) {
         //  Can only attach after DOM is loaded because
         //  event bubbling does not work on scroll events. 
-        $('.featured-games-section ul, .game-media-list').on('scroll', function() {
+        $(el).on('scroll', function() {
             var $this = $(this);
             var $arrow = $this.parent().find('.arrow');
-            if (this.scrollTop + $this.height() + 30 > this.scrollHeight) {
-                $arrow.hide();
-            } else {
-                $arrow.show();
-            }
+            $arrow.toggle(this.scrollTop + $this.height() + 30 < this.scrollHeight);
         });
     }
 

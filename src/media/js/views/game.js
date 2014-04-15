@@ -1,6 +1,6 @@
 define('views/game',
-       ['jquery', 'l10n', 'featured-games', 'requests', 'templates', 'user', 'utils', 'urls', 'video-utils', 'z'],
-       function($, l10n, featured_games, requests, nunjucks, user, utils, urls, video_utils, z) {
+       ['jquery', 'l10n', 'featured-games', 'requests', 'templates', 'underscore', 'user', 'utils', 'urls', 'video-utils', 'z'],
+       function($, l10n, featured_games, requests, nunjucks, _, user, utils, urls, video_utils, z) {
 
     var gettext = l10n.gettext;
 
@@ -22,6 +22,16 @@ define('views/game',
         
         $media.addClass('selected');
         $('.game-current-media').html($mediaObject);
+    }
+
+    function renderGalleryArrow() {
+        var $gameMediaList = $('.game-media-list');
+        if ($gameMediaList.children().length < 3) {
+            $gameMediaList.siblings('.arrow').hide();
+            console.log('hide')
+        } else {
+            console.log('show')
+        }
     }
 
     z.win.on('hashchange', function() {
@@ -62,7 +72,9 @@ define('views/game',
             $('.game-details-container').html(nunjucks.env.render('game/detail.html', {game: gameData}));
             showSelectedMedia($('.game-media')[0]);
             history.pushState({}, '', urls.reverse('game', [slug]));
-            z('title', utils.translate(game.name));
+            document.title = utils.translate(gameData.name);
+            renderGalleryArrow();
+            featured_games.attachScrollEvents($('.game-media-list'));
             // TODO: Navigate to pages in history when user clicks back button.
         });
 
@@ -89,9 +101,11 @@ define('views/game',
             showSelectedMedia($('.game-media')[0]);
             $('.featured-games-section li[data-game-slug="' + game.slug + '"]').addClass('selected');
             // TODO: Scroll to that particular game in the featured games listings.
-            
+            renderGalleryArrow();
+
             twttr.widgets.load(); // Needed for loaded twitter widget scripts
-            featured_games.attachScrollEvents();
+            featured_games.attachScrollEvents($('.featured-games-section ul'));
+            featured_games.attachScrollEvents($('.game-media-list'));
         });
     };
 });
