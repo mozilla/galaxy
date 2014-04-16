@@ -58,7 +58,7 @@ define('views/submit',
     }).on('click', '.toggle-preview', function(e){
         e.preventDefault();
         var textarea = $('textarea[name=description]');
-        $('.description-preview').html(markdown.toHTML(textarea.val()));
+        $('.description-preview').html(marked(textarea.val()));
         $(this).toggleClass('fa-eye-slash');
         textarea.toggle();
         $('.description-preview').toggle();
