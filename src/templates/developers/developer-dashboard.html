@@ -6,7 +6,7 @@
   <div class="grid-cell">
     <div class="title">
       <h1>{{ _('My Games') }}</h1>
-      <a class="btn">{{ _('Submit a New Game') }}</a>
+      <a class="btn" id="submit-new-game-btn">{{ _('Submit a New Game') }}</a>
     </div>
     {% defer (url=api('game.list')|urlparams(developer='1'), nocache=true, id='gameList') %}
       <table class="dashboard-table developer-dashboard-table">

@@ -69,6 +69,14 @@ define('views/developer_dashboard',
         moderateGame($game, $this, false);
     });
 
+    z.page.on('fragment_load_failed fragment_loaded', function(e) {
+        var data = e.originalEvent.detail;
+        if ((data.signature.id === 'gameList') &&
+            (data.context.ctx.error === 403)) {
+                $('#submit-new-game-btn').hide()
+        }
+    });
+
     return function(builder, args) {
         builder.start('developers/developer-dashboard.html');
 
