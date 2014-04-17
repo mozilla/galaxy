@@ -79,7 +79,7 @@ define('views/developer_dashboard',
         var data = e.originalEvent.detail;
         if ((data.signature.id === 'gameList') &&
             (data.context.ctx.error === 403)) {
-                $('#submit-new-game-btn').hide()
+                $('#submit-new-game-btn').hide();
         }
     });
 
