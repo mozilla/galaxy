@@ -18,18 +18,25 @@
                 <div class="game-title">{{ game.name }}</div>
               </a>
             </td>
-            <td class="cell-container" title="{{ game.status }}">
-              <h3 class="cell-title">{{ _('Status:') }}</h3>
-              <div class="cell-content status-{{ game.status }}">{{ game.status }}</div>
-            </td>
-            <td class="cell-container" title="{{ game.created }}">
-              <h3 class="cell-title">{{ _('Waiting time:') }}</h3>
-              <div class="cell-content">{{ game.created|relativeDate(useRelativeSuffix=false) }}</div>
-            </td>
-            <td class="cell-container" title="{{ game.queuePosition }}">
-              <h3 class="cell-title">{{ _('Queue position:') }}</h3>
-              <div class="cell-content">{{ game.queuePosition }}</div>
-            </td>
+            {% if (game.status=="pending") %}
+              <td class="cell-container" title="{{ game.status }}">
+                <h3 class="cell-title">{{ _('Status:') }}</h3>
+                <div class="cell-content status-{{ game.status }}">{{ game.status }}</div>
+              </td>
+              <td class="cell-container" title="{{ game.created }}">
+                <h3 class="cell-title">{{ _('Waiting time:') }}</h3>
+                <div class="cell-content">{{ game.created|relativeDate(useRelativeSuffix=false) }}</div>
+              </td>
+              <td class="cell-container" title="{{ game.queuePosition }}">
+                <h3 class="cell-title">{{ _('Queue position:') }}</h3>
+                <div class="cell-content">{{ game.queuePosition }}</div>
+              </td>
+            {% else %}
+              <td class="cell-container" colspan="3" title="{{ game.status }}">
+                <h3 class="cell-title">{{ _('Status:') }}</h3>
+                <div class="cell-content status-{{ game.status }}">{{ game.status }}</div>
+              </td>
+            {% endif %}
             <td class="developer-dashboard-buttons dashboard-buttons">
               <div class="secondary-buttons">
                 <a class="btn-secondary-view hint--right" data-hint="{{ _('View') }}" href="{{ url('game', [game.slug]) }}" target="_blank">
