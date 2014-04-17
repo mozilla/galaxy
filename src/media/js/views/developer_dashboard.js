@@ -4,12 +4,22 @@ define('views/developer_dashboard',
     
     var console = log('developer-dashboard');
 
-    function moderateGame($game, $button, deleted) {
+    function moderateGame($game, $button, statusVerb) {
         function setSpinning(spinning) {
             var newVisibility = spinning ? 'hidden' : 'visible';
             $button.children('.btn-text').css('visibility', newVisibility);
+
+            var isBtn = $button.hasClass('btn');
+            if (!isBtn) {
+                // Need to use spinner-container class to get spinner to be
+                // positioned and sized correctly
+                $button.toggleClass('spinner-container', spinning);
+            }
+
             if (spinning) {
-                $button.append('<div class="spinner"></div>');
+                // Use alternate (dark) spinner for non-bordered buttons
+                var spinnerClasses = 'spinner' + (isBtn ? '' : ' alt');
+                $button.append('<div class="'+ spinnerClasses + '"></div>');
             } else {
                 $button.children('.spinner').remove();
             }
@@ -17,7 +27,6 @@ define('views/developer_dashboard',
         setSpinning(true);
 
         var gameSlug = $game.data('gameSlug');
-        var statusVerb = deleted ? 'delete' : 'disable';
         requests.post(urls.api.url('game.moderate', [gameSlug, statusVerb]))
                 .done(function(data) {
                     gameModerated(true);
@@ -31,13 +40,13 @@ define('views/developer_dashboard',
             var message;
             var params = {game: gameTitle};
             if (success) {
-                if (deleted) {
+                if (statusVerb === "delete") {
                     message = gettext('Deleted game: {game}', params);
                 } else {
                     message = gettext('Disabled game: {game}', params);
                 }
             } else {
-                if (deleted) {
+                if (statusVerb === "delete") {
                     message = gettext('Failed to delete game: {game}', params);
                 } else {
                     message = gettext('Failed to disable game: {game}', params);
@@ -59,14 +68,12 @@ define('views/developer_dashboard',
         }
     }
 
-    z.body.on('click', '.developer-dashboard-delete', function() {
+    z.body.on('click', '.developer-dashboard-buttons [data-status-verb]', function() {
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
-        moderateGame($game, $this, true);
-    }).on('click', '.developer-dashboard-disable', function() {
-        var $this = $(this);
-        var $game = $this.closest('[data-game-slug]');
-        moderateGame($game, $this, false);
+        var statusVerb = $this.data('statusVerb');
+        alert(statusVerb);
+        moderateGame($game, $this, statusVerb);
     });
 
     z.page.on('fragment_load_failed fragment_loaded', function(e) {
