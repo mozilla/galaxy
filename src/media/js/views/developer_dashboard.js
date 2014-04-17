@@ -72,7 +72,6 @@ define('views/developer_dashboard',
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
         var statusVerb = $this.data('statusVerb');
-        alert(statusVerb);
         moderateGame($game, $this, statusVerb);
     });
 
