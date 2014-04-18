@@ -207,11 +207,7 @@ define('media-input',
     }).on('blur change', 'input[type=file].media-input', function(e) {
         var input = this;
         input.blur();
-<<<<<<< HEAD
-
-=======
         var $this = $(this);
->>>>>>> Fixed bug with modification of existing screenshots
         getFileDataURI(input).then(function (data) {
             preview($this.closest('.media-preview-container'), data, true);
         }).catch(function (err) {
