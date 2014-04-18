@@ -17,7 +17,7 @@ define('views/game',
         } else {
             // Screenshot type
             var $mediaObject = $('<div>', {height: 304, width: 480});
-            $mediaObject.css('background-image', 'url(\'' + $media.attr('src') + '\')');
+            $mediaObject.css('background-image', 'url(' + $media.attr('src') + ')');
         }
         
         $media.addClass('selected');
