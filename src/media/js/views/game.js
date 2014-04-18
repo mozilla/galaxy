@@ -17,7 +17,7 @@ define('views/game',
         } else {
             // Screenshot type
             var $mediaObject = $('<div>', {height: 304, width: 480});
-            $mediaObject.css('background-image', 'url(\'' + $media[0].src + '\')');
+            $mediaObject.css('background-image', 'url(\'' + $media.attr('src') + '\')');
         }
         
         $media.addClass('selected');
@@ -28,9 +28,6 @@ define('views/game',
         var $gameMediaList = $('.game-media-list');
         if ($gameMediaList.children().length < 3) {
             $gameMediaList.siblings('.arrow').hide();
-            console.log('hide')
-        } else {
-            console.log('show')
         }
     }
 
@@ -70,7 +67,7 @@ define('views/game',
         var slug = $this.data('game-slug');
         requests.get(urls.api.url('game', [slug])).done(function(gameData) {
             $('.game-details-container').html(nunjucks.env.render('game/detail.html', {game: gameData}));
-            showSelectedMedia($('.game-media')[0]);
+            showSelectedMedia(document.querySelector('.game-media'))
             history.pushState({}, '', urls.reverse('game', [slug]));
             document.title = utils.translate(gameData.name) + ' | Mozilla Galaxy';
             renderGalleryArrow();
@@ -98,7 +95,7 @@ define('views/game',
         builder.z('pagetitle', gettext('App Details'));
         builder.onload('game-data', function(game) {
             builder.z('title', utils.translate(game.name));
-            showSelectedMedia($('.game-media')[0]);
+            showSelectedMedia(document.querySelector('.game-media'));
             $('.featured-games-section li[data-game-slug="' + game.slug + '"]').addClass('selected');
             // TODO: Scroll to that particular game in the featured games listings.
             renderGalleryArrow();
