@@ -9,12 +9,6 @@
     {% defer (url=endpoint, as='game', key=slug, id='game-data') %}
       {% set game = this %}
       {% include 'game/detail.html' %}
-    {% placeholder %}
-      <masthead class="game-masthead">
-        <div>
-          <h1>{{ _('Loading&hellip;') }}</h1>
-        </div>
-      </div>
     {% except %}
       <div class="game-detail-error">
         <h2>{{ _('Oh no!') }}</h2>
