@@ -48,20 +48,22 @@ define('views/submit',
         $slug.toggleClass('focused', !!$this.val());
     }).on('keyup', 'textarea[name=description]', function(e) {
         var value = $(this).val();
-        $('.toggle-preview').hide();
+        var togglePreview = $('.toggle-preview');
+        togglePreview.hide();
         delay(function() {
             if (value.length) {
-                $('.toggle-preview').show(); 
+                togglePreview.show(); 
             }
         }, 300);
         
     }).on('click', '.toggle-preview', function(e){
         e.preventDefault();
         var textarea = $('textarea[name=description]');
-        $('.description-preview').html(marked(textarea.val()));
+        var descriptionPreview = $('.description-preview');
+        descriptionPreview.html(marked(textarea.val()));
         $(this).toggleClass('fa-eye-slash');
         textarea.toggle();
-        $('.description-preview').toggle();
+        descriptionPreview.toggle();
     }).on('submit', '.game-form', function(e) {
         e.preventDefault();
         var $this = $(this);
