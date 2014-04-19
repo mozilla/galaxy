@@ -9,7 +9,7 @@ casper.test.begin('Game Submission Page Test', 3, function suite(test) {
         });
     }, function then() {
         test.assertExists('.game-form', 'Game form is present');
-        this.capture('game-submission-page.png', {
+        this.capture('test-results/game-submission-page.png', {
             top: 0,
             left: 0,
             width: 1200,
