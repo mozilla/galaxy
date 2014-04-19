@@ -1,6 +1,6 @@
 define('views/game',
-       ['jquery', 'l10n', 'featured-games', 'requests', 'templates', 'underscore', 'user', 'utils', 'urls', 'video-utils', 'z'],
-       function($, l10n, featured_games, requests, nunjucks, _, user, utils, urls, video_utils, z) {
+       ['jquery', 'l10n', 'featured-games', 'requests', 'templates', 'user', 'utils', 'urls', 'video-utils', 'z'],
+       function($, l10n, featured_games, requests, nunjucks, user, utils, urls, video_utils, z) {
 
     var gettext = l10n.gettext;
 
