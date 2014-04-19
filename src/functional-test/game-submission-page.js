@@ -38,9 +38,9 @@ casper.test.begin('Game Submission Page Test', 3, function suite(test) {
             }), 'slug is correct');
         });
 
-        //      - enter url on media fields
-        //      - upload image on media fields
-        //      - enter valid game details and submit (will be later asserted on detail page)
+        // TODO: enter url on media fields
+        // TODO: upload image on media fields (need to figure out a way how to use aviary in testing)
+        // TODO: enter valid game details and submit (will be later asserted on detail page)
     }).run(function() {
         test.done();
     });
