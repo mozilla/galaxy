@@ -12,13 +12,14 @@ casper.test.begin('Game Detail Page Test', 8, function suite(test) {
         test.assertExists('.game-details-container-left', 'Game detail section is present');
         test.assertExists('.game-details-media', 'Game details media is present');
         test.assertExists('.btn-play', 'Play button is present');
-        this.capture('game-detail-page.png', {
+        test.assertExists('.icon-facebook', 'Facebook share button is present');
+        test.assertExists('.icon-twitter', 'Twitter share button is present');
+        this.capture('test-results/game-detail-page.png', {
             top: 0,
             left: 0,
             width: 1200,
             height: 700
         });
-        // to do: assertian social media buttons
     }, function timeout() {
         this.echo('Timeout: page did not load in time...').exit();
     }).then(function() {

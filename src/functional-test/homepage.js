@@ -10,7 +10,7 @@ casper.test.begin('Homepage Test', 5, function suite(test) {
     	test.assertExists('.homepage-content', 'Homepage content is present');
     	test.assertExists('header.site-header', 'Header is present');
     	test.assertExists('footer.site-footer', 'Footer is present');
-        this.capture('homepage.png', {
+        this.capture('test-results/homepage.png', {
 	        top: 0,
 	        left: 0,
 	        width: 1200,
