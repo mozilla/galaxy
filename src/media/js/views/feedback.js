@@ -11,7 +11,7 @@ define('views/feedback',
         var $this = $(this);
         if (!$.trim($this.val())) {
             notify({
-                message: gettext('Please enter feedback.')
+                message: gettext('Please enter feedback')
             });
             return;
         }
@@ -31,7 +31,7 @@ define('views/feedback',
         }).fail(function() {
             forms.toggleSubmitFormState($this, true);
             notify({
-                message: gettext('There was a problem submitting your feedback. Try again soon.')
+                message: gettext('There was a problem submitting your feedback. Try again soon')
             });
         });
     });
