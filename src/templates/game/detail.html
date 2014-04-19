@@ -1,0 +1,54 @@
+<div class="grid">
+  <div class="grid-cell grid-flex-grow-two game-details-container-left">
+    <div class="game-current-media"></div>
+    <div class="game-details-section">
+      <div class="game-buttons-section">
+        <button data-app-url="{{ game.app_url }}" data-game-slug="{{ game.slug }}" class="btn btn-big btn-play {{ 'btn-install' if game.purchased }}">{{ _('Play') }}</button>
+        <div>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}" target="_blank">
+            <i class="icon-facebook icon-medium"></i> 
+          </a>
+          <a href="https://twitter.com/intent/tweet?source=webclient&text=Check+this+game+out:+{{ game.name }}+{{ page_url }}" target="_blank">
+            <i class="icon-twitter icon-medium"></i> 
+          </a>
+        </div>
+      </div>
+      <h2 class="game-name">{{ game.name|translate(game) }}</h2>
+      <p class="game-developer">{{ game.developer.name }}</p>
+    </div>
+    <div class="game-details-section">
+      <div class="game-description">
+        <p>{{ game.description|escape|replace('\n\n', '</p><p>')|replace('\n', '<br/>')|safe }}</p>
+      </div>
+    </div>
+    <div class="game-details-section">
+      <div class="grid">
+        <div class="grid-cell game-detail-attribute">
+          <h2>{{ _('Genre:') }}</h2>
+          <div>{{ settings.genres[game.genre] }}</div>
+        </div>
+        <div class="grid-cell game-detail-attribute">
+          <h2>{{ _('Release date:') }}</h2>
+          <div>{{ game.created.split('T')[0] }}</div>
+        </div>
+        <div class="grid-cell game-detail-attribute">
+          <h2>{{ _('Players:') }}</h2>
+          <div>{{ settings.number_of_players[game.number_of_players] }} &nbsp; <i class="icon-controller"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid-cell game-details-container-right">
+    <div class="game-details-media">
+      <div class="game-media-list">
+        {% for video in game.videos %}
+          <img class="game-media" alt="" title="" src="{{ video.thumbnail }}" data-video-id="{{ video.id }}" data-video-type="{{ video.type }}">
+        {% endfor %}
+        {% for screenshot in game.screenshots %}
+          <img class="game-media" alt="" title="" src="{{ screenshot.src }}">
+        {% endfor %}
+      </div>
+      <div class="arrow"></div>            
+    </div>
+  </div>
+</div>

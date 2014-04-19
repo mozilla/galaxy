@@ -157,6 +157,10 @@
         .game-details-container-left {
             .game-current-media {
                 margin-bottom: 20px;
+                div {
+                    background: #000 no-repeat center;
+                    background-size: contain;
+                }
             }
         }
         .game-details-container-right {
@@ -188,9 +192,11 @@
         .game-details-section {
             margin-bottom: 20px;
         }
-        .game-title {
+        .game-name {
             color: #fff;
             font-size: 48px;
+            line-height: 1em;
+            margin-bottom: 7px; 
         }
         .game-developer {
             color: #cfcfcf;
@@ -251,7 +257,14 @@
             }
 
             .icon-controller {
-                margin-left: 2px
+                margin: -1px 0 0 2px;
+            }
+        }
+        .game-detail-error {
+            color: #fff;
+            padding: 20px;
+            h2 {
+                color: #fff;
             }
         }
     }

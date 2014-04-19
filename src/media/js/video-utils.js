@@ -28,14 +28,19 @@ define('video-utils',
         };
     }
 
-    function createVideo(url, width, height) {
+    function createVideoFromUrl(url, width, height) {
         var videoObj = parseVideo(url);
-        var $iframe = $('<iframe>', { width: width, height: height });
+        return createVideoFromId(videoObj.id, videoObj.type, width, height);
+        
+    }
+
+    function createVideoFromId(id, type, width, height) {
+        var $iframe = $('<iframe>', {width: width, height: height});
         $iframe.attr('frameborder', 0);
-        if (videoObj.type === 'youtube') {
-            $iframe.attr('src', '//www.youtube.com/embed/' + videoObj.id);
-        } else if (videoObj.type === 'vimeo') {
-            $iframe.attr('src', '//player.vimeo.com/video/' + videoObj.id);
+        if (type === 'youtube') {
+            $iframe.attr('src', '//www.youtube.com/embed/' + id);
+        } else if (type === 'vimeo') {
+            $iframe.attr('src', '//player.vimeo.com/video/' + id);
         }
         return $iframe;
     }
@@ -43,7 +48,7 @@ define('video-utils',
     function getVideoThumbnail(url, cb) {
         var videoObj = parseVideo(url);
         if (videoObj.type === 'youtube') {
-            cb('//img.youtube.com/vi/' + videoObj.id + '/maxresdefault.jpg');
+            cb('//img.youtube.com/vi/' + videoObj.id + '/hqdefault.jpg');
         } else if (videoObj.type === 'vimeo') {
             $.get('http://vimeo.com/api/v2/video/' + videoObj.id + '.json', function(data) {
                 cb(data[0].thumbnail_large);
@@ -51,9 +56,10 @@ define('video-utils',
         }
     }
 
-    return function() {
+    return {
         parseVideo: parseVideo,
-        createVideo: createVideo,
+        createVideoFromUrl: createVideoFromUrl,
+        createVideoFromId: createVideoFromId,
         getVideoThumbnail: getVideoThumbnail
     };
 });

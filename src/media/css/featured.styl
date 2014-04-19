@@ -34,12 +34,13 @@
             }
         }
         .game-icon {
+            background-color: #fff;
             border: 1px solid #ccc;
             float: left;
             height: 64px;
             width: 64px;
         }
-        .game-title {
+        .game-name {
             color: #fff;
             font-weight: 600; 
             padding-bottom: 5px;
@@ -55,6 +56,7 @@
     .featured-games-section {
         li {
             opacity: 0.25;
+            transition(opacity 0.3s ease-out);
             &.selected {
                 opacity: 1;
                 .select-bar {
@@ -66,6 +68,9 @@
                     top: 0;
                     width: 10px;
                 }
+            }
+            &:hover {
+                opacity: 1;
             }
         }
     }

@@ -1,6 +1,6 @@
 define('views/game',
-       ['jquery', 'l10n', 'featured-games', 'requests', 'user', 'utils', 'urls', 'z'],
-       function($, l10n, featured_games, requests, user, utils, urls, z) {
+       ['jquery', 'l10n', 'featured-games', 'requests', 'templates', 'user', 'utils', 'urls', 'video-utils', 'z'],
+       function($, l10n, featured_games, requests, nunjucks, user, utils, urls, video_utils, z) {
 
     var gettext = l10n.gettext;
 
@@ -8,17 +8,28 @@ define('views/game',
         requests.post(urls.api.url('user.purchase'), {game: gameSlug});
     };
 
-    z.body.on('click', '.btn-play', function(e) {
-        var $this = $(this);
-        e.preventDefault();
-        window.open($this.data('appUrl'));
-    }).on('click', '.btn-install', function(e) {
-        var $this = $(this);
-        if (user.logged_in()) {
-            updatePlay($this.data('gameSlug'));
-            $this.removeClass('btn-install');
+    function showSelectedMedia(media) {
+        var $media = $(media);
+        $('.game-media').removeClass('selected');
+        if ($media.data('video-type')) {
+            // Video type
+            var $mediaObject = video_utils.createVideoFromId($media.data('video-id'), $media.data('video-type'), 480, 300);
+        } else {
+            // Screenshot type
+            var $mediaObject = $('<div>', {height: 304, width: 480});
+            $mediaObject.css('background-image', 'url(' + $media.attr('src') + ')');
         }
-    });
+        
+        $media.addClass('selected');
+        $('.game-current-media').html($mediaObject);
+    }
+
+    function renderGalleryArrow() {
+        var $gameMediaList = $('.game-media-list');
+        if ($gameMediaList.children().length < 3) {
+            $gameMediaList.siblings('.arrow').hide();
+        }
+    }
 
     z.win.on('hashchange', function() {
         // TODO: allow builder to accept hash.
@@ -37,38 +48,38 @@ define('views/game',
         $el.addClass('current');
     });
 
-    z.body.on('click', '.featured-games-section li', function(e) {
-        $('.featured-games-section li').removeClass('selected');
-        $(this).addClass('selected');
-        // TODO: Update game detail section with selected game details.
-    })
+    z.body.on('click', '.btn-play', function(e) {
+        e.preventDefault();
+        window.open($(this).data('appUrl'));
 
-    z.body.on('click', '.game-media', function() {
-        $('.game-media').removeClass('selected');
+    }).on('click', '.btn-install', function(e) {
+        var $this = $(this);
+        if (user.logged_in()) {
+            updatePlay($this.data('gameSlug'));
+            $this.removeClass('btn-install');
+        }
+
+    }).on('click', '.featured-games-section li', function(e) {
+        e.preventDefault();
+        $('.featured-games-section li').removeClass('selected');
         var $this = $(this);
         $this.addClass('selected');
-        var mediaSrc = $this.attr('src');
-        if (mediaSrc.search(/youtube|vimeo/) > -1) {
-            if (mediaSrc.indexOf('youtube') > -1) {
-                var youtubeId = mediaSrc.split('/')[4];
-                var $mediaObject = $('<iframe>', {
-                    autoplay: 1,
-                    frameborder: 0,
-                    src: '//www.youtube.com/embed/' + youtubeId
-                });
-            } else {
-                // TODO: Vimeo
-            }
-        } else {
-            var $mediaObject = $('<img>', { src: mediaSrc });
-        }
-        $mediaObject.attr('height', 300);
-        $mediaObject.attr('width', 480);
-        $('.game-current-media').html($mediaObject);
-    });
+        var slug = $this.data('game-slug');
+        requests.get(urls.api.url('game', [slug])).done(function(gameData) {
+            $('.game-details-container').html(nunjucks.env.render('game/detail.html', {game: gameData}));
+            showSelectedMedia(document.querySelector('.game-media'))
+            history.pushState({}, '', urls.reverse('game', [slug]));
+            document.title = utils.translate(gameData.name) + ' | Mozilla Galaxy';
+            renderGalleryArrow();
+            featured_games.attachScrollEvents($('.game-media-list'));
+            // TODO: Navigate to pages in history when user clicks back button.
+        });
 
-    z.body.on('click', '.game-details-media .arrow', function() {
-        // TODO: Scroll media gallery section downwards
+    }).on('click', '.game-media', function() {
+        showSelectedMedia($(this));
+
+    }).on('click', '.game-details-media .arrow', function() {
+        // TODO: Scroll media gallery section downwards.
     });
 
     return function(builder, args) {
@@ -76,8 +87,7 @@ define('views/game',
 
         builder.start('game/main.html', {
             slug: slug, 
-            page_url: window.location.href,
-            featured_games: featured_games.getFeaturedGames()
+            page_url: window.location.href
         });
 
         builder.z('type', 'game');
@@ -85,8 +95,14 @@ define('views/game',
         builder.z('pagetitle', gettext('App Details'));
         builder.onload('game-data', function(game) {
             builder.z('title', utils.translate(game.name));
+            showSelectedMedia(document.querySelector('.game-media'));
+            $('.featured-games-section li[data-game-slug="' + game.slug + '"]').addClass('selected');
+            // TODO: Scroll to that particular game in the featured games listings.
+            renderGalleryArrow();
+
             twttr.widgets.load(); // Needed for loaded twitter widget scripts
-            featured_games.attachScrollEvents();
+            featured_games.attachScrollEvents($('.featured-games-section ul'));
+            featured_games.attachScrollEvents($('.game-media-list'));
         });
     };
 });
