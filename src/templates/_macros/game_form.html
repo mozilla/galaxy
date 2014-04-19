@@ -93,11 +93,11 @@
     <div class="grid content">
       <div class="grid-cell grid-flex-grow-two">
         <div class="l">{{ _('Number of Players') }}</div>
+        <span class="req" data-required="{{ _('Required') }}"></span>
         <div class="form-field">
           {% for value, name in settings.number_of_players.items() %}
               <label class="choice"><input type="radio" name="number_of_players"{{ ' checked' if value == game.number_of_players }} required value="{{ value }}"> {{ name }}</label>
           {% endfor %}
-          <span class="req" data-required="{{ _('Required') }}"></span>
         </div>
       </div>
       <div class="grid-cell">
