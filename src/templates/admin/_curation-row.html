@@ -17,15 +17,15 @@
       <a class="btn-secondary-edit hint--right" href="{{ url('edit_game', [game.slug]) }}" data-hint="{{ _('Edit') }}">
         <div class="btn-text fa fa-edit"></div>
       </a>
-      <a class="btn-secondary-delete hint--right" data-status-verb="delete" data-hint="{{ _('Delete') }}">
+      <a class="btn-secondary-delete hint--right curation-delete" data-status-verb="delete" data-hint="{{ _('Delete') }}">
         <div class="btn-text fa fa-trash-o"></div>
       </a>
       {% if game.status == 'disabled' %}
-      <a class="btn-secondary-enable hint--right" data-status-verb="enable" data-hint="{{ _('Enable') }}">
+      <a class="btn-secondary-enable hint--right curation-enable" data-status-verb="enable" data-hint="{{ _('Enable') }}">
         <div class="btn-text fa fa-check-circle-o"></div>
       </a>
       {% else %}
-      <a class="btn-secondary-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}">
+      <a class="btn-secondary-disable hint--right curation-disable" data-status-verb="disable" data-hint="{{ _('Disable') }}">
         <div class="btn-text fa fa-ban"></div>
       </a>
       {% endif %}

@@ -99,7 +99,8 @@ define('views/feature',
 
     // Send request to moderate endpoint.
     function moderateGame($this, action) {
-        var gameSlug = $this.parent().data('slug');
+        var $game = $this.closest('[data-slug]');
+        var gameSlug = $game.data('slug');
 
         controlSpinner($this, true);
 
