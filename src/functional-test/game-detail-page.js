@@ -1,4 +1,4 @@
-casper.test.begin('Game Detail Page Test', 8, function suite(test) {
+casper.test.begin('Game Detail Page Test', 10, function suite(test) {
     var root = 'http://0.0.0.0:8675';
 
     casper.start(root + '/game/nutty-ninjas/detail', function() {
