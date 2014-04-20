@@ -1,7 +1,8 @@
 <tr class="curation-entry" data-slug="{{game.slug}}">
   <td class="curation-title">
     <i class="curation-draggable fa fa-arrows-v fa-lg"></i>
-    <img src="{{ game.icons }}" title="{{ game.name|translate }}"><a href="#">{{ game.name|translate }}</a>
+    <img class="game-icon" src="{{ game.icons[0].src }}" title="{{ game.name|translate }}"></img>
+    <a href="#">{{ game.name|translate }}</a>
   </td>
   <td class="curation-status" title="{{ _(game.status) }}">
     <span class="status-span">{{ _('Status') }}:</span><br>
