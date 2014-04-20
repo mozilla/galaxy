@@ -252,16 +252,36 @@
         <div class="grid-cell grid-flex-grow-two">
           <div class="grid videos media form-field">
             <div class="grid-cell media-left">
-              <div class="media-item">
-                <div class="media-preview-container" data-message="{{ _('Preview') }}"></div>
+              <div class="media-list">
+                <div class="media-item {{ 'processed' if game.videos[0] }}">
+                  <div class="media-preview-container" data-message="{{ _('Preview') }}">
+                    <div class="media-iframe"></div>
+                    <div class="media-delete"></div>
+                  </div>
+                  {% if game.videos[0].id %}
+                    <input name="media-video-object" type="hidden" value="{{ game.videos[0].id }}" data-video-type="{{ game.videos[0].type }}" data-video-thumbnail="{{ game.videos[0].thumbnail }}">
+                  {% else %}
+                    <input name="media-video-object" type="hidden">
+                  {% endif %}
+                  <input class="media-input" type="url" data-type="videos" value="{{ game.videos[0].id }}" placeholder="{{ _('Enter YouTube/Vimeo URL here') }}" pattern="https?://.*">
+                </div>
               </div>
-              <input type="url" data-type="videos" value="{{ game.videos[0] }}" placeholder="{{ _('Enter YouTube/Vimeo URL here') }}" pattern="https?://.*">
             </div>
             <div class="grid-cell media-right">
-              <div class="media-item">
-                <div class="media-preview-container" data-message="{{ _('Preview') }}"></div>
+              <div class="media-list">
+                <div class="media-item {{ 'processed' if game.videos[1] }}">
+                  <div class="media-preview-container" data-message="{{ _('Preview') }}">
+                    <div class="media-iframe"></div>
+                    <div class="media-delete"></div>
+                  </div>
+                  {% if game.videos[1].id %}
+                    <input name="media-video-object" type="hidden" value="{{ game.videos[1].id }}" data-video-type="{{ game.videos[1].type }}" data-video-thumbnail="{{ game.videos[1].thumbnail }}">
+                  {% else %}
+                    <input name="media-video-object" type="hidden">
+                  {% endif %}
+                  <input class="media-input" type="url" data-type="videos" value="{{ game.videos[1].id }}" placeholder="{{ _('Enter YouTube/Vimeo URL here') }}" pattern="https?://.*">
+                </div>
               </div>
-              <input type="url" data-type="videos" value="{{ game.videos[1] }}" placeholder="{{ _('Enter YouTube/Vimeo URL here') }}" pattern="https?://.*">
             </div>
           </div>
         </div>

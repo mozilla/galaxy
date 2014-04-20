@@ -1,6 +1,6 @@
 define('media-input',
-       ['jquery', 'l10n', 'promise', 'z'],
-       function($, l10n, promise, z) {
+       ['jquery', 'l10n', 'promise', 'video-utils', 'z'],
+       function($, l10n, promise, video_utils, z) {
     var gettext = l10n.gettext;
     var Promise = promise;
 
@@ -117,31 +117,12 @@ define('media-input',
     }
 
     function loadVideo($input) {
-        var mediaSrc = $input.val();
-        // TODO: Handle case of invalid video URLs.
-        if (mediaSrc.search(/youtube|vimeo/) > -1) {
-            // TODO: Handle all formats of youtube and vimeo URLs.
-            if (mediaSrc.indexOf('youtube') > -1) {
-                var youtubeId = mediaSrc.split('/')[4];
-                var $mediaObject = $('<iframe>', {
-                    autoplay: 1,
-                    frameborder: 0,
-                    src: '//www.youtube.com/embed/' + youtubeId
-                });
-            } else {
-                var vimeoId = mediaSrc.split('/')[3];
-                var $mediaObject = $('<iframe>', {
-                    frameborder: 0,
-                    src: '//player.vimeo.com/video/' + vimeoId
-                });
-            }
-        } else {
-            return;
+        if ($input.val()) {
+            var $mediaPreview = $input.siblings('.media-preview-container');
+            $mediaPreview.find('.media-iframe')
+                .html(video_utils.createVideoFromId($input.val(), $input.data('video-type')));
+            $mediaPreview.parent('.media-item').addClass('processed');
         }
-        $mediaObject.attr('height', 210);
-        $mediaObject.attr('width', 280); 
-        // TODO: Replace $mediaObject with media parser's returned iframe
-        $input.siblings('.media-item').children('.media-preview-container').html($mediaObject);
     }
 
     z.page.on('loaded', function() {
@@ -150,7 +131,7 @@ define('media-input',
             createInput($this);
         });
 
-        $('.videos input').each(function() {
+        $('.videos input[type=hidden]').each(function() {
             // Load iframes for existing videos
             loadVideo($(this));
         });
@@ -176,6 +157,9 @@ define('media-input',
         }
     }).on('blur', 'input[type=url].media-input', function(e) {
         var $this = $(this);
+        if ($this.data('type') === 'videos') {
+            return;
+        }
         // Launch editor only when input is blurred.
         if ($this.val() !== 'http://') {
             // Launch on non-empty inputs.
@@ -215,22 +199,28 @@ define('media-input',
         });
     }).on('click', '.media-delete', function(e) {
         e.stopPropagation();
-        $(this).siblings('input[type=file].media-input').val('');
-
-        var $mediaList = $(this).closest('.media-list');
+        var $this = $(this);
+        $this.siblings('input[type=file].media-input').val('');
+        var $mediaList = $this.closest('.media-list');
         if ($mediaList.children('.media-item').length == 1) {
-            var $mediaPreviewContainer = $(this).parent();
+            var $mediaPreviewContainer = $this.parent();
             $mediaPreviewContainer.closest('.media-item').removeClass('processed');
             $mediaPreviewContainer.siblings('.media-input').val('');
             $mediaPreviewContainer.siblings('.media-input-processed-url').val('');
+            $mediaPreviewContainer.children('.media-iframe').html('');
         } else {
-            $(this).closest('.media-item').remove();
+            $this.closest('.media-item').remove();
         }
-    }).on('blur', '.videos input', function() {
+    }).on('blur', '.videos input[type=url]', function() {
         // Videos section
         var $this = $(this);
         if ($this.val()) {
-            loadVideo($this);
+            var videoObject = video_utils.parseVideo($this.val());
+            var $hidden = $this.siblings('input[type=hidden]')
+            $hidden.val(videoObject.id);
+            $hidden.data('video-type', videoObject.type);
+            $hidden.data('video-thumbnail', videoObject.thumbnail);
+            loadVideo($hidden);
         } else {
             // Clear the loaded iframe.
             $this.siblings('.media-preview-container').html('');
