@@ -95,16 +95,6 @@ define('media-input',
         }
     }
 
-    function createInput($section) {
-        $section.append($('<input>', {
-            'class': 'media-input',
-            'data-type': $section.data('type'),
-            'type': 'url',
-            'placeholder': $section.data('placeholder'),
-            'pattern': 'https?://.*'
-        }));
-    }
-
     function getFileDataURI(input, callback) {
         return new Promise(function(resolve, reject) {
             var files = input.files;
@@ -136,29 +126,12 @@ define('media-input',
     }
 
     z.page.on('loaded', function() {
-        $('.fallback').each(function() {
-            createInput($(this));
-        });
 
         $('.videos input[type=hidden]').each(function() {
             // Load iframes for existing videos
             var $this = $(this);
             loadVideo($this, $this.data('video-type'));
         });
-    }).on('input', 'input[type=url].media-input', function(e) {
-        // var $input = $(e.target);
-        // var $allInputs = $input.parent().children('input[type=url]');
-        // var $emptyInputs = $allInputs.filter(function() {
-        //     return !$(this).val();
-        // });
-        // // TODO: Have a better check for the icons input field
-        // if ($input.val() && $emptyInputs.length === 0 && $input.data('type') === 'screenshots') {
-        //     createInput($input.parent());
-        // } else {
-        //     // So that at any point in time, there will be exactly
-        //     // ONE empty input field for user to enter more URLs.
-        //     $emptyInputs.slice(1).remove();
-        // }
     }).on('keypress', 'input[type=url].media-input', function(e) {
         var $this = $(this);
         if (this.checkValidity() && e.keyCode === 13) {
