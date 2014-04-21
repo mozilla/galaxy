@@ -81,7 +81,6 @@ define('media-input',
         return false;
     }
 
-
     function preview($obj, src, launch) {
         var img = $obj.children('.media-preview')[0];
         img.src = src;
@@ -126,18 +125,19 @@ define('media-input',
     }
 
     z.page.on('loaded', function() {
-
         $('.videos input[type=hidden]').each(function() {
             // Load iframes for existing videos
             var $this = $(this);
             loadVideo($this, $this.data('video-type'));
         });
+
     }).on('keypress', 'input[type=url].media-input', function(e) {
         var $this = $(this);
         if (this.checkValidity() && e.keyCode === 13) {
             // After it's been blurred, the editor will get launched.
             return this.blur();
         }
+
     }).on('blur', 'input[type=url].media-input', function(e) {
         var $this = $(this);
         if ($this.data('type') === 'videos') {
@@ -148,6 +148,7 @@ define('media-input',
             // Launch on non-empty inputs.
             preview($this.siblings('.media-preview-container'), $this.val(), true);
         }
+
     }).on('click', '.media-preview-container', function(e) {
         // Open the file upload dialog when user clicks on dropzone.
         // Only happens if there's no image inside the preview container.
@@ -160,6 +161,7 @@ define('media-input',
         } else {
             $this.children('input[type=file]')[0].click();
         }
+
     }).on('drop', '.media-preview-container', function(e) {
         e.preventDefault();
         var $this = $(this);
@@ -172,6 +174,7 @@ define('media-input',
                 return console.error(err);
             });
         }
+
     }).on('blur change', 'input[type=file].media-input', function(e) {
         var input = this;
         input.blur();
@@ -181,6 +184,7 @@ define('media-input',
         }).catch(function (err) {
             return console.error(err);
         });
+
     }).on('click', '.media-delete', function(e) {
         e.stopPropagation();
         var $this = $(this);
@@ -197,6 +201,7 @@ define('media-input',
         } else {
             $this.closest('.media-item').remove();
         }
+
     }).on('blur', '.videos input[type=url]', function() {
         // Videos section
         var $this = $(this);
@@ -224,11 +229,14 @@ define('media-input',
             e.originalEvent.dataTransfer.dropEffect = 'none';
         }
         return false;
+
     }).on('dragleave dragend', '.media-preview-container', function(e) {
         $(this).toggleClass('dragenter', false);
         return false;
+
     }).on('click', '.add-button', function(e) {
         $(this).siblings('.media-item-template').removeClass('media-item-template').addClass('add-item');
+
     });
 
 });
