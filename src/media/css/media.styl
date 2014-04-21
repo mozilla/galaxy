@@ -88,16 +88,6 @@
             position: absolute;
             text-align: center;
         }
-        &.dragenter {
-            background-color: #efefef;
-            border-color: $colorGray;
-            &:before {
-                background-image: url('../img/game-submission/upload.png');
-            }
-            &:after {
-                color: $colorGray;
-            }
-        }
     }
     &.processed {
         .media-preview-container {
@@ -203,6 +193,16 @@
             }
             &:after {
                 bottom: 15px;
+            }
+        }
+        &.dragenter {
+            background-color: #efefef;
+            border-color: $colorGray;
+            &:before {
+                background-image: url('../img/game-submission/upload.png');
+            }
+            &:after {
+                color: $colorGray;
             }
         }
     }

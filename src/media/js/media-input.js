@@ -216,10 +216,10 @@ define('media-input',
 
     }).on('dragover dragenter', function(e) {
         e.preventDefault();
-        var $this = $(this);
-        if ($this.hasClass('media-preview-container')) {
+        var $target = $(e.target);
+        if ($target.hasClass('media-preview-container')) {
             e.originalEvent.dataTransfer.dropEffect = 'copy';
-            $this.toggleClass('dragenter', true);
+            $target.toggleClass('dragenter', true);
         } else {
             e.originalEvent.dataTransfer.dropEffect = 'none';
         }
