@@ -195,15 +195,19 @@
                 bottom: 15px;
             }
         }
-        &.dragenter {
-            background-color: #efefef;
-            border-color: $colorGray;
-            &:before {
-                background-image: url('../img/game-submission/upload.png');
-            }
-            &:after {
-                color: $colorGray;
-            }
+    }
+}
+
+.icons,
+.screenshots {
+    .media-preview-container.dragenter {
+        background-color: #efefef;
+        border-color: $colorGray;
+        &:before {
+            background-image: url('../img/game-submission/upload.png');
+        }
+        &:after {
+            color: $colorGray;
         }
     }
 }
