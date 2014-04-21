@@ -52,15 +52,25 @@ define('media-input',
     }
 
     function launchEditor(id, src, type) {
-        if (type === 'icons') {
-            var message = gettext('Crop your icon to a square');
-            var ratio = '1:1';
-            var size = 128;
-        } else {
-            var message = gettext('Crop your icon to a 4:3 rectangle');
-            var ratio = '4:3';
-            var size = 1024;
+
+        switch (type) {
+            case 'icons':
+                var message = gettext('Crop your icon to a square');
+                var ratio = '1:1';
+                var size = 128;
+                break;
+            case 'screenshots-4-3':
+                var message = gettext('Crop your icon to a 4:3 rectangle');
+                var ratio = '4:3';
+                var size = 1024;
+                break;
+            case 'screenshots-16-9':
+                var message = gettext('Crop your icon to a 16:9 rectangle');
+                var ratio = '16:9';
+                var size = 1280;
+                break;
         }
+
         featherEditor.launch({
             forceCropPreset: [message, ratio],
             forceCropMessage: '&nbsp;',
@@ -168,13 +178,14 @@ define('media-input',
     }).on('click', '.media-preview-container', function(e) {
         // Open the file upload dialog when user clicks on dropzone.
         // Only happens if there's no image inside the preview container.
-        if ($(this).closest('.media-item').hasClass('processed')) {
-            var src = $(this).siblings('.media-input-processed-url').val();
-            var $img = $(this).children('.media-preview');
+        var $this = $(this);
+        if ($this.closest('.media-item').hasClass('processed')) {
+            var src = $this.siblings('.media-input-processed-url').val();
+            var $img = $this.children('.media-preview');
             $img[0].id = 'aviary-img';
-            launchEditor($img[0].id, src, $(this).data('type'));
+            launchEditor($img[0].id, src, $this.data('type'));
         } else {
-            $(this).children('input[type=file]')[0].click();
+            $this.children('input[type=file]')[0].click();
         }
     }).on('drop', '.media-preview-container', function(e) {
         e.preventDefault();
