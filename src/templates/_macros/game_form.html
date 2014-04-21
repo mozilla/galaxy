@@ -190,10 +190,10 @@
             <div class="grid-cell media-left">
               <span class="media-size">4:3 <span class="inner">(1024px &times; 768px)</span></span>
               <div class="media-list">
-                {% set count = game.screenshots|length + 1 if game.screenshots else 1 %}
+                {% set count = game.screenshots[0].4_3|length + 1 if game.screenshots else 1 %}
                 {% for i in range(count) %}
                   {% include '_macros/media-item.html' %}
-                  {{ mediaItem(game.screenshots[i], i == count - 1) }}
+                  {{ mediaItem(game.screenshots[0].4_3[i], i == count - 1, 'screenshots-4-3') }}
                 {% endfor %}
                 <button type="button" class="btn add-button"><i class="fa fa-plus"></i> Add</button>
               </div>              
@@ -201,10 +201,12 @@
             <div class="grid-cell media-right">
               <span class="media-size">16:9 <span class="inner">(1280px &times; 720px)</span></span>
               <div class="media-list">
-                <div class="media-item">
-                  <div class="media-preview-container screenshots-16-9" data-message="{{ _('Drag and drop or select') }}"></div>
-                  <input type="url" data-type="icons" value="{{ game.icons }}" placeholder="{{ _('Or enter URL to 16:9 screenshot here') }}" pattern="https?://.*">
-                </div>
+                {% set count = game.screenshots[0].16_9|length + 1 if game.screenshots else 1 %}
+                {% for i in range(count) %}
+                  {% include '_macros/media-item.html' %}
+                  {{ mediaItem(game.screenshots[0].16_9[i], i == count - 1, 'screenshots-16-9') }}
+                {% endfor %}
+                <button type="button" class="btn add-button"><i class="fa fa-plus"></i> Add</button>
               </div>
             </div>
           </div>
