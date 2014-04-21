@@ -261,9 +261,9 @@
                     <div class="media-delete"></div>
                   </div>
                   {% if game.videos[0].id %}
-                    <input name="media-video-object" type="hidden" value="{{ game.videos[0].id }}" data-video-type="{{ game.videos[0].type }}" data-video-thumbnail="{{ game.videos[0].thumbnail }}">
+                    <input name="media-video-data" type="hidden" value="{{ game.videos[0].id }}" data-video-type="{{ game.videos[0].type }}" data-video-thumbnail="{{ game.videos[0].thumbnail }}">
                   {% else %}
-                    <input name="media-video-object" type="hidden">
+                    <input name="media-video-data" type="hidden">
                   {% endif %}
                   <input class="media-input" type="url" data-type="videos" value="{{ game.videos[0].id }}" placeholder="{{ _('Enter YouTube/Vimeo URL here') }}" pattern="https?://.*">
                 </div>
@@ -277,9 +277,9 @@
                     <div class="media-delete"></div>
                   </div>
                   {% if game.videos[1].id %}
-                    <input name="media-video-object" type="hidden" value="{{ game.videos[1].id }}" data-video-type="{{ game.videos[1].type }}" data-video-thumbnail="{{ game.videos[1].thumbnail }}">
+                    <input name="media-video-data" type="hidden" value="{{ game.videos[1].id }}" data-video-type="{{ game.videos[1].type }}" data-video-thumbnail="{{ game.videos[1].thumbnail }}">
                   {% else %}
-                    <input name="media-video-object" type="hidden">
+                    <input name="media-video-data" type="hidden">
                   {% endif %}
                   <input class="media-input" type="url" data-type="videos" value="{{ game.videos[1].id }}" placeholder="{{ _('Enter YouTube/Vimeo URL here') }}" pattern="https?://.*">
                 </div>

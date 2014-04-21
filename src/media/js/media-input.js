@@ -126,24 +126,24 @@ define('media-input',
         });
     }
 
-    function loadVideo($input) {
+    function loadVideo($input, type) {
         if ($input.val()) {
             var $mediaPreview = $input.siblings('.media-preview-container');
             $mediaPreview.find('.media-iframe')
-                .html(video_utils.createVideoFromId($input.val(), $input.data('video-type')));
+                .html(video_utils.createVideoFromId($input.val(), type));
             $mediaPreview.parent('.media-item').addClass('processed');
         }
     }
 
     z.page.on('loaded', function() {
         $('.fallback').each(function() {
-            var $this = $(this);
-            createInput($this);
+            createInput($(this));
         });
 
         $('.videos input[type=hidden]').each(function() {
             // Load iframes for existing videos
-            loadVideo($(this));
+            var $this = $(this);
+            loadVideo($this, $this.data('video-type'));
         });
     }).on('input', 'input[type=url].media-input', function(e) {
         // var $input = $(e.target);
@@ -219,22 +219,26 @@ define('media-input',
             $mediaPreviewContainer.siblings('.media-input').val('');
             $mediaPreviewContainer.siblings('.media-input-processed-url').val('');
             $mediaPreviewContainer.children('.media-iframe').html('');
+            $mediaPreviewContainer.siblings('input[type=hidden]').
+                val('').attr('data-video-type', '').attr('data-video-thumbnail', '');
         } else {
             $this.closest('.media-item').remove();
         }
     }).on('blur', '.videos input[type=url]', function() {
         // Videos section
         var $this = $(this);
-        if ($this.val()) {
+        var $hidden = $this.siblings('input[type=hidden]');
+        if ($this.val() && $this.val() !== 'http://') {
             var videoObject = video_utils.parseVideo($this.val());
-            var $hidden = $this.siblings('input[type=hidden]')
-            $hidden.val(videoObject.id);
-            $hidden.data('video-type', videoObject.type);
-            $hidden.data('video-thumbnail', videoObject.thumbnail);
-            loadVideo($hidden);
+            $hidden.val(videoObject.id).attr('data-video-type', videoObject.type);
+            video_utils.getVideoThumbnailFromId(videoObject.id, videoObject.type, function(thumbnail) {
+                $hidden.attr('data-video-thumbnail', thumbnail);
+            });
+            loadVideo($hidden, videoObject.type);
         } else {
             // Clear the loaded iframe.
-            $this.siblings('.media-preview-container').html('');
+            $this.siblings('.media-preview-container').children('.media-iframe').html('');
+            $hidden.val('').attr('data-video-type', '').attr('data-video-thumbnail', '');
         }
 
     }).on('dragover dragenter', function(e) {
