@@ -6,6 +6,6 @@
       <div class="media-delete"></div>
     </div>
     <input type="url" class="media-input" data-type="{{ type }}" value="{{ game.screenshots[i].src }}" placeholder="{{ _('Or enter URL to screenshot here') }}" value="{{ item.src }}" pattern="https?://.*">
-    <input type="hidden" name="screenshot_final_url" class="media-input-processed-url" data-type="{{ type }}" data-height="1024" value="{{ item.src }}" data-width="768">
+    <input type="hidden" name="screenshot_final_url" class="media-input-processed-url" data-type="{{ type }}" data-height="{{ item.height }}" data-width="{{ item.width }}" value="{{ item.src }}">
   </div>
 {% endmacro %}

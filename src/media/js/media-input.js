@@ -31,9 +31,15 @@ define('media-input',
                 cleanUpTemplate($mediaItem);
                 $mediaItem = $clone;
             } 
-
             // This is the URL that gets POST'd to the API.
-            $mediaItem.children('.media-input-processed-url').val(newURL);
+            var $processedInput = $mediaItem.children('.media-input-processed-url');
+            $processedInput.val(newURL);
+
+            img.onload = function() {
+                $processedInput.attr('data-height', img.naturalHeight);
+                $processedInput.attr('data-width', img.naturalWidth);
+            };
+
             $mediaItem.removeClass('add-item').addClass('processed');
 
             // Close the editor.

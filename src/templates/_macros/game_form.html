@@ -1,5 +1,5 @@
 {% macro gameForm(game) %}
-  <form class="game-form" method="post" data-required="{{ _('Required') }}" data-formtype="{{'edit' if game else 'submit'}}">
+  <form class="game-form" method="post" data-required="{{ _('Required') }}" data-formtype="{{'edit' if game else 'submit'}}" novalidate>
     <div class="grid content">
       <div class="grid-cell grid-flex-grow-two">
         <div class="form-field">
@@ -147,7 +147,7 @@
                     <div class="media-delete"></div>
                   </div>
                   <input type="url" class="media-input" data-type="icons" value="{{ game.icons[0].src }}" placeholder="{{ _('Or enter URL to 128px icon here') }}" pattern="https?://.*">
-                  <input type="hidden" name="icon_final_url" class="media-input-processed-url" data-type="icons" data-height="128" data-width="128">
+                  <input type="hidden" name="icon_final_url" class="media-input-processed-url" data-type="icons" data-height="{{ game.icons[0].height }}" data-width="{{ game.icons[0].width }}" value="{{ game.icons[0].src }}">
                 </div>
               </div>
             </div>
@@ -187,7 +187,7 @@
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
           <div class="grid screenshots media form-field grid-bottom">
-            <div class="grid-cell media-left">
+            <div class="grid-cell media-left screenshots-list" data-screenshot-type="4_3">
               <span class="media-size">4:3 <span class="inner">(1024px &times; 768px)</span></span>
               <div class="media-list">
                 {% set count = game.screenshots[0].4_3|length + 1 if game.screenshots else 1 %}
@@ -198,7 +198,7 @@
                 <button type="button" class="btn add-button"><i class="fa fa-plus"></i> Add</button>
               </div>              
             </div>
-            <div class="grid-cell media-right">
+            <div class="grid-cell media-right screenshots-list" data-screenshot-type="16_9">
               <span class="media-size">16:9 <span class="inner">(1280px &times; 720px)</span></span>
               <div class="media-list">
                 {% set count = game.screenshots[0].16_9|length + 1 if game.screenshots else 1 %}
