@@ -18,10 +18,10 @@
                 <div class="game-title">{{ game.name }}</div>
               </a>
             </td>
-            {% if (game.status=="pending") %}
+            {% if (game.status=='pending') %}
               <td class="cell-container" title="{{ game.status }}">
                 <h3 class="cell-title">{{ _('Status:') }}</h3>
-                <div class="cell-content status-{{ game.status }}">{{ game.status }}</div>
+                <div class="cell-content status-{{ game.status|statusName }}">{{ game.status }}</div>
               </td>
               <td class="cell-container" title="{{ game.created }}">
                 <h3 class="cell-title">{{ _('Waiting time:') }}</h3>
@@ -34,7 +34,7 @@
             {% else %}
               <td class="cell-container" colspan="3" title="{{ game.status }}">
                 <h3 class="cell-title">{{ _('Status:') }}</h3>
-                <div class="cell-content status-{{ game.status }}">{{ game.status }}</div>
+                <div class="cell-content status-{{ game.status|statusName }}">{{ game.status }}</div>
               </td>
             {% endif %}
             <td class="developer-dashboard-buttons dashboard-buttons">

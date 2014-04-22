@@ -40,13 +40,13 @@ define('views/developer_dashboard',
             var message;
             var params = {game: gameTitle};
             if (success) {
-                if (statusVerb === "delete") {
+                if (statusVerb === 'delete') {
                     message = gettext('Deleted game: {game}', params);
                 } else {
                     message = gettext('Disabled game: {game}', params);
                 }
             } else {
-                if (statusVerb === "delete") {
+                if (statusVerb === 'delete') {
                     message = gettext('Failed to delete game: {game}', params);
                 } else {
                     message = gettext('Failed to disable game: {game}', params);
