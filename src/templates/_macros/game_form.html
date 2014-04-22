@@ -57,8 +57,10 @@
         <div class="form-field">
           <label>
             <span class="l">{{ _('Description') }}</span>
-            <i class="fa fa-eye toggle-preview"></i>
             <textarea name="description" placeholder="{{ _('Enter game description here') }}" required>{{ game.description }}</textarea>
+            <div class="toggle-preview-container">
+              <i class="fa fa-eye toggle-preview"></i>
+            </div>
             <div class="description-preview"></div>    
             <span class="req" data-required="{{ _('Required') }}"></span>
           </label>

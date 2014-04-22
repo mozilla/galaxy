@@ -48,22 +48,24 @@ define('views/submit',
         $slug.toggleClass('focused', !!$this.val());
     }).on('keyup', 'textarea[name=description]', function(e) {
         var value = $(this).val();
-        var togglePreview = $('.toggle-preview');
+        var togglePreview = $('.toggle-preview-container');
         togglePreview.hide();
         delay(function() {
             if (value.length) {
-                togglePreview.show(); 
+                togglePreview.show();
             }
         }, 300);
         
-    }).on('click', '.toggle-preview', function(e){
+    }).on('click', '.toggle-preview-container', function(e) {
         e.preventDefault();
-        var textarea = $('textarea[name=description]');
-        var descriptionPreview = $('.description-preview');
-        descriptionPreview.html(marked(textarea.val()));
-        $(this).toggleClass('fa-eye-slash');
-        textarea.toggle();
-        descriptionPreview.toggle();
+        console.log('click')
+        var $textarea = $('textarea[name=description]');
+        var $descriptionPreview = $('.description-preview');
+        $descriptionPreview.html(marked($textarea.val()));
+        $(this).children('.fa').toggleClass('fa-eye-slash');
+        $textarea.toggle();
+        $descriptionPreview.toggle();
+
     }).on('submit', '.game-form', function(e) {
         e.preventDefault();
         var $this = $(this);

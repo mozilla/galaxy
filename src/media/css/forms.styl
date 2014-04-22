@@ -155,7 +155,7 @@ input[type="number"],
 input[type="date"],
 input[type="url"],
 input[type="search"],
-textarea, .description-preview {
+textarea {
     background-color: white;
     border: 1px solid $light-gray;
     border-radius: 1px;
@@ -335,13 +335,25 @@ form {
     .span-grid {
         margin-top: 15px;
     }
-    .toggle-preview {
+    textarea[name=description].focused + .toggle-preview-container {
+        display: initial;
+    }
+    .toggle-preview-container {
+        background-color: rgba(0,255,0,0.25);
+        border: 1px solid green;
+        border-radius: 5px;
+        bottom: 5px;
         cursor: pointer;
         display: none;
+        height: 24px;
         position: absolute;
-        right: 4px;
-        top: 20px;
+        right: 5px;
+        text-align: center;
+        width: 24px;
         z-index: 100;
+        &:hover {
+            background-color: rgba(0,255,0,0.5);
+        }
     }
     .req {
         position: absolute;
