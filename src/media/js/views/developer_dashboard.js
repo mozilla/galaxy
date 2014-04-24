@@ -57,7 +57,14 @@ define('views/developer_dashboard',
             setSpinning(false);
             if (success) {
                 // TODO: Animate this
-                $game.remove();
+                if (statusVerb === 'delete') {
+                    $game.remove();
+                } else {
+                    rawr = $game
+                    $game.children(".cell-container")
+                        .not(".status-container").remove();
+                    $game.children(".status-container").attr("colspan", "3");
+                }
 
                 var $table = $('.developer-dashboard-table');
                 if (!$table.find('tbody > tr').length) {
