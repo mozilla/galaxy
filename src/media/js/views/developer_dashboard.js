@@ -60,10 +60,21 @@ define('views/developer_dashboard',
                 if (statusVerb === 'delete') {
                     $game.remove();
                 } else {
-                    rawr = $game
                     $game.children(".cell-container")
                         .not(".status-container").remove();
-                    $game.children(".status-container").attr("colspan", "3");
+                    
+                    $game.find(".status-container").attr("title",gettext("disabled"))
+                        .attr("colspan", "3")
+                    $game.find(".status-container > .cell-content")
+                        .removeClass()
+                        .addClass("cell-content status-disabled")
+                        // Below should use the statusName filter from helpers.js if possible
+                        .text(gettext("Disabled"));
+
+                    $game.find(".dashboard-buttons > .secondary-buttons > .btn-secondary-disable")
+                        .css("visibility", "hidden");
+                    $game.find(".dashboard-buttons > .secondary-buttons > .btn-secondary-disable > div")
+                        .css("visibility", "hidden");
                 }
 
                 var $table = $('.developer-dashboard-table');
