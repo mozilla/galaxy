@@ -11,49 +11,51 @@
     {% defer (url=api('game.list')|urlparams(developer='1'), nocache=true, id='gameList') %}
       <table class="dashboard-table developer-dashboard-table">
         {% for game in this|sort(attribute='created') %}
-          <tr class="developer-dashboard-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
-            <td class="game-title-container">
-              <a href="{{ game.app_url }}">
-                <div class="game-icon" style="background-image: url({{ game.icons[0].src }})"></div>
-                <div class="game-title">{{ game.name }}</div>
-              </a>
-            </td>
-            {% if (game.status=='pending') %}
-              <td class="cell-container" title="{{ game.status }}">
-                <h3 class="cell-title">{{ _('Status:') }}</h3>
-                <div class="cell-content status-{{ game.status|statusName }}">{{ game.status }}</div>
-              </td>
-              <td class="cell-container" title="{{ game.created }}">
-                <h3 class="cell-title">{{ _('Waiting time:') }}</h3>
-                <div class="cell-content">{{ game.created|relativeDate(useRelativeSuffix=false) }}</div>
-              </td>
-              <td class="cell-container" title="{{ game.queuePosition }}">
-                <h3 class="cell-title">{{ _('Queue position:') }}</h3>
-                <div class="cell-content">{{ game.queuePosition }}</div>
-              </td>
-            {% else %}
-              <td class="cell-container" colspan="3" title="{{ game.status }}">
-                <h3 class="cell-title">{{ _('Status:') }}</h3>
-                <div class="cell-content status-{{ game.status|statusName }}">{{ game.status }}</div>
-              </td>
-            {% endif %}
-            <td class="developer-dashboard-buttons dashboard-buttons">
-              <div class="secondary-buttons">
-                <a class="btn-secondary-view hint--right" data-hint="{{ _('View') }}" href="{{ url('game', [game.slug]) }}" target="_blank">
-                  <div class="btn-text fa fa-desktop"></div>
+          {% if (game.status != 'deleted') %}
+            <tr class="developer-dashboard-entry" data-game-slug="{{ game.slug }}" data-game-title="{{ game.name }}">
+              <td class="game-title-container">
+                <a href="{{ game.app_url }}">
+                  <div class="game-icon" style="background-image: url({{ game.icons[0].src }})"></div>
+                  <div class="game-title">{{ game.name }}</div>
                 </a>
-                <a class="btn-secondary-edit hint--right" data-hint="{{ _('Edit') }}" href="{{ url('edit_game', [game.slug]) }}">
-                  <div class="btn-text fa fa-edit"></div>
-                </a>
-                <a class="btn-secondary-delete hint--right" data-status-verb="delete" data-hint="{{ _('Delete') }}">
-                  <div class="btn-text fa fa-trash-o"></div>
-                </a>
-                <a class="btn-secondary-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}">
-                  <div class="btn-text fa fa-ban"></div>
-                </a>
-              </div>
-            </td>
-          </tr>
+              </td>
+              {% if (game.status == 'pending') %}
+                <td class="cell-container status-container" title="{{ game.status }}">
+                  <h3 class="cell-title">{{ _('Status:') }}</h3>
+                  <div class="cell-content status-{{ game.status|statusName }}">{{ game.status }}</div>
+                </td>
+                <td class="cell-container" title="{{ game.created }}">
+                  <h3 class="cell-title">{{ _('Waiting time:') }}</h3>
+                  <div class="cell-content">{{ game.created|relativeDate(useRelativeSuffix=false) }}</div>
+                </td>
+                <td class="cell-container" title="{{ game.queuePosition }}">
+                  <h3 class="cell-title">{{ _('Queue position:') }}</h3>
+                  <div class="cell-content">{{ game.queuePosition }}</div>
+                </td>
+              {% else %}
+                <td class="cell-container status-container" colspan="3" title="{{ game.status }}">
+                  <h3 class="cell-title">{{ _('Status:') }}</h3>
+                  <div class="cell-content status-{{ game.status|statusName }}">{{ game.status }}</div>
+                </td>
+              {% endif %}
+              <td class="developer-dashboard-buttons dashboard-buttons">
+                <div class="secondary-buttons">
+                  <a class="btn-secondary-view hint--right" data-hint="{{ _('View') }}" href="{{ url('game', [game.slug]) }}" target="_blank">
+                    <div class="btn-text fa fa-desktop"></div>
+                  </a>
+                  <a class="btn-secondary-edit hint--right" data-hint="{{ _('Edit') }}" href="{{ url('edit_game', [game.slug]) }}">
+                    <div class="btn-text fa fa-edit"></div>
+                  </a>
+                  <a class="btn-secondary-delete hint--right" data-status-verb="delete" data-hint="{{ _('Delete') }}">
+                    <div class="btn-text fa fa-trash-o"></div>
+                  </a>
+                  <a class="btn-secondary-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}">
+                    <div class="btn-text fa fa-ban"></div>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          {% endif %}
         {% endfor %}
       </table>
       <div id="empty-message" class="hidden">
