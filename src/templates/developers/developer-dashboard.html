@@ -20,9 +20,9 @@
                 </a>
               </td>
               {% if (game.status == 'pending') %}
-                <td class="cell-container status-container" title="{{ game.status }}">
+                <td class="cell-container status-container" title="{{ game.status|statusName }}">
                   <h3 class="cell-title">{{ _('Status:') }}</h3>
-                  <div class="cell-content status-{{ game.status|statusName }}">{{ game.status }}</div>
+                  <div class="cell-content status-{{ game.status }}">{{ game.status|statusName }}</div>
                 </td>
                 <td class="cell-container" title="{{ game.created }}">
                   <h3 class="cell-title">{{ _('Waiting time:') }}</h3>
@@ -33,9 +33,9 @@
                   <div class="cell-content">{{ game.queuePosition }}</div>
                 </td>
               {% else %}
-                <td class="cell-container status-container" colspan="3" title="{{ game.status }}">
+                <td class="cell-container status-container" colspan="3" title="{{ game.status|statusName }}">
                   <h3 class="cell-title">{{ _('Status:') }}</h3>
-                  <div class="cell-content status-{{ game.status|statusName }}">{{ game.status }}</div>
+                  <div class="cell-content status-{{ game.status }}">{{ game.status|statusName }}</div>
                 </td>
               {% endif %}
               <td class="developer-dashboard-buttons dashboard-buttons">
@@ -49,9 +49,15 @@
                   <a class="btn-secondary-delete hint--right" data-status-verb="delete" data-hint="{{ _('Delete') }}">
                     <div class="btn-text fa fa-trash-o"></div>
                   </a>
-                  <a class="btn-secondary-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}">
-                    <div class="btn-text fa fa-ban"></div>
-                  </a>
+                  {% if (game.status == 'disabled') %}
+                    <a class="btn-secondary-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}" style="visibility:hidden">
+                      <div class="btn-text fa fa-ban"></div>
+                    </a>
+                  {% else %}
+                    <a class="btn-secondary-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}">
+                      <div class="btn-text fa fa-ban"></div>
+                    </a>
+                  {% endif %}
                 </div>
               </td>
             </tr>
