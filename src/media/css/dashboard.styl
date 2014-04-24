@@ -74,6 +74,26 @@ $iconSize = 56px;
             }
         }
     }
+
+    .cell-container {
+        .cell-title {
+            color: $colorGrayUltraLight;
+            font-size: $smallFontSize;
+            font-weight: normal;
+        }
+        .cell-content {
+            font-weight: 600;
+        }
+        .status-approved {
+            color: $colorLightGreen;
+        }
+        .status-pending, 
+        .status-rejected,
+        .status-disabled,
+        .status-deleted {
+            color: $colorGray;
+        }
+    }
 }
 
 .curation-page-title {
@@ -208,6 +228,25 @@ $iconSize = 56px;
             margin-left: 25px;
             position: absolute;
             top: 30%;
+        }
+    }
+
+    .grid-cell {
+        margin: 0 5%;
+    }
+}
+
+[data-page-type~="developer-dashboard"] .page {
+    .title {
+        margin-bottom: 25px;
+        position: relative;
+        h1 {
+            color: $colorGrayDark;
+            display: inline-block;
+            margin-bottom: 0;
+        }
+        #submit-new-game-btn {
+            float: right;
         }
     }
 
