@@ -12,11 +12,15 @@ define('forms', ['jquery', 'z'], function($, z) {
         // If it's required, show :valid/:invalid styles -OR-
         // if it's optional, show styles when there's some text in the value.
         $this.toggleClass('focused', this.hasAttribute('required') || !!$this.val());
+        $this.toggleClass('empty', !$.trim($this.val()));
+        if (!$.trim($this.val()) && this.hasAttribute('required')) {
+            $(e.target.form).find('button[type=submit]').attr('disabled', true);
+        }
     }).on('blur', 'input, select, textarea', function(e) {
         var $this = $(this);
         $this.toggleClass('focused', this.hasAttribute('required') || !!$this.val());
         // So we can target .empty (because :empty doesn't apply to attributes).
-        $this.toggleClass('empty', !!!$this.val());
+        $this.toggleClass('empty', !$.trim($this.val()));
     }).on('loaded decloak', function() {
         $('form:not([novalidate])').each(function() {
             checkValid(this);

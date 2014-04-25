@@ -156,25 +156,27 @@ input[type="date"],
 input[type="url"],
 input[type="search"],
 textarea {
-    position: relative;
-    z-index: 2;
-    font-family: $inputFontFamily;
-    height: 23px;
-    border: 1px solid #ccc;
-    margin: 0;
-    padding: 1px 2px;
     background-color: white;
-    color: #333;
-    font-size: 13px;
-    line-height: 1;
+    border: 1px solid $light-gray;
     border-radius: 1px;
     box-shadow: 0 0 1px rgba(0, 0, 0, .2) inset;
+    color: #333;
+    font-family: $inputFontFamily;
+    font-size: 13px;
+    height: 23px;
+    line-height: 1;
+    margin: 0;
+    padding: 1px 2px;
+    position: relative;
     transition(border .3s ease-in);
+    z-index: 2;
 }
+
 .potato-captcha {
     display: none;
 }
-textarea {
+
+textarea, .description-preview {
     line-height: 1.4em;
 }
 
@@ -187,12 +189,12 @@ textarea {
 }
 form:not([novalidate]) {
     input.input-error, textarea.input-error, select.input-error, .input-error,
-    input.focused:invalid, textarea.focused:invalid, select.focused:invalid {
+    input.focused:invalid, textarea.focused:invalid, textarea.focused.empty, select.focused:invalid {
         border-color: #da3e5a;
         box-shadow: 0 0 0 2px rgba(218, 62, 90, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
     }
     input.input-success, textarea.input-success, select.input-success, .input-success,
-    input.focused:valid, textarea.focused:valid, select.focused:valid {
+    input.focused:valid, textarea.focused:not(.empty):valid, select.focused:valid {
         border-color: #18a011 ;
         box-shadow: 0 0 0 2px rgba(24, 160, 17, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
     }
@@ -240,7 +242,7 @@ input.input-search, input[type="search"] {
     z-index: 2;
 }
 
-button, input, select, textarea {
+button, input, select, textarea, .description-preview {
     font: 100% $sourceFontFamily;
     margin: 0;
     max-width: 100%;
@@ -288,7 +290,13 @@ label {
     }
 }
 
-input[type=email], input[type=search], input[type=text], input[type=url], textarea, .input-prepend {
+input[type=email], 
+input[type=search], 
+input[type=text], 
+input[type=url], 
+textarea, 
+.input-prepend, 
+.description-preview {
     border-radius: 2px;
     border: 1px solid $light-gray;
     padding: 5px;
@@ -309,7 +317,7 @@ input[type=email],
 input[type=search],
 input[type=text],
 input[type=url],
-textarea {
+textarea, .description-preview {
     font-size: 18px;
     line-height: 22px;
     height: 30px;
@@ -317,14 +325,35 @@ textarea {
     width: 100%;
     z-index: 2;
 }
-textarea {
+textarea, .description-preview {
     height: auto;
     min-height: 50px;
+    overflow: hidden;
 }
 
 form {
     .span-grid {
         margin-top: 15px;
+    }
+    textarea[name=description].focused + .toggle-preview-container {
+        display: initial;
+    }
+    .toggle-preview-container {
+        background-color: rgba(0,255,0,0.25);
+        border: 1px solid green;
+        border-radius: 5px;
+        bottom: 5px;
+        cursor: pointer;
+        display: none;
+        height: 24px;
+        position: absolute;
+        right: 5px;
+        text-align: center;
+        width: 24px;
+        z-index: 100;
+        &:hover {
+            background-color: rgba(0,255,0,0.5);
+        }
     }
     .req {
         position: absolute;

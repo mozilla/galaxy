@@ -9,6 +9,13 @@ define('views/feedback',
         e.preventDefault();
 
         var $this = $(this);
+        if (!$.trim($this.val())) {
+            notify({
+                message: gettext('Please enter feedback')
+            });
+            return;
+        }
+
         var data = utils.getVars($this.serialize());
         data.page_url = window.location.pathname;
         
@@ -24,7 +31,7 @@ define('views/feedback',
         }).fail(function() {
             forms.toggleSubmitFormState($this, true);
             notify({
-                message: gettext('There was a problem submitting your feedback. Try again soon.')
+                message: gettext('There was a problem submitting your feedback. Try again soon')
             });
         });
     });

@@ -24,6 +24,14 @@ define('views/submit',
         });
     }
 
+    var delay = (function(){
+        var timer = 0;
+        return function(callback, duration){
+            clearTimeout(timer);
+            timer = setTimeout(callback, duration);
+        };
+    })();
+
     z.body.on('blur input', 'input[name=name]', function(e) {
         // NOTE: We're using `keyup` instead of `keypress` to detect when
         // the user tabs within this field.
@@ -38,6 +46,26 @@ define('views/submit',
         // Upon presence/absence of name, toggle the `focused` class so
         // :valid/:invalid styles get set on slug.
         $slug.toggleClass('focused', !!$this.val());
+    }).on('keyup', 'textarea[name=description]', function(e) {
+        var value = $(this).val();
+        var togglePreview = $('.toggle-preview-container');
+        togglePreview.hide();
+        delay(function() {
+            if (value.length) {
+                togglePreview.show();
+            }
+        }, 300);
+        
+    }).on('click', '.toggle-preview-container', function(e) {
+        e.preventDefault();
+        console.log('click')
+        var $textarea = $('textarea[name=description]');
+        var $descriptionPreview = $('.description-preview');
+        $descriptionPreview.html(marked($textarea.val()));
+        $(this).children('.fa').toggleClass('fa-eye-slash');
+        $textarea.toggle();
+        $descriptionPreview.toggle();
+
     }).on('submit', '.game-form', function(e) {
         e.preventDefault();
         var $this = $(this);
@@ -87,19 +115,7 @@ define('views/submit',
     });
 
     return function(builder) {
-        builder.start('submit.html').done(function() {
-            // new dropzone('#test-zone', {
-            //     url: "#",
-            //     clickable: true,
-            //     maxFilesize: 10,
-            //     uploadMultiple: true,
-            //     addRemoveLinks: true,
-            //     accept: function(file, done) {
-            //         console.log(file);
-            //     }
-            // });
-        });
-
+        builder.start('submit.html');
         builder.z('type', 'leaf submit');
         builder.z('title', gettext('Submit a Game'));
     };
