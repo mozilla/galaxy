@@ -3,16 +3,21 @@ define('views/review',
     function(format, log, notification, requests, urls, utils, z) {
     
     var console = log('review');
+    var pastTense = {'approve': 'approved',
+                     'reject': 'rejected',
+                     'disable': 'disabled',
+                     'delete': 'deleted'};
+
+    function capitalise(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     function successMessage(statusVerb, game) {
-        var params = {game: game};
-        switch (statusVerb) {
-            case 'approve': return gettext('Approved game: {game}', params);
-            case 'reject':  return gettext('Rejected game: {game}', params);
-            case 'disable': return gettext('Disabled game: {game}', params);
-            case 'delete':  return gettext('Deleted game: {game}', params);
-            default:        return '';
+        var params = {verb: capitalise(pastTense[statusVerb]), game: game};
+        if (statusVerb) {
+            return gettext('{verb} game: {game}', params); 
         }
+        return '';
     }
     function failureMessage(statusVerb, game) {
         var params = {verb: statusVerb, game: game};
@@ -22,9 +27,9 @@ define('views/review',
         return '';
     }
     function invalidMessage(statusVerb, game) {
-        var params = {verb: statusVerb, game: game};
+        var params = {verb: pastTense[statusVerb], game: game};
         if (statusVerb) {
-            return gettext('{game} is already {verb}d', params); 
+            return gettext('{game} is already {verb}', params); 
         }
         return '';
     }
