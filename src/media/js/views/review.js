@@ -19,6 +19,7 @@ define('views/review',
         }
         return '';
     }
+
     function failureMessage(statusVerb, game) {
         var params = {verb: statusVerb, game: game};
         if (statusVerb) {
@@ -26,6 +27,7 @@ define('views/review',
         }
         return '';
     }
+    
     function invalidMessage(statusVerb, game) {
         var params = {verb: pastTense[statusVerb], game: game};
         if (statusVerb) {
