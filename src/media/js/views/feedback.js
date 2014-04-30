@@ -39,7 +39,7 @@ define('views/feedback',
     // Init desktop feedback form modal trigger.
     function addFeedbackModal(decloak) {
         if (!$('.main.feedback:not(.modal)').length && !$('.feedback.modal').length) {
-            z.page.append(nunjucks.env.render('feedback.html'));
+            z.body.append(nunjucks.env.render('feedback.html'));
             rt.resizeTextareas();
         }
         if (!decloak) {
@@ -59,10 +59,16 @@ define('views/feedback',
         $('.feedback.modal').addClass('show');
     });
 
-    z.body.on('click', '.close', function(e) {
+    z.body.on('click', '.feedback-container', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        $('.feedback').removeClass('show');
+        $('.cloak').trigger('dismiss');
+        return;
+    });
+
+    z.body.on('click', '.feedback.modal', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         return;
     });
 
