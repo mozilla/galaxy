@@ -49,15 +49,9 @@
                   <a class="btn-secondary-delete hint--right" data-status-verb="delete" data-hint="{{ _('Delete') }}">
                     <div class="btn-text fa fa-trash-o"></div>
                   </a>
-                  {% if (game.status == 'disabled') %}
-                    <a class="btn-secondary-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}" style="visibility:hidden">
-                      <div class="btn-text fa fa-ban"></div>
-                    </a>
-                  {% else %}
-                    <a class="btn-secondary-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}">
-                      <div class="btn-text fa fa-ban"></div>
-                    </a>
-                  {% endif %}
+                  <a class="btn-secondary-disable hint--right" data-status-verb="disable" data-hint="{{ _('Disable') }}" style="visibility:{{'hidden' if game.status == 'disabled' else 'visible'}}"> 
+                    <div class="btn-text fa fa-ban"></div>
+                  </a>
                 </div>
               </td>
             </tr>
