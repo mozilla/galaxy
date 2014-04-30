@@ -9,48 +9,57 @@
     }
 }
 
-.overlayed .feedback-container {
-    bottom: 0;
-    height: 100%;
-    position: fixed;
-    width: 100%;
-    z-index: 60;
-    .feedback-inner {
-        height: 100%;
-        margin: 0 auto;
-        max-width: 1200px;
-        position: relative;
+@media $narrower-than-desktop {
+    .feedback-form.form-modal {
+        left: 50%;
+        right: auto;
     }
 }
 
-.feedback {
-    &.modal {
-        bottom: 40px;
-        left: auto;
-        margin-left: 70px;
-        position: absolute;
-        right: 125px;
-        top: auto;
-        width: 400px;
-        &:before {
-            border: transparent solid 10px;
-            border-top-color: $modalBackgroundColor;
-            bottom: -20px;
-            content: '';
-            display: block;
-            height: 0;
-            margin-left: -10px;
-            position: absolute;
-            right: 25%;
-            width: 0;
-            z-index: 99;
+@media $at-least-desktop {
+    .overlayed .feedback-container {
+        bottom: 0;
+        height: 100%;
+        position: fixed;
+        width: 100%;
+        z-index: 60;
+        .feedback-inner {
+            height: 100%;
+            margin: 0 auto;
+            max-width: 1200px;
+            position: relative;
         }
     }
-    h2 {
-        margin-bottom: 10px;
-    }
-    textarea {
-        min-height: 100px;
-        max-height: 300px;
+
+    .feedback {
+        &.modal {
+            bottom: 40px;
+            left: auto;
+            margin-left: 70px;
+            position: absolute;
+            right: 125px;
+            top: auto;
+            width: 400px;
+            &:before {
+                border: transparent solid 10px;
+                border-top-color: $modalBackgroundColor;
+                bottom: -20px;
+                content: '';
+                display: block;
+                height: 0;
+                margin-left: -10px;
+                position: absolute;
+                right: 25%;
+                width: 0;
+                z-index: 99;
+            }
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        textarea {
+            min-height: 100px;
+            max-height: 300px;
+        }
     }
 }
