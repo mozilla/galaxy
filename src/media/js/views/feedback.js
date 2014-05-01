@@ -63,13 +63,11 @@ define('views/feedback',
         e.preventDefault();
         e.stopPropagation();
         $('.cloak').trigger('dismiss');
-        return;
     });
 
     z.body.on('click', '.feedback.modal', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        return;
     });
 
     return function(builder) {
