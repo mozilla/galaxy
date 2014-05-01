@@ -1,16 +1,18 @@
 {% include '_macros/potato-captcha.html' %}
-<div class="feedback modal">
-  <div>
-    <form method="post" class="feedback-form form-modal">
-      <h2>{{ _('Feedback') }}</h2>
-      <a href="#" class="form-close">&times;</a>
-      <p>
-        <textarea name="feedback" placeholder="{{ _('Tell us why we rock. Or how we can rock harder.') }}" required></textarea>
-      </p>
-      <p class="form-footer">
-        {{ potato_captcha() }}
-        <button class="btn btn-big" type="submit">{{ _('Submit') }}</button>
-      </p>
-    </form>
+<div class="feedback-container">
+  <div class="feedback-inner">
+    <div class="feedback modal">
+      <form method="post" class="feedback-form form-modal">
+        <h2>{{ _('Feedback') }}</h2>
+        <a title="" class="form-close">&times;</a>
+        <p>
+          <textarea name="feedback" placeholder="{{ _('Tell us why we rock. Or how we can rock harder.') }}" required></textarea>
+        </p>
+        <p class="form-footer">
+          {{ potato_captcha() }}
+          <button class="btn btn-big" type="submit">{{ _('Submit') }}</button>
+        </p>
+      </form>
+    </div>
   </div>
 </div>

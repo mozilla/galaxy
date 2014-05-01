@@ -17,12 +17,27 @@
 }
 
 @media $at-least-desktop {
+    .overlayed .feedback-container {
+        bottom: 0;
+        height: 100%;
+        position: fixed;
+        width: 100%;
+        z-index: 60;
+        .feedback-inner {
+            height: 100%;
+            margin: 0 auto;
+            max-width: 1200px;
+            position: relative;
+        }
+    }
+
     .feedback {
         &.modal {
             bottom: 40px;
             left: auto;
-            margin-left: 200px;
-            right: 8%;
+            margin-left: 70px;
+            position: absolute;
+            right: 125px;
             top: auto;
             width: 400px;
             &:before {
@@ -32,9 +47,9 @@
                 content: '';
                 display: block;
                 height: 0;
-                left: 20%;
                 margin-left: -10px;
                 position: absolute;
+                right: 25%;
                 width: 0;
                 z-index: 99;
             }
