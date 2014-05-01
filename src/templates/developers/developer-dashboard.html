@@ -24,9 +24,9 @@
                   <h3 class="cell-title">{{ _('Status:') }}</h3>
                   <div class="cell-content status-{{ game.status }}">{{ game.status|statusName }}</div>
                 </td>
-                <td class="cell-container" title="{{ game.created }}">
+                <td class="cell-container" title="{{ game.waitingTime }}">
                   <h3 class="cell-title">{{ _('Waiting time:') }}</h3>
-                  <div class="cell-content">{{ game.created|relativeDate(useRelativeSuffix=false) }}</div>
+                  <div class="cell-content">{{ game.waitingTime|relativeDate(useRelativeSuffix=false) }}</div>
                 </td>
                 <td class="cell-container" title="{{ game.queuePosition }}">
                   <h3 class="cell-title">{{ _('Queue position:') }}</h3>
