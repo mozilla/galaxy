@@ -171,7 +171,7 @@ define('media-input',
     }).on('drop', '.media-preview-container', function(e) {
         e.preventDefault();
         var $this = $(this);
-        $(this).toggleClass('dragenter', false);
+        $this.toggleClass('dragenter', false);
         if (!$this.closest('.media-item').hasClass('processed')) {
             e = e.originalEvent;
             getFileDataURI(e.dataTransfer).then(function(data) {
@@ -196,7 +196,7 @@ define('media-input',
         var $this = $(this);
         $this.siblings('input[type=file].media-input').val('');
         var $mediaList = $this.closest('.media-list');
-        if ($mediaList.children('.media-item').length == 1) {
+        if ($mediaList.children('.media-item').length === 1) {
             var $mediaPreviewContainer = $this.parent();
             $mediaPreviewContainer.closest('.media-item').removeClass('processed');
             $mediaPreviewContainer.siblings('.media-input').val('');
