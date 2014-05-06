@@ -97,7 +97,7 @@ define('views/submit',
         $('.screenshots-list').each(function() {
             var $this = $(this);
             var type = $this.data('screenshot-type');
-            $this.find('[name=screenshot_final_url').each(function() {
+            $this.find('[name=screenshot_final_url]').each(function() {
                 var $screenshotInput = $(this);
                 var src = $screenshotInput.val();
                 var height = $screenshotInput.data('height');
