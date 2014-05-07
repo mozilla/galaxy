@@ -113,7 +113,7 @@ define('views/submit',
         });
 
         // Handle URLs for videos.
-        $('.videos input[type=hidden').each(function() {
+        $('.videos input[type=hidden]').each(function() {
             var $this = $(this);
             var id = $this.val();
             var videoType = $this.data('video-type');
