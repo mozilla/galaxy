@@ -103,9 +103,9 @@ define('media-input',
     function getFileDataURI(input, callback) {
         return new Promise(function(resolve, reject) {
             var files = input.files;
-            if (files) {
+            if (files && files[0]) {
                 // Loop through the files and render image files.
-                files.forEach(function (file) {
+                for (var i = 0, f; f = files[i]; i++) {
                     // This is so we can get the data URI of the image uploaded.
                     var reader = new FileReader();
                     reader.onload = function (e) {
@@ -115,8 +115,8 @@ define('media-input',
                     reader.onerror = function (err) {
                         reject(err.getMessage());
                     };
-                    reader.readAsDataURL(file);
-                });
+                    reader.readAsDataURL(input.files[i]);
+                }
             }
         });
     }
