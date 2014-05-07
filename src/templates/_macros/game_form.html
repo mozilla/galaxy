@@ -136,7 +136,7 @@
       </div>
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
-          <div class="grid icons media form-field grid-bottom">
+          <div class="grid icons media form-field grid-bottom grid-one-of-two">
             <div class="grid-cell media-left">
               <span class="media-size">{{ _('128px &times; 128px') }}</span>
               <div class="media-list">
@@ -148,21 +148,6 @@
                   </div>
                   <input type="url" class="media-input" data-type="icons" value="{{ game.icons[0].src }}" placeholder="{{ _('Or enter URL to 128px icon here') }}" pattern="https?://.*">
                   <input type="hidden" name="icon_final_url" class="media-input-processed-url" data-type="icons" data-height="{{ game.icons[0].height }}" data-width="{{ game.icons[0].width }}" value="{{ game.icons[0].src }}">
-                </div>
-              </div>
-            </div>
-            <div class="grid-cell media-right"></div> <!-- Placeholder -->
-            <div class="grid-cell media-right" style="display:none"> <!-- Not in use for now -->
-              <div class="media-list">
-                <div class="media-item">
-                  <span class="media-size">{{ _('64px &times; 64px') }}</span>
-                  <div class="media-preview-container icons-64" data-message="{{ _('Drag and drop or select') }}">
-                    <img class="media-preview" data-type="icons">
-                    <input type="file" name="icon_file" class="media-input" data-type="icons">
-                    <div class="media-delete"></div>
-                  </div>
-                  <input type="url" class="media-input" data-type="icons" value="{{ game.icons }}" placeholder="{{ _('Or enter URL to 64px icon here') }}" pattern="https?://.*">
-                  <input type="hidden" name="icon_final_url" class="media-input-processed-url" data-type="icons" data-height="64" data-width="64">
                 </div>
               </div>
             </div>
