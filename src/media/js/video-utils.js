@@ -1,6 +1,6 @@
 define('video-utils',
-       ['l10n', 'jquery', 'requests'],
-       function(l10n, $, requests) {
+       ['l10n', 'jquery', 'requests', 'settings'],
+       function(l10n, $, requests, settings) {
 
     function parseVideo(url) {
         // - Supported YouTube URL formats:
@@ -37,9 +37,9 @@ define('video-utils',
         var $iframe = $('<iframe>', {width: width, height: height});
         $iframe.attr('frameborder', 0);
         if (type === 'youtube') {
-            $iframe.attr('src', '//www.youtube.com/embed/' + id);
+            $iframe.attr('src', settings.video_utils_urls.youtube.iframe.replace('<id>', id));
         } else if (type === 'vimeo') {
-            $iframe.attr('src', '//player.vimeo.com/video/' + id);
+            $iframe.attr('src', settings.video_utils_urls.vimeo.iframe.replace('<id>', id));
         }
         return $iframe;
     }
@@ -51,9 +51,9 @@ define('video-utils',
 
     function getVideoThumbnailFromId(id, type, cb) {
         if (type === 'youtube') {
-            cb('//img.youtube.com/vi/' + id + '/hqdefault.jpg');
+            cb(settings.video_utils_urls.youtube.thumbnail.replace('<id>', id));
         } else if (type === 'vimeo') {
-            requests.get('http://vimeo.com/api/v2/video/' + id + '.json').then(function(data) {
+            requests.get(settings.video_utils_urls.vimeo.thumbnail.replace('<id>', id)).then(function(data) {
                 cb(data[0].thumbnail_large);
             });
         }

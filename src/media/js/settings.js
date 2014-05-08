@@ -36,6 +36,17 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'multiplayer': gettext('Multiplayer')
         },
 
+        video_utils_urls: {
+            'youtube': {
+                'iframe': '//www.youtube.com/embed/<id>',
+                'thumbnail': '//img.youtube.com/vi/<id>/hqdefault.jpg'
+            },
+            'vimeo': {
+                'iframe': '//player.vimeo.com/video/<id>',
+                'thumbnail': 'http://vimeo.com/api/v2/video/<id>.json'
+            }
+        },
+
         // Error template paths. Used by builder.js.
         fragment_error_template: 'errors/fragment.html',
         pagination_error_template: 'errors/pagination.html',
