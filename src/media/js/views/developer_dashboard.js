@@ -57,12 +57,15 @@ define('views/developer_dashboard',
             setSpinning(false);
             if (success) {
                 // TODO: Animate this
-                $game.remove();
-
-                var $table = $('.developer-dashboard-table');
-                if (!$table.find('tbody > tr').length) {
-                    $table.hide();
-                    $('#empty-message').show();
+                if (statusVerb === 'delete') {
+                    $game.remove();
+                    var $table = $('.developer-dashboard-table');
+                    if (!$table.find('tbody > tr').length) {
+                        $table.hide();
+                        $('#empty-message').show();
+                    }
+                } else {
+                    require('views').reload();
                 }
             }
         }
