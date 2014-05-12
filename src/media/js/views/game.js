@@ -103,6 +103,7 @@ define('views/game',
             twttr.widgets.load(); // Needed for loaded twitter widget scripts
             featured_games.attachScrollEvents($('.featured-games-section ul'));
             featured_games.attachScrollEvents($('.game-media-list'));
+            $('.game-description').html(marked(game.description));
         });
     };
 });
