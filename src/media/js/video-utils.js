@@ -1,6 +1,6 @@
 define('video-utils',
-       ['l10n', 'jquery'],
-       function(l10n, $) {
+       ['l10n', 'jquery', 'requests', 'settings'],
+       function(l10n, $, requests, settings) {
 
     function parseVideo(url) {
         // - Supported YouTube URL formats:
@@ -31,26 +31,29 @@ define('video-utils',
     function createVideoFromUrl(url, width, height) {
         var videoObj = parseVideo(url);
         return createVideoFromId(videoObj.id, videoObj.type, width, height);
-        
     }
 
     function createVideoFromId(id, type, width, height) {
         var $iframe = $('<iframe>', {width: width, height: height});
         $iframe.attr('frameborder', 0);
         if (type === 'youtube') {
-            $iframe.attr('src', '//www.youtube.com/embed/' + id);
+            $iframe.attr('src', settings.video_utils_urls.youtube.iframe.replace('<id>', id));
         } else if (type === 'vimeo') {
-            $iframe.attr('src', '//player.vimeo.com/video/' + id);
+            $iframe.attr('src', settings.video_utils_urls.vimeo.iframe.replace('<id>', id));
         }
         return $iframe;
     }
 
-    function getVideoThumbnail(url, cb) {
+    function getVideoThumbnailFromUrl(url, cb) {
         var videoObj = parseVideo(url);
-        if (videoObj.type === 'youtube') {
-            cb('//img.youtube.com/vi/' + videoObj.id + '/hqdefault.jpg');
-        } else if (videoObj.type === 'vimeo') {
-            $.get('http://vimeo.com/api/v2/video/' + videoObj.id + '.json', function(data) {
+        getVideoThumbnailFromId(videoObj.id, videoObj.type, cb);
+    }
+
+    function getVideoThumbnailFromId(id, type, cb) {
+        if (type === 'youtube') {
+            cb(settings.video_utils_urls.youtube.thumbnail.replace('<id>', id));
+        } else if (type === 'vimeo') {
+            requests.get(settings.video_utils_urls.vimeo.thumbnail.replace('<id>', id)).then(function(data) {
                 cb(data[0].thumbnail_large);
             });
         }
@@ -60,6 +63,7 @@ define('video-utils',
         parseVideo: parseVideo,
         createVideoFromUrl: createVideoFromUrl,
         createVideoFromId: createVideoFromId,
-        getVideoThumbnail: getVideoThumbnail
+        getVideoThumbnailFromUrl: getVideoThumbnailFromUrl,
+        getVideoThumbnailFromId: getVideoThumbnailFromId
     };
 });

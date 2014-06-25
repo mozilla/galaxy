@@ -42,7 +42,12 @@
         {% for video in game.videos %}
           <img class="game-media" alt="" title="" src="{{ video.thumbnail }}" data-video-id="{{ video.id }}" data-video-type="{{ video.type }}">
         {% endfor %}
-        {% for screenshot in game.screenshots %}
+
+        {% for screenshot in game.screenshots[0].4_3 %}
+          <img class="game-media" alt="" title="" src="{{ screenshot.src }}">
+        {% endfor %}
+        
+        {% for screenshot in game.screenshots[0].16_9 %}
           <img class="game-media" alt="" title="" src="{{ screenshot.src }}">
         {% endfor %}
       </div>

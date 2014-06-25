@@ -1,37 +1,5 @@
 @import 'lib';
 
-.media-preview {
-    cursor: pointer;
-    display: block;
-}
-
-.media-preview {
-    display: none;
-    margin-top: 5px;
-    max-height: 150px;
-    max-width: 200px;
-}
-
-.icons .media-preview {
-    max-height: 128px;
-    max-width: 128px;
-}
-
-.videos .media-preview {
-    max-height: 150px;
-    max-width: 200px;
-}
-
-.media-size {
-    color: $colorGrayLight;
-    font-size: 10px;
-    margin-top: 15px;
-}
-
-input[type=url].media {
-    margin-bottom: 5px;
-}
-
 .media {
     .form-help {
         margin-bottom: 5px;
@@ -41,4 +9,231 @@ input[type=url].media {
         bottom: auto;
         top: 5px;
     }
+    .media-left,
+    .media-right {
+        padding-right: 80px;
+    }
+    .media-size {
+        border: 1px solid $colorGrayLightest;
+        border-radius: 2px;
+        color: $colorGrayLighter;
+        display: inline-block;
+        font-size: 10px;
+        margin-top: 15px;
+        padding: 1px 3px;
+        .inner {
+            color: $colorGrayLightest;
+        }
+    }
+    input {
+        font-size: 12px;
+    }
+    input[type=file] {
+        display: none;
+    }
+    .media-item {
+        margin-bottom: 10px;
+        &.media-item-template {
+            display: none;
+            &:first-child {
+                display: block;
+            }
+            &:not(:first-child) + .add-button {
+                display: block;
+            }
+        }
+        &.add-item {
+            display: inherit;
+        }
+    }
+    .add-button {
+        display: none;
+        i {
+            margin-right: 3px;
+        }
+    }
+}
+
+.media-item {
+    .media-preview-container {
+        background-color: $mediaPreviewBackgroundColor;
+        border: $mediaPreviewBorder;
+        border-radius: 2px;
+        cursor: pointer;
+        display: block;
+        margin: 5px 0;
+        max-width: 100%;
+        position: relative;
+        
+        img, iframe {
+            height: 100%;
+            position: relative;
+            width: 100%;
+            z-index: 1;
+        }
+        .media-preview {
+            display: none;
+        }
+        &:before {
+            background: url('../img/game-submission/upload-blue.png') 50% 0 no-repeat;
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+        }
+        &:after {
+            color: $colorLightBlue;
+            content: attr(data-message);
+            display: block;
+            position: absolute;
+            text-align: center;
+        }
+    }
+    &.processed {
+        .media-preview-container {
+            background: #fff url('../img/game-submission/crosshatch.png');
+            border: 1px solid $colorGray;
+            .media-preview {
+                display: inherit;
+            }
+            .media-delete {
+                background-color: rgba(217,21,24,0.75);
+                border: 1px solid #d91518;
+                border-radius: 5px;
+                bottom: 5px;
+                color: #fff;
+                cursor: pointer;
+                display: none;
+                height: 30px;
+                position: absolute;
+                width: 30px;
+                right: 5px;
+                text-align: center;
+                z-index: 2;
+                &:before {
+                    content: "\00d7";   /* Cross symbol */
+                    font-size: 24px;
+                    font-weight: 600;
+                    line-height: 30px;
+                }
+            }
+            &:hover {
+                .media-delete {
+                    display: inherit;
+                }
+            }
+            &:before {
+                background-image: none;
+            }
+            &:after {
+                content: "";
+            }
+        }
+        .media-input {
+            display: none;
+        }
+    }
+}
+
+.icons {
+    .icons-dimensions {
+        border: 1px solid $colorGrayLighter;
+        border-radius: 2px;
+        color: $colorGrayLighter;
+        display: inline-block;
+        font-size: 10px
+        padding: 1px 3px;
+    }
+
+    .media-preview-container {
+        height: 128px;
+        width: 128px;
+        &:before {
+            background-size: 50px;
+            height: 50px;
+            top: 25px;
+        }
+        &:after {
+            bottom: 17px;
+            font-size: 12px;
+            margin-left: 20%;
+            width: 60%;
+        }
+        &.icons-64 {
+            height: 64px;
+            width: 64px;
+            &:before {
+                background-size: 25px;
+                top: 20px;
+            }
+            &:after {
+                content: "";
+            }
+        }
+    }
+}
+
+.screenshots {
+    .media-preview-container {
+        height: 210px;
+        &:before {
+            background-size: 80px;
+            height: 80px;
+            top: 50px;
+        }
+        &:after {
+            bottom: 35px;
+            margin-left: 32%;
+            width: 36%;
+        }
+        &.screenshots-16-9 {
+            height: 157px;
+            &:before {
+                top: 20px;
+            }
+            &:after {
+                bottom: 15px;
+            }
+        }
+    }
+}
+
+.icons,
+.screenshots {
+    .media-preview-container.dragenter {
+        background-color: #efefef;
+        border-color: $colorGray;
+        &:before {
+            background-image: url('../img/game-submission/upload.png');
+        }
+        &:after {
+            color: $colorGray;
+        }
+    }
+}
+
+.videos {
+    .media-preview-container {
+        cursor: default;
+        height: 210px;
+        &:before {
+            background: url('../img/game-submission/preview-blue.png') 53% 0 no-repeat;
+            background-size: 80px;
+            height: 80px;
+            top: 60px;
+        }
+        &:after {
+            bottom: 55px;
+            content: attr(data-message);
+            width: 100%;
+        }
+        .media-iframe {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+input[type=url].media {
+    margin-bottom: 5px;
 }

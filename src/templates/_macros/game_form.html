@@ -1,5 +1,5 @@
 {% macro gameForm(game) %}
-  <form class="game-form" method="post" data-required="{{ _('Required') }}" data-formtype="{{'edit' if game else 'submit'}}">
+  <form class="game-form" method="post" data-required="{{ _('Required') }}" data-formtype="{{'edit' if game else 'submit'}}" novalidate>
     <div class="grid content">
       <div class="grid-cell grid-flex-grow-two">
         <div class="form-field">
@@ -93,11 +93,11 @@
     <div class="grid content">
       <div class="grid-cell grid-flex-grow-two">
         <div class="l">{{ _('Number of Players') }}</div>
+        <span class="req" data-required="{{ _('Required') }}"></span>
         <div class="form-field">
           {% for value, name in settings.number_of_players.items() %}
               <label class="choice"><input type="radio" name="number_of_players"{{ ' checked' if value == game.number_of_players }} required value="{{ value }}"> {{ name }}</label>
           {% endfor %}
-          <span class="req" data-required="{{ _('Required') }}"></span>
         </div>
       </div>
       <div class="grid-cell">
@@ -110,11 +110,13 @@
     <div class="grid content">
       <div class="grid-cell grid-flex-grow-two">
         <div class="l">{{ _('Genre') }}</div>
+        <span class="req" data-required="{{ _('Required') }}"></span>
         <div class="form-field">
           {% for slug, name in settings.genres.items() %}
-              <label class="choice"><input type="radio" name="genre"{{ ' checked' if slug == game.genre }} required value="{{ slug }}"> {{ name }}</label>
+            <label class="choice">
+              <input type="radio" name="genre"{{ ' checked' if slug == game.genre }} required value="{{ slug }}"> {{ name }}
+            </label>
           {% endfor %}
-          <span class="req" data-required="{{ _('Required') }}"></span>
         </div>
       </div>
       <div class="grid-cell">
@@ -128,33 +130,32 @@
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
           <div class="l">{{ _('Icon') }}</div>
-            <span class="req" data-required="{{ _('Required') }}"></span>
+          <span class="req" data-required="{{ _('Required') }}"></span>
         </div>
         <div class="grid-cell"></div>
       </div>
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
-          <div class="icons media form-field">
-            <label>
-              <div class="fallback" data-placeholder="{{ _('Icon URL') }}" data-type="icons">
-                {% for icon in game.icons %}
-                  <input type="url" name="icon_url" class="media" data-type="icons" value="{{ icon }}" placeholder="{{ _('Icon URL') }}" pattern="https?://.*">
-                {% endfor %}
+          <div class="grid icons media form-field grid-bottom grid-one-of-two">
+            <div class="grid-cell media-left">
+              <span class="media-size">{{ _('128px &times; 128px') }}</span>
+              <div class="media-list">
+                <div class="media-item {{ 'processed' if game.icons[0] }}">
+                  <div class="media-preview-container" data-type="icons" data-message="{{ _('Drag and drop or select') }}">
+                    <img class="media-preview" data-type="icons" src="{{ game.icons[0].src }}">
+                    <input type="file" name="icon_file" class="media-input" data-type="icons">
+                    <div class="media-delete"></div>
+                  </div>
+                  <input type="url" class="media-input" data-type="icons" value="{{ game.icons[0].src }}" placeholder="{{ _('Or enter URL to 128px icon here') }}" pattern="https?://.*">
+                  <input type="hidden" name="icon_final_url" class="media-input-processed-url" data-type="icons" data-height="{{ game.icons[0].height }}" data-width="{{ game.icons[0].width }}" value="{{ game.icons[0].src }}">
+                </div>
               </div>
-            </label>
-            <input type="file" name="icon_file" class="media" data-type="icons">
-
-            <div class="media-size"></div>
-            <img id="icon-preview" class="media-preview" data-type="icons">
-
-            {# `icon_final_url` contains the URL of the image that we'll want to save locally on the server. #}
-            <input type="hidden" name="icon_final_url" class="media-final-url" data-type="icons" data-height="128" data-width="128">
+            </div>
           </div>
         </div>
         <div class="grid-cell">
           <p class="form-help">
-            {{ _("The icon will be shown on all listings in Galaxy.<br>Allowed formats: <code>PNG</code>, <code>JPG</code><br>
-            Maximum dimensions: 128px &times; 128px") }}
+            {{ _("The icon will be shown on all listings in Galaxy.<br>Allowed image formats: PNG, JPG<br>Maximum dimensions: 128px &times; 128px") }}
           </p>
         </div>
       </div>
@@ -170,26 +171,34 @@
       </div>
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
-          <div class="screenshots media form-field">
-            <label>
-              <div class="fallback" data-placeholder="{{ _('Image URL') }}" data-type="screenshots">
-                {% for screenshot in game.screenshots %}
-                  <input type="url" class="media" data-type="screenshots" value="{{ screenshot }}" placeholder="{{ _('Image URL') }}" pattern="https?://.*">
+          <div class="grid screenshots media form-field grid-bottom">
+            <div class="grid-cell media-left screenshots-list" data-screenshot-type="4_3">
+              <span class="media-size">4:3 <span class="inner">(1024px &times; 768px)</span></span>
+              <div class="media-list">
+                {% set count = game.screenshots[0].4_3|length + 1 if game.screenshots else 1 %}
+                {% for i in range(count) %}
+                  {% include '_macros/media-item.html' %}
+                  {{ mediaItem(game.screenshots[0].4_3[i], i == count - 1, 'screenshots-4-3') }}
                 {% endfor %}
+                <button type="button" class="btn add-button"><i class="fa fa-plus"></i> Add</button>
+              </div>              
+            </div>
+            <div class="grid-cell media-right screenshots-list" data-screenshot-type="16_9">
+              <span class="media-size">16:9 <span class="inner">(1280px &times; 720px)</span></span>
+              <div class="media-list">
+                {% set count = game.screenshots[0].16_9|length + 1 if game.screenshots else 1 %}
+                {% for i in range(count) %}
+                  {% include '_macros/media-item.html' %}
+                  {{ mediaItem(game.screenshots[0].16_9[i], i == count - 1, 'screenshots-16-9') }}
+                {% endfor %}
+                <button type="button" class="btn add-button"><i class="fa fa-plus"></i> Add</button>
               </div>
-            </label>
-            <input type="file" name="screenshot_file" class="media" data-type="screenshots">
-<!-- 
-            <div class="media-size"></div>
-            <img id="screenshot-preview" class="media-preview" data-type="screenshots">
-
-            {# `screenshot_final_url` contains the URL of the image that we'll want to save locally on the server. #}
-            <input type="hidden" name="screenshot_final_url" class="media-final-url" data-type="screenshots"> -->
+            </div>
           </div>
         </div>
         <div class="grid-cell">
           <p class="form-help">
-            {{ _("Screenshots will be shown on your game detail page. Allowed image formats: <code>PNG</code>, <code>JPG</code>") }}
+            {{ _("Screenshots will be shown on your game detail page.<br>Allowed image formats: PNG, JPG") }}
           </p>
         </div>
       </div>
@@ -205,22 +214,44 @@
       </div>
       <div class="grid">
         <div class="grid-cell grid-flex-grow-two">
-          <div class="videos media form-field">
-            <label>
-              <div class="fallback" data-placeholder="{{ _('YouTube or Vimeo URL') }}" data-type="videos">
-                {% if game.videos %}
-                  {% for video in game.videos %}
-                    <input type="url" class="media media-final-url" data-type="videos" value="{{ video }}" placeholder="{{ _('YouTube or Vimeo URL') }}" pattern="https?://.*">
-                  {% endfor %}
-                {% endif %}
+          <div class="grid videos media form-field">
+            <div class="grid-cell media-left">
+              <div class="media-list">
+                <div class="media-item {{ 'processed' if game.videos[0] }}">
+                  <div class="media-preview-container" data-message="{{ _('Preview') }}">
+                    <div class="media-iframe"></div>
+                    <div class="media-delete"></div>
+                  </div>
+                  {% if game.videos[0].id %}
+                    <input name="media-video-data" type="hidden" value="{{ game.videos[0].id }}" data-video-type="{{ game.videos[0].type }}" data-video-thumbnail="{{ game.videos[0].thumbnail }}">
+                  {% else %}
+                    <input name="media-video-data" type="hidden">
+                  {% endif %}
+                  <input class="media-input" type="url" data-type="videos" value="{{ game.videos[0].id }}" placeholder="{{ _('Enter YouTube/Vimeo URL here') }}" pattern="https?://.*">
+                </div>
               </div>
-            </label>
-            <div class="file-size"></div><div class="file-preview"></div>
+            </div>
+            <div class="grid-cell media-right">
+              <div class="media-list">
+                <div class="media-item {{ 'processed' if game.videos[1] }}">
+                  <div class="media-preview-container" data-message="{{ _('Preview') }}">
+                    <div class="media-iframe"></div>
+                    <div class="media-delete"></div>
+                  </div>
+                  {% if game.videos[1].id %}
+                    <input name="media-video-data" type="hidden" value="{{ game.videos[1].id }}" data-video-type="{{ game.videos[1].type }}" data-video-thumbnail="{{ game.videos[1].thumbnail }}">
+                  {% else %}
+                    <input name="media-video-data" type="hidden">
+                  {% endif %}
+                  <input class="media-input" type="url" data-type="videos" value="{{ game.videos[1].id }}" placeholder="{{ _('Enter YouTube/Vimeo URL here') }}" pattern="https?://.*">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="grid-cell">
           <p class="form-help">
-            {{ _("Videos will be shown on your game detail page. Please use YouTube and/or Vimeo hosted videos only.") }}
+            {{ _("Videos will be shown on your game detail page.<br>Please use YouTube and/or Vimeo-hosted videos only.<br>Maximum of two video submissions.") }}
           </p>
         </div>
       </div>

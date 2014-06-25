@@ -70,13 +70,6 @@ define('views/submit',
         e.preventDefault();
         var $this = $(this);
 
-        function stringifyURLs(type) {
-            var inputs = $this.find('.' + type + '.media input').get();
-            return inputs.map(function(e) {
-                return $(e).val();
-            }).filter(_.identity);
-        }
-
         var data = {
             name: $this.find('[name=name]').val(),
             slug: $this.find('[name=slug]').val(),
@@ -86,26 +79,54 @@ define('views/submit',
             privacy_policy_url: $this.find('[name=privacy_policy_url]').val(),
             genre: $this.find('[name=genre]:checked').val(),
             icons: [],
-            screenshots: [],
+            screenshots: [{ 
+                '4_3': [], 
+                '16_9': []
+            }],
+            videos: []
         };
 
-        // Handle URLs for icons, screenshots, and videos.
-        $('.media-final-url').each(function () {
-            var $this = $(this);
-            var item = {src: $this.val()};
+        var $iconInput = $this.find('[name=icon_final_url]');
 
-            var height = $this.data('height');
-            if (height) {
-                item.height = height;
-            }
-
-            var width = $this.data('width');
-            if (width) {
-                item.width = width;
-            }
-
-            data[$this.data('type')].push(item);
+        data.icons.push({ 
+            src: $iconInput.val(), 
+            height: $iconInput.data('height'),
+            width: $iconInput.data('width')
         });
+
+        $('.screenshots-list').each(function() {
+            var $this = $(this);
+            var type = $this.data('screenshot-type');
+            $this.find('[name=screenshot_final_url]').each(function() {
+                var $screenshotInput = $(this);
+                var src = $screenshotInput.val();
+                var height = $screenshotInput.data('height');
+                var width = $screenshotInput.data('width');
+                if (src && height && width) {
+                    data.screenshots[0][type].push({
+                        src: src,
+                        height: height,
+                        width: width
+                    });
+                }
+            });
+        });
+
+        // Handle URLs for videos.
+        $('.videos input[type=hidden]').each(function() {
+            var $this = $(this);
+            var id = $this.val();
+            var videoType = $this.data('video-type');
+            var thumbnail = $this.data('video-thumbnail');
+
+            if (id && videoType && thumbnail) {
+                data.videos.push({
+                    id: id,
+                    type: videoType,
+                    thumbnail: thumbnail,
+                });
+            }
+        })
 
         if ($this.data('formtype') === 'submit') {
             submitGame(data);
@@ -115,6 +136,7 @@ define('views/submit',
     });
 
     return function(builder) {
+
         builder.start('submit.html');
         builder.z('type', 'leaf submit');
         builder.z('title', gettext('Submit a Game'));

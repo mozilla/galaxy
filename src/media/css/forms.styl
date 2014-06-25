@@ -263,11 +263,11 @@ label {
 }
 
 ::-webkit-input-placeholder {
-    color: $gray;
+    color: $colorGrayLightest;
 }
 
 :-moz-placeholder {
-    color: $gray;
+    color: $colorGrayLightest;
     text-overflow: ellipsis;  // Firefox 18 and below
 }
 
@@ -336,7 +336,7 @@ form {
         margin-top: 15px;
     }
     textarea[name=description].focused + .toggle-preview-container {
-        display: initial;
+        display: inherit;
     }
     .toggle-preview-container {
         background-color: rgba(0,255,0,0.25);
@@ -386,7 +386,8 @@ form {
         color: #999;
     }
     .grid > .grid-flex-grow-two {
-        padding-right: 50px;
+        margin-right: 50px;
+        position: relative;
     }
     input.large ~ .req:after {
         bottom: 10px;
@@ -423,7 +424,9 @@ form {
     }
 
     .l {
-        font-size: 10px;
+        color: $colorGray;
+        font-size: 12px;
+        margin-bottom: 5px;
     }
     [placeholder] {
         ~ .l {
