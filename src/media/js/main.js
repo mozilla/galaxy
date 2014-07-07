@@ -1,5 +1,3 @@
-console.log('Sample Commonplace App');
-
 require.config({
     enforceDefine: true,
     paths: {
