@@ -121,6 +121,7 @@ main {
   min-height: 100%;
   flex: 1;
   font-size: 14px;
+  opacity: .75;  /* Just to be a tad subtle. */
   padding: 80px 30px 30px;  /* 80px = 50px header + 30px padding */
   position: relative;
   width: 300px;
@@ -141,7 +142,7 @@ main {
 }
 
 .games:hover .game {
-  opacity: .3;
+  /*opacity: .3;*/  /* This was annoying. */
   transition: opacity .35s;
 }
 
@@ -156,7 +157,7 @@ h2 {
 }
 
 .game:after {
-  background-image: linear-gradient(to bottom, rgba(0,0,0,.9), transparent 100%);
+  background-image: linear-gradient(to bottom, rgba(0,0,0,.95), transparent 100%);
   content: "";
   height: 50vh;
   left: 0;
@@ -164,6 +165,10 @@ h2 {
   position: absolute;
   top: 50px;
   width: 100%;
+}
+
+.game:hover:after {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,.55), transparent 100%);
 }
 
 .game .details {
