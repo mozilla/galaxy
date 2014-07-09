@@ -1,0 +1,102 @@
+<!--
+<!doctype html>
+<html>
+  <head>
+    <title>galaxy controller client</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <meta name="robots" content="none">
+  </head>
+  <body>
+    <script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+    <script src="controller.js"></script>
+  </body>
+</html>
+ -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1"> -->
+  <title></title>
+
+  <style type="text/css">
+
+  </style>
+
+</head>
+<body>
+  <main id="main"></main>
+<!--   <div class="main">
+      <h2>Device Orientation</h2>
+      <table>
+        <tr>
+          <td>Event Supported</td>
+          <td id="doEvent"></td>
+        </tr>
+        <tr>
+          <td>Tilt Left/Right [gamma]</td>
+          <td id="doTiltLR"></td>
+        </tr>
+        <tr>
+          <td>Tilt Front/Back [beta]</td>
+          <td id="doTiltFB"></td>
+        </tr>
+        <tr>
+          <td>Direction [alpha]</td>
+          <td id="doDirection"></td>
+        </tr>
+      </table>
+  </div> -->
+
+  <script type="text/javascript">
+    init();
+    var count = 0;
+
+    function init() {
+      if (window.DeviceOrientationEvent) {
+        // document.getElementById("doEvent").innerHTML = "DeviceOrientation";
+        // Listen for the deviceorientation event and handle the raw data
+        window.addEventListener('deviceorientation', function(eventData) {
+          // gamma is the left-to-right tilt in degrees, where right is positive
+          var tiltLR = eventData.gamma;
+
+          // beta is the front-to-back tilt in degrees, where front is positive
+          var tiltFB = eventData.beta;
+
+          // alpha is the compass direction the device is facing in degrees
+          var dir = eventData.alpha
+
+          // call our orientation event handler
+          deviceOrientationHandler(tiltLR, tiltFB, dir);
+          }, false);
+      } else {
+      }
+    }
+
+    function deviceOrientationHandler(tiltLR, tiltFB, dir) {
+      var forward = Math.round(tiltLR);
+      var backward = Math.round(tiltLR);
+
+      var direction = '';
+
+      if (forward > 15) {
+        window.main.innerHTML = '<br>accelerating';
+      }
+
+      if (backward < -5) {
+        window.main.innerHTML = '<br>left';
+      }
+
+      if (backward > -5) {
+        window.main.innerHTML = '<br>right';
+      }
+    }
+
+  </script>
+
+
+
+</body>
+</html>
