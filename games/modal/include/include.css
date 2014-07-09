@@ -1,0 +1,460 @@
+@font-face {
+  font-family: akzidenz;
+  src: local('Akzidenz-Grotesk BQ Medium'),
+       url('fonts/akzidenzgrotesk-medium-webfont.woff') format('woff'),
+       url('fonts/akzidenzgrotesk-medium-webfont.ttf') format('truetype'),
+       url('fonts/akzidenzgrotesk-medium-webfont.svg#akzidenz-grotesk_bqmedium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background: #fff;
+}
+
+html, body, main, .games, .details, .game:before {
+  height: 100%;
+}
+
+header, section, main {
+  display: block;
+}
+
+body {
+  font-family: "Source Sans Pro", "Helvetica Neue", sans-serif;
+}
+
+a {
+  color: #369;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #036;
+}
+
+.header {
+  background: #f3f3f3;
+  height: 50px;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.wordmark {
+  color: #444;
+  font-size: 22px;
+  font-weight: normal;
+  line-height: 50px;
+}
+
+.games {
+  background: #222;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  list-style: none;
+  font-size: 0;
+}
+
+.games li {
+  color: #fff;
+  display: block;
+  min-height: 100%;
+  flex: 1;
+  font-size: 14px;
+  padding: 80px 30px 30px;  /* 80px = 50px header + 30px padding */
+  position: relative;
+  width: 300px;
+}
+
+.games p,
+.games:hover li,
+.games li:hover {
+  transition: opacity .35s ease-in-out, padding .35s ease-in-out;
+}
+
+.games p {
+  opacity: .5;
+}
+
+.games li:hover p {
+  opacity: .75;
+}
+
+.games:hover li {
+  opacity: .3;
+  transition: opacity .35s;
+}
+
+.games li:hover {
+  opacity: 1;
+}
+
+h2 {
+  font: 28px/1.1 akzidenz, "Source Sans Pro", sans-serif;
+  margin-bottom: 15px;
+  text-shadow: 0 .5px .5px #111;
+}
+
+.game:after {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,.9), transparent 100%);
+  content: "";
+  height: 50vh;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+}
+
+.game .details {
+  position: relative;
+  z-index: 1;
+}
+
+.game:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.game-bastion:before {
+  background: url(img/screenshots/bastion/wallpaper.jpg) 57% 70%;
+  opacity: .2;
+}
+
+.game-megaman:before {
+  background: #052543 url(img/megaman.png) 100% 100% no-repeat;
+  background-size: contain;
+}
+
+.game-hexgl:before {
+  background: url(img/screenshots/hexgl/1.png) 52% 0 no-repeat;
+  background-size: cover;
+}
+
+.game-dungeonfury:before {
+  background: url(img/dungeonfury.png) center no-repeat;
+  background-size: cover;
+}
+
+.game-bananabread:before {
+  background: url(img/bananabread.jpg) 75% 0 no-repeat;
+  background-size: cover;
+}
+
+.game-monstermadness:before {
+  background: url(img/monstermadness.jpg) 30% 0 no-repeat;
+  background-size: cover;
+}
+
+.game-urbangalaxy:before {
+  background: url(img/urbangalaxy.jpg) 35% 100% no-repeat;
+  background-size: cover;
+}
+
+.game-deadtrigger2:before {
+  background: url(img/deadtrigger2.png) 53% 0 no-repeat;
+  background-size: cover;
+}
+
+.game-quake:before {
+  background: url(img/quake-2.png) 45% 0% no-repeat;
+  background-size: cover;
+}
+
+.summary {
+  margin-bottom: 15px;
+}
+
+.btn, .btn:hover {
+  color: inherit;
+}
+
+.btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  letter-spacing: 1px;
+  outline: none;
+  padding: 15px 80px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn-2 {
+  background: #4ecb4e;
+  box-shadow: 0 6px #3cab3c;
+  color: #fff;
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+}
+
+.btn-2g {
+  border-radius: 40px;
+}
+
+.btn-2g:hover {
+  box-shadow: 0 4px #3cab3c;
+  top: 2px;
+}
+
+.btn-2g:active {
+  box-shadow: none;
+  top: 6px;
+}
+
+.actions {
+  background: rgba(0,0,0,.75);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 30px;
+}
+
+.btn.btn-play {
+  width: 100%;
+}
+
+/* General styles for the modal */
+
+/*
+Styles for the html/body for special modal where we want 3d effects
+Note that we need a container wrapping all content on the page for the
+perspective effects (not including the modals and the overlay).
+*/
+.md-perspective,
+.md-perspective body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.md-perspective body  {
+  background: #222;
+  -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+  perspective: 600px;
+}
+
+.container {
+  background: #e74c3c;
+  min-height: 100%;
+}
+
+.md-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  max-width: 630px;
+  min-width: 320px;
+  height: auto;
+  z-index: 2000;
+  visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.md-show {
+  visibility: visible;
+}
+
+.md-overlay {
+  /*background: #3e4851;*/
+  background: rgba(62,72,81,.9);
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  transition: all .3s;
+  visibility: hidden;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Disable scrolling on the body when a modal is opened. */
+.overlayed {
+  overflow: hidden;
+}
+
+.overlayed .md-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Content styles */
+.md-content {
+  color: #fff;
+  background: #f2f2f2;
+  position: relative;
+  border-radius: 3px;
+  margin: 0 auto;
+}
+
+.md-content h3 {
+  margin: 0;
+  padding: 0.4em;
+  text-align: center;
+  font-size: 2.4em;
+  font-weight: 300;
+  opacity: 0.8;
+  /*
+  background: #f55;
+  background: #f2585b;
+  */
+  background: #1a9;
+  /*box-shadow: 0 0 1px rgba(255,255,255,5) inset;*/
+  border-top: 1px solid rgba(255,255,255,.35);
+  border-bottom: 1px solid rgba(0,0,0,.35);
+  border-radius: 3px 3px 0 0;
+}
+
+.md-content > div {
+  padding: 15px 40px 30px;
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.15em;
+}
+
+.md-content > div p {
+  margin: 0;
+  padding: 10px 0;
+}
+
+.md-content > div ul {
+  margin: 0;
+  padding: 0 0 30px 20px;
+}
+
+.md-content > div ul li {
+  padding: 5px 0;
+}
+
+.md-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 79px;
+  display: table;
+  width: 79px;
+}
+
+.md-close span {
+  color: rgba(0,0,0,.5);
+  cursor: pointer;
+  display: table-cell;
+  font: 600 24px/24px monospace;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.md-close span:before {
+  border-radius: 4px;
+  border: 3px solid rgba(0,0,0,.5);
+  content: "×";
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+
+.md-close div {
+  position: absolute;
+  text-indent: 101%;
+  visibility: hidden;
+}
+
+.md-close:hover span:before {
+  border-color: rgba(0,0,0,.75);
+  color: rgba(0,0,0,.75);
+}
+
+/* Individual modal styles with animations/transitions */
+
+/* Effect 1: Fade in and scale up */
+.md-effect-1 .md-content {
+  -webkit-transform: scale(0.7);
+  -moz-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transform: scale(0.7);
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.md-show.md-effect-1 .md-content {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+
+.md-modal label,
+.md-modal input {
+  display: block;
+}
+
+.md-modal label {
+  color: #959595;
+  font-weight: 500;
+  margin: 15px 0 10px;
+  line-height: 1;
+}
+
+.md-modal input {
+  border: 1px solid #dedede;
+  color: #555;
+  font-family: inherit;
+  font-size: 28px;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+@media screen and (max-width: 32em) {
+  body {
+    font-size: 75%;
+  }
+}
