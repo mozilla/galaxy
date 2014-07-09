@@ -1,5 +1,15 @@
 (function () {
 
+// Inject styles needed for Galaxy.
+// TODO: Have the host file include these styles and just serve an iframe
+// that gets fullscreened.
+var link = document.createElement('link');
+link.href = '/games/modal/include/include.css';
+link.media = 'all';
+link.rel = 'stylesheet';
+link.type = 'text/css';
+document.querySelector('head').appendChild(link);
+
 var $doc = $(document);
 var $body = $(document.body);
 
@@ -41,7 +51,7 @@ function Modal(opts, inject) {
 Modal.closeAll = Modal.prototype.close = function () {
   // Close any open modal.
   $('.md-show').removeClass('md-show');
-  $('.overlayed').removeClass('overlayed');
+  $('.galaxy-overlayed').removeClass('galaxy-overlayed');
 };
 
 Modal.injectOverlay = function () {
@@ -70,7 +80,7 @@ Modal.prototype.inject = function () {
   var $modal = $(this.html());
 
   $modal.appendTo($body);
-  $body.addClass('overlayed');
+  $body.addClass('galaxy-overlayed');
 
   return this.el = $modal[0];
 };
