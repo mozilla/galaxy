@@ -333,3 +333,23 @@ h2 {
     -webkit-transform: rotate(1turn);
   }
 }
+
+.gameface {
+  border: 2px solid rgba(255,255,255,.5);
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+  background-position: center;
+  float: left;
+  background-repeat: no-repeat;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+
+.details li {
+  background: rgba(0,0,0,.75);
+  border-radius: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  margin-top: 10px;
+}

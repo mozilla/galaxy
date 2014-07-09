@@ -210,3 +210,91 @@
 .md-modal.slim input {
   margin: 0 auto;
 }
+
+.btn, .btn:hover {
+  color: #fff;
+}
+
+.btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  letter-spacing: 1px;
+  outline: none;
+  padding: 15px 80px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn-2 {
+  background: #4ecb4e;
+  box-shadow: 0 6px #3cab3c;
+  color: #fff;
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+}
+
+.btn-2g {
+  border-radius: 40px;
+}
+
+.btn-2g:hover {
+  box-shadow: 0 4px #3cab3c;
+  top: 2px;
+}
+
+.btn-2g:active {
+  box-shadow: none;
+  top: 6px;
+}
+
+.btn.snap {
+  display: block;
+  padding: 15px;
+  width: 200px;
+}
+
+.snap-area {
+  overflow: hidden;
+  padding-bottom: 4px;  /* To compensate for the button. */
+  text-align: left;
+}
+
+.galaxy-overlayed .hidden {
+  display: none;
+}
+
+.snap-capture-side {
+  float: left;
+}
+
+.snap-preview-side {
+  float: right;
+}
+
+#snap-preview {
+  display: block;
+}
+
+#confirm-button:not(.hidden) {
+  display: block;
+  margin-top: 8px;
+}

@@ -59,7 +59,9 @@ function Modal(opts, inject) {
 Modal.closeAll = Modal.prototype.close = function () {
   // Close any open modal.
   $('.md-show').removeClass('md-show');
-  $('.galaxy-overlayed').removeClass('galaxy-overlayed');
+  setTimeout(function () {
+    $('.galaxy-overlayed').removeClass('galaxy-overlayed');
+  }, 150);
 };
 
 Modal.injectOverlay = function () {
@@ -220,6 +222,19 @@ var authForm = (
   '</form>'
 );
 
+var gameFaceForm = (
+  '<div class="snap-area">' +
+    '<div class="snap-capture-side">' +
+      '<video id="snap-video"></video>' +
+      '<button class="snap btn btn-2 btn-2g" id="snap-button">Take photo</button>' +
+    '</div>' +
+    '<div class="snap-preview-side">' +
+      '<canvas class="hidden" id="snap-canvas"></canvas>' +
+      '<img id="snap-preview">' +
+      '<button class="hidden snap btn btn-2 btn-2g" id="confirm-button">Use photo</button>' +
+    '</div>' +
+  '</div>'
+);
 
 function connect(opts) {
   return new Promise(function (resolve, reject) {
@@ -228,6 +243,91 @@ function connect(opts) {
     game = new Game(opts);
 
     resolve();
+  });
+}
+
+
+function getGameFace() {
+  // Take a photo of the player's game face.
+
+  $('.auth-form').replaceWith(gameFaceForm);
+  $('#modal-auth h3').text('Show me your game face!');
+  $('#modal-auth').addClass('md-snap');
+
+  return new Promise(function (resolve, reject) {
+    var streaming = false;
+    var video = document.getElementById('snap-video');
+    var cover = document.getElementById('snap-cover');
+    var canvas = document.getElementById('snap-canvas');
+    var preview = document.getElementById('snap-preview');
+    var snapButton = document.getElementById('snap-button');
+    var confirmButton = document.getElementById('confirm-button');
+    var snapped = false;
+    var previewURI = null;
+    var width = 200;
+    var height = 0;
+
+    navigator.getMedia = (navigator.getUserMedia ||
+                          navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                          navigator.msGetUserMedia);
+
+    navigator.getMedia({video: true, audio: false}, function (stream) {
+      if (navigator.mozGetUserMedia) {
+        video.mozSrcObject = stream;
+      } else {
+        var vendorURL = window.URL || window.webkitURL;
+        video.src = vendorURL ? vendorURL.createObjectURL(stream) : stream;
+      }
+      video.play();
+    }, function (err) {
+      console.error('Could not take photo: ' + err);
+    });
+
+    video.addEventListener('canplay', function () {
+      if (!streaming) {
+        height = video.videoHeight / (video.videoWidth / width);
+        video.setAttribute('width', width);
+        video.setAttribute('height', height);
+        canvas.setAttribute('width', width);
+        canvas.setAttribute('height', height);
+        streaming = true;
+      }
+    }, false);
+
+    function snapPhoto() {
+      canvas.width = width;
+      canvas.height = height;
+      canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+      previewURI = canvas.toDataURL('image/png');
+      preview.setAttribute('src', previewURI);
+
+      if (!snapped) {
+        // After the first photo taken, change the buttons.
+        snapButton.textContent = 'Retake photo';
+        confirmButton.classList.remove('hidden');
+      }
+      snapped = true;
+    }
+
+    snapButton.addEventListener('click', function (e) {
+      e.preventDefault();
+      snapPhoto();
+    }, false);
+
+    confirmButton.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // TODO: Do not hardcode this. And, uhm, make this actually send it to the server.
+      var gameFaces = {};
+      gameFaces[user.get('username')] = previewURI;
+      localStorage.galaxy_gameFaces = JSON.stringify(gameFaces);
+
+      // We're done.
+      $('#modal-auth').removeClass('md-snap');
+      resolve(previewURI);
+    }, false);
+
   });
 }
 
@@ -281,11 +381,10 @@ function authenticate() {
       user.authenticate();
       user.save();
 
-      modal.close();
-
-      console.log('resolving');
-
-      resolve();
+      getGameFace().then(function () {
+        modal.close();
+        resolve();
+      });
     });
   });
 }

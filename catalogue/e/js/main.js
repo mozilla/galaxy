@@ -18,6 +18,8 @@
     var gamesPlayed = JSON.parse(localStorage.galaxy_gamesPlayed || '{}');
     var gamesPlaying = JSON.parse(localStorage.galaxy_gamesPlaying || '{}');
 
+    var gameFaces = JSON.parse(localStorage.galaxy_gameFaces || '{}');
+
     $('.game[data-game]').each(function () {
       var $this = $(this);
       var slug = $this.data('game');
@@ -42,14 +44,19 @@
       if (onlinePlayers.length) {
         var playersHTML = '';
         onlinePlayers.forEach(function (player) {
-          playersHTML += '<li>' + utils.escape(player) + '</li>\n';
+          playersHTML += '<li>';
+          if (player in gameFaces) {
+            // TODO: Use real URLs since these are not safe (since from `localStorage`).
+            playersHTML += '<div class="gameface" style="background-image:url(' +
+              gameFaces[player] + ')"></div>';
+          }
+          playersHTML += utils.escape(player) + '</li>\n';
         });
 
         var templateHTML = $('#online-players').html().replace('{players}', playersHTML);
         if ($this.find('.details .online-players').length) {
           // TODO: Instead of replacing the entire section, add/remove the
           // necessary ones. (React is starting to sound like a good idea.)
-          console.log('replacing online');
           $this.find('.details .online-players').replaceWith(templateHTML);
         } else {
           $this.find('.details').append(templateHTML);
@@ -64,12 +71,17 @@
       if (offlinePlayers.length) {
         var playersHTML = '';
         offlinePlayers.forEach(function (player) {
-          playersHTML += '<li>' + utils.escape(player) + '</li>\n';
+          playersHTML += '<li>';
+          if (player in gameFaces) {
+            // TODO: Use real URLs since these are not safe (since from `localStorage`).
+            playersHTML += '<div class="gameface" style="background-image:url(' +
+              gameFaces[player] + ')"></div>';
+          }
+          playersHTML += utils.escape(player) + '</li>\n';
         });
 
         var templateHTML = $('#offline-players').html().replace('{players}', playersHTML);
         if ($this.find('.details .offline-players').length) {
-          console.log('replacing offline');
           $this.find('.details .offline-players').replaceWith(templateHTML);
         } else {
           $this.find('.details').append(templateHTML);
