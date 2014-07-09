@@ -3,12 +3,20 @@
 // Inject styles needed for Galaxy.
 // TODO: Have the host file include these styles and just serve an iframe
 // that gets fullscreened.
-var link = document.createElement('link');
-link.href = '/games/modal/include/include.css';
-link.media = 'all';
-link.rel = 'stylesheet';
-link.type = 'text/css';
-document.querySelector('head').appendChild(link);
+
+var stylesheets = [
+  'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700',
+  '/games/modal/include/include.css'
+];
+
+stylesheets.forEach(function (stylesheet) {
+  var link = document.createElement('link');
+  link.href = stylesheet;
+  link.media = 'all';
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  document.querySelector('head').appendChild(link);
+});
 
 var $doc = $(document);
 var $body = $(document.body);
