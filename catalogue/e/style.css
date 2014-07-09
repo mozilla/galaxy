@@ -43,19 +43,62 @@ a:hover {
 }
 
 .header {
-  background: #f3f3f3;
+  background: #213b59;
   height: 50px;
   position: fixed;
-  text-align: center;
   width: 100%;
   z-index: 1;
 }
 
+h1 {
+  margin: 0 auto;
+  width: 100px;
+}
+
 .wordmark {
-  color: #444;
-  font-size: 22px;
+  color: #eff;
+  display: inline-block;
+  font-size: 24px;
   font-weight: normal;
   line-height: 50px;
+  position: relative;
+  text-shadow: 0 0 4px rgba(0,255,255,.5);
+  transition: text-shadow .5s;
+}
+
+.wordmark:before {
+  box-shadow: inset 0 0 .5em rgba(0,255,255,.7),
+              inset 0 0 .25em rgba(255,255,255,.5),
+              0 0 .5em rgba(0,255,255,.5);
+  border-radius: 1em;
+  content: "";
+  display: inline-block;
+  height: 1em;
+  margin-bottom: -.15em;
+  margin-right: .5em;
+  width: 1em;
+}
+
+.wordmark:after {
+  animation: 10s spin infinite steps(300);
+  -webkit-animation: 10s spin infinite steps(300);
+  box-shadow: inset 0 0 .25em rgba(0,255,255,.7);
+  border-radius: 1em;
+  content: "";
+  display: block;
+  height: .5em;
+  left: 0;
+  margin-top: -.5em;
+  position: absolute;
+  top: 50%;
+  transform-origin: .5em .5em;
+  -webkit-transform-origin: .5em .5em;
+  width: .5em;
+}
+
+.wordmark:hover {
+  color: #eff;
+  text-shadow: 0 0 10px #0ff;
 }
 
 main {
@@ -257,4 +300,36 @@ h2 {
 
 .btn.btn-play {
   width: 100%;
+}
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0turn);
+  }
+
+  100% {
+    -moz-transform: rotate(1turn);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0turn);
+    transform: rotate(0turn);
+  }
+
+  100% {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0turn);
+    -webkit-transform: rotate(0turn);
+  }
+
+  100% {
+    transform: rotate(1turn);
+    -webkit-transform: rotate(1turn);
+  }
 }
