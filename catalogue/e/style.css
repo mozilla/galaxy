@@ -234,6 +234,11 @@ h2 {
   background-size: cover;
 }
 
+.game-rollercoaster:before {
+  background: url(img/rollercoaster.png) 83% 0 no-repeat;
+  background-size: cover;
+}
+
 .summary {
   margin-bottom: 15px;
 }
@@ -299,8 +304,9 @@ h2 {
   bottom: 0;
   left: 0;
   right: 0;
-  width: 100%;
   padding: 30px;
+  width: 100%;
+  z-index: 1;
 }
 
 .btn.btn-play {
