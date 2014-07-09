@@ -12,12 +12,34 @@
     <main>
     </main>
     <script src="include/zepto.js"></script>
+    <script src="include/promise-1.0.0.js"></script>
     <script src="include/include.js"></script>
     <script>
       (function () {
-        // Game logic starts here.
+        var opts = {
+          name: 'hexgl'  // TODO: Ensure this game is on registered on the API server.
+        };
 
-        window.galaxy.authenticate();
+        window.galaxy.connect(opts).then(function () {
+
+          window.galaxy.authenticate().then(function () {
+            console.log('Signed in as ' + window.galaxy.getUser().get('username'));
+
+            window.galaxy.beginPlaying();
+
+          }, function (err) {
+            console.error('Could not authenticate with Galaxy: ' + err);
+          }).catch(console.error);
+
+        }, function (err) {
+          console.error('Could not connect to Galaxy: ' + err);
+        }).catch(console.error);
+
+        window.addEventListener('beforeunload', function () {
+          // If the user left the page, the game's over.
+          window.galaxy.endPlaying();
+        });
+
       })();
     </script>
   </body>

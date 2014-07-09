@@ -326,14 +326,16 @@ perspective effects (not including the modals and the overlay).
 
 /* Content styles */
 .md-content {
-  color: #fff;
+  color: #333;
   background: #f2f2f2;
   position: relative;
   border-radius: 3px;
   margin: 0 auto;
+  min-width: 380px;
 }
 
 .md-content h3 {
+  color: #fff;
   margin: 0;
   padding: 0.4em;
   text-align: center;
@@ -352,7 +354,7 @@ perspective effects (not including the modals and the overlay).
 }
 
 .md-content > div {
-  padding: 15px 40px 30px;
+  padding: 30px 40px;
   margin: 0;
   font-weight: 300;
   font-size: 1.15em;
@@ -440,7 +442,7 @@ perspective effects (not including the modals and the overlay).
 .md-modal label {
   color: #959595;
   font-weight: 500;
-  margin: 15px 0 10px;
+  margin-bottom: 10px;
   line-height: 1;
 }
 
@@ -451,6 +453,15 @@ perspective effects (not including the modals and the overlay).
   font-size: 28px;
   margin: 0;
   padding: 5px 10px;
+}
+
+.md-modal.slim,
+.md-modal.slim input {
+  text-align: center;
+}
+
+.md-modal.slim input {
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 32em) {

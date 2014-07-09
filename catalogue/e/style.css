@@ -71,8 +71,9 @@ main {
   font-size: 0;
 }
 
-.games li {
+.game {
   color: #fff;
+  cursor: pointer;  /* TODO: Figure out a decent way to make bigger click targets for the panel. */
   display: block;
   min-height: 100%;
   flex: 1;
@@ -83,8 +84,8 @@ main {
 }
 
 .games p,
-.games:hover li,
-.games li:hover {
+.games:hover .game,
+.game:hover {
   transition: opacity .35s ease-in-out, padding .35s ease-in-out;
 }
 
@@ -92,16 +93,16 @@ main {
   opacity: .5;
 }
 
-.games li:hover p {
+.game:hover p {
   opacity: .75;
 }
 
-.games:hover li {
+.games:hover .game {
   opacity: .3;
   transition: opacity .35s;
 }
 
-.games li:hover {
+.games:hover .game:hover {
   opacity: 1;
 }
 
@@ -125,6 +126,10 @@ h2 {
 .game .details {
   position: relative;
   z-index: 1;
+}
+
+.details ul {
+  list-style: none;
 }
 
 .game:before {
