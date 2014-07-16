@@ -6,7 +6,7 @@
 
 var stylesheets = [
   'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700',
-  '/games/modal/include/include.css'
+  '../../games/modal/include/include.css'
 ];
 
 stylesheets.forEach(function (stylesheet) {
