@@ -12,19 +12,30 @@
 
   GamepadController = (function() {
     GamepadController.isCompatible = function() {
-      return ('getGamepads' in navigator) || ('webkitGetGamepads' in navigator);
+      return ('getGamepads' in navigator ||
+              'webkitGetGamepads' in navigator ||
+              'webkitGamepads' in navigator);
     };
 
     /*
       Creates a new GamepadController
     */
 
-
     function GamepadController(buttonPressCallback) {
       this.buttonPressCallback = buttonPressCallback;
       this.active = true;
       this.leftStickArray = [];
       this.rightStickArray = [];
+
+      var gamepad = new galaxy.gamepad();
+      gamepad.bind(galaxy.gamepad.Event.CONNECTED, function (device) {
+        console.error('Connected', device);
+      });
+
+      if (!gamepad.init()) {
+        console.error('Your browser does not support gamepads; download ' +
+                      'the latest Google Chrome or Mozilla Firefox.');
+      }
     }
 
     /*

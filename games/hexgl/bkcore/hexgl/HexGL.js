@@ -23,7 +23,7 @@ bkcore.hexgl.HexGL = function(opts)
 	this.displayHUD = opts.hud == undefined ? true : opts.hud;
 	this.width = opts.width == undefined ? window.innerWidth : opts.width;
 	this.height = opts.height == undefined ? window.innerHeight : opts.height;
-	
+
 	this.difficulty = opts.difficulty == undefined ? 0 : opts.difficulty;
 	this.player = opts.player == undefined ? "Anonym" : opts.player;
 
@@ -32,7 +32,7 @@ bkcore.hexgl.HexGL = function(opts)
 	this.mode = opts.mode == undefined ? 'timeattack' : opts.mode;
 
 	this.controlType = opts.controlType == undefined ? 1 : opts.controlType;
-	
+
 	// 0 == low, 1 == mid, 2 == high, 3 == very high
 	// the old platform+quality combinations map to these new quality values
 	// as follows:
@@ -134,7 +134,7 @@ bkcore.hexgl.HexGL.prototype.update = function()
 bkcore.hexgl.HexGL.prototype.init = function()
 {
 	this.initHUD();
-	
+
 	this.track.buildMaterials(this.quality);
 
 	this.track.buildScenes(this, this.quality);
@@ -349,9 +349,9 @@ bkcore.hexgl.HexGL.prototype.initGameComposer = function()
 	// 	this.composers.game.addPass( effectFXAA );
 
 	// 	this.extras.fxaa = effectFXAA;
-	
+
 	// }
-	
+
 	// desktop + quality mid or high
 	if(this.quality > 2)
 	{
