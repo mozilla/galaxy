@@ -1,5 +1,8 @@
 (function () {
 
+var exports = module.exports;
+// window.module = undefined;
+
 // Inject styles needed for Galaxy.
 // TODO: Have the host file include these styles and just serve an iframe
 // that gets fullscreened.
@@ -354,7 +357,7 @@ function authenticate() {
       setTimeout(function () {
         modal.close();
         resolve();
-      }, 2000);
+      }, 151);
 
       return;
     }
@@ -403,7 +406,7 @@ $body.on('click', '.md-close, .md-overlay', function (e) {
 });
 
 
-if (!('game' in window)) {
+if (!('galaxy' in window)) {
   window.galaxy = {
     authenticate: authenticate,
     connect: connect,
@@ -413,6 +416,7 @@ if (!('game' in window)) {
     endPlaying: function () {
       return user.endPlaying();
     },
+    gamepad: exports.Gamepad,
     getGame: function () {
       return game;
     },

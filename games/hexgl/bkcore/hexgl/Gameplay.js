@@ -1,7 +1,7 @@
  /*
  * HexGL
  * @author Thibaut 'BKcore' Despoulain <http://bkcore.com>
- * @license This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License. 
+ * @license This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License.
  *          To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/.
  */
 
@@ -181,28 +181,13 @@ bkcore.hexgl.Gameplay.prototype.update = function()
 	if(!this.active) return;
 
 	this.timer.update();
-	
+
 	if(this.step == 0 && this.timer.time.elapsed >= this.countDownDelay+this.startDelay)
-	{
-		if(this.hud != null) this.hud.display("3");
-		this.step = 1;
-	}
-	else if(this.step == 1 && this.timer.time.elapsed >= 2*this.countDownDelay+this.startDelay)
-	{
-		if(this.hud != null) this.hud.display("2");
-		this.step = 2;
-	}
-	else if(this.step == 2 && this.timer.time.elapsed >= 3*this.countDownDelay+this.startDelay)
-	{
-		if(this.hud != null) this.hud.display("1");
-		this.step = 3;
-	}
-	else if(this.step == 3 && this.timer.time.elapsed >= 4*this.countDownDelay+this.startDelay)
 	{
 		if(this.hud != null) this.hud.display("Go", 0.5);
 		this.step = 4;
 		this.timer.start();
-		
+
 		if(this.mode != "replay")
 			this.shipControls.active = true;
 	}
