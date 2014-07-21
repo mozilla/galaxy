@@ -328,6 +328,7 @@
 	 *
 	 * @property Type
 	 * @param {String} Type.N64 Retrolink N64 controller
+	 * @param {String} Type.NES Gtron N64 controller
 	 * @param {String} Type.PLAYSTATION Playstation controller
 	 * @param {String} Type.LOGITECH Logitech controller
 	 * @param {String} Type.XBOX XBOX controller
@@ -335,6 +336,7 @@
 	 */
 	Gamepad.Type = {
 		N64: 'n64',
+		NES: 'nes',
 		PLAYSTATION: 'playstation',
 		LOGITECH: 'logitech',
 		XBOX: 'xbox',
@@ -428,7 +430,7 @@
 		'LEFT_TOP_SHOULDER', 'RIGHT_TOP_SHOULDER', 'LEFT_BOTTOM_SHOULDER', 'RIGHT_BOTTOM_SHOULDER',
 		'SELECT_BACK', 'START_FORWARD', 'LEFT_STICK', 'RIGHT_STICK',
 		'DPAD_UP', 'DPAD_DOWN', 'DPAD_LEFT', 'DPAD_RIGHT',
-		'HOME'
+		'HOME', 'ACCELERATE'
 	];
 
 	/**
@@ -481,7 +483,7 @@
 			},
 			buttons: {
 				byButton: [
-					// TODO: Figure out which buttons to map A and Z buttons to.
+					// TODO: Figure out which button to Z button to.
 					2, // FACE_1 -- C-down button
 					1, // FACE_2 -- C-right button
 					3, // FACE_3 -- C-left button
@@ -490,7 +492,7 @@
 					5, // RIGHT_TOP_SHOULDER -- R button
 					-1, // LEFT_BOTTOM_SHOULDER -- missing on controller
 					-1, // RIGHT_BOTTOM_SHOULDER -- missing on controller
-					8, // SELECT_BACK -- B button (is this right?)
+					9, // SELECT_BACK -- START button (shouldn't do this, but no SELECT button)
 					9, // START_FORWARD -- START button
 					-1, // LEFT_STICK -- missing on controller
 					-1, // RIGHT_STICK -- missing on controller
@@ -498,7 +500,8 @@
 					13, // DPAD_DOWN -- not supported by API (but may eventually)
 					14, // DPAD_LEFT -- not supported by API (but may eventually)
 					15, // DPAD_RIGHT -- not supported by API (but may eventually)
-					-1 // HOME -- missing on controller (could be START/B?)
+					-1, // HOME -- missing on controller (could be START/B?)
+					6 // ACCELERATE -- A button
 				]
 			},
 			axes: {
@@ -547,6 +550,36 @@
 				]
 			}
 		},
+		// Gtron NES controller on Firefox
+		{
+			env: {
+				platform: FirefoxPlatform.getType(),
+				type: Gamepad.Type.NES
+			},
+			buttons: {
+				byButton: Gamepad.StandardMapping.buttons.byButton.concat([
+					0 // ACCELERATE -- A button
+				])
+			},
+			axes: {
+				byAxis: Gamepad.StandardMapping.axes.byAxis
+			}
+		},
+		// Gtron NES controller on WebKit
+		{
+			env: {
+				platform: WebKitPlatform.getType(),
+				type: Gamepad.Type.NES
+			},
+			buttons: {
+				byButton: Gamepad.StandardMapping.buttons.byButton.concat([
+					0 // ACCELERATE -- A button
+				])
+			},
+			axes: {
+				byAxis: Gamepad.StandardMapping.axes.byAxis
+			}
+		},
 		// PS3 controller on Firefox
 		{
 			env: {
@@ -554,7 +587,7 @@
 				type: Gamepad.Type.PLAYSTATION
 			},
 			buttons: {
-				byButton: [14, 13, 15, 12, 10, 11, 8, 9, 0, 3, 1, 2, 4, 6, 7, 5, 16]
+				byButton: [14, 13, 15, 12, 10, 11, 8, 9, 0, 3, 1, 2, 4, 6, 7, 5, 16, 0]
 			},
 			axes: {
 				byAxis: [0, 1, 2, 3]
@@ -567,7 +600,7 @@
 				type: Gamepad.Type.LOGITECH
 			},
 			buttons: { // TODO: This can't be right - LEFT/RIGHT_STICK have same mappings as HOME/DPAD_UP
-				byButton: [1, 2, 0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11, 12, 13, 14, 10]
+				byButton: [1, 2, 0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11, 12, 13, 14, 10, 0]
 			},
 			axes: {
 				byAxis: [0, 1, 2, 3]
@@ -580,7 +613,7 @@
 				type: Gamepad.Type.LOGITECH
 			},
 			buttons: {
-				byButton: [0, 1, 2, 3, 4, 5, -1, -1, 6, 7, 8, 9, 11, 12, 13, 14, 10],
+				byButton: [0, 1, 2, 3, 4, 5, -1, -1, 6, 7, 8, 9, 11, 12, 13, 14, 10, 0],
 				byAxis: [-1, -1, -1, -1, -1, -1, [2, 0, 1],
 					[2, 0, -1]
 				]
@@ -1019,6 +1052,10 @@
 			(id.indexOf('vendor: 0079 product: 0006') !== -1 &&
 				id.indexOf('generic usb joystick') !== -1)) {
 			return Gamepad.Type.N64;
+		} else if (id.indexOf('12bd-d015-2axes 11keys') !== -1 ||
+				id.indexOf('vendor: 12bd product: d015') !== -1 ||
+				id.indexOf('2axes 11keys') !== -1) {
+			return Gamepad.Type.NES;
 		} else {
 			return Gamepad.Type.UNKNOWN;
 		}
