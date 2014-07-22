@@ -1,3 +1,5 @@
+/*
+
 importScripts('lunr.js');
 
 var itemIndex;
@@ -67,3 +69,5 @@ onmessage = function(e) {
         method(e.data.data);
     }
 };
+
+*/
