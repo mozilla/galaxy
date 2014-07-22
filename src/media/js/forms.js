@@ -6,7 +6,7 @@ define('forms', ['jquery', 'z'], function($, z) {
         }
     }
 
-    z.body.on('input', 'input, select, textarea', function(e) {
+    z.body.on('input change', 'input, select, textarea', function(e) {
         var $this = $(this);
         checkValid(e.target.form);
         // If it's required, show :valid/:invalid styles -OR-
@@ -18,6 +18,7 @@ define('forms', ['jquery', 'z'], function($, z) {
         }
     }).on('blur', 'input, select, textarea', function(e) {
         var $this = $(this);
+        checkValid(e.target.form);
         $this.toggleClass('focused', this.hasAttribute('required') || !!$this.val());
         // So we can target .empty (because :empty doesn't apply to attributes).
         $this.toggleClass('empty', !$.trim($this.val()));
