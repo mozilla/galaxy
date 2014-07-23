@@ -303,6 +303,7 @@ function getGameFace() {
       canvas.height = height;
       canvas.getContext('2d').drawImage(video, 0, 0, width, height);
       previewURI = canvas.toDataURL('image/png');
+      console.log(previewURI);
       preview.setAttribute('src', previewURI);
 
       if (!snapped) {
