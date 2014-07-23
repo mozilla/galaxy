@@ -17,11 +17,21 @@ var routes = [
     {'pattern': '^/featured$', 'view_name': 'feature'},
     {'pattern': '^/developerDashboard$', 'view_name': 'developer_dashboard'},
 
-    {'pattern': '^/tests$', 'view_name': 'tests'},
     {'pattern': '^/debug$', 'view_name': 'debug'}
-    
 ];
 window.routes = routes;
+
+// Only `require.js` has `window.require.defined`, so we can use this to
+// sniff for whether we're using the minified bundle or not. (In production
+// we use commonplace's `amd.js`.)
+if (window.require.hasOwnProperty('defined')) {
+    // The minified JS bundle doesn't need some dev-specific JS views.
+    // Those go here.
+    routes = routes.concat([
+        {'pattern': '^/tests$', 'view_name': 'tests'}
+    ]);
+}
+
 
 define(
     'routes',

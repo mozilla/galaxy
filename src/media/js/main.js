@@ -1,4 +1,4 @@
-console.log('Sample Commonplace App');
+console.log('Galaxy');
 
 require.config({
     enforceDefine: true,
@@ -111,20 +111,20 @@ require.config({
         }
 
         // Debug page
-        (function() {
-            var to = false;
-            z.doc.on('touchstart mousedown', '.wordmark', function(e) {
-                console.log('hold for debug...', e.type);
-                clearTimeout(to);
-                to = setTimeout(function() {
-                    console.log('navigating to debug...');
-                    z.page.trigger('navigate', ['/debug']);
-                }, 3000);
-            }).on('touchend mouseup', '.wordmark', function(e) {
-                console.log('debug hold released...', e.type);
-                clearTimeout(to);
-            });
-        })();
+        // (function() {
+        //     var to = false;
+        //     z.doc.on('touchstart mousedown', '.wordmark', function(e) {
+        //         console.log('hold for debug...', e.type);
+        //         clearTimeout(to);
+        //         to = setTimeout(function() {
+        //             console.log('navigating to debug...');
+        //             z.page.trigger('navigate', ['/debug']);
+        //         }, 3000);
+        //     }).on('touchend mouseup', '.wordmark', function(e) {
+        //         console.log('debug hold released...', e.type);
+        //         clearTimeout(to);
+        //     });
+        // })();
 
         console.log('Initialization complete');
     });
