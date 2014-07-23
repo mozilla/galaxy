@@ -1,6 +1,6 @@
 define('settings_local', [], function() {
 	// Use this module for settings to be used in production.
     return {
-        api_url: 'https://galaxy-api.paas.allizom.org'
+        api_url: window.location.protocol + '//api-' + window.location.host  // No trailing slash, please.
     };
 });
