@@ -3,26 +3,37 @@ define('views/review',
     function(format, log, notification, requests, urls, utils, z) {
     
     var console = log('review');
+    var pastTense = {'approve': 'approved',
+                     'reject': 'rejected',
+                     'disable': 'disabled',
+                     'delete': 'deleted'};
+
+    function capitalise(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     function successMessage(statusVerb, game) {
-        var params = {game: game};
-        switch (statusVerb) {
-            case 'approve': return gettext('Approved game: {game}', params);
-            case 'reject':  return gettext('Rejected game: {game}', params);
-            case 'disable': return gettext('Disabled game: {game}', params);
-            case 'delete':  return gettext('Deleted game: {game}', params);
-            default:        return '';
+        var params = {verb: capitalise(pastTense[statusVerb]), game: game};
+        if (statusVerb) {
+            return gettext('{verb} game: {game}', params); 
         }
+        return '';
     }
+
     function failureMessage(statusVerb, game) {
-        var params = {game: game};
-        switch (statusVerb) {
-            case 'approve': return gettext('Failed to approve game: {game}', params);
-            case 'reject':  return gettext('Failed to reject game: {game}', params);
-            case 'disable': return gettext('Failed to disable game: {game}', params);
-            case 'delete':  return gettext('Failed to delete game: {game}', params);
-            default:        return '';
+        var params = {verb: statusVerb, game: game};
+        if (statusVerb) {
+            return gettext('Failed to {verb} game: {game}', params);
         }
+        return '';
+    }
+    
+    function invalidMessage(statusVerb, game) {
+        var params = {verb: pastTense[statusVerb], game: game};
+        if (statusVerb) {
+            return gettext('{game} is already {verb}', params); 
+        }
+        return '';
     }
 
     function submitStatusChange($game, $button, statusVerb) {
@@ -79,7 +90,13 @@ define('views/review',
         var $this = $(this);
         var $game = $this.closest('[data-game-slug]');
         var statusVerb = $this.data('statusVerb');
-        submitStatusChange($game, $this, statusVerb);
+        var currentStatus = $('#select-status').val();
+        if (currentStatus.indexOf(statusVerb) > -1) {
+            var message = invalidMessage(statusVerb, $game.data('gameTitle'));
+            notification.notification({message: message});
+        } else {
+            submitStatusChange($game, $this, statusVerb);
+        }
     }).on('change', '#select-status', function() {
         var params = {status: this.value};
         z.page.trigger('navigate', utils.urlparams(urls.reverse('review'), params));
