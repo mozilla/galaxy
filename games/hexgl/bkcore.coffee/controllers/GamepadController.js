@@ -27,47 +27,36 @@
       this.leftStickArray = [];
       this.rightStickArray = [];
 
-      var gamepad = new galaxy.gamepad();
-      this.gamepad = gamepad;
-      gamepad.bind(galaxy.gamepad.Event.CONNECTED, function (device) {
-        console.log('Connected', device);
-      });
+      var username = 'null';
+      var controllerRef = new Firebase('https://galaxy-controller.firebaseio.com/' + username);
 
-      if (!gamepad.init()) {
-        console.error('Your browser does not support gamepads; download ' +
-                      'the latest Google Chrome or Mozilla Firefox.');
-      }
+      this.state = {};
+
+      controllerRef.on('value', function (snapshot) {
+        var changedPost = snapshot.val();
+        this.state = changedPost;
+      }, function (err) {
+        console.error('The read failed: ' + err.code);
+      });
     }
 
     /*
       @public
     */
-
-
     GamepadController.prototype.updateAvailable = function() {
-      var accel, gamepads, gp, lt, rt, sel, _ref, _ref1, _ref2, _ref3;
-      if (!this.active) {
-        return false;
+      var turn = this.state.turn;
+      if (a > 270 || a < 90) {
+        turn = 0 - this.state.turn;
+      } else {
+        turn = b;
       }
-      var gp = this.gamepad.gamepads[0];
-      if (!gp) {
-        return false;
-      }
-      var state = gp.state;
-      var lastState = gp.lastState;
-      // TODO: Check `lastState` so we set only when the button was actually pressed.
-      // Otherwise, `null`.
 
-      this.lstickx = state.LEFT_STICK_X;
-      accel = gp.buttons[0];
-      lt = gp.buttons[6];
-      rt = gp.buttons[7];
-      sel = gp.buttons[8];
+      this.lstickx = turn;
 
-      this.acceleration = state.ACCELERATE;
-      this.ltrigger = state.LEFT_TOP_SHOULDER;
-      this.rtrigger = state.RIGHT_TOP_SHOULDER;
-      this.select = state.SELECT_BACK;
+      this.acceleration = this.state.accelerate;
+      this.ltrigger = null;
+      this.rtrigger = null;
+      this.select = null;
 
       this.buttonPressCallback(this);
 

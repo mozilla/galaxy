@@ -8,6 +8,11 @@
   font-style: normal;
 }
 
+body {
+  background: #000;
+  color: #fff;
+}
+
 /* Modal styles */
 
 .container {
