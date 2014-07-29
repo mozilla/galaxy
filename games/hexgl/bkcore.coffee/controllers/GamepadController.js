@@ -27,7 +27,7 @@
       this.leftStickArray = [];
       this.rightStickArray = [];
 
-      var username = 'null';
+      var username = 'cvan';
       var controllerRef = new Firebase('https://galaxy-controller.firebaseio.com/' + username);
 
       this.state = {};
@@ -44,14 +44,8 @@
       @public
     */
     GamepadController.prototype.updateAvailable = function() {
-      var turn = this.state.turn;
-      if (a > 270 || a < 90) {
-        turn = 0 - this.state.turn;
-      } else {
-        turn = b;
-      }
-
-      this.lstickx = turn;
+      return false;
+      this.lstickx = this.state.turn;
 
       this.acceleration = this.state.accelerate;
       this.ltrigger = null;

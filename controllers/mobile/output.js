@@ -1,6 +1,6 @@
 (function () {
 
-  var username = 'null';
+  var username = 'cvan';
   var controllerRef = new Firebase('https://galaxy-controller.firebaseio.com/' + username);
 
   var state = {};

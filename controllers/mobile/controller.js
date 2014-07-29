@@ -1,13 +1,14 @@
 (function () {
 
 var username;
-if (localStorage.galaxy_username) {
-  username = localStorage.galaxy_username;
-} else {
-  // TODO: Use a real shortcode instead of simply asking for a username lol
-  localStorage.galaxy_username = username = window.prompt('What is your username?', 'guest');
-}
+// if (localStorage.galaxy_username) {
+//   username = localStorage.galaxy_username;
+// } else {
+//   // TODO: Use a real shortcode instead of simply asking for a username lol
+//   localStorage.galaxy_username = username = window.prompt('What is your username?', 'guest');
+// }
 
+username = 'cvan';
 var controllerRef = new Firebase('https://galaxy-controller.firebaseio.com/' + username);
 
 controllerRef.update({accelerate: false});
@@ -46,9 +47,25 @@ window.addEventListener('deviceorientation', function (e) {
     turn = 0 - b;
   }
 
+  console.log('[xxx]');
+
+
+  // TODO: Should range be -180 to 180?
+  var oldMin = -90;
+  var oldMax = 90;
+  var oldRange = oldMax - oldMin;
+
+  var newMin = -1;
+  var newMax = 1;
+  var newRange = newMax - newMin;
+
+  var turnRatio = (((turn - oldMin) * newRange) / oldRange) + newMin;
+  console.log('[xxx] turnRatio', turnRatio);
+
   // Tell game to turn the vehicle.
   controllerRef.update({
-    turn: turn,
+    turnOriginal: turn,
+    turn: turnRatio,
     g: a
   });
   // controllerRef.turn = turn;
