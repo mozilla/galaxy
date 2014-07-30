@@ -7,13 +7,73 @@
     <title>galaxy mobile controller</title>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet" type="text/css">
     <style>
+      * {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
       body {
         background: #000;
         color: #fff;
+        display: table;
+        font-family: "Source Sans Pro", "Helvetica Neue", sans-serif;
+        width: 100%;
+      }
+
+      a {
+        border-radius: 10px;
+        cursor: pointer;
+        display: table-cell;
+        font-size: 300%;
+        height: 100%;
+        padding: 0 10px;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .arrow {
+        pointer-events: none;
+        position: relative;
+      }
+
+      .arrow::before {
+        box-shadow: 0 10px red inset;
+        border-style: solid;
+        border-width: 15px 15px 15px 0;
+        border-color: transparent #333333 transparent transparent;
+        content: "";
+        display: block;
+        top: 7.5px;
+      }
+
+      .right::before {
+        border-width: 15px 0 15px 15px;
+        border-color: transparent transparent transparent #333333;
+      }
+
+      .accelerate {
+        background: rgba(0,100,0,.5);
+        border: 30px solid transparent;
+        font-size: 18px;
+      }
+
+      .accelerate:active {
+        background: rgba(0,50,0,.5);
+        color: #aaa;
       }
     </style>
   </head>
   <body class="galaxy-overlayed">
+    <a class="arrow left">&lsaquo;</a>
+    <a class="accelerate">Accelerate</a>
+    <a class="arrow right">&rsaquo;</a>
     <script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
     <script src="../../games/modal/include/zepto.js"></script>
     <script src="../../games/modal/include/promise-1.0.0.js"></script>
