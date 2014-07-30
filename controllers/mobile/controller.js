@@ -34,23 +34,22 @@ document.addEventListener('touchmove', function (e) {
   e.preventDefault();
 }, false);
 
-
 // Steer the vehicle based on the phone's orientation.
 window.addEventListener('deviceorientation', function (e) {
-  var a = e.alpha;  // Direction
-  var b = e.beta;  // Left/right tilt
-  var g = e.gamma;  // Forward/back tilt
+  var alpha = e.alpha;  // Compass direction of the direction the device is facing, in degrees.
+  var beta = e.beta;  // Front-to-back tilt, in degrees (front is positive).
+  var gamma = e.gamma;  // Left-to-right tilt, in degrees (right is positive).
 
   // Regardless of phone direction, left/right tilt should behave the same.
-  var turn = b;
-  if (a < 90 || a > 270) {
-    turn = 0 - b;
+
+  var turnDegrees = beta;  // When your right hand is on the top of the phone and your left hand is on the bottom of the phone.
+  var dir = 'left';
+
+  if (alpha < 90 || alpha > 270) {
+    turnDegrees = 0 - beta;  // When your left hand is on the top of the phone and your right hand is on the bottom of the phone
+    dir = 'right';
   }
 
-  console.log('[xxx]');
-
-
-  // TODO: Should range be -180 to 180?
   var oldMin = -90;
   var oldMax = 90;
   var oldRange = oldMax - oldMin;
@@ -59,18 +58,15 @@ window.addEventListener('deviceorientation', function (e) {
   var newMax = 1;
   var newRange = newMax - newMin;
 
-  var turnRatio = (((turn - oldMin) * newRange) / oldRange) + newMin;
-  console.log('[xxx] turnRatio', turnRatio);
+  var turn = ((turnDegrees - oldMin) * newRange) / oldRange + newMin;  // Ratio of turn in degrees (bound to the range of -1 and 1).
 
-  // Tell game to turn the vehicle.
   controllerRef.update({
-    turnOriginal: turn,
-    turn: turnRatio,
-    g: a
+    alpha: alpha,
+    beta: beta,
+    gamma: gamma,
+    dir: dir,
+    turn: turn
   });
-  // controllerRef.turn = turn;
-  // controllerRef.g = a;
-  // });
 }, false);
 
 })();

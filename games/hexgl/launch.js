@@ -137,13 +137,13 @@
         return $('step-2').style.backgroundImage = "url(css/help-" + s[0][3] + ".png)";
       };
     }
+
+    // init(3, 3, 1, 0);
   }
 
   // setTimeout(function () {
   //   $('step-1').style.display = 'none';
   //   $('step-2').style.display = 'block';
   // }, 0);
-
-      init(3, 3, 1, 0);
 
 }).call(this);

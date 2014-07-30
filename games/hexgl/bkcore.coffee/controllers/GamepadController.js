@@ -30,13 +30,11 @@
       var username = 'cvan';
       var controllerRef = new Firebase('https://galaxy-controller.firebaseio.com/' + username);
 
-      this.state = {};
+      this.state = {turn: null, accelerate: null};
+      var self = this;
 
       controllerRef.on('value', function (snapshot) {
-        var changedPost = snapshot.val();
-        this.state = changedPost;
-      }, function (err) {
-        console.error('The read failed: ' + err.code);
+        self.state = snapshot.exportVal();
       });
     }
 
@@ -44,9 +42,7 @@
       @public
     */
     GamepadController.prototype.updateAvailable = function() {
-      return false;
       this.lstickx = this.state.turn;
-
       this.acceleration = this.state.accelerate;
       this.ltrigger = null;
       this.rtrigger = null;

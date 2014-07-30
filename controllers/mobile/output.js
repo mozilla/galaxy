@@ -14,15 +14,19 @@
   });
 
   var accelerate = document.getElementById('accelerate');
-  var g = document.getElementById('g');
+  var alpha = document.getElementById('alpha');
+  var beta = document.getElementById('beta');
+  var gamma = document.getElementById('gamma');
   var turn = document.getElementById('turn');
+  var dir = document.getElementById('dir');
 
   function update() {
     accelerate.innerHTML = state.accelerate;
-    g.innerHTML = state.g;
+    alpha.innerHTML = state.alpha;
+    beta.innerHTML = state.beta;
+    gamma.innerHTML = state.gamma;
+    dir.innerHTML = state.dir;
     turn.innerHTML = state.turn;
   }
-
-  update();
 
 })();
