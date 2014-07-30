@@ -6,7 +6,9 @@
     <meta name="robots" content="none">
     <title>galaxy mobile controller</title>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
     <style>
+      /*
       * {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
@@ -68,15 +70,56 @@
         background: rgba(0,50,0,.5);
         color: #aaa;
       }
+      */
     </style>
   </head>
   <body class="galaxy-overlayed">
-    <a class="arrow left">&lsaquo;</a>
-    <a class="accelerate">Accelerate</a>
-    <a class="arrow right">&rsaquo;</a>
+    <div class="controller">
+      <div class="base">
+        <div class="top left"></div>
+        <div class="top right"></div>
+        <div class="bottom left"></div>
+        <div class="bottom right"></div>
+      </div>
+      <div class="joystick">
+        <div class="inner">
+          <div class="roller">
+            <div class="stick">
+              <div class="inner"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
     <script src="../../games/modal/include/zepto.js"></script>
     <script src="../../games/modal/include/promise-1.0.0.js"></script>
     <script src="controller.js"></script>
+    <script>
+    joystick = {
+    init : function() {
+        var $elem = $('.stick, .base');
+        $(document).on('keydown', function(e) {
+            switch(e.keyCode) {
+                case 38 : $elem.addClass('top'); break;
+                case 37 : $elem.addClass('left'); break;
+                case 39 : $elem.addClass('right'); break;
+                case 40 : $elem.addClass('bottom'); break;
+            }
+        });
+        $(document).on('keyup', function(e) {
+            switch(e.keyCode) {
+                case 38 : $elem.removeClass('top'); break;
+                case 37 : $elem.removeClass('left'); break;
+                case 39 : $elem.removeClass('right'); break;
+                case 40 : $elem.removeClass('bottom'); break;
+            }
+        });
+    }
+};
+
+$(function() { joystick.init(); });
+    </script>
   </body>
 </html>
