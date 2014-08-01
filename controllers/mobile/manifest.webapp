@@ -11,5 +11,6 @@
   "launch_path": "/controllers/mobile/index.html",
   "name": "Galaxy Pad",
   "type": "web",
+  "orientation": "landscape",
   "version": "hosted-version"
 }

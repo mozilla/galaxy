@@ -1,5 +1,9 @@
 (function () {
 
+if ('screen.mozLockOrientation' in screen) {
+  screen.mozLockOrientation('landscape');
+}
+
 var username;
 // if (localStorage.galaxy_username) {
 //   username = localStorage.galaxy_username;
@@ -16,16 +20,19 @@ controllerRef.update({accelerate: false});
 // TODO: First check that the phone is paired before sending commands.
 
 document.addEventListener('touchend', function (e) {
-  socket.emit('accelerate', {accelerate: false});
+  document.body.classList.remove('accelerated');
+  controllerRef.update({accelerate: false});
 }, false);
 
 // Acclerate if the user touches the screen.
 document.addEventListener('touchstart', function (e) {
+  document.body.classList.add('accelerated');
   controllerRef.update({accelerate: true});
 }, false);
 
 // Stop accelerating if user stops touching screen.
 document.addEventListener('touchend', function (e) {
+  document.body.classList.remove('accelerated');
   controllerRef.update({accelerate: false});
 }, false);
 
@@ -42,12 +49,22 @@ window.addEventListener('deviceorientation', function (e) {
 
   // Regardless of phone direction, left/right tilt should behave the same.
 
+  var deviceDir = 'left';  // Direction you are holding the phone.
   var turnDegrees = beta;  // When your right hand is on the top of the phone and your left hand is on the bottom of the phone.
-  var dir = 'left';
+  var turnDir = beta < 0 ? 'left' : 'right';  // Direction you are turning (left or right).
 
   if (alpha < 90 || alpha > 270) {
+    deviceDir = 'right';
     turnDegrees = 0 - beta;  // When your left hand is on the top of the phone and your right hand is on the bottom of the phone
-    dir = 'right';
+    turnDir = beta < 0 ? 'right' : 'left';
+  }
+
+  if (turnDir === 'left') {
+    document.getElementById('base').classList.remove('right');
+    document.getElementById('base').classList.add('left');
+  } else if (turnDir === 'right') {
+    document.getElementById('base').classList.remove('left');
+    document.getElementById('base').classList.add('right');
   }
 
   var oldMin = -90;
@@ -64,8 +81,9 @@ window.addEventListener('deviceorientation', function (e) {
     alpha: alpha,
     beta: beta,
     gamma: gamma,
-    dir: dir,
-    turn: turn
+    deviceDir: deviceDir,
+    turn: turn,
+    turnDir: turnDir
   });
 }, false);
 

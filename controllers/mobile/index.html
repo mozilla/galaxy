@@ -74,24 +74,24 @@
     </style>
   </head>
   <body class="galaxy-overlayed">
-    <div class="controller">
-      <div class="base">
-        <div class="top left"></div>
-        <div class="top right"></div>
-        <div class="bottom left"></div>
-        <div class="bottom right"></div>
-      </div>
-      <div class="joystick">
-        <div class="inner">
-          <div class="roller">
-            <div class="stick">
-              <div class="inner"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <section id="container">
+        <section id="base">
+            <section class="top left"></section>
+            <section class="top right"></section>
+            <section class="bottom left"></section>
+            <section class="bottom right"></section>
+        </section>
 
+        <section id="joystick">
+            <section class="inner">
+                <section id="roller">
+                    <section id="stick">
+                        <section class="inner">Go</section>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
     <script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
     <script src="../../games/modal/include/zepto.js"></script>
     <script src="../../games/modal/include/promise-1.0.0.js"></script>
@@ -99,7 +99,7 @@
     <script>
     joystick = {
     init : function() {
-        var $elem = $('.stick, .base');
+        var $elem = $('#base');
         $(document).on('keydown', function(e) {
             switch(e.keyCode) {
                 case 38 : $elem.addClass('top'); break;

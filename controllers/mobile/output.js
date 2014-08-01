@@ -17,16 +17,18 @@
   var alpha = document.getElementById('alpha');
   var beta = document.getElementById('beta');
   var gamma = document.getElementById('gamma');
+  var deviceDir = document.getElementById('deviceDir');
   var turn = document.getElementById('turn');
-  var dir = document.getElementById('dir');
+  var turnDir = document.getElementById('turnDir');
 
   function update() {
     accelerate.innerHTML = state.accelerate;
     alpha.innerHTML = state.alpha;
     beta.innerHTML = state.beta;
     gamma.innerHTML = state.gamma;
-    dir.innerHTML = state.dir;
+    deviceDir.innerHTML = state.deviceDir;
     turn.innerHTML = state.turn;
+    turnDir.innerHTML = state.turnDir;
   }
 
 })();
