@@ -1,5 +1,0 @@
-{% set endpoint = api('genre', [slug]) %}
-
-{% defer (url=endpoint, as='game', key=slug, id='genre-data') %}
-  {% set genre = this %}
-{% end %}
