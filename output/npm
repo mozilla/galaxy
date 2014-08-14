@@ -1,0 +1,9 @@
+
+> galaxy@0.0.2 build_directory /opt/galaxy
+> pushd directory && ../node_modules/.bin/metalsmith && popd
+
+/opt/galaxy/directory /opt/galaxy
+
+  Metalsmith · successfully built to /opt/galaxy/src/directory
+
+/opt/galaxy
