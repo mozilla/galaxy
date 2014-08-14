@@ -1,0 +1,25 @@
+{
+  "source": "src",
+  "destination": "../src/directory",
+  "metadata": {
+    "title": "Mozilla Games Directory",
+    "description": "A collection of outstanding HTML5 games in the wild"
+  },
+  "plugins": {
+    "metalsmith-clean-css": {
+      "files": "**/*.css"
+    },
+    "metalsmith-uglify": {
+      "files": "**/*.js"
+    },
+    "metalsmith-collections": {
+      "games": "games/*.json"
+    },
+    "metalsmith-json": {
+      "key": "game"
+    },
+    "metalsmith-templates": {
+      "engine": "handlebars"
+    }
+  }
+}
