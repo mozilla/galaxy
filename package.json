@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build_directory": "pushd directory && ../node_modules/.bin/metalsmith && popd",
-    "dev": "open src/index.html",
+    "dev": "gulp dev",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --require should --reporter spec --harmony --bail api/*/test.js"
   },
   "version": "0.0.2"

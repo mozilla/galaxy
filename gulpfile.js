@@ -2,6 +2,8 @@ var connect = require('gulp-connect');
 var gulp = require('gulp');
 var run = require('gulp-run');
 
+var PORT = process.env.PORT || 3000;
+
 
 gulp.task('build', function () {
   switch (process.env.GALAXY_ENV) {
@@ -18,18 +20,17 @@ gulp.task('build', function () {
 
 gulp.task('connect', ['build'], function () {
   connect.server({
-    port: process.env.PORT || 3000,
+    port: PORT,
     root: 'src'
   });
 });
 
 
 gulp.task('watch', function() {
-  gulp.watch(['directory/**/*'], ['build'], function () {
-    console.log('watching');
-  });
+  gulp.watch(['directory/**/*'], ['build']);
 });
 
 
 gulp.task('dev', ['connect', 'watch'], function () {
+  run('open http://localhost:' + PORT).exec();
 });
