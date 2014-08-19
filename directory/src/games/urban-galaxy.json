@@ -4,9 +4,10 @@
   "author": "Urban Galaxy",
   "summary": "Urban Galaxy is an HTML5 3D real-time MMORPG set in a futuristic Megapolis. Choose your career and play in rich urbanscapes with your friends.",
   "screenshot": {
-    "src": ""
+    "src": "../catalogue/img/urbangalaxy.jpg"
   },
   "icon": {
     "src": ""
-  }
+  },
+  "url": "http://www.urbangalaxyonline.com/play"
 }

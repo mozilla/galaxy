@@ -5,15 +5,15 @@
 }
 
 @font-face {
-  src:local('Fira Sans OT Regular'),local('Fira Sans Regular'),local('Fira Sans OT'),local('Fira Sans'),url(../fonts/FiraSans/firasansot-regular-webfont.woff) format('woff'),url(../fonts/FiraSans/firasansot-regular-webfont.ttf) format('truetype'),url(../fonts/FiraSans/firasansot-regular-webfont.svg#fira_sans_otregular) format('svg');font-family:FiraSans;font-weight:400;
+  src: local('Fira Sans OT Regular'),local('Fira Sans Regular'),local('Fira Sans OT'),local('Fira Sans'),url(../fonts/FiraSans/firasansot-regular-webfont.woff) format('woff'),url(../fonts/FiraSans/firasansot-regular-webfont.ttf) format('truetype'),url(../fonts/FiraSans/firasansot-regular-webfont.svg#fira_sans_otregular) format('svg');font-family:FiraSans;font-weight:400;
 }
 
 @font-face {
-  src:local('Fira Sans OT Medium Regular'),local('Fira Sans Medium Regular'),local('Fira Sans OT Medium'),local('Fira Sans Medium'),local('Fira Sans OT'),local('Fira Sans'),url(../fonts/FiraSans/firasansot-medium-webfont.woff) format('woff'),url(../fonts/FiraSans/firasansot-medium-webfont.ttf) format('truetype'),url(../fonts/FiraSans/firasansot-medium-webfont.svg#fira_sans_otregular) format('svg');font-family:FiraSans;font-weight:500;
+  src: local('Fira Sans OT Medium Regular'),local('Fira Sans Medium Regular'),local('Fira Sans OT Medium'),local('Fira Sans Medium'),local('Fira Sans OT'),local('Fira Sans'),url(../fonts/FiraSans/firasansot-medium-webfont.woff) format('woff'),url(../fonts/FiraSans/firasansot-medium-webfont.ttf) format('truetype'),url(../fonts/FiraSans/firasansot-medium-webfont.svg#fira_sans_otregular) format('svg');font-family:FiraSans;font-weight:500;
 }
 
 @font-face {
-  src:local('Fira Sans OT Bold'),local('Fira Sans Bold'),local('Fira Sans OT'),local('Fira Sans'),url(../fonts/FiraSans/firasansot-bold-webfont.woff) format('woff'),url(../fonts/FiraSans/firasansot-bold-webfont.ttf) format('truetype'),url(../fonts/FiraSans/firasansot-bold-webfont.svg#fira_sans_otbold) format('svg');font-family:FiraSans;font-weight:600;
+  src: local('Fira Sans OT Bold'),local('Fira Sans Bold'),local('Fira Sans OT'),local('Fira Sans'),url(../fonts/FiraSans/firasansot-bold-webfont.woff) format('woff'),url(../fonts/FiraSans/firasansot-bold-webfont.ttf) format('truetype'),url(../fonts/FiraSans/firasansot-bold-webfont.svg#fira_sans_otbold) format('svg');font-family:FiraSans;font-weight:600;
 }
 
 * {
@@ -23,8 +23,8 @@
   padding: 0;
 }
 
-body,html {
-  background: #ddd;
+body, html {
+  background: #def;
   height: 100%;
   min-height: 100%;
 }
@@ -32,7 +32,7 @@ body,html {
 body {
   display: flex;
   flex-direction: column;
-  font-family: FiraSans,Helvetica,sans-serif;
+  font-family: FiraSans, Helvetica, sans-serif;
 }
 
 a {
@@ -60,25 +60,25 @@ main {
 
 form {
   align-items: flex-start;
-  background: #fff;
-  border-top: 1px solid #e6e6e6;
+  background: #0cf;
+  border-top: 1px solid rgba(0,0,0,.1);
   border-bottom: 1px solid #bbb;
   display: flex;
   padding: 10px 15px;
 }
 
-button,input {
+button, input {
   font-family: inherit;
 }
 
-input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration {
+input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
 input {
   background: #f4f4f4 url(../img/search.png) 10px 10px no-repeat;
   background-size: 16px;
-  border: 2px solid #c7c7c7;
+  border: 2px solid rgba(0,0,0,.15);
   border-radius: 10px;
   color: #333;
   flex: 1;
@@ -86,12 +86,12 @@ input {
   height: 40px;
   padding: 3px 10px 3px 32px;
   position: relative;
-  transition: background .3s ease-in-out,padding .3s ease-in-out,border .3s ease-in,box-shadow .3s ease-in;
+  transition: background .3s ease-in-out, padding .3s ease-in-out, border .3s ease-in, box-shadow .3s ease-in;
   width: 100%;
   z-index: 2;
 }
 
-input:invalid,input:required {
+input:invalid, input:required {
   box-shadow: none;
 }
 
@@ -148,7 +148,7 @@ input:focus {
   z-index: 2;
 }
 
-.search-clear:hover::before,input:focus~.search-clear::before {
+.search-clear:hover::before, input:focus~.search-clear::before {
   color: #999;
 }
 
@@ -172,13 +172,13 @@ input:valid~.search-clear {
 
 .logo {
   background: url(../img/logo.png) 0 50% no-repeat;
-  background-size: 30px;
+  background-size: 80px;
   color: #fff;
   display: block;
   font-size: 14px;
   height: 40px;
   text-indent: -9999px;
-  width: 40px;
+  width: 100px;
 }
 
 main h1 {
@@ -206,25 +206,26 @@ main h1 {
   position: relative;
 }
 
-.app {
-  background: #fff linear-gradient(to top,rgba(200,200,200,.25) 0,rgba(255,255,255,1) 60%);
+.game {
+  background: #fff linear-gradient(to top, rgba(200,200,200,.25) 0,rgba(255,255,255,1) 60%);
   border: 1px solid #ccc;
   border-radius: 2px;
   padding: 1px;
-  transition: border .1s ease-in,box-shadow .1s ease-in;
+  transition: border .1s ease-in, box-shadow .1s ease-in;
   width: 100%;
 }
 
-.app .details,.app .details * {
+.game .details,
+.game .details * {
   pointer-events: none;
 }
 
-.app:hover {
+.game:hover {
   border-color: #999;
   box-shadow: 0 0 0 2px rgba(70,70,70,.1);
 }
 
-.app:hover .screenshot:before {
+.game:hover .screenshot:before {
   background: 0 0;
 }
 
@@ -232,7 +233,7 @@ main h1 {
   padding-bottom: 300px;
 }
 
-.app:active {
+.game:active {
   background: #eee;
   opacity: .9;
 }
@@ -268,7 +269,7 @@ main h1 {
   z-index: 10;
 }
 
-.app {
+.game {
   display: block;
   position: relative;
 }
@@ -281,150 +282,64 @@ main h1 {
 
 .name {
   color: #333;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 500;
-  line-height: 26px;
+  line-height: 28px;
 }
 
 .dev {
   color: #999;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 14px;
   width: calc(100% - 90px);
-}
-
-.stars {
-  color: #f78813;
-  font: 12px "Arial Unicode MS";
-  letter-spacing: 2px;
-  margin: 4px 0 6px;
-}
-
-.stars .half {
-  display: inline-block;
-  margin-right: -5px;
-  overflow: hidden;
-  position: relative;
-  vertical-align: top;
-  width: 5px;
-  z-index: 1;
-}
-
-.stars .empty {
-  color: #ccc;
 }
 
 .description {
   color: #666;
   font-size: 11px;
   line-height: 14px;
+  margin: 15px 0 10px;
 }
 
-.results-heading {
-  display: none;
-}
-
-.speed {
-  color: #ccc;
-  font-size: 16px;
-  margin-left: 2px;
-}
-
-.install {
+.play {
   background: rgba(46,204,113,.825);
   border: 0;
   box-shadow: 0 2px rgba(34,149,82,.825);
   border-radius: 2px;
   color: #fff;
   display: inline-block;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1;
-  transition: .2s all ease-in;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 9px 0 6px;
+  padding: 10px 0 8px;
   pointer-events: none;
   position: absolute;
-  top: 35px;
-  right: 11px;
+  top: 10px;
+  right: 10px;
+  text-transform: uppercase;
+  text-align: center;
+  transition: .2s all ease-in;
   width: 80px;
 }
 
-.app:focus .install,.app:hover .install {
+.game:focus .play,
+.game:hover .play {
   background: #2ecc71;
   box-shadow: 0 2px #229552;
 }
 
-.open {
-  background: rgba(46,113,204,.825);
-  box-shadow: 0 2px rgba(34,82,149,.825);
-}
-
-.app:focus .open,.app:hover .open {
-  background: #2e71cc;
-  box-shadow: 0 2px #225295;
-}
-
-.notice {
-  color: #999;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 24px;
-  padding: 15px;
-}
-
-.notification {
-  background: #333;
-  bottom: -62px;
+masthead {
+  background: #333 url(../img/webgl-games.png) 100% 0 no-repeat;
+  background-size: auto 250px;
   color: #fff;
-  cursor: pointer;
-  height: 62px;
-  left: 0;
-  line-height: 42px;
-  margin: 0 auto;
-  padding: 10px 15px;
-  position: fixed;
-  right: 0;
-  transition-duration: .3s;
-  transition-property: bottom;
-  width: 100%;
-  z-index: 2;
-}
-
-.notification.success {
-  background: #093;
-}
-
-.notification.error {
-  background: #903;
-}
-
-.notification.show {
-  bottom: 0;
-  transition-duration: .3s;
-  transition-property: bottom;
-}
-
-.notification.hidden {
   display: none;
-}
-
-.notification b {
-  font-weight: 500;
-}
-
-.notification-content {
-  display: inline-block;
-  line-height: 1.5;
-  vertical-align: middle;
+  font-size: 32px;
+  font-weight: 300;
+  height: 250px;
+  line-height: 250px;
+  padding: 0 20px;
 }
 
 @media (min-width: 600px) {
-  .notification {
-    border-radius: 4px 4px 0 0;
-    max-width: 600px;
-  }
-
   .results ol {
     display: flex;
     flex-wrap: wrap;

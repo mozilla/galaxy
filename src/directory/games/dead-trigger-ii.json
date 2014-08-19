@@ -4,9 +4,10 @@
   "author": "Madfinger Games",
   "summary": "Enter a world where humanity is engaged in the ultimate battle for survival in the face of a global Zombie apocalypse.",
   "screenshot": {
-    "src": ""
+    "src": "../catalogue/img/deadtrigger2.png"
   },
   "icon": {
     "src": ""
-  }
+  },
+  "url": "https://apps.facebook.com/463319163784205/"
 }

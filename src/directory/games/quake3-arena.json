@@ -4,9 +4,10 @@
   "author": "TojiCode",
   "summary": "Welcome to the Arena, where high-ranking warriors are transformed into spineless mush. Abandoning every ounce of common sense and any trace of doubt, you lunge onto a stage of harrowing landscapes and veiled abysses.",
   "screenshot": {
-    "src": ""
+    "src": "../catalogue/img/quake-2.png"
   },
   "icon": {
     "src": ""
-  }
+  },
+  "url": "http://media.tojicode.com/q3bsp/"
 }

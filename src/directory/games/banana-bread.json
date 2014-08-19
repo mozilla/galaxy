@@ -4,9 +4,10 @@
   "author": "Mozilla",
   "summary": "BananaBread is a 3D first-person shooter based on Cube 2: Sauerbraten.",
   "screenshot": {
-    "src": ""
+    "src": "../catalogue/img/bananabread.jpg"
   },
   "icon": {
     "src": ""
-  }
+  },
+  "url": "https://dl.dropboxusercontent.com/u/80664946/index.html"
 }

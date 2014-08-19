@@ -5,33 +5,37 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="{{ description }}">
     <link type="text/css" rel="stylesheet" href="css/style.css">
-    <title>{{metadata.title}}</title>
+    <title>{{ title }}</title>
   </head>
-  <body>
-    <header>
-      <h1><a class="logo">{{title}}</a></h1>
+  <body data-prod="true" class="results" data-page="results">
+    <header class="header">
+      <form action="/">
+        <h1><a class="logo" href="/">{{ title }}</a></h1>
+        <input type="search" name="q" title="" x-inputmode="verbatim" autocapitalize="off" autocomplete="off" autocorrect="off" required="" placeholder="Search">
+        <a class="search-clear"></a>
+      </form>
     </header>
     <masthead>
-      <p>{{description}}</p>
+      <p>{{ description }}</p>
     </masthead>
     <main>
-      <ul>
+      <ol>
         {{#each collections.games}}
-          <li class="game" title="{{game.title}}">
-            <a class="game">
+          <li title="{{ game.title }}">
+            <a class="game" href="{{ game.url }}" target="_blank">
               <div style="background-image:url({{ game.screenshot.src }})" class="screenshot">
                 <div style="background-image:url({{ game.icon.src }})" class="icon"></div>
               </div>
               <div class="details">
                 <div class="trunc name">{{ game.title }}</div>
                 <div class="trunc dev">by {{ game.author }}</div>
-                <div class="description">{{game.summary}}</div>
+                <div class="description">{{ game.summary }}</div>
+                <button class="play">Play</button>
               </div>
             </a>
-            <button class="install play">Play</button>
           </li>
         {{/each}}
-      </ul>
+      </ol>
     </main>
   </body>
 </html>

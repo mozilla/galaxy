@@ -4,9 +4,10 @@
   "author": "Google Chrome",
   "summary": "Buckle up for a ride in a roller coaster. Virtual reality at its finest.",
   "screenshot": {
-    "src": ""
+    "src": "../catalogue/img/rollercoaster.png"
   },
   "icon": {
     "src": ""
-  }
+  },
+  "url": "http://vr.chromeexperiments.com/rollercoaster.html"
 }

@@ -3,7 +3,7 @@
   "destination": "../src/directory",
   "metadata": {
     "title": "Mozilla Games Directory",
-    "description": "A collection of outstanding HTML5 games in the wild"
+    "description": "A collection of outstanding HTML5 games in the wild."
   },
   "plugins": {
     "metalsmith-clean-css": {
