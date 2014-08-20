@@ -27,10 +27,10 @@
                 <div style="background-image:url({{ game.icon.src }})" class="icon"></div>
               </div>
               <div class="details">
+                <button class="play">Play</button>
                 <div class="trunc name">{{ game.title }}</div>
                 <div class="trunc dev">by {{ game.author }}</div>
                 <div class="description">{{ game.summary }}</div>
-                <button class="play">Play</button>
               </div>
             </a>
           </li>
