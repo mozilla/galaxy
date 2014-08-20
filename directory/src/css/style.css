@@ -24,7 +24,7 @@
 }
 
 body, html {
-  background: #def;
+  background: #333;
   height: 100%;
   min-height: 100%;
 }
@@ -55,14 +55,15 @@ a:hover {
 main {
   flex: auto;
   height: 100%;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
 form {
   align-items: flex-start;
-  background: #0cf;
+  background: rgb(0,153,208);
   border-top: 1px solid rgba(0,0,0,.1);
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid rgba(0,0,0,.5);
   display: flex;
   padding: 10px 15px;
 }
@@ -207,10 +208,9 @@ main h1 {
 }
 
 .game {
-  background: #fff linear-gradient(to top, rgba(200,200,200,.25) 0,rgba(255,255,255,1) 60%);
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  padding: 1px;
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 2px 5px rgba(0,0,0,.6);
+  padding: 0;
   transition: border .1s ease-in, box-shadow .1s ease-in;
   width: 100%;
 }
@@ -221,8 +221,8 @@ main h1 {
 }
 
 .game:hover {
-  border-color: #999;
-  box-shadow: 0 0 0 2px rgba(70,70,70,.1);
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
 }
 
 .game:hover .screenshot:before {
