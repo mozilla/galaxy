@@ -26,3 +26,14 @@ To build the directory for production:
 Alternatively, via gulp:
 
     gulp build
+
+
+## Components
+
+### Directory
+
+The games directory (v0) lives at `/directory/`.
+
+### Catalogue
+
+The game centre lobby (v1) lives at `/catalogue/`.
