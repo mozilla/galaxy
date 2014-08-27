@@ -79,8 +79,8 @@ input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-se
 input {
   background: #f4f4f4 url(../img/search.png) 10px 10px no-repeat;
   background-size: 16px;
-  border: 2px solid rgba(0,0,0,.15);
   border-radius: 10px;
+  border: 2px solid rgba(0,0,0,.15);
   color: #333;
   flex: 1;
   font-size: 20px;
@@ -100,8 +100,8 @@ input:focus {
   background-position: -18px 10px;
   border-color: #5ca9e4;
   box-shadow: 0 0 0 2px rgba(70,161,231,.3),0 1px 2px rgba(0,0,0,.2) inset;
-  padding-left: 10px;
   outline: 0;
+  padding-left: 10px;
 }
 
 ::-webkit-input-placeholder {
@@ -141,11 +141,11 @@ input:focus {
   font-size: 30px;
   height: 41px;
   line-height: 40px;
+  padding: 10px 25px 10px 20px;
   position: absolute;
-  top: 0;
   right: 0;
   text-align: right;
-  padding: 10px 25px 10px 20px;
+  top: 0;
   z-index: 2;
 }
 
@@ -244,16 +244,16 @@ main h1 {
   background-size: cover;
   height: 150px;
   opacity: .8;
-  transition: .3s padding;
   position: relative;
+  transition: .3s padding;
   width: 100%;
 }
 
 .screenshot:before {
   background: rgba(0,0,0,.5);
   content: "";
-  position: absolute;
   height: 100%;
+  position: absolute;
   transition: .3s background;
   width: 100%;
 }
@@ -303,19 +303,19 @@ main h1 {
 
 .play {
   background: rgba(46,204,113,.825);
+  border-radius: 2px;
   border: 0;
   box-shadow: 0 2px rgba(34,149,82,.825);
-  border-radius: 2px;
   color: #fff;
   display: inline-block;
+  float: right;
   font-size: 11px;
   line-height: 1;
   margin-left: 5px;
   padding: 10px 0 8px;
   pointer-events: none;
-  float: right;
-  text-transform: uppercase;
   text-align: center;
+  text-transform: uppercase;
   transition: .2s all ease-in;
   width: 80px;
 }
