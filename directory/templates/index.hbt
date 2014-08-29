@@ -22,7 +22,7 @@
       <ol>
         {{#each collections.games}}
           <li title="{{ game.title }}">
-            <a class="game" href="{{ game.url }}" target="_blank">
+            <a class="game" href="{{ game.game_url }}" target="_blank">
               <div style="background-image:url({{ game.screenshot.src }})" class="screenshot">
                 <div style="background-image:url({{ game.icon.src }})" class="icon"></div>
               </div>
