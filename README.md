@@ -1,4 +1,4 @@
-# galaxy
+![galaxy logo](images/logo.png?raw=true)
 
 To infinity and beyond.
 
