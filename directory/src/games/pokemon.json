@@ -1,0 +1,10 @@
+{
+  "title": "Pokemon",
+  "slug": "pokemon",
+  "author": "Nintendo",
+  "summary": "Full Screen Pokemon is an open source HTML5 remake of the original Pokemon games. You can play the original two generations (Red/Blue through Crystal), literally billions of procedurally generated maps, or create your own using the level editor.",
+  "screenshot": {
+    "src": "/img/screenshots/pokemon/1.png"
+  },
+  "game_url": "http://www.fullscreenpokemon.com/"
+}
