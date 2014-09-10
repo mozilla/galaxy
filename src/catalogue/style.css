@@ -51,8 +51,16 @@ a:hover {
 }
 
 h1 {
-  margin: 0 auto;
-  width: 100px;
+  /* Old flexbox to centre horizontally. */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  align-items: center;
+
+  /* New flexbox to centre horizontally. */
+  display: flex;
+  justify-content: center;
 }
 
 .wordmark {
