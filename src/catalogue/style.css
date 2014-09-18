@@ -197,6 +197,11 @@ h2 {
   width: 100%;
 }
 
+.game-angry-bots:before {
+  background: url(img/angry-bots.png) 80% 0 no-repeat;
+  background-size: cover;
+}
+
 .game-hexgl:before {
   background: url(img/screenshots/hexgl/1.png) 52% 0 no-repeat;
   background-size: cover;

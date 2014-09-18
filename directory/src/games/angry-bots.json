@@ -1,0 +1,13 @@
+{
+  "title": "Angry Bots",
+  "slug": "angry-bots",
+  "author": "Unity",
+  "summary": "Use your big, blasty gun to destroy menacing machines!",
+  "screenshot": {
+    "src": "../catalogue/img/angry-bots.png"
+  },
+  "icon": {
+    "src": ""
+  },
+  "game_url": "http://beta.unity3d.com/jonas/AngryBots/"
+}
