@@ -1,0 +1,13 @@
+{
+  "title": "Full Screen Mario",
+  "slug": "full-screen-mario",
+  "author": "Diogenesthecynic",
+  "summary": "An HTML5 remake of the original Super Mario Brothers.",
+  "screenshot": {
+    "src": "../catalogue/img/full-screen-mario.png"
+  },
+  "icon": {
+    "src": ""
+  },
+  "game_url": "games/FullScreenMario/mario.html"
+}

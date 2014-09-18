@@ -232,6 +232,11 @@ h2 {
   background-size: cover;
 }
 
+.game-full-screen-mario:before {
+  background: url(img/full-screen-mario.png) 10% 100% repeat-y;
+  background-size: auto 130%;
+}
+
 .game-deadtrigger2:before {
   background: url(img/deadtrigger2.png) 53% 0 no-repeat;
   background-size: cover;
