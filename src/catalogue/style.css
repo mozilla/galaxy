@@ -197,11 +197,6 @@ h2 {
   width: 100%;
 }
 
-.game-bastion:before {
-  background: url(img/screenshots/bastion/wallpaper.jpg) 57% 70%;
-  opacity: .2;
-}
-
 .game-megaman:before {
   background: #052543 url(img/megaman.png) 100% 100% no-repeat;
   background-size: contain;
