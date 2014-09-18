@@ -197,11 +197,6 @@ h2 {
   width: 100%;
 }
 
-.game-megaman:before {
-  background: #052543 url(img/megaman.png) 100% 100% no-repeat;
-  background-size: contain;
-}
-
 .game-hexgl:before {
   background: url(img/screenshots/hexgl/1.png) 52% 0 no-repeat;
   background-size: cover;
