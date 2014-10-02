@@ -2,6 +2,8 @@
 
 To infinity and beyond.
 
+> __Note:__ This project is not ready for prime time. Not an official Mozilla project. Pre-alpha everything. Anything and everything at your own risk.
+
 
 ## Installation
 
