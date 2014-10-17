@@ -27,7 +27,7 @@
     "url": "git://github.com/mozilla/galaxy.git"
   },
   "scripts": {
-    "build_directory": "pushd directory && ../node_modules/.bin/metalsmith && popd",
+    "build_directory": "/bin/bash -c 'pushd directory && ../node_modules/.bin/metalsmith && popd'",
     "dev": "gulp dev",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --require should --reporter spec --harmony --bail api/*/test.js"
   },
